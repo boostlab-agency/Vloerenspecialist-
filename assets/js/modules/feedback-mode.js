@@ -1,18 +1,16 @@
 /* ==========================================================================
    Feedbackmodus — klantvriendelijke, zichtbare reviewlaag ("werk alsof je in
-   Figma zit"). Geen verborgen URL-parameter: een knop rechtsboven ("💬
-   Feedbackmodus") schakelt de modus voor iedere bezoeker met toegang tot de
-   voorstelwebsite in en uit. De voorkeur blijft onthouden (localStorage),
-   ook tussen pagina's.
+   Figma zit"). Een knop rechtsboven ("💬 Feedbackmodus") schakelt de modus
+   voor iedere bezoeker met toegang tot de voorstelwebsite in en uit. De
+   voorkeur blijft onthouden (localStorage), ook tussen pagina's.
 
-   Werking, per elementtype:
-   - Tekst / knop: toont de huidige tekst, laat nieuwe tekst invoeren en past
-     die meteen live toe op de pagina (met een subtiele "bewerkt"-markering),
-     zodat het voelt als direct redigeren — niet als een support-ticket.
-   - Afbeelding: opmerking plaatsen en/of vervanging aanvragen (met badge).
-   - Sectie: hoger/lager plaatsen (verplaatst 'm meteen echt), verwijderen
-     (dimt 'm met een banner — nooit destructief uit de DOM) of aanpassen
-     (vrije opmerking).
+   Belangrijk gedragsprincipe: feedback is een VOORSTEL, geen directe
+   wijziging. De enige uitzondering is tekstfeedback (op platte tekst, geen
+   knoppen) — die wordt live op de pagina getoond zodat het verschil meteen
+   voelbaar is, en de sidebar toont dan altijd zowel de originele als de
+   nieuwe tekst. Verwijder je zo'n tekstfeedback-item, dan wordt de
+   oorspronkelijke tekst automatisch teruggezet.
+
    Alles wordt vastgelegd in localStorage (key "dvsFeedback") en getoond in
    een donker feedbackpaneel rechts, met datum, elementtype en status
    (Open / In behandeling / Afgerond).
@@ -26,6 +24,7 @@
     { value: "in-behandeling", label: "In behandeling" },
     { value: "afgerond", label: "Afgerond" }
   ];
+  var MAX_ATTACHMENT_BYTES = 3 * 1024 * 1024; // 3MB — lokale opslag (localStorage) heeft weinig ruimte
 
   var isActive = false;
   try { isActive = window.localStorage.getItem(ACTIVE_KEY) === "1"; } catch (e) {}
@@ -38,13 +37,18 @@
     } catch (e) { return []; }
   }
   function writeAll(items) {
-    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch (e) {}
+    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); return true; } catch (e) { return false; }
   }
   function addEntry(entry) {
     var items = readAll();
     items.unshift(entry);
-    writeAll(items);
+    var ok = writeAll(items);
+    if (!ok) {
+      window.alert("Deze feedback kon niet worden opgeslagen — waarschijnlijk is de bijlage te groot voor lokale opslag. Probeer een kleiner bestand.");
+      return false;
+    }
     refreshAll();
+    return true;
   }
   function updateStatus(id, status) {
     var items = readAll().map(function (i) {
@@ -55,7 +59,10 @@
     refreshAll();
   }
   function removeEntry(id) {
-    writeAll(readAll().filter(function (i) { return i.id !== id; }));
+    var items = readAll();
+    var entry = items.filter(function (i) { return i.id === id; })[0];
+    writeAll(items.filter(function (i) { return i.id !== id; }));
+    if (entry && entry.actionType === "tekst-wijziging") revertLiveText(entry);
     refreshAll();
   }
   function uid() {
@@ -84,7 +91,21 @@
       else if (n.nodeType === 3) { n.textContent = ""; }
     });
     if (!replaced) el.insertBefore(document.createTextNode(newText), el.firstChild);
-    el.classList.add("fb-edited");
+  }
+  /* Vindt (bij dezelfde paginaweergave) het element terug via sectie + huidige
+     tekst, zodat een verwijderde tekstfeedback de pagina weer terug kan zetten. */
+  function revertLiveText(entry) {
+    var section = document.querySelector('[data-review-id="' + entry.sectionId + '"]');
+    if (!section) return;
+    var candidates = section.querySelectorAll("h1,h2,h3,h4,h5,p,span,li,blockquote,figcaption");
+    for (var i = 0; i < candidates.length; i++) {
+      var el = candidates[i];
+      if (getEditableText(el) === entry.newText) {
+        setEditableText(el, entry.oldText);
+        el.classList.remove("fb-edited");
+        return;
+      }
+    }
   }
 
   /* ---------------- Doel van een klik herkennen ---------------- */
@@ -104,33 +125,41 @@
     return { el: section, kind: "sectie", kindLabel: "Sectie", detail: "" };
   }
 
-  /* ---------------- Sectie verplaatsen / markeren ---------------- */
-  function moveSection(el, dir) {
-    if (dir === "up") {
-      var prev = el.previousElementSibling;
-      if (prev) { el.parentNode.insertBefore(el, prev); return true; }
-    } else {
-      var next = el.nextElementSibling;
-      if (next) { el.parentNode.insertBefore(next, el); return true; }
-    }
-    return false;
-  }
-
   /* ================================================================
      UI opbouwen
      ================================================================ */
 
-  /* ---- Schakelknop rechtsboven ---- */
+  /* ---- Schakelknop rechtsboven + knop om het paneel te (her)openen ---- */
   var toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "fb-toggle";
-  toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedbackmodus</span><span class="fb-count" id="fb-toggle-count" hidden>0</span>';
+  toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedbackmodus</span>';
   document.body.appendChild(toggle);
+
+  var panelBtn = document.createElement("button");
+  panelBtn.type = "button";
+  panelBtn.className = "fb-panel-btn";
+  panelBtn.hidden = true;
+  panelBtn.setAttribute("aria-label", "Open feedbackoverzicht");
+  panelBtn.innerHTML = '<span class="fb-panel-icon">📋</span><span class="fb-count" id="fb-toggle-count">0</span>';
+  document.body.appendChild(panelBtn);
 
   /* ---- Subtiele overlay over de hele site ---- */
   var overlay = document.createElement("div");
   overlay.className = "fb-overlay";
   document.body.appendChild(overlay);
+
+  /* ---- Toast — korte, rustige bevestiging na een voorstel ---- */
+  var toast = document.createElement("div");
+  toast.className = "fb-toast";
+  document.body.appendChild(toast);
+  var toastTimer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("is-visible");
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toast.classList.remove("is-visible"); }, 2800);
+  }
 
   /* ---- Zwevende hint bij hover ---- */
   var hint = document.createElement("div");
@@ -145,7 +174,7 @@
   }
   document.addEventListener("mouseover", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-toggle, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
+    if (e.target.closest(".fb-toggle, .fb-panel-btn, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
     var section = e.target.closest("[data-review-id]");
     if (!section) { clearHover(); return; }
     var t = describeTarget(e.target, section);
@@ -168,7 +197,71 @@
     if (!e.relatedTarget || !(e.relatedTarget instanceof Element) || !e.relatedTarget.closest("[data-review-id]")) clearHover();
   });
 
-  /* ---- Popover: per elementtype andere inhoud ---- */
+  /* ---------------- Bijlage (foto/screenshot/video als lokale referentie) ----------------
+     Wordt nog nergens naar een server geüpload; de bestandsinhoud wordt als
+     data-URL in het feedback-item zelf opgeslagen (localStorage). */
+  var pendingAttachment = null;
+  function attachmentFieldHtml() {
+    return (
+      '<div class="fb-field">' +
+        '<label>Bijlage <span class="fb-optional">(optioneel)</span></label>' +
+        '<label class="fb-attach-btn" for="fb-attach-input">📎 Bijlage toevoegen</label>' +
+        '<input type="file" id="fb-attach-input" accept="image/*,video/*" hidden>' +
+        '<div class="fb-attach-preview" id="fb-attach-preview" hidden></div>' +
+      "</div>"
+    );
+  }
+  function wireAttachmentField() {
+    var input = document.getElementById("fb-attach-input");
+    var preview = document.getElementById("fb-attach-preview");
+    if (!input) return;
+    input.addEventListener("change", function () {
+      var file = input.files && input.files[0];
+      if (!file) return;
+      if (file.size > MAX_ATTACHMENT_BYTES) {
+        window.alert("Dit bestand is groter dan 3 MB. Kies een kleiner bestand — lokale opslag heeft weinig ruimte.");
+        input.value = "";
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        pendingAttachment = { name: file.name, type: file.type, dataUrl: reader.result };
+        renderAttachmentPreview();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  function renderAttachmentPreview() {
+    var preview = document.getElementById("fb-attach-preview");
+    if (!preview) return;
+    if (!pendingAttachment) { preview.hidden = true; preview.innerHTML = ""; return; }
+    var isImg = pendingAttachment.type.indexOf("image/") === 0;
+    preview.hidden = false;
+    preview.innerHTML =
+      (isImg ? '<img src="' + pendingAttachment.dataUrl + '" alt="">' : '<span class="fb-attach-file">🎞️</span>') +
+      '<span class="fb-attach-name">' + pendingAttachment.name + "</span>" +
+      '<button type="button" id="fb-attach-remove" aria-label="Bijlage verwijderen">✕</button>';
+    document.getElementById("fb-attach-remove").addEventListener("click", function () {
+      pendingAttachment = null;
+      document.getElementById("fb-attach-input").value = "";
+      renderAttachmentPreview();
+    });
+  }
+  function attachmentThumbHtml(att) {
+    if (!att) return "";
+    var isImg = att.type && att.type.indexOf("image/") === 0;
+    return (
+      '<div class="fb-item-attachment">' +
+        (isImg ? '<img src="' + att.dataUrl + '" alt="">' : '<span class="fb-attach-file">🎞️</span>') +
+        '<span>' + att.name + "</span>" +
+      "</div>"
+    );
+  }
+
+  /* ---- Popover: per elementtype andere inhoud ----
+     Eén enkele, permanente (delegated) klik-listener op formBody regelt alle
+     knoppen binnenin — nooit opnieuw gebonden bij het opnieuw tekenen van de
+     inhoud, dus nooit een "dode" Annuleren-knop. */
   var scrim = document.createElement("div");
   scrim.className = "fb-scrim";
   scrim.innerHTML = '<div class="fb-modal" role="dialog" aria-modal="true"><p class="fb-form-kind" id="fb-form-kind">Sectie</p><div id="fb-form-body"></div></div>';
@@ -176,6 +269,8 @@
   var formBody = document.getElementById("fb-form-body");
 
   var activeTarget = null;
+  var currentSaveHandler = null;
+
   function baseEntry(target, extra) {
     var label = target.section.getAttribute("data-review-label") || target.section.getAttribute("data-review-id");
     var entry = {
@@ -187,6 +282,7 @@
       targetKind: target.kind,
       targetKindLabel: target.kindLabel,
       targetDetail: target.detail,
+      attachment: pendingAttachment,
       status: "open",
       createdAt: new Date().toISOString()
     };
@@ -194,96 +290,126 @@
     return entry;
   }
 
-  function closePopover() { scrim.classList.remove("is-open"); activeTarget = null; }
-  scrim.addEventListener("click", function (e) { if (e.target === scrim) closePopover(); });
+  function closePopover() {
+    scrim.classList.remove("is-open");
+    activeTarget = null;
+    currentSaveHandler = null;
+    pendingAttachment = null;
+  }
+
+  /* Eén permanente delegated handler — geldig voor élk formuliertype dat
+     hierna ooit in #fb-form-body wordt getekend. */
+  scrim.addEventListener("click", function (e) {
+    if (e.target === scrim) { closePopover(); return; }
+    if (e.target.closest("#fb-cancel")) { closePopover(); return; }
+    if (e.target.closest("#fb-save") || e.target.closest("#fb-save-adjust")) {
+      if (typeof currentSaveHandler === "function") currentSaveHandler();
+      return;
+    }
+    var actionBtn = e.target.closest("[data-action]");
+    if (actionBtn) { handleSectionAction(actionBtn.getAttribute("data-action")); return; }
+  });
 
   function renderTextForm(target) {
     var current = getEditableText(target.el);
+    var isText = target.kind === "tekst";
     formBody.innerHTML =
-      '<h3>' + (target.kind === "knop" ? "Knoptekst aanpassen" : "Tekst aanpassen") + "</h3>" +
+      "<h3>" + (isText ? "Tekst aanpassen" : "Voorstel voor nieuwe knoptekst") + "</h3>" +
       '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong></p>" +
+      (isText
+        ? '<p class="fb-hint-copy">Deze wijziging wordt direct op de pagina getoond, als voorbeeld.</p>'
+        : '<p class="fb-hint-copy">Dit is een voorstel — de knop op de pagina verandert niet vanzelf.</p>') +
       '<div class="fb-current"><span class="fb-current-label">Huidige tekst</span><p>' + current.replace(/</g, "&lt;") + "</p></div>" +
-      '<div class="fb-field"><label for="fb-new-text">Nieuwe tekst</label><textarea id="fb-new-text" placeholder="Hoe zou dit moeten worden?"></textarea></div>' +
+      '<div class="fb-field"><label for="fb-new-text">' + (isText ? "Nieuwe tekst" : "Voorgestelde tekst") + '</label><textarea id="fb-new-text" placeholder="Hoe zou dit moeten worden?"></textarea></div>' +
+      attachmentFieldHtml() +
       '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Feedback opslaan</button></div>';
-    document.getElementById("fb-cancel").addEventListener("click", closePopover);
-    document.getElementById("fb-save").addEventListener("click", function () {
+    wireAttachmentField();
+
+    currentSaveHandler = function () {
       var newText = document.getElementById("fb-new-text").value.trim();
       if (!newText) { document.getElementById("fb-new-text").focus(); return; }
-      addEntry(baseEntry(target, { actionType: "tekst-wijziging", oldText: current, newText: newText, message: current + " → " + newText }));
-      setEditableText(target.el, newText);
-      closePopover();
-    });
+      if (isText) {
+        var saved = addEntry(baseEntry(target, { actionType: "tekst-wijziging", oldText: current, newText: newText, message: current + " → " + newText }));
+        if (saved) { setEditableText(target.el, newText); target.el.classList.add("fb-edited"); showToast("Tekst bijgewerkt — je voorstel staat in het paneel."); closePopover(); }
+      } else {
+        var saved2 = addEntry(baseEntry(target, { actionType: "knop-suggestie", oldText: current, newText: newText, message: "Voorstel: \"" + current + "\" → \"" + newText + "\"" }));
+        if (saved2) { showToast("Voorstel opgeslagen."); closePopover(); }
+      }
+    };
     window.setTimeout(function () { var f = document.getElementById("fb-new-text"); if (f) f.focus(); }, 150);
   }
 
   function renderImageForm(target) {
     formBody.innerHTML =
-      "<h3>Afbeelding</h3>" +
+      "<h3>Voorstel voor deze afbeelding</h3>" +
       '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong></p>" +
-      '<div class="fb-field"><label for="fb-img-note">Opmerking</label><textarea id="fb-img-note" placeholder="Wat valt je op aan deze afbeelding?"></textarea></div>' +
-      '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Afbeelding vervangen aanvragen</span></label>' +
+      '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de afbeelding zelf verandert niet.</p>' +
+      '<div class="fb-field"><label for="fb-img-note">Opmerking</label><textarea id="fb-img-note" placeholder="Bijvoorbeeld: gebruik liever een andere foto"></textarea></div>' +
+      '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Andere afbeelding voorstellen</span></label>' +
+      attachmentFieldHtml() +
       '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Feedback opslaan</button></div>';
-    document.getElementById("fb-cancel").addEventListener("click", closePopover);
-    document.getElementById("fb-save").addEventListener("click", function () {
+    wireAttachmentField();
+
+    currentSaveHandler = function () {
       var note = document.getElementById("fb-img-note").value.trim();
       var replace = document.getElementById("fb-img-replace").checked;
-      if (!note && !replace) { document.getElementById("fb-img-note").focus(); return; }
-      addEntry(baseEntry(target, {
-        actionType: replace ? "afbeelding-vervangen" : "afbeelding-opmerking",
-        message: note || "Vervanging aangevraagd", imageReplace: replace
-      }));
-      if (replace) (target.el.closest(".media") || target.el).classList.add("fb-image-flagged");
-      closePopover();
-    });
+      if (!note && !replace && !pendingAttachment) { document.getElementById("fb-img-note").focus(); return; }
+      var msg = note ? "Voorstel: " + note : "Voorstel: andere afbeelding gewenst";
+      var saved = addEntry(baseEntry(target, { actionType: replace ? "afbeelding-vervangen" : "afbeelding-opmerking", message: msg, imageReplace: replace }));
+      if (saved) {
+        if (replace || pendingAttachment) (target.el.closest(".media") || target.el).classList.add("fb-image-flagged");
+        showToast("Voorstel opgeslagen.");
+        closePopover();
+      }
+    };
     window.setTimeout(function () { var f = document.getElementById("fb-img-note"); if (f) f.focus(); }, 150);
   }
 
   var ACTION_LABELS = {
-    up: "Hoger plaatsen", down: "Lager plaatsen", remove: "Verwijderen", adjust: "Aanpassen"
+    up: "Deze sectie hoger op de pagina",
+    down: "Deze sectie lager op de pagina",
+    remove: "Deze sectie verwijderen",
+    adjust: "Inhoud van deze sectie aanpassen"
   };
+  var activeSectionTarget = null;
   function renderSectionForm(target) {
+    activeSectionTarget = target;
     formBody.innerHTML =
       "<h3>Sectie: " + (target.section.getAttribute("data-review-label") || target.sectionId || "") + "</h3>" +
+      '<p class="fb-hint-copy">Kies wat je wilt voorstellen — dit wordt vastgelegd als suggestie, de pagina verandert niet.</p>' +
       '<div class="fb-section-actions">' +
-        '<button type="button" data-action="up">↑ Hoger plaatsen</button>' +
-        '<button type="button" data-action="down">↓ Lager plaatsen</button>' +
-        '<button type="button" data-action="remove">🗑 Verwijderen</button>' +
-        '<button type="button" data-action="adjust">✎ Aanpassen</button>' +
+        '<button type="button" data-action="up"><span>↑</span>' + ACTION_LABELS.up + "</button>" +
+        '<button type="button" data-action="down"><span>↓</span>' + ACTION_LABELS.down + "</button>" +
+        '<button type="button" data-action="remove"><span>🗑</span>' + ACTION_LABELS.remove + "</button>" +
+        '<button type="button" data-action="adjust"><span>✎</span>' + ACTION_LABELS.adjust + "</button>" +
       "</div>" +
       '<div class="fb-field" id="fb-adjust-wrap" hidden>' +
         '<label for="fb-adjust-text">Wat moet er worden aangepast?</label>' +
-        '<textarea id="fb-adjust-text" placeholder="Beschrijf de gewenste aanpassing"></textarea>' +
+        '<textarea id="fb-adjust-text" placeholder="Beschrijf de gewenste aanpassing — bijvoorbeeld tekst, foto’s, opmaak of inhoud"></textarea>' +
+        attachmentFieldHtml() +
         '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save-adjust">Feedback opslaan</button></div>' +
       "</div>";
 
-    formBody.querySelectorAll(".fb-section-actions button").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var action = btn.getAttribute("data-action");
-        if (action === "adjust") {
-          document.getElementById("fb-adjust-wrap").hidden = false;
-          document.getElementById("fb-cancel").addEventListener("click", closePopover);
-          document.getElementById("fb-save-adjust").addEventListener("click", function () {
-            var msg = document.getElementById("fb-adjust-text").value.trim();
-            if (!msg) { document.getElementById("fb-adjust-text").focus(); return; }
-            addEntry(baseEntry(target, { actionType: "aanpassen", message: msg }));
-            closePopover();
-          });
-          window.setTimeout(function () { document.getElementById("fb-adjust-text").focus(); }, 100);
-          return;
-        }
-        if (action === "up" || action === "down") {
-          var moved = moveSection(target.section, action);
-          addEntry(baseEntry(target, {
-            actionType: action === "up" ? "verplaats-omhoog" : "verplaats-omlaag",
-            message: ACTION_LABELS[action] + (moved ? "" : " (al aan de rand)")
-          }));
-        } else if (action === "remove") {
-          target.section.classList.add("fb-marked-removed");
-          addEntry(baseEntry(target, { actionType: "verwijderen", message: "Gemarkeerd voor verwijdering" }));
-        }
-        closePopover();
-      });
-    });
+    currentSaveHandler = function () {
+      var msg = document.getElementById("fb-adjust-text").value.trim();
+      if (!msg) { document.getElementById("fb-adjust-text").focus(); return; }
+      var saved = addEntry(baseEntry(target, { actionType: "sectie-aanpassen", message: "Voorstel: " + msg }));
+      if (saved) { showToast("Voorstel opgeslagen."); closePopover(); }
+    };
+  }
+
+  function handleSectionAction(action) {
+    var target = activeSectionTarget;
+    if (!target) return;
+    if (action === "adjust") {
+      document.getElementById("fb-adjust-wrap").hidden = false;
+      wireAttachmentField();
+      window.setTimeout(function () { document.getElementById("fb-adjust-text").focus(); }, 100);
+      return;
+    }
+    var actionType = action === "up" ? "sectie-hoger" : action === "down" ? "sectie-lager" : "sectie-verwijderen";
+    var saved = addEntry(baseEntry(target, { actionType: actionType, message: "Voorstel: " + ACTION_LABELS[action] }));
+    if (saved) { showToast("Voorstel opgeslagen: " + ACTION_LABELS[action].toLowerCase() + "."); closePopover(); }
   }
 
   function openPopover(target) {
@@ -298,7 +424,7 @@
   /* ---- Klik op sectie, afbeelding, tekst of knop ---- */
   document.addEventListener("click", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-toggle, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) return;
+    if (e.target.closest(".fb-toggle, .fb-panel-btn, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim, .fb-intro-scrim")) return;
     var section = e.target.closest("[data-review-id]");
     if (!section) return;
     e.preventDefault();
@@ -308,6 +434,47 @@
     target.section = section;
     openPopover(target);
   }, true);
+
+  /* ---------------- Algemene feedbackvraag (eerste stap bij activeren) ---------------- */
+  var introScrim = document.createElement("div");
+  introScrim.className = "fb-scrim fb-intro-scrim";
+  introScrim.innerHTML =
+    '<div class="fb-modal fb-intro-modal" role="dialog" aria-modal="true">' +
+      "<h3>Wat vind je van het ontwerp?</h3>" +
+      '<p class="fb-hint-copy">Deel eerst je algemene indruk. Daarna kun je op elk onderdeel van de pagina klikken voor gerichte feedback.</p>' +
+      '<div class="fb-field"><label for="fb-intro-like">Wat spreekt je aan?</label><textarea id="fb-intro-like" placeholder="Wat vind je nu al goed?"></textarea></div>' +
+      '<div class="fb-field"><label for="fb-intro-change">Wat moet er nog worden aangepast?</label><textarea id="fb-intro-change" placeholder="Denk aan: kleuren, lettertypes, foto’s, video’s, teksten, uitstraling, navigatie"></textarea></div>' +
+      '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-intro-skip">Overslaan</button><button type="button" class="fb-btn-save" id="fb-intro-save">Versturen</button></div>' +
+    "</div>";
+  document.body.appendChild(introScrim);
+
+  function closeIntro() { introScrim.classList.remove("is-open"); }
+  introScrim.addEventListener("click", function (e) {
+    if (e.target === introScrim || e.target.closest("#fb-intro-skip")) { closeIntro(); return; }
+    if (e.target.closest("#fb-intro-save")) {
+      var like = document.getElementById("fb-intro-like").value.trim();
+      var change = document.getElementById("fb-intro-change").value.trim();
+      if (like || change) {
+        var parts = [];
+        if (like) parts.push("Wat spreekt aan: " + like);
+        if (change) parts.push("Wat moet worden aangepast: " + change);
+        addEntry({
+          id: uid(), path: window.location.pathname, pageTitle: document.title,
+          sectionId: "algemeen", sectionLabel: "Algemene indruk",
+          targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
+          actionType: "algemeen", message: parts.join("\n\n"), attachment: null,
+          status: "open", createdAt: new Date().toISOString()
+        });
+        showToast("Bedankt voor je feedback!");
+      }
+      closeIntro();
+    }
+  });
+  function openIntro() {
+    document.getElementById("fb-intro-like").value = "";
+    document.getElementById("fb-intro-change").value = "";
+    introScrim.classList.add("is-open");
+  }
 
   /* ---- Sidebar met alle feedback ---- */
   var sidebar = document.createElement("aside");
@@ -332,9 +499,16 @@
   var currentFilter = "all";
   function statusLabel(v) { var s = STATUS.filter(function (x) { return x.value === v; })[0]; return s ? s.label : v; }
 
-  function summarize(i) {
-    if (i.actionType === "tekst-wijziging") return "“" + i.oldText + "” → “" + i.newText + "”";
-    return i.message || "";
+  function itemBodyHtml(i) {
+    if (i.actionType === "tekst-wijziging" || i.actionType === "knop-suggestie") {
+      return (
+        '<div class="fb-diff">' +
+          '<div class="fb-diff-row"><span class="fb-diff-label">Origineel</span><p>' + (i.oldText || "").replace(/</g, "&lt;") + "</p></div>" +
+          '<div class="fb-diff-row fb-diff-new"><span class="fb-diff-label">Nieuw</span><p>' + (i.newText || "").replace(/</g, "&lt;") + "</p></div>" +
+        "</div>"
+      );
+    }
+    return '<p class="fb-item-msg">' + (i.message || "").replace(/</g, "&lt;") + "</p>";
   }
 
   function renderList() {
@@ -352,7 +526,8 @@
             '<span class="fb-badge" data-status="' + i.status + '">' + statusLabel(i.status) + "</span>" +
             '<span class="fb-item-kind">' + (i.targetKindLabel || "Sectie") + "</span>" +
           "</div>" +
-          '<p class="fb-item-msg">' + summarize(i).replace(/</g, "&lt;") + "</p>" +
+          itemBodyHtml(i) +
+          attachmentThumbHtml(i.attachment) +
           '<div class="fb-item-meta"><strong>' + (i.sectionLabel || i.sectionId || "") + "</strong><span>" + i.path + "</span></div>" +
           '<div class="fb-item-who"><span>' + fmtDate(i.createdAt) + "</span></div>" +
           '<div class="fb-item-foot">' +
@@ -370,7 +545,7 @@
     });
     list.querySelectorAll(".fb-item-del").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        if (window.confirm("Deze feedback verwijderen?")) removeEntry(btn.getAttribute("data-id"));
+        if (window.confirm("Deze feedback verwijderen? Een tekstwijziging wordt dan ook teruggezet naar de oorspronkelijke tekst.")) removeEntry(btn.getAttribute("data-id"));
       });
     });
   }
@@ -387,10 +562,12 @@
   function closeSidebar() { sidebar.classList.remove("is-open"); sidebarScrim.classList.remove("is-open"); }
   document.getElementById("fb-sidebar-close").addEventListener("click", closeSidebar);
   sidebarScrim.addEventListener("click", closeSidebar);
+  panelBtn.addEventListener("click", openSidebar);
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (scrim.classList.contains("is-open")) closePopover();
+    if (introScrim.classList.contains("is-open")) closeIntro();
     if (sidebar.classList.contains("is-open")) closeSidebar();
   });
 
@@ -401,24 +578,26 @@
     document.documentElement.classList.toggle("feedback-mode", isActive);
     toggle.classList.toggle("is-active", isActive);
     toggle.querySelector(".fb-toggle-text").textContent = isActive ? "Feedbackmodus actief" : "Feedbackmodus";
-    var countEl = document.getElementById("fb-toggle-count");
+    panelBtn.hidden = !isActive;
     if (isActive) {
-      countEl.hidden = false;
-      countEl.textContent = String(readAll().length);
+      document.getElementById("fb-toggle-count").textContent = String(readAll().length);
     } else {
-      countEl.hidden = true;
       clearHover();
       closePopover();
+      closeIntro();
       closeSidebar();
     }
   }
-  function setActive(on) {
+  function setActiveCore(on) {
     isActive = on;
     try { window.localStorage.setItem(ACTIVE_KEY, on ? "1" : "0"); } catch (e) {}
     applyState();
-    if (on) openSidebar();
   }
-  toggle.addEventListener("click", function () { setActive(!isActive); });
+  toggle.addEventListener("click", function () {
+    var turningOn = !isActive;
+    setActiveCore(turningOn);
+    if (turningOn) openIntro();
+  });
 
   function refreshAll() {
     var countEl = document.getElementById("fb-toggle-count");

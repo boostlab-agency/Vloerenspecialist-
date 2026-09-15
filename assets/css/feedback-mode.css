@@ -135,6 +135,7 @@ html.feedback-mode .fb-edited,
 .fb-current p { margin: 0; font-size: 14px; color: var(--fb-ink); line-height: 1.5; }
 
 .fb-field { display: block; margin-bottom: 16px; }
+.fb-field[hidden] { display: none; }
 .fb-field label {
   display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   color: var(--fb-ink-soft); margin-bottom: 8px;
