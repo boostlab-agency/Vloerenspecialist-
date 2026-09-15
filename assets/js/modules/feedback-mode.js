@@ -668,12 +668,13 @@
     openPopover(target);
   }, true);
 
-  /* ---------------- Welkom + eenmalige ontwerpvragen ----------------
-     Verschijnt alleen bij de allereerste keer dat iemand feedbackmodus
+  /* ---------------- Welkom + ontwerpvragen ----------------
+     Verschijnt vanzelf bij de allereerste keer dat iemand feedbackmodus
      inschakelt: legt in drie stappen uit hoe het werkt en vraagt in
-     dezelfde stap één keer naar een algemene indruk. Die antwoorden
-     worden daarna nooit opnieuw afgedwongen — ze blijven gewoon
-     bewerkbaar via "Bewerken" bij dat item in het overzicht. */
+     dezelfde stap naar een algemene indruk. Wordt daarna nooit meer
+     automatisch afgedwongen, maar blijft altijd bereikbaar via de
+     "❓ Hoe werkt dit?"-link in de sidebar (openHowItWorks) — ook als
+     iemand de eerste keer op "Overslaan" drukte. */
   var introScrim = document.createElement("div");
   introScrim.className = "fb-scrim fb-intro-scrim";
   document.body.appendChild(introScrim);
@@ -684,20 +685,18 @@
   function introHtml(isOnboarding) {
     return (
       '<div class="fb-modal fb-intro-modal" role="dialog" aria-modal="true">' +
-        (isOnboarding
-          ? "<h3>Welkom! Zo werkt feedback geven</h3>" +
-            '<div class="fb-steps">' +
-              '<div class="fb-step"><span class="fb-step-num">1</span><p>Klik ergens op de pagina — op een tekst, foto, knop of hele sectie.</p></div>' +
-              '<div class="fb-step"><span class="fb-step-num">2</span><p>Typ je opmerking of voorstel en sla ’m op.</p></div>' +
-              '<div class="fb-step"><span class="fb-step-num">3</span><p>Bekijk alles terug via “Mijn feedback” rechtsboven.</p></div>' +
-            "</div>" +
-            '<hr class="fb-divider">' +
-            "<h4>Wat vind je van het ontwerp?</h4>" +
-            '<p class="fb-hint-copy">Dit vragen we je maar één keer — je kunt je antwoord later altijd aanpassen.</p>'
-          : "<h3>Algemene indruk bewerken</h3>") +
+        "<h3>" + (isOnboarding ? "Welkom! Zo werkt feedback geven" : "Zo werkt feedback geven") + "</h3>" +
+        '<div class="fb-steps">' +
+          '<div class="fb-step"><span class="fb-step-num">1</span><p>Klik ergens op de pagina — op een tekst, foto, knop of hele sectie.</p></div>' +
+          '<div class="fb-step"><span class="fb-step-num">2</span><p>Typ je opmerking of voorstel en sla ’m op.</p></div>' +
+          '<div class="fb-step"><span class="fb-step-num">3</span><p>Bekijk alles terug via “Mijn feedback” rechtsboven. Dit venster kun je daar altijd opnieuw openen.</p></div>' +
+        "</div>" +
+        '<hr class="fb-divider">' +
+        "<h4>Wat vind je van het ontwerp?</h4>" +
+        '<p class="fb-hint-copy">Je kunt je antwoord hier altijd weer aanpassen.</p>' +
         '<div class="fb-field"><label for="fb-intro-like">Wat spreekt je aan?</label><textarea id="fb-intro-like" placeholder="Wat vind je nu al goed?"></textarea></div>' +
         '<div class="fb-field"><label for="fb-intro-change">Wat moet er nog worden aangepast?</label><textarea id="fb-intro-change" placeholder="Denk aan: kleuren, lettertypes, foto’s, video’s, teksten, uitstraling, navigatie"></textarea></div>' +
-        '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-intro-skip">' + (isOnboarding ? "Overslaan" : "Annuleren") + "</button>" +
+        '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-intro-skip">' + (isOnboarding ? "Overslaan" : "Sluiten") + "</button>" +
         '<button type="button" class="fb-btn-save fb-btn-lg" id="fb-intro-save">' + (isOnboarding ? "Versturen en beginnen" : "Opslaan") + "</button></div>" +
       "</div>"
     );
@@ -760,6 +759,16 @@
     window.setTimeout(function () { var f = document.getElementById("fb-intro-like"); if (f) f.focus(); }, 150);
   }
 
+  /* Altijd bereikbare ingang naar "Zo werkt feedback geven" + de algemene
+     indruk — ook nadat iemand de eerste keer op "Overslaan" heeft gedrukt.
+     Bestaat er al een "algemeen"-item, dan open je dat ter bewerking;
+     zo niet, dan krijg je gewoon de (lege) eerste-keer-vragen te zien. */
+  function openHowItWorks() {
+    var existing = readAll().filter(function (i) { return i.actionType === "algemeen"; })[0];
+    if (existing) openIntroEdit(existing);
+    else openOnboarding();
+  }
+
   /* ---- Overzicht met alle feedback ("Mijn feedback") ----
      Zo eenvoudig mogelijk gehouden: geen technische velden (paginapad,
      dubbele statuslabels), grote duidelijke statusknoppen in plaats van
@@ -769,7 +778,9 @@
   sidebar.setAttribute("aria-label", "Mijn feedback");
   sidebar.innerHTML =
     '<div class="fb-sidebar-head">' +
-      '<div><h3>Mijn feedback</h3><p>Al je opmerkingen, overzichtelijk bij elkaar.</p></div>' +
+      '<div><h3>Mijn feedback</h3><p>Al je opmerkingen, overzichtelijk bij elkaar.</p>' +
+        '<button type="button" class="fb-help-link" id="fb-help-link">❓ Hoe werkt dit? / mijn algemene indruk</button>' +
+      "</div>" +
       '<button type="button" class="fb-close" id="fb-sidebar-close" aria-label="Sluiten">✕</button>' +
     "</div>" +
     '<div class="fb-filter-row" id="fb-filter-row">' +
@@ -863,6 +874,7 @@
   function openSidebar() { renderList(); sidebar.classList.add("is-open"); sidebarScrim.classList.add("is-open"); }
   function closeSidebar() { sidebar.classList.remove("is-open"); sidebarScrim.classList.remove("is-open"); }
   document.getElementById("fb-sidebar-close").addEventListener("click", closeSidebar);
+  document.getElementById("fb-help-link").addEventListener("click", openHowItWorks);
   sidebarScrim.addEventListener("click", closeSidebar);
   panelBtn.addEventListener("click", openSidebar);
 
