@@ -19,6 +19,7 @@
   "use strict";
   var STORAGE_KEY = "dvsFeedback";
   var ACTIVE_KEY = "dvsFeedbackModeOn";
+  var ONBOARDED_KEY = "dvsFeedbackOnboarded";
   var STATUS = [
     { value: "open", label: "Open" },
     { value: "in-behandeling", label: "In behandeling" },
@@ -28,6 +29,8 @@
 
   var isActive = false;
   try { isActive = window.localStorage.getItem(ACTIVE_KEY) === "1"; } catch (e) {}
+  var onboarded = false;
+  try { onboarded = window.localStorage.getItem(ONBOARDED_KEY) === "1"; } catch (e) {}
 
   /* ---------------- Opslag ---------------- */
   function readAll() {
@@ -129,20 +132,28 @@
      UI opbouwen
      ================================================================ */
 
-  /* ---- Schakelknop rechtsboven + knop om het paneel te (her)openen ---- */
-  var toggle = document.createElement("button");
-  toggle.type = "button";
-  toggle.className = "fb-toggle";
-  toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedbackmodus</span>';
-  document.body.appendChild(toggle);
+  /* ---- Schakelknop rechtsboven + knop om het overzicht te (her)openen ----
+     Groot en uitnodigend: dit is de enige ingang tot de hele feedbackmodus,
+     dus moet in één oogopslag duidelijk zijn wat hij doet. Beide knoppen
+     zitten in één flex-rij, zodat hun volle (tekst-afhankelijke) breedte
+     nooit hoeft te worden uitgerekend of kan overlappen. */
+  var headerControls = document.createElement("div");
+  headerControls.className = "fb-header-controls";
+  document.body.appendChild(headerControls);
 
   var panelBtn = document.createElement("button");
   panelBtn.type = "button";
   panelBtn.className = "fb-panel-btn";
   panelBtn.hidden = true;
-  panelBtn.setAttribute("aria-label", "Open feedbackoverzicht");
-  panelBtn.innerHTML = '<span class="fb-panel-icon">📋</span><span class="fb-count" id="fb-toggle-count">0</span>';
-  document.body.appendChild(panelBtn);
+  panelBtn.setAttribute("aria-label", "Open mijn feedback");
+  panelBtn.innerHTML = '<span class="fb-panel-icon">📋</span><span class="fb-panel-text">Mijn feedback</span><span class="fb-count" id="fb-toggle-count">0</span>';
+  headerControls.appendChild(panelBtn);
+
+  var toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "fb-toggle";
+  toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedback geven</span>';
+  headerControls.appendChild(toggle);
 
   /* ---- Subtiele overlay over de hele site ---- */
   var overlay = document.createElement("div");
@@ -174,7 +185,7 @@
   }
   document.addEventListener("mouseover", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-toggle, .fb-panel-btn, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
+    if (e.target.closest(".fb-header-controls, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
     var section = e.target.closest("[data-review-id]");
     if (!section) { clearHover(); return; }
     var t = describeTarget(e.target, section);
@@ -424,7 +435,7 @@
   /* ---- Klik op sectie, afbeelding, tekst of knop ---- */
   document.addEventListener("click", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-toggle, .fb-panel-btn, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim, .fb-intro-scrim")) return;
+    if (e.target.closest(".fb-header-controls, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim, .fb-intro-scrim")) return;
     var section = e.target.closest("[data-review-id]");
     if (!section) return;
     e.preventDefault();
@@ -435,54 +446,119 @@
     openPopover(target);
   }, true);
 
-  /* ---------------- Algemene feedbackvraag (eerste stap bij activeren) ---------------- */
+  /* ---------------- Welkom + eenmalige ontwerpvragen ----------------
+     Verschijnt alleen bij de allereerste keer dat iemand feedbackmodus
+     inschakelt: legt in drie stappen uit hoe het werkt en vraagt in
+     dezelfde stap één keer naar een algemene indruk. Die antwoorden
+     worden daarna nooit opnieuw afgedwongen — ze blijven gewoon
+     bewerkbaar via "Bewerken" bij dat item in het overzicht. */
+  function updateEntryFields(id, fields) {
+    var items = readAll().map(function (i) {
+      if (i.id === id) {
+        for (var k in fields) i[k] = fields[k];
+        i.updatedAt = new Date().toISOString();
+      }
+      return i;
+    });
+    writeAll(items);
+    refreshAll();
+  }
+
   var introScrim = document.createElement("div");
   introScrim.className = "fb-scrim fb-intro-scrim";
-  introScrim.innerHTML =
-    '<div class="fb-modal fb-intro-modal" role="dialog" aria-modal="true">' +
-      "<h3>Wat vind je van het ontwerp?</h3>" +
-      '<p class="fb-hint-copy">Deel eerst je algemene indruk. Daarna kun je op elk onderdeel van de pagina klikken voor gerichte feedback.</p>' +
-      '<div class="fb-field"><label for="fb-intro-like">Wat spreekt je aan?</label><textarea id="fb-intro-like" placeholder="Wat vind je nu al goed?"></textarea></div>' +
-      '<div class="fb-field"><label for="fb-intro-change">Wat moet er nog worden aangepast?</label><textarea id="fb-intro-change" placeholder="Denk aan: kleuren, lettertypes, foto’s, video’s, teksten, uitstraling, navigatie"></textarea></div>' +
-      '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-intro-skip">Overslaan</button><button type="button" class="fb-btn-save" id="fb-intro-save">Versturen</button></div>' +
-    "</div>";
   document.body.appendChild(introScrim);
 
-  function closeIntro() { introScrim.classList.remove("is-open"); }
+  var introMode = "onboarding"; // "onboarding" | "edit"
+  var editingGeneralId = null;
+
+  function introHtml(isOnboarding) {
+    return (
+      '<div class="fb-modal fb-intro-modal" role="dialog" aria-modal="true">' +
+        (isOnboarding
+          ? "<h3>Welkom! Zo werkt feedback geven</h3>" +
+            '<div class="fb-steps">' +
+              '<div class="fb-step"><span class="fb-step-num">1</span><p>Klik ergens op de pagina — op een tekst, foto, knop of hele sectie.</p></div>' +
+              '<div class="fb-step"><span class="fb-step-num">2</span><p>Typ je opmerking of voorstel en sla ’m op.</p></div>' +
+              '<div class="fb-step"><span class="fb-step-num">3</span><p>Bekijk alles terug via “Mijn feedback” rechtsboven.</p></div>' +
+            "</div>" +
+            '<hr class="fb-divider">' +
+            "<h4>Wat vind je van het ontwerp?</h4>" +
+            '<p class="fb-hint-copy">Dit vragen we je maar één keer — je kunt je antwoord later altijd aanpassen.</p>'
+          : "<h3>Algemene indruk bewerken</h3>") +
+        '<div class="fb-field"><label for="fb-intro-like">Wat spreekt je aan?</label><textarea id="fb-intro-like" placeholder="Wat vind je nu al goed?"></textarea></div>' +
+        '<div class="fb-field"><label for="fb-intro-change">Wat moet er nog worden aangepast?</label><textarea id="fb-intro-change" placeholder="Denk aan: kleuren, lettertypes, foto’s, video’s, teksten, uitstraling, navigatie"></textarea></div>' +
+        '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-intro-skip">' + (isOnboarding ? "Overslaan" : "Annuleren") + "</button>" +
+        '<button type="button" class="fb-btn-save fb-btn-lg" id="fb-intro-save">' + (isOnboarding ? "Versturen en beginnen" : "Opslaan") + "</button></div>" +
+      "</div>"
+    );
+  }
+
+  function markOnboarded() {
+    onboarded = true;
+    try { window.localStorage.setItem(ONBOARDED_KEY, "1"); } catch (e) {}
+  }
+  function closeIntro() { introScrim.classList.remove("is-open"); editingGeneralId = null; }
   introScrim.addEventListener("click", function (e) {
-    if (e.target === introScrim || e.target.closest("#fb-intro-skip")) { closeIntro(); return; }
+    if (e.target === introScrim || e.target.closest("#fb-intro-skip")) {
+      if (introMode === "onboarding") markOnboarded();
+      closeIntro();
+      return;
+    }
     if (e.target.closest("#fb-intro-save")) {
       var like = document.getElementById("fb-intro-like").value.trim();
       var change = document.getElementById("fb-intro-change").value.trim();
-      if (like || change) {
-        var parts = [];
-        if (like) parts.push("Wat spreekt aan: " + like);
-        if (change) parts.push("Wat moet worden aangepast: " + change);
-        addEntry({
-          id: uid(), path: window.location.pathname, pageTitle: document.title,
-          sectionId: "algemeen", sectionLabel: "Algemene indruk",
-          targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
-          actionType: "algemeen", message: parts.join("\n\n"), attachment: null,
-          status: "open", createdAt: new Date().toISOString()
-        });
-        showToast("Bedankt voor je feedback!");
+      var parts = [];
+      if (like) parts.push("Wat spreekt aan: " + like);
+      if (change) parts.push("Wat moet worden aangepast: " + change);
+      var message = parts.join("\n\n");
+
+      if (introMode === "edit" && editingGeneralId) {
+        updateEntryFields(editingGeneralId, { like: like, change: change, message: message });
+        showToast("Bijgewerkt.");
+      } else {
+        if (like || change) {
+          addEntry({
+            id: uid(), path: window.location.pathname, pageTitle: document.title,
+            sectionId: "algemeen", sectionLabel: "Algemene indruk",
+            targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
+            actionType: "algemeen", like: like, change: change, message: message, attachment: null,
+            status: "open", createdAt: new Date().toISOString()
+          });
+          showToast("Bedankt voor je feedback!");
+        }
+        markOnboarded();
       }
       closeIntro();
     }
   });
-  function openIntro() {
+  function openOnboarding() {
+    introMode = "onboarding";
+    introScrim.innerHTML = introHtml(true);
     document.getElementById("fb-intro-like").value = "";
     document.getElementById("fb-intro-change").value = "";
     introScrim.classList.add("is-open");
+    window.setTimeout(function () { var f = document.getElementById("fb-intro-like"); if (f) f.focus(); }, 150);
+  }
+  function openIntroEdit(entry) {
+    introMode = "edit";
+    editingGeneralId = entry.id;
+    introScrim.innerHTML = introHtml(false);
+    document.getElementById("fb-intro-like").value = entry.like || "";
+    document.getElementById("fb-intro-change").value = entry.change || "";
+    introScrim.classList.add("is-open");
+    window.setTimeout(function () { var f = document.getElementById("fb-intro-like"); if (f) f.focus(); }, 150);
   }
 
-  /* ---- Sidebar met alle feedback ---- */
+  /* ---- Overzicht met alle feedback ("Mijn feedback") ----
+     Zo eenvoudig mogelijk gehouden: geen technische velden (paginapad,
+     dubbele statuslabels), grote duidelijke statusknoppen in plaats van
+     een uitklaplijst, en grote leesbare tekst. */
   var sidebar = document.createElement("aside");
   sidebar.className = "fb-sidebar";
-  sidebar.setAttribute("aria-label", "Feedback op deze website");
+  sidebar.setAttribute("aria-label", "Mijn feedback");
   sidebar.innerHTML =
     '<div class="fb-sidebar-head">' +
-      '<div><h3>Feedback</h3><p>Opgeslagen op dit apparaat — alle pagina’s, alle secties.</p></div>' +
+      '<div><h3>Mijn feedback</h3><p>Al je opmerkingen, overzichtelijk bij elkaar.</p></div>' +
       '<button type="button" class="fb-close" id="fb-sidebar-close" aria-label="Sluiten">✕</button>' +
     "</div>" +
     '<div class="fb-filter-row" id="fb-filter-row">' +
@@ -497,7 +573,6 @@
   document.body.appendChild(sidebarScrim);
 
   var currentFilter = "all";
-  function statusLabel(v) { var s = STATUS.filter(function (x) { return x.value === v; })[0]; return s ? s.label : v; }
 
   function itemBodyHtml(i) {
     if (i.actionType === "tekst-wijziging" || i.actionType === "knop-suggestie") {
@@ -520,28 +595,40 @@
       return;
     }
     list.innerHTML = items.map(function (i) {
+      var isGeneral = i.actionType === "algemeen";
+      var kindLine = i.targetKindLabel || "Sectie";
+      if (i.sectionLabel && !isGeneral) kindLine += " · " + i.sectionLabel;
       return (
         '<div class="fb-item" data-id="' + i.id + '">' +
           '<div class="fb-item-top">' +
-            '<span class="fb-badge" data-status="' + i.status + '">' + statusLabel(i.status) + "</span>" +
-            '<span class="fb-item-kind">' + (i.targetKindLabel || "Sectie") + "</span>" +
+            '<span class="fb-item-kind">' + kindLine + "</span>" +
+            '<span class="fb-item-date">' + fmtDate(i.createdAt) + "</span>" +
           "</div>" +
           itemBodyHtml(i) +
           attachmentThumbHtml(i.attachment) +
-          '<div class="fb-item-meta"><strong>' + (i.sectionLabel || i.sectionId || "") + "</strong><span>" + i.path + "</span></div>" +
-          '<div class="fb-item-who"><span>' + fmtDate(i.createdAt) + "</span></div>" +
           '<div class="fb-item-foot">' +
-            '<select data-id="' + i.id + '" aria-label="Status wijzigen">' +
-              STATUS.map(function (s) { return '<option value="' + s.value + '"' + (s.value === i.status ? " selected" : "") + ">" + s.label + "</option>"; }).join("") +
-            "</select>" +
-            '<button type="button" class="fb-item-del" data-id="' + i.id + '">Verwijderen</button>' +
+            '<div class="fb-status-group" role="group" aria-label="Status">' +
+              STATUS.map(function (s) {
+                return '<button type="button" class="fb-status-btn" data-status="' + s.value + '" data-id="' + i.id + '"' + (s.value === i.status ? ' aria-pressed="true"' : "") + ">" + s.label + "</button>";
+              }).join("") +
+            "</div>" +
+            '<div class="fb-item-actions">' +
+              (isGeneral ? '<button type="button" class="fb-item-edit" data-id="' + i.id + '">Bewerken</button>' : "") +
+              '<button type="button" class="fb-item-del" data-id="' + i.id + '">Verwijderen</button>' +
+            "</div>" +
           "</div>" +
         "</div>"
       );
     }).join("");
 
-    list.querySelectorAll("select[data-id]").forEach(function (sel) {
-      sel.addEventListener("change", function () { updateStatus(sel.getAttribute("data-id"), sel.value); });
+    list.querySelectorAll(".fb-status-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () { updateStatus(btn.getAttribute("data-id"), btn.getAttribute("data-status")); });
+    });
+    list.querySelectorAll(".fb-item-edit").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var entry = readAll().filter(function (i) { return i.id === btn.getAttribute("data-id"); })[0];
+        if (entry) openIntroEdit(entry);
+      });
     });
     list.querySelectorAll(".fb-item-del").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -577,7 +664,7 @@
   function applyState() {
     document.documentElement.classList.toggle("feedback-mode", isActive);
     toggle.classList.toggle("is-active", isActive);
-    toggle.querySelector(".fb-toggle-text").textContent = isActive ? "Feedbackmodus actief" : "Feedbackmodus";
+    toggle.querySelector(".fb-toggle-text").textContent = isActive ? "Feedback actief" : "Feedback geven";
     panelBtn.hidden = !isActive;
     if (isActive) {
       document.getElementById("fb-toggle-count").textContent = String(readAll().length);
@@ -596,7 +683,7 @@
   toggle.addEventListener("click", function () {
     var turningOn = !isActive;
     setActiveCore(turningOn);
-    if (turningOn) openIntro();
+    if (turningOn && !onboarded) openOnboarding();
   });
 
   function refreshAll() {
