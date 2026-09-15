@@ -1,23 +1,33 @@
 /* ==========================================================================
    Feedbackmodus — klantvriendelijke, zichtbare reviewlaag ("werk alsof je in
    Figma zit"). Een knop rechtsboven ("💬 Feedbackmodus") schakelt de modus
-   voor iedere bezoeker met toegang tot de voorstelwebsite in en uit. De
-   voorkeur blijft onthouden (localStorage), ook tussen pagina's.
+   voor iedere bezoeker met toegang tot de voorstelwebsite in en uit.
+
+   Opslag: Supabase (tabel "feedback_items", bucket "feedback-attachments")
+   — centraal en gedeeld tussen alle bezoekers/apparaten, met live-updates
+   via Supabase Realtime. Zie supabase/schema.sql voor het volledige
+   databaseschema. Alleen de "is feedbackmodus aan?"- en
+   "heb ik de intro al gezien?"-voorkeur blijven per apparaat in
+   localStorage staan — dat is puur lokale UI-status, geen feedbackdata.
 
    Belangrijk gedragsprincipe: feedback is een VOORSTEL, geen directe
    wijziging. De enige uitzondering is tekstfeedback (op platte tekst, geen
    knoppen) — die wordt live op de pagina getoond zodat het verschil meteen
    voelbaar is, en de sidebar toont dan altijd zowel de originele als de
    nieuwe tekst. Verwijder je zo'n tekstfeedback-item, dan wordt de
-   oorspronkelijke tekst automatisch teruggezet.
+   oorspronkelijke tekst automatisch teruggezet — ook als iemand anders
+   'm ergens anders verwijdert, via het realtime-DELETE-event.
 
-   Alles wordt vastgelegd in localStorage (key "dvsFeedback") en getoond in
-   een donker feedbackpaneel rechts, met datum, elementtype en status
-   (Open / In behandeling / Afgerond).
+   Alles wordt getoond in een donker feedbackpaneel rechts, met datum,
+   elementtype en status (Open / In behandeling / Afgerond).
    ========================================================================== */
 (function () {
   "use strict";
-  var STORAGE_KEY = "dvsFeedback";
+  var SUPABASE_URL = "https://wxpyvoisvmtrclztgdrk.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_sfXqpISGr8lwpIeZxWfELg_KVHCi5mX";
+  var TABLE = "feedback_items";
+  var BUCKET = "feedback-attachments";
+
   var ACTIVE_KEY = "dvsFeedbackModeOn";
   var ONBOARDED_KEY = "dvsFeedbackOnboarded";
   var STATUS = [
@@ -25,49 +35,154 @@
     { value: "in-behandeling", label: "In behandeling" },
     { value: "afgerond", label: "Afgerond" }
   ];
-  var MAX_ATTACHMENT_BYTES = 3 * 1024 * 1024; // 3MB — lokale opslag (localStorage) heeft weinig ruimte
+  var MAX_ATTACHMENT_BYTES = 50 * 1024 * 1024; // 50MB — nu in Supabase Storage, ruimte is geen probleem meer
 
   var isActive = false;
   try { isActive = window.localStorage.getItem(ACTIVE_KEY) === "1"; } catch (e) {}
   var onboarded = false;
   try { onboarded = window.localStorage.getItem(ONBOARDED_KEY) === "1"; } catch (e) {}
 
-  /* ---------------- Opslag ---------------- */
+  /* ---------------- Supabase-client ----------------
+     Werkt de site zonder internet of is de CDN geblokkeerd, dan blijft de
+     UI gewoon werken (lokaal, niet-gedeeld) in plaats van te crashen. */
+  var sb = (typeof window.supabase !== "undefined")
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
+  if (!sb) console.warn("Feedbackmodus: Supabase-client kon niet worden geladen — feedback wordt niet gedeeld.");
+
+  /* ---------------- Opslag ----------------
+     "cache" is de lokale spiegel van de feedback_items-tabel: gevuld bij
+     het laden en daarna bijgehouden via realtime-events. Schrijfacties zijn
+     optimistisch — de UI werkt direct bij, het Supabase-verzoek loopt op de
+     achtergrond mee. Zo blijft de bediening exact even snel aanvoelen als
+     met localStorage, terwijl alles nu centraal staat. */
+  var cache = [];
+
   function readAll() {
-    try {
-      var raw = window.localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) { return []; }
+    return cache.slice().sort(function (a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
   }
-  function writeAll(items) {
-    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); return true; } catch (e) { return false; }
+  function upsertCache(entry) {
+    var idx = cache.findIndex(function (i) { return i.id === entry.id; });
+    if (idx === -1) cache.unshift(entry); else cache[idx] = entry;
   }
+  function removeFromCache(id) {
+    cache = cache.filter(function (i) { return i.id !== id; });
+  }
+
+  function rowToEntry(row) {
+    return {
+      id: row.id, path: row.path, pageTitle: row.page_title,
+      sectionId: row.section_id, sectionLabel: row.section_label,
+      targetKind: row.target_kind, targetKindLabel: row.target_kind_label, targetDetail: row.target_detail,
+      actionType: row.action_type, message: row.message,
+      oldText: row.old_text, newText: row.new_text,
+      like: row.like_text, change: row.change_text,
+      attachment: row.attachment_url ? { name: row.attachment_name, type: row.attachment_type, dataUrl: row.attachment_url } : null,
+      imageReplace: row.image_replace, status: row.status,
+      createdAt: row.created_at, updatedAt: row.updated_at
+    };
+  }
+  function entryToRow(entry) {
+    return {
+      id: entry.id, path: entry.path, page_title: entry.pageTitle,
+      section_id: entry.sectionId, section_label: entry.sectionLabel,
+      target_kind: entry.targetKind, target_kind_label: entry.targetKindLabel, target_detail: entry.targetDetail,
+      action_type: entry.actionType, message: entry.message,
+      old_text: entry.oldText || null, new_text: entry.newText || null,
+      like_text: entry.like || null, change_text: entry.change || null,
+      attachment_url: entry.attachment ? entry.attachment.dataUrl : null,
+      attachment_name: entry.attachment ? entry.attachment.name : null,
+      attachment_type: entry.attachment ? entry.attachment.type : null,
+      image_replace: !!entry.imageReplace, status: entry.status,
+      created_at: entry.createdAt, updated_at: entry.updatedAt || null
+    };
+  }
+
   function addEntry(entry) {
-    var items = readAll();
-    items.unshift(entry);
-    var ok = writeAll(items);
-    if (!ok) {
-      window.alert("Deze feedback kon niet worden opgeslagen — waarschijnlijk is de bijlage te groot voor lokale opslag. Probeer een kleiner bestand.");
-      return false;
-    }
+    upsertCache(entry);
     refreshAll();
+    if (sb) {
+      sb.from(TABLE).insert(entryToRow(entry)).then(function (res) {
+        if (res.error) {
+          console.error("Feedback opslaan mislukt:", res.error);
+          window.alert("Deze feedback kon niet worden opgeslagen. Controleer je internetverbinding en probeer opnieuw.");
+          removeFromCache(entry.id);
+          // Bij mislukte opslag ook de live tekstwijziging terugdraaien —
+          // anders oogt de pagina bijgewerkt terwijl er niets is vastgelegd.
+          if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
+          refreshAll();
+        }
+      });
+    }
     return true;
   }
   function updateStatus(id, status) {
-    var items = readAll().map(function (i) {
-      if (i.id === id) { i.status = status; i.updatedAt = new Date().toISOString(); }
-      return i;
-    });
-    writeAll(items);
+    var entry = cache.filter(function (i) { return i.id === id; })[0];
+    if (entry) { entry.status = status; entry.updatedAt = new Date().toISOString(); }
     refreshAll();
+    if (sb) {
+      sb.from(TABLE).update({ status: status, updated_at: new Date().toISOString() }).eq("id", id).then(function (res) {
+        if (res.error) { console.error("Status bijwerken mislukt:", res.error); window.alert("Status bijwerken is niet gelukt. Controleer je internetverbinding."); }
+      });
+    }
   }
   function removeEntry(id) {
-    var items = readAll();
-    var entry = items.filter(function (i) { return i.id === id; })[0];
-    writeAll(items.filter(function (i) { return i.id !== id; }));
+    var entry = cache.filter(function (i) { return i.id === id; })[0];
+    removeFromCache(id);
     if (entry && entry.actionType === "tekst-wijziging") revertLiveText(entry);
     refreshAll();
+    if (sb) {
+      sb.from(TABLE).delete().eq("id", id).then(function (res) {
+        if (res.error) console.error("Feedback verwijderen mislukt:", res.error);
+      });
+    }
   }
+  function updateEntryFields(id, fields) {
+    var entry = cache.filter(function (i) { return i.id === id; })[0];
+    if (entry) { for (var k in fields) entry[k] = fields[k]; entry.updatedAt = new Date().toISOString(); }
+    refreshAll();
+    if (sb) {
+      var row = { updated_at: new Date().toISOString() };
+      if ("like" in fields) row.like_text = fields.like;
+      if ("change" in fields) row.change_text = fields.change;
+      if ("message" in fields) row.message = fields.message;
+      sb.from(TABLE).update(row).eq("id", id).then(function (res) {
+        if (res.error) { console.error("Bijwerken mislukt:", res.error); window.alert("Bijwerken is niet gelukt. Controleer je internetverbinding."); }
+      });
+    }
+  }
+
+  function loadInitial() {
+    if (!sb) return;
+    sb.from(TABLE).select("*").order("created_at", { ascending: false }).then(function (res) {
+      if (res.error) { console.error("Feedback laden mislukt:", res.error); return; }
+      cache = (res.data || []).map(rowToEntry);
+      refreshAll();
+    });
+  }
+
+  function initRealtime() {
+    if (!sb) return;
+    sb.channel("feedback-items-realtime")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: TABLE }, function (payload) {
+        upsertCache(rowToEntry(payload.new));
+        refreshAll();
+      })
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: TABLE }, function (payload) {
+        upsertCache(rowToEntry(payload.new));
+        refreshAll();
+      })
+      .on("postgres_changes", { event: "DELETE", schema: "public", table: TABLE }, function (payload) {
+        var old = payload.old && payload.old.id ? rowToEntry(payload.old) : null;
+        if (old) {
+          removeFromCache(old.id);
+          if (old.actionType === "tekst-wijziging") revertLiveText(old);
+        }
+        refreshAll();
+      })
+      .subscribe();
+  }
+
   function uid() {
     return "fb-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
   }
@@ -208,10 +323,12 @@
     if (!e.relatedTarget || !(e.relatedTarget instanceof Element) || !e.relatedTarget.closest("[data-review-id]")) clearHover();
   });
 
-  /* ---------------- Bijlage (foto/screenshot/video als lokale referentie) ----------------
-     Wordt nog nergens naar een server geüpload; de bestandsinhoud wordt als
-     data-URL in het feedback-item zelf opgeslagen (localStorage). */
+  /* ---------------- Bijlage (foto/screenshot/video) ----------------
+     Wordt direct geüpload naar Supabase Storage ("feedback-attachments");
+     het feedback-item bewaart alleen de openbare URL, niet het bestand
+     zelf — zo blijft elk item klein, ongeacht de bestandsgrootte. */
   var pendingAttachment = null;
+  var uploadInFlight = false;
   function attachmentFieldHtml() {
     return (
       '<div class="fb-field">' +
@@ -222,25 +339,47 @@
       "</div>"
     );
   }
+  function uploadAttachment(file) {
+    if (!sb) return Promise.reject(new Error("Geen verbinding met Supabase."));
+    var ext = (file.name.split(".").pop() || "bestand").toLowerCase().replace(/[^a-z0-9]/g, "");
+    var path = uid() + (ext ? "." + ext : "");
+    return sb.storage.from(BUCKET).upload(path, file, { contentType: file.type || undefined }).then(function (res) {
+      if (res.error) throw res.error;
+      var pub = sb.storage.from(BUCKET).getPublicUrl(path);
+      return pub.data.publicUrl;
+    });
+  }
   function wireAttachmentField() {
     var input = document.getElementById("fb-attach-input");
-    var preview = document.getElementById("fb-attach-preview");
     if (!input) return;
     input.addEventListener("change", function () {
       var file = input.files && input.files[0];
       if (!file) return;
       if (file.size > MAX_ATTACHMENT_BYTES) {
-        window.alert("Dit bestand is groter dan 3 MB. Kies een kleiner bestand — lokale opslag heeft weinig ruimte.");
+        window.alert("Dit bestand is groter dan 50 MB. Kies een kleiner bestand.");
         input.value = "";
         return;
       }
-      var reader = new FileReader();
-      reader.onload = function () {
-        pendingAttachment = { name: file.name, type: file.type, dataUrl: reader.result };
+      uploadInFlight = true;
+      renderAttachmentUploading(file.name);
+      uploadAttachment(file).then(function (publicUrl) {
+        uploadInFlight = false;
+        pendingAttachment = { name: file.name, type: file.type, dataUrl: publicUrl };
         renderAttachmentPreview();
-      };
-      reader.readAsDataURL(file);
+      }).catch(function (err) {
+        uploadInFlight = false;
+        console.error("Bijlage uploaden mislukt:", err);
+        window.alert("Deze bijlage kon niet worden geüpload. Controleer je internetverbinding en probeer opnieuw.");
+        input.value = "";
+        renderAttachmentPreview();
+      });
     });
+  }
+  function renderAttachmentUploading(name) {
+    var preview = document.getElementById("fb-attach-preview");
+    if (!preview) return;
+    preview.hidden = false;
+    preview.innerHTML = '<span class="fb-attach-file">⏳</span><span class="fb-attach-name">Bezig met uploaden — ' + name + "</span>";
   }
   function renderAttachmentPreview() {
     var preview = document.getElementById("fb-attach-preview");
@@ -314,6 +453,7 @@
     if (e.target === scrim) { closePopover(); return; }
     if (e.target.closest("#fb-cancel")) { closePopover(); return; }
     if (e.target.closest("#fb-save") || e.target.closest("#fb-save-adjust")) {
+      if (uploadInFlight) { window.alert("Even geduld — de bijlage wordt nog geüpload."); return; }
       if (typeof currentSaveHandler === "function") currentSaveHandler();
       return;
     }
@@ -452,18 +592,6 @@
      dezelfde stap één keer naar een algemene indruk. Die antwoorden
      worden daarna nooit opnieuw afgedwongen — ze blijven gewoon
      bewerkbaar via "Bewerken" bij dat item in het overzicht. */
-  function updateEntryFields(id, fields) {
-    var items = readAll().map(function (i) {
-      if (i.id === id) {
-        for (var k in fields) i[k] = fields[k];
-        i.updatedAt = new Date().toISOString();
-      }
-      return i;
-    });
-    writeAll(items);
-    refreshAll();
-  }
-
   var introScrim = document.createElement("div");
   introScrim.className = "fb-scrim fb-intro-scrim";
   document.body.appendChild(introScrim);
@@ -693,4 +821,6 @@
   }
 
   applyState();
+  loadInitial();
+  initRealtime();
 })();
