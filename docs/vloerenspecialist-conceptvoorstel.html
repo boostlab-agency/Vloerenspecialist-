@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De Vloerenspecialist Tilburg — UX- en conceptvoorstel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee;
+  --surface:#fffdf9;
+  --surface-2:#efeae1;
+  --ink:#20201d;
+  --ink-soft:#55524b;
+  --line:#ddd6ca;
+  --accent:#9a5b3b;
+  --accent-soft:#c98a5f;
+  --gold:#8a7a4e;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --bg:#171613;
+    --surface:#1e1d19;
+    --surface-2:#26241f;
+    --ink:#efe9df;
+    --ink-soft:#b3ac9f;
+    --line:#33302a;
+    --accent:#d0996f;
+    --accent-soft:#c98a5f;
+    --gold:#c3b17e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171613;
+  --surface:#1e1d19;
+  --surface-2:#26241f;
+  --ink:#efe9df;
+  --ink-soft:#b3ac9f;
+  --line:#33302a;
+  --accent:#d0996f;
+  --accent-soft:#c98a5f;
+  --gold:#c3b17e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+header.cover{
+  padding:96px 0 64px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin:0 0 22px;
+}
+h1{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(38px,6vw,64px);line-height:1.04;
+  letter-spacing:-.01em;margin:0 0 20px;
+}
+.lead{font-size:clamp(19px,2.4vw,22px);color:var(--ink-soft);max-width:60ch;margin:0}
+.meta{margin-top:32px;font-size:14px;color:var(--ink-soft)}
+.meta strong{color:var(--ink);font-weight:600}
+
+h2{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(27px,4vw,38px);line-height:1.1;
+  letter-spacing:-.01em;margin:0 0 8px;
+}
+h3{
+  font-family:var(--serif);font-weight:500;
+  font-size:22px;line-height:1.2;margin:38px 0 10px;
+}
+h4{font-family:var(--sans);font-weight:600;font-size:16px;margin:26px 0 6px;letter-spacing:.01em}
+p{margin:0 0 16px}
+.section{padding:64px 0;border-bottom:1px solid var(--line)}
+.section-no{
+  font-family:var(--serif);font-size:14px;color:var(--accent);
+  letter-spacing:.16em;font-weight:600;display:block;margin-bottom:14px;
+}
+.section-intro{color:var(--ink-soft);font-size:19px;max-width:62ch;margin-bottom:8px}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:0 0 7px}
+li::marker{color:var(--accent-soft)}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+
+.callout{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:4px;padding:22px 26px;margin:26px 0;
+}
+.callout .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;display:block;margin-bottom:8px}
+.callout p:last-child{margin-bottom:0}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;padding:24px 26px;margin:18px 0;
+}
+.card h3{margin-top:0}
+
+.tree{
+  font-family:var(--sans);font-size:15px;line-height:1.9;
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:22px 26px;margin:20px 0;overflow-x:auto;
+}
+.tree .l0{font-weight:600;color:var(--ink)}
+.tree .l1{padding-left:22px;color:var(--ink-soft)}
+.tree .l2{padding-left:44px;color:var(--ink-soft);font-size:14px}
+.tree .tag{color:var(--accent);font-size:12px;letter-spacing:.04em}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
+.pill{
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:999px;padding:6px 14px;font-size:13px;color:var(--ink-soft);font-weight:500;
+}
+.pill.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.tbl-scroll{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px 28px;margin:40px 0 0}
+.toc ol{counter-reset:t;list-style:none;padding:0;margin:0}
+.toc li{counter-increment:t;margin:0 0 4px;padding-left:34px;position:relative}
+.toc li::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;font-family:var(--serif);color:var(--accent);font-size:13px}
+.toc a{border:none}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+.mini{font-size:14px;color:var(--ink-soft)}
+.divider-label{display:flex;align-items:center;gap:16px;margin:8px 0 4px}
+.divider-label span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.divider-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+footer{padding:56px 0 90px;color:var(--ink-soft);font-size:14px}
+.chapters{counter-reset:ch}
+.chapter-block{margin:20px 0;padding-left:56px;position:relative;counter-increment:ch}
+.chapter-block::before{
+  content:counter(ch,decimal-leading-zero);position:absolute;left:0;top:2px;
+  font-family:var(--serif);font-size:20px;color:var(--accent);
+}
+.chapter-block h4{margin:0 0 4px}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <p class="eyebrow">Boost Lab Agency · UX- en conceptvoorstel</p>
+    <h1>Van vloerenzaak naar het interieurmerk van Tilburg.</h1>
+    <p class="lead">Een strategische uitwerking van twee designrichtingen voor De Vloerenspecialist, waarin de showroom de hoofdrol krijgt en de website vooral inspireert in plaats van verkoopt.</p>
+    <p class="meta"><strong>Klant:</strong> De Vloerenspecialist, Tilburg &nbsp;·&nbsp; <strong>Concepten:</strong> Modern Luxe &amp; High-End Design &nbsp;·&nbsp; <strong>Doel:</strong> conceptbasis voor de definitieve bouw</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <p class="eyebrow" style="margin-bottom:16px">Inhoud</p>
+    <ol>
+      <li><a href="#analyse">Analyse: huidige site, concepten en aanbod</a></li>
+      <li><a href="#kern">Het centrale inzicht: de showroom is het product</a></li>
+      <li><a href="#fundament">Gedeeld fundament voor beide concepten</a></li>
+      <li><a href="#modern">Concept 1 · Modern Luxe (het navigeerbare platform)</a></li>
+      <li><a href="#highend">Concept 2 · High-End Design (de beleving)</a></li>
+      <li><a href="#tien">De tien dimensies per concept</a></li>
+      <li><a href="#aanbeveling">Aanbeveling en route naar de bouw</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- 1 ANALYSE -->
+<section class="section" id="analyse">
+  <div class="wrap">
+    <span class="section-no">01 — Analyse</span>
+    <h2>Waar we vandaan komen</h2>
+    <p class="section-intro">Drie dingen tegen het licht gehouden: de huidige website, de twee gekozen concepten en het volledige aanbod. Zo weten we precies wat er mist en wat er sterker mag.</p>
+
+    <h3>De huidige website</h3>
+    <p>De live site is een klassieke WordPress-vloerensite. Betrouwbaar, maar hij doet zichzelf tekort op drie punten. Hij is gebouwd rond de offerteaanvraag, terwijl de showroom het echte verkoopkanaal is. Hij laat het aanbod niet zien als iets dat je kunt verkennen, PVC, hout, laminaat, visgraat en tapijt staan niet als eigen ingangen op de site. En hij voelt als een dienstverlener, niet als een merk. Precies die drie punten lossen de nieuwe concepten op.</p>
+
+    <h3>Concept 1 · Modern Luxe, zoals het nu staat</h3>
+    <p>Een strakke, geloofwaardige bedrijfssite. De vier vakgebieden staan er, er is sociale proof, de showroom wordt genoemd. Sterk fundament. De zwakke plekken zijn duidelijk.</p>
+    <ul>
+      <li><strong>Nog steeds offertegericht.</strong> De hoofdknop in de navigatie, de eerste knop in de hero en de slot-CTA zijn allemaal "Vraag offerte aan". Dat botst met de nieuwe koers.</li>
+      <li><strong>Producten zitten verstopt.</strong> Alle vloeren zitten samengevouwen in één tegel "Vloeren". De vijf vloertypes die de klant juist wil laten zien, hebben geen eigen plek.</li>
+      <li><strong>Geen echte productervaring.</strong> Geen overzicht, geen filters, geen detailpagina, geen merkenpagina, terwijl "62+ merken" een van de sterkste troeven is.</li>
+      <li><strong>Inspiratie is dun.</strong> Drie projecten, verder weinig om in te verdwalen of voor terug te komen.</li>
+    </ul>
+
+    <h3>Concept 2 · High-End Design, zoals het nu staat</h3>
+    <p>Dit concept staat al veel dichter bij de gewenste koers. Het is scroll-gedreven, redactioneel en zet de showroom neer als bestemming. De CTA's kloppen al: "Plan showroombezoek", "Vraag advies aan", "Kom inspiratie opdoen". Er staat zelfs een klantquote die letterlijk de positionering verwoordt: dit voelt als een interieurmerk met visie. De beperking is dat het nu een mooie one-page teaser is. Het skelet is prachtig, maar de verhaallijn, de contentdiepte en de fotografierichting moeten nog echt gebouwd worden.</p>
+
+    <h3>Het aanbod, in twee lagen</h3>
+    <p>Het is belangrijk om het aanbod als twee lagen te zien, want dat bepaalt de hele structuur.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Laag 1 · Vloeren, met diepte</h4>
+        <p class="mini">PVC vloeren, houten vloeren, laminaat, visgraat, tapijt, aangevuld met natuursteen en gietvloer. Dit is de laag die de klant zichtbaar en doorzoekbaar wil maken.</p>
+      </div>
+      <div class="card">
+        <h4>Laag 2 · Het complete interieur</h4>
+        <p class="mini">Interieur op maat, kasten, keukens, stalen deuren, plus behang en raamdecoratie, gordijnen, shutters en zonwering. Dit is het verhaal van één adres voor je hele woning.</p>
+      </div>
+    </div>
+    <p class="mini">Onderscheidende troeven die we overal laten terugkomen: 1.800 m² showroom, 62+ gerenommeerde merken, eigen vakmensen in dienst, persoonlijk en eerlijk advies zonder verkooppraatjes.</p>
+  </div>
+</section>
+
+<!-- 2 KERN -->
+<section class="section" id="kern">
+  <div class="wrap">
+    <span class="section-no">02 — Het centrale inzicht</span>
+    <h2>De showroom is het product. De site is de trailer.</h2>
+    <p class="section-intro">Dit is de belangrijkste keuze in het hele project. Alles daarna volgt hieruit.</p>
+    <p>De klant verkoopt het beste als mensen langskomen. De website hoeft dus niet te verkopen, hij moet verlangen wekken en de drempel naar de showroom tot nul brengen. Denk aan een premium interieurmagazine dat je aan het einde van elke pagina zin geeft om binnen te lopen, niet aan een formulierfabriek.</p>
+
+    <div class="callout">
+      <span class="k">De omslag in één zin</span>
+      <p>Elke pagina eindigt niet in een formulier, maar in een reden om langs te komen. De offerte verdwijnt niet, maar wordt een stille, tweede optie in plaats van de kop.</p>
+    </div>
+
+    <h4>Wat betekent conversie dan nog?</h4>
+    <p>We definiëren conversie opnieuw, in twee niveaus.</p>
+    <ul>
+      <li><strong>De macro-conversie</strong> is een geplande showroomafspraak of adviesgesprek. Aangevuld met bellen of appen.</li>
+      <li><strong>Micro-conversies</strong> voeden dat: een moodboard of verlanglijst opslaan, projectverhalen lezen, materialen bekijken, een 360-tour openen, de route plannen. Kleine ja's die naar de grote ja leiden.</li>
+    </ul>
+    <p>De taal past zich aan: kom inspiratie opdoen, bezoek onze showroom, plan een adviesgesprek, ontdek onze showroom, laat je inspireren. De woorden "vraag direct een offerte aan" komen nergens meer als hoofdboodschap voor.</p>
+  </div>
+</section>
+
+<!-- 3 FUNDAMENT -->
+<section class="section" id="fundament">
+  <div class="wrap">
+    <span class="section-no">03 — Gedeeld fundament</span>
+    <h2>De basis onder beide concepten</h2>
+    <p class="section-intro">Positionering, doelgroep, showroom en conversie zijn merkkeuzes. Die staan los van de vormgeving en gelden dus voor allebei de richtingen.</p>
+
+    <h3>Positionering</h3>
+    <p>Van "de vloerenzaak van Tilburg" naar "het interieurmerk van Tilburg, met de showroom als hart." Vier disciplines, één team, één standaard. Premium, maar met beide benen op de grond: vakmanschap, eigen mensen, eerlijk advies. Mogelijke merklijnen om mee te werken:</p>
+    <ul>
+      <li>Kwaliteit in elk detail van uw interieur.</li>
+      <li>Eén adres voor uw complete interieur.</li>
+      <li>Voel het verschil. Kom langs in Tilburg.</li>
+    </ul>
+
+    <h3>Doelgroep</h3>
+    <p>Vier profielen, allemaal high-consideration en gevoelig voor zien en voelen.</p>
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>Profiel</th><th>Wie</th><th>Wat de site moet doen</th></tr>
+        <tr><td>De renovator</td><td>Koopwoning in Tilburg en dorpen als Goirle, Oisterwijk, Reeshof. Wil kwaliteit en ontzorging.</td><td>Laten zien dat één partij het hele interieur doet, en uitnodigen om te voelen.</td></tr>
+        <tr><td>De nieuwbouw-inrichter</td><td>Leeg huis, veel keuzes tegelijk, zoekt samenhang.</td><td>Advies en overzicht bieden, richting adviesgesprek.</td></tr>
+        <tr><td>De designliefhebber</td><td>Penthouse, villa, herenhuis. Wil onderscheidend en exclusief, investeert graag.</td><td>Prikkelen met visgraat, natuursteen en signature projecten.</td></tr>
+        <tr><td>De dromer</td><td>Oriënteert nog, nog niet klaar om te kopen.</td><td>Inspireren en later terugtrekken naar de showroom. Hier verdient het magazine zich terug.</td></tr>
+      </table>
+    </div>
+    <p class="mini">Secundair: stylisten en architecten voor projecten. Voor hen tellen de cases en het materialenoverzicht.</p>
+
+    <h3>Showroomstrategie</h3>
+    <p>De showroom krijgt een eigen, rijke pagina en komt door de hele site terug als rustige, terugkerende uitnodiging. De inhoud draait om beleving en gemak: 1.800 m² complete woonopstellingen, alles zien en voelen, vrijblijvend, persoonlijk advies, koffie, ruim parkeren. Plus alles wat de drempel verlaagt: adres, kaart en route, openingstijden van maandag tot en met zaterdag van 09:30 tot 17:30, telefoon en WhatsApp, foto's of een 360-tour, en een tip om je plattegrond, foto's of moodboard mee te nemen.</p>
+
+    <h3>Conversiestrategie</h3>
+    <p>Zoals in inzicht 02: macro is de afspraak, micro's zijn de kleine betrokkenheden. De offerte blijft als zachte optie bestaan, bijvoorbeeld "Liever eerst een indicatie? Vraag vrijblijvend advies", nooit als hoofd-CTA. Meetbaar maken we het op showroomafspraken, telefoon- en app-contacten, geopende routes, aangemaakte verlanglijsten en leestijd op het magazine.</p>
+
+    <h3>Contentstrategie</h3>
+    <p>Drie contentlagen dragen beide concepten, met fotografie als ruggengraat.</p>
+    <ul>
+      <li><strong>Product.</strong> Materialen, kleuren, legpatronen, toepassingen, merken.</li>
+      <li><strong>Inspiratie.</strong> Projecten, per ruimte, stijlverhalen, een redactioneel journal.</li>
+      <li><strong>Vertrouwen.</strong> Verhaal, team, werkwijze, reviews, de showroom zelf.</li>
+    </ul>
+    <div class="callout">
+      <span class="k">Randvoorwaarde</span>
+      <p>Beide concepten staan of vallen met echte fotografie. Advies: laat drie tot vier opgeleverde projecten, de showroom, materiaal-macro's en het team professioneel vastleggen. Consistente art direction: natuurlijk licht, rustige styling, warme neutralen, accenten van zwart staal en hout. Vermijd stockbeeld.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 MODERN LUXE -->
+<section class="section" id="modern">
+  <div class="wrap">
+    <span class="section-no">04 — Concept 1</span>
+    <h2>Modern Luxe: het navigeerbare premium platform</h2>
+    <p class="section-intro">Dit wordt het complete concept. Diep, doorzoekbaar, met een echte productervaring op het niveau van high-end interieurzaken en designmerken. Hier kan de bezoeker het hele assortiment verkennen en toch steeds richting de showroom bewegen.</p>
+
+    <h3>De informatiearchitectuur</h3>
+    <p>De navigatie verandert fundamenteel. Vloeren wordt een mega-menu met echte ingangen, Inspiratie en Showroom worden hoofditems, en de headerknop wordt "Plan showroombezoek".</p>
+
+    <div class="tree">
+      <div class="l0">Home</div>
+      <div class="l0">Vloeren <span class="tag">mega-menu</span></div>
+      <div class="l1">Op type: PVC · Houten vloeren · Laminaat · Visgraat · Tapijt · Natuursteen · Gietvloer</div>
+      <div class="l1">Op merk: merkenoverzicht en uitgelichte merken</div>
+      <div class="l1">Inspiratie: legpatronen · kleuren · per ruimte</div>
+      <div class="l2">→ Productoverzicht per type</div>
+      <div class="l2">→ Productdetail per collectie</div>
+      <div class="l0">Interieur <span class="tag">mega-menu</span></div>
+      <div class="l1">Interieur op maat · Behang · Raamdecoratie</div>
+      <div class="l0">Inspiratie</div>
+      <div class="l1">Projecten → projectdetail · Per ruimte · Journal → artikel · Moodboard</div>
+      <div class="l0">Merken</div>
+      <div class="l1">Merkenoverzicht → merkdetail</div>
+      <div class="l0">Showroom</div>
+      <div class="l0">Over ons</div>
+      <div class="l1">Verhaal · Team · Werkwijze · Reviews</div>
+      <div class="l0">Contact / Plan showroombezoek</div>
+      <div class="l0">Utility <span class="tag">overal</span></div>
+      <div class="l1">Zoeken · Verlanglijst · Openingstijden en telefoon</div>
+    </div>
+
+    <h3>De productervaring en het filteren</h3>
+    <p>Dit is de kern van de wens. Om filteren mogelijk te maken zonder zwaar CMS, definiëren we per product, dus per collectie of vloerlijn, een datamodel. Dat is precies wat je later als eenvoudige JSON-laag kunt vullen.</p>
+    <h4>Datamodel per product</h4>
+    <ul>
+      <li><strong>Type</strong>: PVC, hout, laminaat, visgraat, tapijt, natuursteen, gietvloer</li>
+      <li><strong>Merk</strong>: uit de 62+ merken</li>
+      <li><strong>Kleur of tint</strong>: licht eiken, warm bruin, grijs, naturel, zwart, wit</li>
+      <li><strong>Legpatroon</strong>: recht, visgraat, Hongaarse punt, chevron, tegel, brede of smalle planken</li>
+      <li><strong>Toepassing</strong>: woonkamer, keuken, badkamer, hele woning, geschikt voor vloerverwarming, drukke ruimtes</li>
+      <li><strong>Eigenschappen</strong>: geluiddempend, waterbestendig, slijtvast, klik, plak of lijm</li>
+      <li><strong>Stijl</strong>: modern, landelijk, industrieel, klassiek, Scandinavisch</li>
+    </ul>
+
+    <h4>De vier gevraagde filters, plus context</h4>
+    <div class="pill-row">
+      <span class="pill on">Merk</span>
+      <span class="pill on">Kleur</span>
+      <span class="pill on">Legpatroon</span>
+      <span class="pill on">Toepassing</span>
+      <span class="pill">Eigenschappen</span>
+      <span class="pill">Stijl</span>
+    </div>
+    <p>Filterbalk links op desktop, als bottom sheet op mobiel. Resultaatkaarten tonen een groot materiaalbeeld, de collectienaam, het merk, een korte tag en een hart voor de verlanglijst. Geen prijs, geen winkelwagen. Dit is verkennen om langs te komen, geen webshop. De knop op de kaart luidt "Bewaar" of "Bekijk in de showroom".</p>
+
+    <div class="divider-label"><span>De vijf gevraagde pagina's</span></div>
+
+    <div class="card">
+      <h3>A · Productoverzichtspagina</h3>
+      <p class="mini">Bijvoorbeeld /vloeren/pvc</p>
+      <p>Redactionele kop met sfeervolle intro over het type, voor wie het is en waarom hier. Daaronder de filterbalk met het raster. Verder een strip met populaire merken in dit type, een inspiratieblok met dit type in echte ruimtes, een korte kies-gids die naar het journal linkt voor SEO en advies, en een showroomband: "Twijfel je tussen collecties? Leg ze naast elkaar in de showroom." Afsluiten met FAQ per type.</p>
+    </div>
+
+    <div class="card">
+      <h3>B · Merkenpagina</h3>
+      <p class="mini">/merken en /merken/[merk]</p>
+      <p>Het overzicht is een logo-raster van alle merken, filterbaar op type en doorzoekbaar. De merkdetailpagina vertelt het merkverhaal, waar het merk voor staat en welke collecties er zijn, met een knop naar het productoverzicht gefilterd op dat merk. Een badge "te zien in onze showroom" maakt de brug. Dit zet de 62+ merken in als curator-troef: al deze namen onder één dak.</p>
+    </div>
+
+    <div class="card">
+      <h3>C · Productdetailpagina</h3>
+      <p class="mini">/vloeren/[type]/[collectie]</p>
+      <p>Bovenaan grote materiaal- en sfeerbeelden met zoom, eventueel een room-view. Daaronder de kernkenmerken met swatches en icons: type, beschikbare legpatronen, kleuren, toepassing, eigenschappen. Primaire knop: "Zie en voel dit in de showroom", plus "Bewaar in verlanglijst". Verder dit product in echte ruimtes, combinatietips die naar behang en raamdecoratie leiden, een adviesblok "onze specialist over deze vloer", gerelateerde collecties en praktische info over onderhoud en vloerverwarming. Geen prijs, geen checkout.</p>
+    </div>
+
+    <div class="card">
+      <h3>D · Inspiratiepagina</h3>
+      <p class="mini">/inspiratie</p>
+      <p>Een magazine-achtige hub. Uitgelichte projecten, per ruimte, stijlverhalen en het journal. Projectdetails zijn echte cases met de gebruikte materialen, elk gelinkt naar de productdetailpagina, zodat inspiratie en product een mooie lus vormen. De moodboard- of verlanglijstfunctie sluit af met de sterkste brug van micro naar macro: "Neem je moodboard mee naar de showroom."</p>
+    </div>
+
+    <div class="card">
+      <h3>E · Showroompagina</h3>
+      <p class="mini">/showroom</p>
+      <p>De showroomstrategie uit sectie 03, volledig uitgewerkt. Hero met 1.800 m² en beeld of video, "wat je kunt verwachten", een eenvoudige planner voor dag en tijd of "wij bellen je", prominent telefoon en WhatsApp, praktische info met kaart en parkeren, een 360-tour of galerij, een blok "bereid je bezoek voor" en reviews die juist de showroomervaring benoemen.</p>
+    </div>
+
+    <div class="divider-label"><span>Direct antwoord op je vragen</span></div>
+    <h4>Welke pagina's ontbreken nu</h4>
+    <p>Productoverzicht per type, merkenoverzicht en merkdetail, productdetail, inspiratiehub met projectdetail en per-ruimte, journal, een echte showroompagina, contact met planner, verlanglijst en FAQ.</p>
+    <h4>Welke secties ontbreken op de home</h4>
+    <p>Een productnavigatieblok met de vijf vloertypes als eigen ingang in plaats van één tegel, een merkenshowcase, een inspiratie- en journalteaser, een introductie van de verlanglijst, een showroomplanner-teaser en een duidelijker uitleg van de werkwijze.</p>
+    <h4>Hoe de gebruikerservaring beter wordt</h4>
+    <p>Alle offerte-CTA's worden showroom-CTA's. De verlanglijst wordt de rode draad met een teller in de header. Inspiratie en Showroom komen bovenin de navigatie. Zoeken wordt toegevoegd. Filteren gebeurt snel en client-side, wat past bij jouw aanpak van zelfstandige HTML zonder buildtools.</p>
+    <h4>Welke content nog moet komen</h4>
+    <p>Productteksten per type, merkverhalen, projectcases met gebruikte materialen, journal-artikelen, showroom-belevingscontent en bovenal de fotografie.</p>
+  </div>
+</section>
+
+<!-- 5 HIGH-END -->
+<section class="section" id="highend">
+  <div class="wrap">
+    <span class="section-no">05 — Concept 2</span>
+    <h2>High-End Design: de beleving</h2>
+    <p class="section-intro">Het meest onderscheidende ontwerp. Minder productgericht, meer merk. De bezoeker scrollt als door een interieurmagazine en wil aan het einde langskomen. Hier komen jouw voorkeuren voor scroll-gedreven, cinematische bouw met GSAP en waar zinvol Three.js het sterkst tot hun recht.</p>
+
+    <h3>De positionering van dit concept</h3>
+    <p>Niet een website die verkoopt, maar een merk dat inspireert. De site verdient het showroombezoek door verlangen en vertrouwen, niet door overtuiging.</p>
+
+    <h3>Structuur en content-architectuur</h3>
+    <p>Minder pagina's, elk rijker. Alles is redactioneel. De lange, in hoofdstukken opgedeelde homepage is het middelpunt.</p>
+    <div class="tree">
+      <div class="l0">Home <span class="tag">long-form scroll story</span></div>
+      <div class="l0">Disciplines</div>
+      <div class="l1">Vloeren · Interieur op maat · Behang · Raamdecoratie, elk als redactioneel hoofdstuk</div>
+      <div class="l0">Materialen <span class="tag">sensorisch, geen catalogus</span></div>
+      <div class="l1">Hout · Natuursteen · Textiel · Marmer · Drapering</div>
+      <div class="l0">Projecten <span class="tag">immersieve cases</span></div>
+      <div class="l0">Showroom <span class="tag">de bestemming</span></div>
+      <div class="l0">Over ons</div>
+      <div class="l0">Contact / Plan showroombezoek</div>
+      <div class="l0">Journal <span class="tag">optioneel, voor ritme en SEO</span></div>
+    </div>
+
+    <h3>De homepage als verhaal in hoofdstukken</h3>
+    <p>Een narratieve boog. Elk hoofdstuk is een bijna paginavullende scène die opbouwt naar de showroom.</p>
+    <div class="chapters">
+      <div class="chapter-block"><h4>Openingsact</h4><p class="mini">Stil en cinematisch. Groot beeld of subtiele video van een af interieur of een detail, licht op hout, visgraat. Merkbelofte: interieurs die kwaliteit uitstralen. Rustige CTA en "scroll to explore".</p></div>
+      <div class="chapter-block"><h4>Wie we zijn</h4><p class="mini">Kort en krachtig manifest. Van vloerenzaak naar interieurmerk. Zet de toon: een merk met visie.</p></div>
+      <div class="chapter-block"><h4>De disciplines</h4><p class="mini">Horizontale beweging. De vier vakgebieden als filmische panelen die langsschuiven. Per paneel groot beeld, één zin, "ontdek". Dit is de bestaande marquee, uitgebouwd tot een echte horizontale scroll-sectie.</p></div>
+      <div class="chapter-block"><h4>Materiaal en ambacht</h4><p class="mini">Sensorisch. Close-ups, texturen, licht. Materiaalnamen verschijnen bij het scrollen. Dit is de tactiele belofte die de showroom straks waarmaakt.</p></div>
+      <div class="chapter-block"><h4>Een project, verteld</h4><p class="mini">Eén signature project als scrollverhaal, van leeg naar af, met de materiaalkeuzes en één quote. Het totaalinterieur, emotioneel gebracht.</p></div>
+      <div class="chapter-block"><h4>De showroom als bestemming</h4><p class="mini">De climax. Zwart staal, warme houtaccenten, 1.800 m² complete woonopstellingen. Cijfers subtiel. Grote uitnodiging: kom inspiratie opdoen, plan je bezoek.</p></div>
+      <div class="chapter-block"><h4>Vertrouwen</h4><p class="mini">De sterke klantquote over een interieurmerk met visie, rustig gepresenteerd met een paar andere ervaringen.</p></div>
+      <div class="chapter-block"><h4>De uitnodiging</h4><p class="mini">Warme afsluiter, als de laatste pagina van een magazine. Adres, openingstijden, route, telefoon. Ervaar het zelf, kom langs.</p></div>
+    </div>
+
+    <h3>Scroll storytelling, animatie en interactie</h3>
+    <ul>
+      <li><strong>GSAP ScrollTrigger als motor</strong>: gepinde secties, horizontale scroll voor de disciplines, tekst die per regel onthult, beelden die schalen en parallaxen.</li>
+      <li><strong>Scroll-progress</strong> als subtiele indicator, zoals de 00% die er al staat.</li>
+      <li><strong>Three.js of WebGL alleen waar het iets toevoegt</strong>, bijvoorbeeld een lichte material- of lichtshader in de materiaalsectie of een fijne grain. Nooit als gimmick.</li>
+      <li><strong>Fijne interacties</strong>: custom cursor, magnetische knoppen, smooth scroll met Lenis.</li>
+      <li><strong>Beeld leidend, tekst spaarzaam</strong>, met een sterke mix van redactionele serif en strakke sans.</li>
+      <li><strong>Prestaties</strong>: zware beelden lui laden en prefers-reduced-motion respecteren.</li>
+      <li><strong>Mobiel</strong>: vertaal de horizontale scroll naar verticaal gestapelde spreads. Ritme behouden, animatie verlichten.</li>
+    </ul>
+
+    <h3>Fotografie en beeldrichting</h3>
+    <p>Dit concept leunt volledig op beeld. Laat drie tot vier projecten, de showroom, materiaal-macro's en het team professioneel fotograferen, met de art direction uit sectie 03. Overweeg een korte cinematische b-roll voor de hero en de showroom. Tot de shoot er is, werk je met hoogwaardige, consistente tijdelijke beelden zodat het ontwerp al klopt.</p>
+
+    <h3>Content en conversie</h3>
+    <p>Minder tekst dan Modern Luxe, maar elke zin moet raken: een kort merkmanifest, sfeervolle disciplinebeschrijvingen, één of twee volledig uitgewerkte projectverhalen, materiaalverhalen en een ambachtsverhaal. De conversie is bewust minimalistisch. De enige echte CTA is de showroom, overal rustig aanwezig en nooit opdringerig. Geen filters, geen offertefocus. Eerst verlangen wekken, dan uitnodigen.</p>
+  </div>
+</section>
+
+<!-- 6 TIEN DIMENSIES -->
+<section class="section" id="tien">
+  <div class="wrap">
+    <span class="section-no">06 — Vergelijking</span>
+    <h2>De tien dimensies, per concept</h2>
+    <p class="section-intro">Dezelfde tien punten voor allebei de richtingen naast elkaar, zodat de keuze scherp wordt.</p>
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>Dimensie</th><th>Modern Luxe</th><th>High-End Design</th></tr>
+        <tr><td>1 · Positionering</td><td>Het complete interieurmerk dat je kunt verkennen.</td><td>Het inspirerende interieurmerk met visie.</td></tr>
+        <tr><td>2 · Doelgroep</td><td>Alle vier profielen, met nadruk op renovator en nieuwbouw-inrichter.</td><td>Nadruk op designliefhebber en dromer.</td></tr>
+        <tr><td>3 · Structuur</td><td>Breed en diep, met een echte productlaag.</td><td>Slank en redactioneel, met een lange homepage als kern.</td></tr>
+        <tr><td>4 · Navigatie</td><td>Mega-menu voor Vloeren en Interieur, plus zoeken en verlanglijst.</td><td>Minimaal genummerd overlay-menu met scroll-progress.</td></tr>
+        <tr><td>5 · Pagina-indeling</td><td>Redactionele grid, filterbalk, kaarten, veel witruimte.</td><td>Paginavullende hoofdstukken, horizontale secties, beeld leidend.</td></tr>
+        <tr><td>6 · UX-keuzes</td><td>Filteren, verlanglijst, moodboard, sticky showroomknop.</td><td>Scroll storytelling, cinematische interacties, custom cursor.</td></tr>
+        <tr><td>7 · Contentstrategie</td><td>Drie lagen volledig: product, inspiratie, vertrouwen.</td><td>Weinig maar rake tekst, verhaal en fotografie voorop.</td></tr>
+        <tr><td>8 · Showroomstrategie</td><td>Eigen pagina plus terugkerende CTA's en planner.</td><td>De showroom als emotionele climax van de scroll.</td></tr>
+        <tr><td>9 · Conversiestrategie</td><td>Micro's, verlanglijst en moodboard, naar de afspraak.</td><td>Eén rustige CTA, verlangen dan uitnodigen.</td></tr>
+        <tr><td>10 · Nodige pagina's</td><td>Home, Vloeren en 5 types, Merken, Interieur, Inspiratie, Journal, Showroom, Over ons, Contact, Verlanglijst, FAQ.</td><td>Home, Disciplines, Materialen, Projecten, Showroom, Over ons, Contact, eventueel Journal.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 7 AANBEVELING -->
+<section class="section" id="aanbeveling">
+  <div class="wrap">
+    <span class="section-no">07 — Aanbeveling</span>
+    <h2>Mijn advies en de route naar de bouw</h2>
+    <p class="section-intro">De twee concepten zijn geen concurrenten. Ze zijn twee snelheden van hetzelfde merk.</p>
+
+    <div class="callout">
+      <span class="k">De sterkste route: een hybride</span>
+      <p>Neem de scroll-storytelling homepage van High-End Design als filmische intro die verlangen wekt, en laat die uitmonden in het navigeerbare product- en inspiratieplatform van Modern Luxe. Zo krijg je het beste van beide: een merk dat raakt, en een site die mensen echt naar de showroom leidt.</p>
+    </div>
+
+    <p>Moet de klant toch één richting kiezen, dan is de vuistregel simpel. Wil hij dat bezoekers het assortiment echt kunnen verkennen, dan Modern Luxe, wat gezien je expliciete productwens de logische keuze is. Draait het puur om merkbeleving en showroombezoek, dan High-End Design.</p>
+
+    <h3>Concrete volgende stappen</h3>
+    <ol>
+      <li>Kies met de klant de richting of de hybride.</li>
+      <li>Definieer de productdatalaag als JSON-schema met de facetten uit sectie 04, zodat filteren en detailpagina's werken zonder zwaar CMS.</li>
+      <li>Plan de fotoshoot, want beide concepten leunen erop.</li>
+      <li>Bouw daarna in VS Code als zelfstandige HTML met GSAP en waar zinvol Three.js, gehost naast de bestaande WordPress-install.</li>
+    </ol>
+    <p>Dit voorstel is de basis. Zeg maar welke richting je kiest, dan werk ik voor die richting de wireframes, de exacte sectievolgorde en de contentbriefing per pagina verder uit.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Boost Lab Agency · Conceptvoorstel voor De Vloerenspecialist, Tilburg · Werkdocument, geen definitief ontwerp.
+  </div>
+</footer>
+
+<script>
+  // Respecteer de gekozen weergave van de lezer, geen eigen opslag nodig.
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.querySelector(this.getAttribute('href'));
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+</script>
+</body>
+</html>

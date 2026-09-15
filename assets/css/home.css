@@ -1,0 +1,296 @@
+/* ==========================================================================
+   Homepage — High-End Design: cinematisch scroll-verhaal.
+   Eén doorlopend donker canvas met grote fotografie, met één lichte
+   adempauze bij het klantcitaat. Referentieniveau: Arte / Mister Design / Tida.
+   ========================================================================== */
+
+body[data-page="home"] {
+  --hp-bg: #0c0b09;
+  --hp-ink: #f4eee1;
+  --hp-ink-soft: #a89d8a;
+  --hp-line: rgba(244,238,225,.14);
+  --hp-accent: #d7a274;
+  background: var(--hp-bg);
+}
+body[data-page="home"] #site-footer .site-footer { background: var(--hp-bg); border-top-color: var(--hp-line); }
+body[data-page="home"] #site-footer .brand,
+body[data-page="home"] #site-footer h4 { color: var(--hp-ink); }
+body[data-page="home"] #site-footer .brand-logo { filter: none; }
+body[data-page="home"] #site-footer p,
+body[data-page="home"] #site-footer .footer-col a,
+body[data-page="home"] #site-footer .footer-bottom { color: var(--hp-ink-soft); }
+body[data-page="home"] #site-footer .footer-top,
+body[data-page="home"] #site-footer .footer-bottom { border-color: var(--hp-line); }
+body[data-page="home"] #site-footer .footer-social a { border-color: var(--hp-line); color: var(--hp-ink-soft); }
+body[data-page="home"] #site-footer .info strong { color: var(--hp-accent); }
+body[data-page="home"] #site-footer .footer-showroom .info { color: var(--hp-ink); }
+body[data-page="home"] #site-footer .footer-showroom .info a { color: var(--hp-ink); }
+body[data-page="home"] #site-footer .footer-showroom .info a:hover { color: var(--hp-accent); }
+
+/* z-index:0 dwingt een eigen stacking context af, anders "lekt" de
+   negatieve z-index van hero/invite-achtergrondbeelden weg tot achter
+   de eigen (ondoorzichtige) body-achtergrond. */
+.chapter { position: relative; z-index: 0; overflow: hidden; }
+.chapter[data-tone="dark"] { background: var(--hp-bg); color: var(--hp-ink); }
+.chapter[data-tone="dark"] .ink-soft,
+.chapter[data-tone="dark"] p { color: var(--hp-ink-soft); }
+.chapter[data-tone="dark"] h2,
+.chapter[data-tone="dark"] h3,
+.chapter[data-tone="dark"] strong { color: var(--hp-ink); }
+.chapter[data-tone="dark"] .eyebrow { color: var(--hp-accent); }
+.chapter[data-tone="dark"] .eyebrow::before { background: var(--hp-accent); }
+
+.chapter-inner { padding: 200px 0; }
+
+.reveal { opacity: 0; transform: translateY(44px); transition: opacity 1.1s cubic-bezier(.16,.8,.24,1), transform 1.1s cubic-bezier(.16,.8,.24,1); }
+.reveal.is-visible,
+html.reduced-motion .reveal { opacity: 1; transform: none; }
+
+/* ---- Herbruikbare mediakaders: echte foto's, reveal + parallax ---- */
+.media { position: relative; overflow: hidden; background: #17140f; }
+/* Rustige lijst rond gekaderde fotografie (niet de volledige-breedte beelden). */
+.material-card .media,
+.project-media,
+.showroom-media,
+.collection-card .media,
+.tile-media {
+  box-shadow: inset 0 0 0 1px rgba(244,238,225,.08);
+}
+.media img, .media video {
+  position: absolute; inset: -6% -6%; width: 112%; height: 112%;
+  object-fit: cover; object-position: center; will-change: transform;
+}
+.media::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(6,5,4,.55), rgba(6,5,4,0) 45%);
+}
+/* ---- 00 Hero ---- */
+.hero-chapter {
+  min-height: 100svh; display: flex; align-items: flex-end; color: #fff;
+  padding-bottom: 120px;
+}
+.hero-chapter .media { position: absolute; inset: 0; z-index: -1; }
+.hero-chapter .media::after { background: linear-gradient(to top, rgba(6,5,4,.85), rgba(6,5,4,.15) 42%, rgba(6,5,4,.5)); }
+.hero-chapter .wrap { position: relative; }
+.hero-eyebrow { color: rgba(244,238,225,.78); }
+.hero-eyebrow::before { background: var(--hp-accent); }
+.hero-chapter h1 {
+  color: #fff; max-width: 20ch; font-weight: 300; letter-spacing: -.02em;
+  font-size: clamp(44px, 8.6vw, 132px); line-height: .98; margin-bottom: 28px;
+}
+.hero-chapter .lead { color: rgba(244,238,225,.82); max-width: 46ch; font-size: clamp(17px, 1.6vw, 20px); }
+.hero-cta-row { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 40px; }
+.hero-cta-row .btn-text { color: #fff; border-color: rgba(255,255,255,.4); }
+
+.scroll-cue {
+  position: absolute; left: var(--gutter); bottom: 36px; display: flex; align-items: center; gap: 12px;
+  color: rgba(244,238,225,.65); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+}
+.scroll-cue .line { width: 26px; height: 1px; background: rgba(244,238,225,.4); position: relative; overflow: hidden; }
+.scroll-cue .line::after { content:""; position:absolute; inset:0; background: var(--hp-accent); transform: translateX(-100%); animation: cue 2.2s ease-in-out infinite; }
+@keyframes cue { 0%{transform:translateX(-100%)} 50%{transform:translateX(0)} 100%{transform:translateX(100%)} }
+
+/* ---- 01 Manifest — puur typografisch rustpunt ---- */
+.manifest-chapter .chapter-inner { padding: 240px 0; display: flex; justify-content: center; text-align: center; position: relative; z-index: 1; }
+.manifest-chapter .wrap { display: flex; flex-direction: column; align-items: center; }
+.manifest-chapter .eyebrow { justify-content: center; }
+.manifest-text {
+  max-width: 20ch; font-family: var(--serif); font-weight: 300;
+  font-size: clamp(30px, 5.4vw, 62px); line-height: 1.18; letter-spacing: -.01em; color: var(--hp-ink);
+}
+.manifest-text strong { color: var(--hp-accent); font-weight: 500; }
+
+/* Zachte lichtgloed achter het manifest, drijft licht mee met de scroll. */
+.manifest-glow {
+  position: absolute; z-index: 0; left: 50%; top: 50%; width: min(900px, 90vw); height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(var(--accent-rgb), .16), rgba(var(--accent-rgb), 0) 70%);
+  pointer-events: none;
+}
+
+/* Woorden reveal: rustige fade + blur + lichte optilling, per woord vertraagd. */
+.manifest-text .word {
+  display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(16px);
+  transition: opacity .9s cubic-bezier(.16,.8,.24,1), filter .9s cubic-bezier(.16,.8,.24,1), transform .9s cubic-bezier(.16,.8,.24,1);
+}
+.manifest-text .word.is-visible,
+html.reduced-motion .manifest-text .word { opacity: 1; filter: blur(0); transform: none; }
+html.reduced-motion .manifest-text .word { transition: none; }
+
+/* ---- 02 Disciplines — Premium tegeloverzicht ----
+   Bewust rustiger dan de hero: vier grote, klikbare tegels in een 2x2 grid.
+   Geen scroll-hijacking, geen pinning, geen storytelling — alleen een
+   zachte fade-in bij scroll en een subtiele hover (beeld-zoom + tekst-lift). */
+.disciplines-chapter .chapter-inner { padding: 180px 0 200px; }
+.disciplines-chapter .lead { max-width: 54ch; }
+
+.tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; margin-top: 64px; }
+
+.tile { position: relative; display: block; color: inherit; }
+.tile-media { aspect-ratio: 5/4; border-radius: 2px; }
+.tile-media img { transition: transform 1.1s cubic-bezier(.16,.8,.24,1); }
+.tile:hover .tile-media img,
+.tile:focus-visible .tile-media img { transform: scale(1.045); }
+
+.tile-copy { padding: 26px 2px 0; transition: transform .5s cubic-bezier(.16,.8,.24,1); }
+.tile:hover .tile-copy,
+.tile:focus-visible .tile-copy { transform: translateY(-4px); }
+.tile-copy h3 {
+  font-family: var(--serif); font-weight: 300; letter-spacing: -.01em;
+  font-size: clamp(23px, 2.2vw, 29px); color: var(--hp-ink); margin-bottom: 10px;
+}
+.tile-copy p { color: var(--hp-ink-soft); font-size: 15.5px; line-height: 1.6; max-width: 40ch; margin-bottom: 16px; }
+.tile-link {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600;
+  color: var(--hp-ink); border-bottom: 1px solid var(--hp-line); padding-bottom: 2px;
+  transition: color .25s ease, border-color .25s ease;
+}
+.tile:hover .tile-link,
+.tile:focus-visible .tile-link { color: var(--hp-accent); border-color: var(--hp-accent); }
+.tile-link .arrow { transition: transform .25s var(--ease); }
+.tile:hover .tile-link .arrow,
+.tile:focus-visible .tile-link .arrow { transform: translateX(4px); }
+
+@media (max-width: 900px) {
+  .disciplines-chapter .chapter-inner { padding: 100px 0 120px; }
+  .tile-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 44px; }
+}
+
+/* ---- 03 Materiaal en ambacht ---- */
+.material-chapter .chapter-inner { padding: 160px 0 200px; }
+.material-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 64px; }
+.material-card { position: relative; aspect-ratio: 1/1.2; border-radius: 2px; overflow: hidden; }
+.material-card .media { position: absolute; inset: 0; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
+.material-card:hover .media { transform: scale(1.04); }
+.material-name {
+  position: absolute; left: 20px; bottom: 20px; z-index: 2; color: #fff;
+  font-family: var(--serif); font-weight: 300; font-size: clamp(19px, 1.8vw, 24px);
+}
+@media (max-width: 900px) { .material-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---- 04 Signature project — beeld voert de boventoon ---- */
+.project-chapter .chapter-inner { padding: 100px 0 200px; }
+.project-grid { display: grid; grid-template-columns: 1.5fr .8fr; gap: 72px; align-items: center; margin-top: 48px; }
+.project-media { aspect-ratio: 4/5; border-radius: 2px; }
+.project-copy .project-loc { color: var(--hp-ink-soft); font-size: 13.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.project-copy h2 { font-weight: 300; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 22px; }
+.project-quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 21px; color: var(--hp-ink); margin: 26px 0; padding-left: 22px; border-left: 1px solid var(--hp-accent); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 30px; }
+.tag { font-size: 12px; color: var(--hp-ink-soft); background: rgba(244,238,225,.06); border: 1px solid var(--hp-line); border-radius: 999px; padding: 7px 14px; }
+.project-chapter .btn-text { color: var(--hp-ink); border-color: var(--hp-line); }
+.project-chapter .btn-text:hover { color: var(--hp-accent); border-color: var(--hp-accent); }
+@media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; gap: 36px; } .project-media { aspect-ratio: 16/11; } }
+
+/* ---- 05 Verken de collectie (hybride naad) ---- */
+.collection-chapter .chapter-inner { padding: 100px 0 200px; }
+.collection-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 56px; }
+.collection-card { position: relative; aspect-ratio: 3/4.3; border-radius: 2px; overflow: hidden; display: flex; align-items: flex-end; }
+.collection-card .media { position: absolute; inset: 0; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
+.collection-card:hover .media { transform: scale(1.04); }
+.collection-card .name { position: relative; z-index: 2; color: #fff; font-family: var(--serif); font-weight: 300; font-size: 18px; padding: 20px; }
+.collection-card::before {
+  content: "→"; position: absolute; z-index: 2; top: 18px; right: 18px; color: #fff;
+  width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  opacity: 0; transform: translate(-4px,4px); transition: opacity .25s, transform .25s;
+}
+.collection-card:hover::before { opacity: 1; transform: none; }
+@media (max-width: 900px) { .collection-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .collection-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---- 06 De showroom (climax) ---- */
+.showroom-chapter .chapter-inner { padding: 100px 0 200px; }
+.showroom-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.showroom-media { aspect-ratio: 3/2; border-radius: 2px; }
+.showroom-copy .eyebrow { color: var(--hp-accent); } .showroom-copy .eyebrow::before { background: var(--hp-accent); }
+.showroom-copy h2 { font-weight: 300; font-size: clamp(34px, 4.2vw, 58px); margin-bottom: 20px; }
+.showroom-copy .lead { color: var(--hp-ink-soft); font-size: 18px; }
+.stat-row { display: flex; gap: 48px; margin: 40px 0 44px; flex-wrap: wrap; }
+.stat b { display: block; font-family: var(--serif); font-weight: 300; font-size: 42px; color: var(--hp-accent); letter-spacing: -.01em; }
+.stat span { font-size: 12.5px; color: var(--hp-ink-soft); letter-spacing: .03em; }
+@media (max-width: 900px) { .showroom-grid { grid-template-columns: 1fr; gap: 40px; } .showroom-media { order: -1; aspect-ratio: 16/11; } }
+
+/* ---- 07 Vertrouwen — Reviews ----
+   Harde, directe overgang van donker naar licht — geen fade, geen vignet.
+   Een rustige, ruime reviewsectie: sociaal bewijs met een premium afwerking,
+   niet als een letterlijke Google-widget. */
+.trust-chapter { background: var(--bg); color: var(--ink); }
+.trust-chapter .chapter-inner { padding: 160px 0; text-align: center; }
+
+.trust-head { display: flex; flex-direction: column; align-items: center; margin-bottom: 64px; }
+.trust-stars { font-size: 22px; letter-spacing: 5px; color: var(--accent); margin-bottom: 6px; }
+.trust-score {
+  font-family: var(--serif); font-weight: 300; letter-spacing: -.01em;
+  font-size: clamp(26px, 3vw, 34px); color: var(--ink); margin-bottom: 6px;
+}
+.trust-source { font-size: 13px; color: var(--ink-soft); letter-spacing: .03em; }
+
+/* Kaarten-rij: vloeit over in horizontaal scrollen zodra er meer dan drie
+   passen — op desktop een rustige "peek", op mobiel de swipebare carousel. */
+.review-grid {
+  display: flex; gap: 24px; text-align: left;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--gutter);
+  margin: 0 calc(var(--gutter) * -1); padding: 4px var(--gutter) 16px;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.review-grid::-webkit-scrollbar { display: none; }
+
+.review-card {
+  scroll-snap-align: start; flex: 0 0 calc((100% - 48px) / 3); min-width: 260px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 32px; box-shadow: var(--shadow-sm);
+  transition: transform .4s cubic-bezier(.16,.8,.24,1), box-shadow .4s cubic-bezier(.16,.8,.24,1), border-color .4s ease;
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(var(--accent-rgb), .3); }
+
+.review-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+.review-avatar {
+  width: 44px; height: 44px; border-radius: 999px; flex: none;
+  background: var(--surface-2); color: var(--accent);
+  font-family: var(--sans); font-weight: 600; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.review-who { flex: 1; min-width: 0; }
+.review-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.review-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.review-stars { font-size: 12px; letter-spacing: 2px; color: var(--accent); }
+.review-date { font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+.review-text { font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); }
+
+.trust-cta { margin-top: 48px; }
+.trust-cta .btn-text { display: inline-flex; }
+
+@media (max-width: 900px) {
+  .trust-chapter .chapter-inner { padding: 110px 0; }
+  .trust-head { margin-bottom: 44px; }
+  .review-card { flex-basis: 82%; min-width: 0; }
+}
+@media (max-width: 560px) {
+  .review-card { flex-basis: 86%; padding: 26px; }
+}
+
+/* ---- 08 Uitnodiging (slot) — vol beeld, bookend met de hero ---- */
+.invite-chapter { color: #fff; min-height: 92vh; display: flex; align-items: flex-end; }
+.invite-chapter .media { position: absolute; inset: 0; z-index: -1; }
+.invite-chapter .media::after { background: linear-gradient(to top, rgba(6,5,4,.9), rgba(6,5,4,.25) 55%, rgba(6,5,4,.55)); }
+.invite-chapter .chapter-inner { padding: 140px 0 110px; width: 100%; }
+.invite-copy .eyebrow { color: var(--hp-accent); } .invite-copy .eyebrow::before { background: var(--hp-accent); }
+.invite-copy h2 { color: #fff; font-weight: 300; font-size: clamp(34px, 5vw, 64px); max-width: 14ch; margin-bottom: 36px; }
+.invite-details { display: flex; flex-wrap: wrap; gap: 28px 56px; margin-top: 8px; }
+.invite-details .item { display: flex; flex-direction: column; gap: 6px; }
+.invite-details .k { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,238,225,.55); }
+.invite-details .v { color: #fff; font-size: 16px; }
+.invite-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 44px; }
+.invite-quiet { color: rgba(244,238,225,.6); font-size: 13.5px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.invite-quiet:hover { color: #fff; }
+
+/* ---- Premium micro-interacties ---- */
+.magnetic { display: inline-flex; }
+.hp-cursor {
+  position: fixed; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--hp-accent); pointer-events: none; z-index: 400; mix-blend-mode: difference;
+  transform: translate(-50%, -50%); opacity: 0; transition: opacity .3s, width .3s, height .3s;
+}
+.hp-cursor.is-visible { opacity: 1; }
+.hp-cursor.is-hover { width: 46px; height: 46px; background: rgba(244,238,225,.9); }
+@media (pointer: coarse) { .hp-cursor { display: none; } }

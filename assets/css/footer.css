@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer { background: var(--bg); border-top: 1px solid var(--line); }
+.site-footer .wrap { padding: 96px var(--gutter) 40px; }
+
+.footer-top {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 56px;
+  padding-bottom: 64px;
+}
+
+.footer-brand .brand { display: inline-flex; margin-bottom: 22px; }
+.footer-brand .brand-logo { height: 28px; width: auto; }
+/* Het logo is wit+rood; de footer heeft standaard een lichte achtergrond,
+   dus wordt het logo hier donker weergegeven (zie home.css voor de
+   donkere-footer-uitzondering op de homepage). */
+.footer-brand .brand-logo { filter: brightness(0); }
+.footer-brand p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; max-width: 32ch; }
+.footer-social { display: flex; gap: 10px; margin-top: 24px; }
+.footer-social a {
+  width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; color: var(--ink-soft);
+  transition: color .2s, border-color .2s;
+}
+.footer-social a:hover { color: var(--accent); border-color: var(--accent); }
+
+.footer-col h4 {
+  font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 20px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 13px; }
+.footer-col a { color: var(--ink-soft); font-size: 14.5px; transition: color .2s; }
+.footer-col a:hover { color: var(--accent); }
+
+.footer-showroom .info { display: flex; flex-direction: column; gap: 16px; font-size: 14.5px; color: var(--ink); margin-bottom: 22px; }
+.footer-showroom .info strong {
+  color: var(--accent); display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px;
+}
+.footer-showroom .info a { color: var(--ink); transition: color .2s; }
+.footer-showroom .info a:hover { color: var(--accent); }
+
+.footer-bottom {
+  border-top: 1px solid var(--line); padding-top: 28px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  font-size: 13px; color: var(--ink-soft);
+}
+.footer-bottom .legal { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-bottom a:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .site-footer .wrap { padding: 72px var(--gutter) 32px; }
+  .footer-top { grid-template-columns: 1fr; }
+}

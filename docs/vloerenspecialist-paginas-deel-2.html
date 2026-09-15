@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De Vloerenspecialist — Pagina-architectuur deel 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee;--surface:#fffdf9;--surface-2:#efeae1;
+  --ink:#20201d;--ink-soft:#55524b;--line:#ddd6ca;
+  --accent:#9a5b3b;--accent-soft:#c98a5f;--gold:#8a7a4e;
+  --serif:"Fraunces",Georgia,serif;--sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+:root:not([data-theme="light"]){@media (prefers-color-scheme: dark){
+  --bg:#171613;--surface:#1e1d19;--surface-2:#26241f;
+  --ink:#efe9df;--ink-soft:#b3ac9f;--line:#33302a;
+  --accent:#d0996f;--accent-soft:#c98a5f;--gold:#c3b17e;}}
+:root[data-theme="dark"]{
+  --bg:#171613;--surface:#1e1d19;--surface-2:#26241f;
+  --ink:#efe9df;--ink-soft:#b3ac9f;--line:#33302a;
+  --accent:#d0996f;--accent-soft:#c98a5f;--gold:#c3b17e;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+header.cover{padding:92px 0 58px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 22px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,5.6vw,58px);line-height:1.05;letter-spacing:-.01em;margin:0 0 20px}
+.lead{font-size:clamp(18px,2.3vw,21px);color:var(--ink-soft);max-width:62ch;margin:0}
+.meta{margin-top:30px;font-size:14px;color:var(--ink-soft)}
+.meta strong{color:var(--ink);font-weight:600}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.8vw,36px);line-height:1.12;letter-spacing:-.01em;margin:0 0 6px}
+h3{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.18;margin:0 0 4px}
+h4{font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:28px 0 8px}
+p{margin:0 0 15px}
+.section{padding:56px 0;border-bottom:1px solid var(--line)}
+.section-no{font-family:var(--serif);font-size:14px;color:var(--accent);letter-spacing:.16em;font-weight:600;display:block;margin-bottom:14px}
+.section-intro{color:var(--ink-soft);font-size:19px;max-width:64ch;margin-bottom:6px}
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin:0 0 6px}
+li::marker{color:var(--accent-soft)}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+.callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;padding:20px 24px;margin:24px 0}
+.callout .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;display:block;margin-bottom:8px}
+.callout p:last-child{margin-bottom:0}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px 26px;margin:38px 0 0}
+.toc ol{counter-reset:t;list-style:none;padding:0;margin:0}
+.toc li{counter-increment:t;margin:0 0 4px;padding-left:36px;position:relative}
+.toc li::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;font-family:var(--serif);color:var(--accent);font-size:13px}
+.toc a{border:none}
+.toc .grp{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:16px 0 6px;padding:0}
+.toc .grp:first-child{margin-top:4px}
+/* page spec card */
+.page{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px 28px 28px;margin:26px 0}
+.route{font-size:13px;color:var(--ink-soft);margin:2px 0 0}
+.spec-label{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:24px 0 4px}
+/* rationale */
+.rationale{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin:16px 0 4px}
+.rationale .ri{margin:0 0 11px}
+.rationale .ri:last-child{margin-bottom:0}
+.rationale .rk{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;display:block;margin-bottom:2px}
+.rationale .rv{font-size:14.5px;color:var(--ink-soft);line-height:1.55}
+/* wireframe */
+.wire{border:1px dashed var(--accent-soft);border-radius:8px;padding:13px;background:var(--bg);margin:10px 0 4px}
+.wblock{border:1px solid var(--line);border-radius:5px;background:var(--surface-2);padding:10px 13px;margin:7px 0}
+.wblock .wl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.wblock .wt{font-size:14px;color:var(--ink);font-weight:600;margin-top:2px}
+.wblock .wn{font-size:12.5px;color:var(--ink-soft);margin-top:3px;line-height:1.5}
+.wrow{display:flex;gap:8px}
+.wrow .wblock{flex:1;margin:7px 0}
+.wrow.w-2-1 .c-a{flex:2}.wrow.w-2-1 .c-b{flex:1}
+.whero{background:linear-gradient(135deg,var(--surface-2),var(--surface))}
+.wnav{background:var(--ink)}
+.wnav .wl{color:var(--accent-soft)}
+.wnav .wt{color:var(--surface)}
+.wnav .wn{color:#cfc9bd}
+.wcta{border-style:solid;border-color:var(--accent);background:transparent}
+.wcta .wl{color:var(--accent)}
+@media(max-width:640px){.wrow{flex-direction:column;gap:0}.page{padding:20px 18px 22px}}
+.mini{font-size:14px;color:var(--ink-soft)}
+.legend{font-size:12.5px;color:var(--ink-soft);margin:4px 0 0}
+footer{padding:54px 0 90px;color:var(--ink-soft);font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <p class="eyebrow">Boost Lab Agency · Bouwtekening deel 2</p>
+    <h1>De resterende dertien pagina's, volledig uitgewerkt.</h1>
+    <p class="lead">Dezelfde opzet als de vijf kernpagina's, uitgebreid met het bestaansrecht, de bezoekersvragen en de rol in de customer journey. De showroom blijft de conversie, offerteaanvragen komen nergens als CTA terug.</p>
+    <p class="meta"><strong>Klant:</strong> De Vloerenspecialist, Tilburg &nbsp;·&nbsp; <strong>Volgt op:</strong> sitemap en wireframes deel 1</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <p class="eyebrow" style="margin-bottom:12px">Inhoud</p>
+    <p class="grp">Cluster A · Interieur</p>
+    <ol>
+      <li><a href="#p1">Interieur Hub</a></li>
+      <li><a href="#p2">Interieur op maat</a></li>
+      <li><a href="#p3">Behang</a></li>
+      <li><a href="#p4">Raamdecoratie</a></li>
+    </ol>
+    <p class="grp">Cluster B · Inspiratie en Journal</p>
+    <ol start="5">
+      <li><a href="#p5">Inspiratie Hub</a></li>
+      <li><a href="#p6">Projectoverzicht</a></li>
+      <li><a href="#p7">Projectdetailpagina</a></li>
+      <li><a href="#p8">Journal overzicht</a></li>
+      <li><a href="#p9">Journal artikelpagina</a></li>
+    </ol>
+    <p class="grp">Cluster C · Merk en Contact</p>
+    <ol start="10">
+      <li><a href="#p10">Over ons</a></li>
+      <li><a href="#p11">Werkwijze</a></li>
+      <li><a href="#p12">Team pagina</a></li>
+      <li><a href="#p13">Contactpagina</a></li>
+    </ol>
+  </div>
+  <p class="legend" style="margin-top:14px">Alle pagina's staan in headermodus B, de vaste navigatie met mega-menu, zoeken en verlanglijst. Donkere balk is de header, gestreepte kaders zijn secties, een omlijnd accentblok is een primaire CTA.</p>
+</div>
+
+<!-- CLUSTER A -->
+<section class="section" id="cluster-a">
+  <div class="wrap">
+    <span class="section-no">Cluster A — Interieur</span>
+    <h2>De tweede laag van het aanbod</h2>
+    <p class="section-intro">Deze vier pagina's vertellen het verhaal van het complete interieur. De hub introduceert, de drie disciplinepagina's verdiepen. Alle vier leunen op advies en beleving, niet op een catalogus.</p>
+
+    <!-- P1 -->
+    <div class="page" id="p1">
+      <h3>1 · Interieur Hub</h3>
+      <p class="route">/interieur</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">De Vloerenspecialist is meer dan vloeren. Deze hub maakt de tweede laag van het aanbod zichtbaar en vertelt het verhaal van één adres voor je hele interieur. Zonder deze pagina blijven interieur op maat, behang en raamdecoratie ondergesneeuwd onder de vloeren.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Doen jullie meer dan vloeren? Kan ik mijn hele interieur bij één partij regelen? Wat valt er precies onder interieur op maat, behang en raamdecoratie?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Oriëntatie. Verbreedt de scope van de bezoeker en positioneert het merk als totaalpartner. Vangt ook het verkeer op dat vanaf de vloerenpagina's doorklikt.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>De drie interieurdisciplines introduceren en de bezoeker naar de juiste subpagina en uiteindelijk de showroom leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Interieur</div></div>
+        <div class="wblock whero"><div class="wl">Editorial hero</div><div class="wt">Het complete interieur, één team, één standaard</div></div>
+        <div class="wblock"><div class="wl">Drie discipline-blokken</div><div class="wt">Interieur op maat · Behang · Raamdecoratie</div><div class="wn">Groot beeld, één zin, Ontdek per discipline.</div></div>
+        <div class="wblock"><div class="wl">Waarom één adres</div><div class="wt">Samenhang, eigen vakmensen, één aanspreekpunt</div></div>
+        <div class="wblock"><div class="wl">Inspiratieteaser</div><div class="wt">Totaalinterieurs uit de projecten</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Editorial hero.</li><li>De drie disciplines.</li><li>Waarom één adres.</li><li>Inspiratieteaser.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek.</li><li><strong>Micro</strong>: Ontdek per discipline, Laat je inspireren.</li><li><strong>Secundair</strong>: Vraag advies aan.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst over het totaalinterieur.</li><li>Per discipline: beeld, korte omschrijving, link.</li><li>USP's voor één adres.</li><li>Projectteaser met beeld.</li></ul>
+    </div>
+
+    <!-- P2 -->
+    <div class="page" id="p2">
+      <h3>2 · Interieur op maat</h3>
+      <p class="route">/interieur/op-maat</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Maatwerk verkoopt via vertrouwen en advies, niet via een catalogus. De pagina laat zien wat mogelijk is en nodigt uit tot een gesprek, precies het gedrag dat de showroom nodig heeft.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Wat kunnen jullie op maat maken? Hoe ziet het proces eruit? Past het bij mijn woning en mijn vloer? Zijn er voorbeelden?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Overweging. Zet expertise en mogelijkheden neer en leidt naar een adviesgesprek in de showroom.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>De maatwerkcapaciteiten tonen via beeld en voorbeelden, en de bezoeker naar een adviesgesprek bewegen.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Interieur / Op maat</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Ontworpen op jouw woning</div></div>
+        <div class="wblock"><div class="wl">Wat we maken</div><div class="wt">Kasten · keukens · stalen deuren</div><div class="wn">Categorieblokken met beeld.</div></div>
+        <div class="wblock"><div class="wl">Het proces</div><div class="wt">Ontwerp, materiaalkeuze, vakmanschap, plaatsing</div></div>
+        <div class="wblock"><div class="wl">Voorbeeldprojecten</div><div class="wt">Galerij van maatwerk</div></div>
+        <div class="wblock"><div class="wl">Materiaal en afwerking</div><div class="wt">Sfeer en kwaliteit</div></div>
+        <div class="wblock"><div class="wl">Combineren</div><div class="wt">Afstemming met vloer en behang</div></div>
+        <div class="wblock wcta"><div class="wl">Advies-CTA-band</div><div class="wt">Bespreek jouw maatwerk in de showroom</div></div>
+        <div class="wblock"><div class="wl">FAQ</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Wat we maken.</li><li>Het proces.</li><li>Voorbeeldprojecten.</li><li>Materiaal en afwerking.</li><li>Combineren met andere disciplines.</li><li>Advies-CTA-band.</li><li>FAQ.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Vraag advies aan, en Plan showroombezoek.</li><li><strong>Micro</strong>: Bekijk projecten.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst.</li><li>Capaciteitencategorieën met beeld.</li><li>Processtappen.</li><li>Projectgalerij.</li><li>Materialen en afwerkingen.</li><li>FAQ-items.</li></ul>
+    </div>
+
+    <!-- P3 -->
+    <div class="page" id="p3">
+      <h3>3 · Behang</h3>
+      <p class="route">/interieur/behang</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Behang is een sfeermaker en vaak een impuls binnen een groter project. De pagina inspireert, toont het assortiment en de merken, en verbindt behang met de vloer en de raamdecoratie.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Wat voor behang hebben jullie? Welke stijlen en merken? Hoe kies ik iets dat bij mijn interieur past? Plaatsen jullie het ook?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Oriëntatie en inspiratie, met een sterke cross-sell. Verbreedt het project en trekt de bezoeker naar de showroom om stalen te voelen.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Inspireren en het behangaanbod tonen, en naar de showroom leiden om stalen te voelen en te combineren.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Interieur / Behang</div></div>
+        <div class="wblock whero"><div class="wl">Editorial hero</div><div class="wt">Karakter voor je wand</div></div>
+        <div class="wblock"><div class="wl">Inspiratie per sfeer</div><div class="wt">Beeldblokken per stijl of ruimte</div></div>
+        <div class="wblock"><div class="wl">Collecties en merken</div><div class="wt">Kaarten of logo's</div></div>
+        <div class="wblock"><div class="wl">Combinatietips</div><div class="wt">Behang bij vloer en raamdecoratie</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div><div class="wt">Voel de stalen in de showroom</div></div>
+        <div class="wblock"><div class="wl">FAQ</div><div class="wt">Plaatsen, onderhoud</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Editorial hero.</li><li>Inspiratie per sfeer.</li><li>Collecties en merken.</li><li>Combinatietips.</li><li>Showroom-CTA-band.</li><li>FAQ.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Kom inspiratie opdoen, en Plan showroombezoek.</li><li><strong>Micro</strong>: Bewaar in verlanglijst.</li><li><strong>Secundair</strong>: Vraag advies aan.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst.</li><li>Sfeercategorieën met beeld.</li><li>Merken en collecties.</li><li>Combinatietips.</li><li>FAQ-items.</li></ul>
+    </div>
+
+    <!-- P4 -->
+    <div class="page" id="p4">
+      <h3>4 · Raamdecoratie</h3>
+      <p class="route">/interieur/raamdecoratie</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Raamdecoratie is technisch en advies-gedreven, want licht, privacy en inmeten spelen mee. De pagina legt de opties uit en leidt naar deskundig advies in plaats van een simpele keuze.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Welke soorten raamdecoratie zijn er? Wat past bij mijn raam, lichtinval en privacywens? Meten en plaatsen jullie? Welke stijlen zijn mogelijk?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Overweging. Toont expertise en leidt naar een adviesgesprek of inmeetafspraak via de showroom.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>De opties tonen met hun functie en sfeer, en de bezoeker naar advies leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Interieur / Raamdecoratie</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Licht, privacy en sfeer</div></div>
+        <div class="wblock"><div class="wl">Types</div><div class="wt">Gordijnen · shutters · zonwering</div><div class="wn">Per type: beeld en waar het voor dient.</div></div>
+        <div class="wblock"><div class="wl">Advies</div><div class="wt">Licht, privacy en isolatie helpen kiezen</div></div>
+        <div class="wblock"><div class="wl">Meten en plaatsen</div><div class="wt">Onze service, zorgeloos</div></div>
+        <div class="wblock"><div class="wl">In de ruimte</div><div class="wt">Voorbeelden</div></div>
+        <div class="wblock wcta"><div class="wl">Advies-CTA-band</div></div>
+        <div class="wblock"><div class="wl">FAQ</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Types met functie.</li><li>Advies-blok.</li><li>Meten en plaatsen.</li><li>In de ruimte.</li><li>Advies-CTA-band.</li><li>FAQ.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Vraag advies aan, en Plan showroombezoek.</li><li><strong>Micro</strong>: Bewaar in verlanglijst.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst.</li><li>Per type: functie en sfeer.</li><li>Advieslogica rond licht en privacy.</li><li>Serviceomschrijving inmeten en plaatsen.</li><li>Voorbeelden en FAQ.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- CLUSTER B -->
+<section class="section" id="cluster-b">
+  <div class="wrap">
+    <span class="section-no">Cluster B — Inspiratie en Journal</span>
+    <h2>De motor van het merk</h2>
+    <p class="section-intro">Dit is waar de dromer binnenkomt en waar bestaande bezoekers terugkomen. De inhoud verleidt, bewijst en bouwt autoriteit, en beweegt telkens richting de showroom.</p>
+
+    <!-- P5 -->
+    <div class="page" id="p5">
+      <h3>5 · Inspiratie Hub</h3>
+      <p class="route">/inspiratie</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Inspiratie is de reden voor de oriënterende bezoeker om te blijven en terug te komen. De hub bundelt alle inspiratiecontent en voedt het verlangen om de showroom te bezoeken.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Hoe ziet jullie werk eruit? Wat past bij mijn stijl en mijn ruimte? Waar haal ik ideeën? Wat is er mogelijk?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Bovenaan de funnel en bij terugkeer. Nurture van de dromer richting een concrete showroomwens.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Inspireren, de bezoeker in de content laten verdwalen en via het moodboard en de showroom-CTA naar een bezoek leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Inspiratie</div></div>
+        <div class="wblock whero"><div class="wl">Editorial hero</div><div class="wt">Laat je inspireren</div></div>
+        <div class="wblock"><div class="wl">Uitgelichte projecten</div><div class="wt">Groot, filmisch</div></div>
+        <div class="wblock"><div class="wl">Navigatietegels</div><div class="wt">Projecten · Per ruimte · Journal · Moodboard</div></div>
+        <div class="wblock"><div class="wl">Per ruimte</div><div class="wt">Woonkamer, keuken, slaapkamer, hal</div></div>
+        <div class="wblock"><div class="wl">Journal-teaser</div><div class="wt">Recente artikelen</div></div>
+        <div class="wblock"><div class="wl">Moodboard-intro</div><div class="wt">Bewaar wat je mooi vindt, neem het mee naar de showroom</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Editorial hero.</li><li>Uitgelichte projecten.</li><li>Navigatietegels.</li><li>Per ruimte.</li><li>Journal-teaser.</li><li>Moodboard-intro.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Kom inspiratie opdoen, en Plan showroombezoek.</li><li><strong>Micro</strong>: Bewaar in verlanglijst, Bekijk projecten, Lees het journal.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst.</li><li>Uitgelichte projecten met beeld.</li><li>Ruimtecategorieën.</li><li>Journal-previews.</li><li>Moodboard-uitleg.</li></ul>
+    </div>
+
+    <!-- P6 -->
+    <div class="page" id="p6">
+      <h3>6 · Projectoverzicht</h3>
+      <p class="route">/inspiratie/projecten</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Projecten zijn het sterkste bewijs van kwaliteit. Het overzicht laat de breedte en het niveau van het werk zien en laat de bezoeker filteren op wat voor hem relevant is.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Hebben jullie al eens iets gedaan zoals ik wil? Wat is jullie stijl? Zijn er voorbeelden per ruimte of per dienst?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Overweging en vertrouwen. Bewijskracht die twijfel wegneemt.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>De portfolio tonen en laten filteren, en per project naar de case en de showroom leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Inspiratie / Projecten</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Ons werk</div></div>
+        <div class="wblock"><div class="wl">Filter</div><div class="wt">Stijl · ruimte · dienst</div></div>
+        <div class="wblock"><div class="wl">Projectraster</div><div class="wt">Grote beelden, titel, locatie, tags</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Filter.</li><li>Projectraster.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek.</li><li><strong>Micro</strong>: Open project, Bewaar in verlanglijst.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Herotekst.</li><li>Per project: titel, locatie, stijl, ruimte, betrokken diensten, coverbeeld.</li><li>Filterfacetten.</li></ul>
+    </div>
+
+    <!-- P7 -->
+    <div class="page" id="p7">
+      <h3>7 · Projectdetailpagina</h3>
+      <p class="route">/inspiratie/projecten/[project]</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Eén project volledig verteld overtuigt sterker dan tien thumbnails. Het verbindt inspiratie aan concrete producten en vormt de brug van dromen naar kiezen.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Hoe is dit gedaan? Welke materialen, vloeren en merken zijn gebruikt? Kan dit ook bij mij? Wat was de aanpak?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Van overweging naar intentie. Verbindt naar de productdetailpagina's en naar de showroom.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Het verhaal van één project vertellen, de gebruikte materialen tonen en linken, en naar een adviesgesprek of showroombezoek leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Inspiratie / Projecten / [project]</div></div>
+        <div class="wblock whero"><div class="wl">Project-hero</div><div class="wt">Grote cover, titel, locatie, korte intro</div></div>
+        <div class="wblock"><div class="wl">Verhaal in beeld</div><div class="wt">Scrollverhaal, voor en na, sfeerbeelden</div></div>
+        <div class="wblock"><div class="wl">Gebruikte materialen</div><div class="wt">Kaarten naar productdetail</div><div class="wn">De lus terug naar het product.</div></div>
+        <div class="wblock"><div class="wl">Quote klant</div><div class="wt">De menselijke bevestiging</div></div>
+        <div class="wblock"><div class="wl">Betrokken disciplines</div><div class="wt">Vloer, maatwerk, behang, raamdecoratie</div></div>
+        <div class="wblock"><div class="wl">Gerelateerde projecten</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div><div class="wt">Wil je zoiets? Kom langs</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Project-hero.</li><li>Verhaal in beeld.</li><li>Gebruikte materialen.</li><li>Quote klant.</li><li>Betrokken disciplines.</li><li>Gerelateerde projecten.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek, en Vraag advies aan.</li><li><strong>Micro</strong>: Bewaar de gebruikte materialen, Bekijk het product.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Verhaaltekst en beeldreeks.</li><li>Relatie naar de gebruikte producten in de datalaag.</li><li>Klantquote.</li><li>Betrokken disciplines en gerelateerde projecten.</li></ul>
+    </div>
+
+    <!-- P8 -->
+    <div class="page" id="p8">
+      <h3>8 · Journal overzicht</h3>
+      <p class="route">/journal</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Het journal positioneert het merk als smaakmaker, geeft een reden om terug te komen en levert vindbaarheid in zoekmachines. Het voedt de oriëntatiefase met kennis en sfeer.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Wat zijn de trends? Hoe kies ik het juiste materiaal of de juiste kleur? Wat weten jullie er eigenlijk van?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Bovenaan de funnel en bij terugkeer. Autoriteit en vindbaarheid, een zachte instroom naar het merk.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Redactionele content bundelen en de bezoeker laten lezen en verder klikken naar producten, inspiratie en de showroom.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Journal</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Het journal</div></div>
+        <div class="wblock"><div class="wl">Uitgelicht artikel</div><div class="wt">Groot</div></div>
+        <div class="wblock"><div class="wl">Categoriefilter</div><div class="wt">Trends · materiaalkennis · kleur · achter de schermen</div></div>
+        <div class="wblock"><div class="wl">Artikelraster</div><div class="wt">Kaarten met cover, titel, leestijd</div></div>
+        <div class="wblock"><div class="wl">Nieuwsbrief-intro</div><div class="wt">Inspiratie in je inbox, geen verkoop</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Uitgelicht artikel.</li><li>Categoriefilter.</li><li>Artikelraster.</li><li>Nieuwsbrief-intro.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Kom inspiratie opdoen.</li><li><strong>Micro</strong>: Lees artikel, Schrijf je in voor inspiratie.</li><li><strong>Secundair</strong>: Plan showroombezoek.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Per artikel: titel, categorie, cover, datum, leestijd, samenvatting.</li><li>Nieuwsbriefblok.</li></ul>
+    </div>
+
+    <!-- P9 -->
+    <div class="page" id="p9">
+      <h3>9 · Journal artikelpagina</h3>
+      <p class="route">/journal/[artikel]</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Het artikel levert de kennis en het merkverhaal die vertrouwen bouwen. Het is de diepste laag van de contentstrategie en de plek waar de bezoeker de expertise echt voelt.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">De concrete vraag van het artikel, bijvoorbeeld hoe kies ik tussen PVC en hout, plus de onderliggende vraag: kan ik deze partij vertrouwen op vakkennis?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Oriëntatie en autoriteit. Leidt zacht naar producten, projecten of de showroom, zonder te verkopen.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Waarde geven via redactionele inhoud en zacht naar de showroom en de inspiratie leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Journal / [artikel]</div></div>
+        <div class="wblock whero"><div class="wl">Artikel-hero</div><div class="wt">Titel, cover, meta: categorie, datum, leestijd</div></div>
+        <div class="wblock"><div class="wl">Leeskolom</div><div class="wt">Rijke tekst, tussenkoppen, beelden, quotes</div><div class="wn">Smalle, prettige leesbreedte.</div></div>
+        <div class="wblock"><div class="wl">Inline verwijzingen</div><div class="wt">Naar producten en projecten</div></div>
+        <div class="wblock"><div class="wl">Auteur of expert</div><div class="wt">Wie schreef dit</div></div>
+        <div class="wblock"><div class="wl">Gerelateerde artikelen</div></div>
+        <div class="wblock wcta"><div class="wl">Zachte showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Artikel-hero met meta.</li><li>Leeskolom.</li><li>Inline verwijzingen naar product en project.</li><li>Auteur of expert.</li><li>Gerelateerde artikelen.</li><li>Zachte showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair, rustig</strong>: Plan showroombezoek, onderaan.</li><li><strong>Micro</strong>: Lees gerelateerd, Bewaar, Schrijf je in.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Artikelmeta: titel, categorie, datum, leestijd, auteur.</li><li>Bodystructuur met koppen, beelden en quotes.</li><li>Inline links naar producten en projecten.</li><li>Gerelateerde artikelen.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- CLUSTER C -->
+<section class="section" id="cluster-c">
+  <div class="wrap">
+    <span class="section-no">Cluster C — Merk en Contact</span>
+    <h2>Vertrouwen en de laatste stap</h2>
+    <p class="section-intro">Deze pagina's beantwoorden de vraag "kan ik jullie vertrouwen" en maken de stap naar de showroom zo klein mogelijk. Ze dragen de menselijke kant van het merk.</p>
+
+    <!-- P10 -->
+    <div class="page" id="p10">
+      <h3>10 · Over ons</h3>
+      <p class="route">/over-ons</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Mensen kopen bij mensen. De pagina bouwt vertrouwen en vertelt de transformatie van vloerenzaak naar interieurmerk, precies de positionering die het hele project draagt.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Wie zijn jullie? Waar staan jullie voor? Kan ik jullie vertrouwen? Hoe lang bestaan jullie al?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Vertrouwen, dwars door de funnel. Ondersteunt de beslissing en verbindt naar team, werkwijze en showroom.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Het merkverhaal en de waarden neerzetten en naar team, werkwijze en showroom leiden.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Over ons</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Design als vakmanschap</div></div>
+        <div class="wblock"><div class="wl">Het verhaal</div><div class="wt">Van vloerenzaak naar interieurmerk</div></div>
+        <div class="wblock"><div class="wl">Waarden</div><div class="wt">Eigen vakmensen, persoonlijk advies, 62+ merken, 1.800 m²</div></div>
+        <div class="wblock"><div class="wl">De showroom als hart</div><div class="wt">Teaser naar de showroompagina</div></div>
+        <div class="wblock"><div class="wl">Team-teaser</div><div class="wt">De mensen achter het werk</div></div>
+        <div class="wblock"><div class="wl">Reviews</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Het verhaal.</li><li>Waarden.</li><li>De showroom als hart.</li><li>Team-teaser.</li><li>Reviews.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek.</li><li><strong>Micro</strong>: Ontmoet het team, Bekijk de werkwijze.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Merkverhaal.</li><li>Waarden en USP's.</li><li>Showroom- en team-teaser.</li><li>Reviews.</li></ul>
+    </div>
+
+    <!-- P11 -->
+    <div class="page" id="p11">
+      <h3>11 · Werkwijze</h3>
+      <p class="route">/over-ons/werkwijze</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Een groot interieurproject voelt spannend. De werkwijze neemt de onzekerheid weg en maakt de eerste stap, het showroombezoek, vanzelfsprekend.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Hoe verloopt het? Wat kan ik verwachten? Wat is de eerste stap? Regelen jullie alles? Hoe lang duurt het?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Van overweging naar intentie. Een drempelverlager die rechtstreeks naar de afspraak leidt.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Het proces helder maken en de showroomafspraak als logische eerste stap neerzetten.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Over ons / Werkwijze</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Van idee tot opgeleverd interieur</div></div>
+        <div class="wblock"><div class="wl">De stappen</div><div class="wt">1 showroombezoek en advies · 2 ontwerp en materiaalkeuze · 3 planning · 4 uitvoering door eigen mensen · 5 oplevering en nazorg</div></div>
+        <div class="wblock"><div class="wl">Voorbereiding</div><div class="wt">Wat je meebrengt naar de eerste afspraak</div></div>
+        <div class="wblock"><div class="wl">Eén team</div><div class="wt">Waarom eigen vakmensen het verschil maken</div></div>
+        <div class="wblock"><div class="wl">Reviews over het proces</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div><div class="wt">Stap 1 begint hier</div></div>
+        <div class="wblock"><div class="wl">FAQ</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>De stappen.</li><li>Voorbereiding.</li><li>Eén team.</li><li>Reviews over het proces.</li><li>Showroom-CTA-band.</li><li>FAQ.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek, als stap 1.</li><li><strong>Secundair</strong>: Vraag advies aan.</li><li><strong>Let op</strong>: de offerte wordt alleen genoemd als processtap, nooit als CTA.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Stappen met korte uitleg per stap.</li><li>Voorbereidingstips.</li><li>USP eigen team.</li><li>Reviews en FAQ.</li></ul>
+    </div>
+
+    <!-- P12 -->
+    <div class="page" id="p12">
+      <h3>12 · Team pagina</h3>
+      <p class="route">/over-ons/team</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Persoonlijk advies is de kernbelofte. Gezichten maken die belofte concreet en verlagen de drempel om binnen te lopen bij een bekende naam.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Met wie heb ik straks te maken? Zijn het echte vakmensen? Wie gaat mij adviseren?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Vertrouwen. Maakt de showroomafspraak persoonlijk in plaats van anoniem.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Het team menselijk en deskundig neerzetten en de bezoeker uitnodigen om kennis te maken in de showroom.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Over ons / Team</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Het team achter je interieur</div></div>
+        <div class="wblock"><div class="wl">Team-grid</div><div class="wt">Portret, naam, rol, specialisme, korte bio</div></div>
+        <div class="wblock"><div class="wl">Eigen vakmensen</div><div class="wt">Adviseurs, leggers en interieurbouwers in dienst</div></div>
+        <div class="wblock wcta"><div class="wl">Showroom-CTA-band</div><div class="wt">Maak kennis in de showroom</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Team-grid.</li><li>Eigen vakmensen.</li><li>Showroom-CTA-band.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek, en Vraag advies aan.</li><li><strong>Micro, optioneel</strong>: Plan met een specifieke adviseur.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Per teamlid: portret, naam, rol, specialisme, korte bio.</li><li>USP eigen vakmensen.</li></ul>
+    </div>
+
+    <!-- P13 -->
+    <div class="page" id="p13">
+      <h3>13 · Contactpagina</h3>
+      <p class="route">/contact</p>
+      <div class="rationale">
+        <div class="ri"><span class="rk">Waarom deze pagina bestaat</span><span class="rv">Elke bezoeker moet moeiteloos contact kunnen leggen of langs kunnen komen. De pagina bundelt alle kanalen met de showroomafspraak voorop.</span></div>
+        <div class="ri"><span class="rk">Vragen die het beantwoordt</span><span class="rv">Hoe bereik ik jullie? Waar zitten jullie? Wanneer zijn jullie open? Kan ik bellen, appen of langskomen? Hoe plan ik een afspraak?</span></div>
+        <div class="ri"><span class="rk">Rol in de customer journey</span><span class="rv">Actie en conversie. Het laatste zetje en de praktische afhandeling van de afspraak.</span></div>
+      </div>
+      <span class="spec-label">Doel</span>
+      <p>Contact en de showroomafspraak faciliteren met een minimale drempel.</p>
+      <span class="spec-label">Wireframe</span>
+      <div class="wire">
+        <div class="wblock wnav"><div class="wl">Header · modus B</div></div>
+        <div class="wblock"><div class="wl">Breadcrumb</div><div class="wt">Home / Contact</div></div>
+        <div class="wblock whero"><div class="wl">Hero</div><div class="wt">Kom langs of neem contact op</div></div>
+        <div class="wblock"><div class="wl">Directe kanalen</div><div class="wt">Bellen · WhatsApp · e-mail</div><div class="wn">Groot en direct klikbaar.</div></div>
+        <div class="wblock wcta"><div class="wl">Showroomplanner</div><div class="wt">Voorkeursdag of dagdeel, of "wij bellen je"</div></div>
+        <div class="wrow">
+          <div class="wblock"><div class="wl">Praktisch</div><div class="wt">Adres, openingstijden, parkeren</div><div class="wn">Ma tot en met za, 09:30 tot 17:30.</div></div>
+          <div class="wblock"><div class="wl">Kaart en route</div><div class="wt">Kraaivenstraat 21-23, Tilburg</div></div>
+        </div>
+        <div class="wblock"><div class="wl">Waarom langskomen</div><div class="wt">Korte herinnering aan de beleving</div></div>
+        <div class="wblock"><div class="wl">Footer</div></div>
+      </div>
+      <span class="spec-label">Sectievolgorde</span>
+      <ol><li>Breadcrumb.</li><li>Hero.</li><li>Directe kanalen.</li><li>Showroomplanner.</li><li>Praktisch en route.</li><li>Waarom langskomen.</li></ol>
+      <span class="spec-label">CTA's</span>
+      <ul><li><strong>Primair</strong>: Plan showroombezoek.</li><li><strong>Direct</strong>: Bel ons, App ons.</li><li><strong>Secundair</strong>: Vraag advies aan.</li><li><strong>Let op</strong>: geen offerte-CTA. Een algemeen vraagveld mag, maar dan gericht op advies, niet op offerte.</li></ul>
+      <span class="spec-label">Contentstructuur</span>
+      <ul><li>Contactkanalen: telefoon, WhatsApp, e-mail.</li><li>Plannervelden: naam, telefoon of e-mail, voorkeursdag of dagdeel, korte vraag.</li><li>Praktische informatie en kaart.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="klaar">
+  <div class="wrap">
+    <span class="section-no">Overzicht compleet</span>
+    <h2>Alle achttien pagina's staan nu op papier</h2>
+    <p>Samen met deel 1 is de volledige site nu uitgewerkt: de vijf kernpagina's en deze dertien. Elke pagina heeft een helder bestaansrecht, een rol in de reis van de bezoeker en een wireframe. De rode draad is overal dezelfde. De showroom is de bestemming, inspiratie is de motor, en de offerte staat nooit vooraan.</p>
+    <div class="callout">
+      <span class="k">Wanneer je klaar bent om te bouwen</span>
+      <p>De logische volgende stap is het JSON-datamodel voor producten, merken en projecten vastleggen. Daarna kunnen we in VS Code beginnen, met een gedeelde header en footer, GSAP voor de homepage en een subtiele WebGL-laag waar die iets toevoegt. Zeg maar wanneer.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Boost Lab Agency · Pagina-architectuur deel 2 voor De Vloerenspecialist, Tilburg · Werkdocument.
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.querySelector(this.getAttribute('href'));
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+</script>
+</body>
+</html>
