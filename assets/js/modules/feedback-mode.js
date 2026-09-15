@@ -26,10 +26,18 @@
   var SUPABASE_URL = "https://wxpyvoisvmtrclztgdrk.supabase.co";
   var SUPABASE_KEY = "sb_publishable_sfXqpISGr8lwpIeZxWfELg_KVHCi5mX";
   var TABLE = "feedback_items";
+  var SESSIONS_TABLE = "feedback_sessions";
   var BUCKET = "feedback-attachments";
+  var NOTIFY_ENDPOINT = "/api/notify-feedback";
+  var INACTIVITY_MS = 50 * 60 * 1000; // 50 minuten
 
   var ACTIVE_KEY = "dvsFeedbackModeOn";
   var ONBOARDED_KEY = "dvsFeedbackOnboarded";
+  /* Sessie-status leeft bewust in sessionStorage (niet localStorage): dat
+     verloopt vanzelf zodra het tabblad dicht gaat, precies zoals "per
+     sessie" bedoeld is voor de eenmalige e-mailnotificatie. */
+  var SESSION_KEY = "dvsFeedbackSessionId";
+  var EMAIL_SENT_KEY = "dvsFeedbackEmailSent";
   var STATUS = [
     { value: "open", label: "Open" },
     { value: "in-behandeling", label: "In behandeling" },
@@ -78,13 +86,14 @@
       oldText: row.old_text, newText: row.new_text,
       like: row.like_text, change: row.change_text,
       attachment: row.attachment_url ? { name: row.attachment_name, type: row.attachment_type, dataUrl: row.attachment_url } : null,
-      imageReplace: row.image_replace, status: row.status,
+      imageReplace: row.image_replace, status: row.status, sessionId: row.session_id,
       createdAt: row.created_at, updatedAt: row.updated_at
     };
   }
   function entryToRow(entry) {
     return {
       id: entry.id, path: entry.path, page_title: entry.pageTitle,
+      session_id: entry.sessionId || null,
       section_id: entry.sectionId, section_label: entry.sectionLabel,
       target_kind: entry.targetKind, target_kind_label: entry.targetKindLabel, target_detail: entry.targetDetail,
       action_type: entry.actionType, message: entry.message,
@@ -101,6 +110,7 @@
   function addEntry(entry) {
     upsertCache(entry);
     refreshAll();
+    armInactivityTimer();
     if (sb) {
       sb.from(TABLE).insert(entryToRow(entry)).then(function (res) {
         if (res.error) {
@@ -191,6 +201,77 @@
       var d = new Date(iso);
       return d.toLocaleDateString("nl-NL", { day: "2-digit", month: "short", year: "numeric" });
     } catch (e) { return ""; }
+  }
+
+  /* ---------------- Feedbacksessies + automatische e-mailnotificatie ----------------
+     Eén sessie bundelt alle feedback-items vanaf de eerste opmerking tot aan
+     de "Ik heb alle feedback gegeven"-knop of 50 minuten inactiviteit. Op
+     dat moment stuurt /api/notify-feedback (een Vercel-functie) één keer een
+     e-mail naar Jip, met een samenvatting en een kant-en-klare Claude-prompt
+     — gebaseerd op wat er in Supabase staat, niet op wat de client beweert. */
+  var currentSessionId = null;
+  var emailSentThisSession = false;
+  var inactivityTimer = null;
+  try {
+    currentSessionId = window.sessionStorage.getItem(SESSION_KEY) || null;
+    emailSentThisSession = window.sessionStorage.getItem(EMAIL_SENT_KEY) === "1";
+  } catch (e) {}
+
+  /* Genereert zo nodig meteen een sessie-id (geen wachttijd voor de
+     optimistische UI) en maakt 'm op de achtergrond ook echt aan in
+     Supabase, zodat de serverfunctie 'm straks kan terugvinden. */
+  function ensureSessionId() {
+    if (currentSessionId) return currentSessionId;
+    currentSessionId = uid();
+    emailSentThisSession = false;
+    try {
+      window.sessionStorage.setItem(SESSION_KEY, currentSessionId);
+      window.sessionStorage.setItem(EMAIL_SENT_KEY, "0");
+    } catch (e) {}
+    if (sb) {
+      sb.from(SESSIONS_TABLE).insert({ id: currentSessionId, started_at: new Date().toISOString() }).then(function (res) {
+        if (res.error) console.error("Feedbacksessie aanmaken mislukt:", res.error);
+      });
+    }
+    return currentSessionId;
+  }
+
+  function endLocalSession() {
+    window.clearTimeout(inactivityTimer);
+    currentSessionId = null;
+    emailSentThisSession = false;
+    try {
+      window.sessionStorage.removeItem(SESSION_KEY);
+      window.sessionStorage.removeItem(EMAIL_SENT_KEY);
+    } catch (e) {}
+  }
+
+  function armInactivityTimer() {
+    window.clearTimeout(inactivityTimer);
+    if (emailSentThisSession || !currentSessionId) return;
+    inactivityTimer = window.setTimeout(function () { notifyFeedback("inactivity"); }, INACTIVITY_MS);
+  }
+
+  /* Stuurt de serverfunctie op pad; markeert daarna (ongeacht het resultaat)
+     deze sessie als "al gemeld" zodat er nooit twee keer wordt gemaild. */
+  function notifyFeedback(reason) {
+    if (!currentSessionId || emailSentThisSession) return;
+    emailSentThisSession = true;
+    try { window.sessionStorage.setItem(EMAIL_SENT_KEY, "1"); } catch (e) {}
+    window.fetch(NOTIFY_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId: currentSessionId, reason: reason })
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
+      return r.json();
+    }).then(function (data) {
+      if (data && data.skipped) console.warn("Feedbackmelding overgeslagen:", data.skipped);
+      endLocalSession();
+    }).catch(function (err) {
+      console.error("Feedbackmelding versturen mislukt:", err);
+      endLocalSession();
+    });
   }
 
   /* ---------------- Tekst lezen/bewerken zonder geneste iconen te breken ----------------
@@ -427,6 +508,7 @@
       id: uid(),
       path: window.location.pathname,
       pageTitle: document.title,
+      sessionId: ensureSessionId(),
       sectionId: target.section.getAttribute("data-review-id"),
       sectionLabel: label,
       targetKind: target.kind,
@@ -647,6 +729,7 @@
         if (like || change) {
           addEntry({
             id: uid(), path: window.location.pathname, pageTitle: document.title,
+            sessionId: ensureSessionId(),
             sectionId: "algemeen", sectionLabel: "Algemene indruk",
             targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
             actionType: "algemeen", like: like, change: change, message: message, attachment: null,
@@ -693,7 +776,11 @@
       '<button type="button" data-filter="all" class="is-active">Alles</button>' +
       STATUS.map(function (s) { return '<button type="button" data-filter="' + s.value + '">' + s.label + "</button>"; }).join("") +
     "</div>" +
-    '<div class="fb-list" id="fb-list"></div>';
+    '<div class="fb-list" id="fb-list"></div>' +
+    '<div class="fb-sidebar-foot">' +
+      '<button type="button" class="fb-done-btn" id="fb-done-btn">✅ Ik heb alle feedback gegeven</button>' +
+      '<p class="fb-done-hint">Jip krijgt hiervan automatisch een e-mail met een samenvatting.</p>' +
+    "</div>";
   document.body.appendChild(sidebar);
 
   var sidebarScrim = document.createElement("div");
@@ -778,6 +865,17 @@
   document.getElementById("fb-sidebar-close").addEventListener("click", closeSidebar);
   sidebarScrim.addEventListener("click", closeSidebar);
   panelBtn.addEventListener("click", openSidebar);
+
+  /* "✅ Ik heb alle feedback gegeven" — markeert de sessie als afgerond en
+     stuurt (via /api/notify-feedback) direct de samenvattings-e-mail naar
+     Jip, zonder op de inactiviteitstimer te hoeven wachten. */
+  document.getElementById("fb-done-btn").addEventListener("click", function () {
+    if (!currentSessionId) { showToast("Je hebt nog geen feedback gegeven."); return; }
+    notifyFeedback("manual");
+    showToast("Bedankt! Jip is op de hoogte gebracht.");
+    closeSidebar();
+    setActiveCore(false);
+  });
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
