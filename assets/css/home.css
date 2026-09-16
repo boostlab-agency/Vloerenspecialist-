@@ -113,10 +113,25 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to top, rgba(30,20,12,.38), rgba(30,20,12,0) 45%);
 }
-/* ---- 00 Hero ---- */
+/* ---- 00 Hero ----
+   De showroomfoto is de held; de tekst ondersteunt. Daarom een bewust
+   ingetogen, Apple/Tesla-achtige vloeiende schaal in plaats van vw-only
+   typografie: die liep op grote schermen (1366–1920px+) al bij ~1500px
+   viewportbreedte tegen zijn maximum aan (132px) en verpletterde het beeld.
+   Nu groeit de kop rustig van "groot en impactvol" op mobiel naar een
+   gecontroleerd, vast maximum op laptop/desktop — nooit groter dan 72px. */
 .hero-chapter {
   min-height: 100svh; display: flex; align-items: flex-end; color: #fff;
-  padding-bottom: 120px;
+  padding-bottom: clamp(56px, 43px + 3.5vw, 110px);
+}
+@media (max-height: 700px) {
+  /* Korte viewports (kleine/oudere telefoons in portrait, telefoons in
+     landscape, of een kort browservenster): bij 100svh zou de
+     bodem-uitgelijnde hero-tekst omhoog worden gedrukt tot ónder de vaste
+     header + feedbackknoppen rechtsboven. Vaste top-ruimte voorkomt dat
+     gegarandeerd; als de tekst zelf niet past groeit de sectie gewoon iets
+     door (een klein beetje scrollen), in plaats van overlap. */
+  .hero-chapter { min-height: auto; padding-top: 250px; padding-bottom: clamp(40px, 6vw, 70px); }
 }
 .hero-chapter .media { position: absolute; inset: 0; z-index: -1; }
 .hero-chapter .media img { object-position: 20% 32%; }
@@ -125,11 +140,11 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .hero-eyebrow { color: rgba(244,238,225,.78); }
 .hero-eyebrow::before { background: var(--hp-accent); }
 .hero-chapter h1 {
-  color: #fff; max-width: 20ch; font-weight: 300; letter-spacing: -.02em;
-  font-size: clamp(44px, 8.6vw, 132px); line-height: .98; margin-bottom: 28px;
+  color: #fff; max-width: 18ch; font-weight: 300; letter-spacing: -.02em;
+  font-size: clamp(42px, 35px + 1.92vw, 72px); line-height: 1.04; margin-bottom: 22px;
 }
-.hero-chapter .lead { color: rgba(244,238,225,.82); max-width: 46ch; font-size: clamp(17px, 1.6vw, 20px); }
-.hero-cta-row { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 40px; }
+.hero-chapter .lead { color: rgba(244,238,225,.82); max-width: 42ch; font-size: clamp(15.5px, 14.7px + 0.23vw, 18px); }
+.hero-cta-row { display: flex; align-items: center; gap: clamp(16px, 2vw, 26px); flex-wrap: wrap; margin-top: clamp(28px, 2vw + 20px, 40px); }
 .hero-cta-row .btn-text { color: #fff; border-color: rgba(255,255,255,.4); }
 
 .scroll-cue {

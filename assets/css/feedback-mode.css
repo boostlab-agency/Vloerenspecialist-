@@ -58,7 +58,21 @@
 .fb-theme-btn[data-theme-choice="brand"].is-active {
   background: #e20e18; border-color: #e20e18; color: #fff;
 }
-@media (max-width: 640px) { .fb-theme-switch { max-width: none; padding: 12px 14px; } }
+/* Op smalle schermen blijft de kaart compact (nooit breder dan wat nodig
+   is) zodat hij zo min mogelijk van de showroomfoto bedekt — dezelfde
+   gedachte als de ingekorte header-CTA hiernaast. */
+@media (max-width: 640px) {
+  .fb-theme-switch { max-width: 210px; padding: 11px 13px; gap: 8px; }
+  .fb-theme-switch-label { font-size: 11px; line-height: 1.4; }
+  .fb-theme-btn { font-size: 11px; padding: 8px 6px; }
+}
+/* Op de kleinste/kortste schermen mag de toelichting weg — de twee
+   knoppen blijven werkend en herkenbaar, maar nemen veel minder hoogte in
+   zodat er meer van de showroomfoto zichtbaar blijft. */
+@media (max-width: 480px) {
+  .fb-theme-switch { max-width: 176px; padding: 8px 10px; gap: 6px; }
+  .fb-theme-switch-label { display: none; }
+}
 
 /* Groot en uitnodigend: dit is de enige ingang tot de hele feedbackmodus. */
 .fb-toggle {
