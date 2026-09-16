@@ -62,7 +62,7 @@
             ]
           }
         ],
-        promo: { k: "Eén adres", text: "Eigen vakmensen in dienst voor je hele interieur, van ontwerp tot oplevering.", href: "/over-ons/werkwijze.html", cta: "Bekijk de werkwijze" }
+        promo: { k: "Eén adres", text: "Eigen vakmensen in dienst voor je hele interieur, van ontwerp tot oplevering.", href: "/over-ons/index.html", cta: "Bekijk de werkwijze" }
       }
     },
     { label: "Merken", href: "/merken/index.html", key: "merken" },
@@ -152,7 +152,7 @@
     return (
       '<header class="site-header" data-mode="' + mode + '" data-review-id="header" data-review-label="Header">' +
         '<div class="wrap">' +
-          '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
+          '<a class="brand" href="/index.html"><img class="brand-logo" src="' + (isHome ? "/assets/img/logo.svg" : "/assets/img/logo-dark.svg") + '" alt="De Vloerenspecialist" width="230" height="34"></a>' +
 
           '<nav aria-label="Hoofdnavigatie">' +
             '<ul class="main-nav">' + renderDesktopNav() + "</ul>" +

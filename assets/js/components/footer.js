@@ -53,8 +53,7 @@
                 '<li><a href="/inspiratie/projecten.html">Inspiratie</a></li>' +
                 '<li><a href="/journal/index.html">Journal</a></li>' +
                 '<li><a href="/over-ons/index.html">Over ons</a></li>' +
-                '<li><a href="/over-ons/werkwijze.html">Werkwijze</a></li>' +
-                '<li><a href="/over-ons/team.html">Team</a></li>' +
+                '<li><a href="/over-ons/index.html#werkwijze">Werkwijze</a></li>' +
               "</ul>" +
             "</div>" +
             '<div class="footer-col footer-showroom">' +

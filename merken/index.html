@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merken — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="62+ gerenommeerde merken onder één dak: van Meister en Moduleo tot Cerdomus en Mart Visser. Bekijk het volledige merkenoverzicht van De Vloerenspecialist.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/review-mode.css">
+<link rel="stylesheet" href="/assets/css/feedback-mode.css">
+<link rel="stylesheet" href="/assets/css/page.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+
+<script src="/assets/js/components/header.js" defer></script>
+<script src="/assets/js/components/footer.js" defer></script>
+<script src="/assets/js/modules/wishlist.js" defer></script>
+<script src="/assets/js/modules/review-mode.js" defer></script>
+<script src="/assets/js/modules/feedback-mode.js" defer></script>
+<script src="/assets/js/modules/nav.js" defer></script>
+<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/journal.js" defer></script>
+</head>
+<body data-page="sub">
+
+<a class="skip-link" href="#main">Naar de inhoud</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Kruimelpad">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <span aria-current="page">Merken</span>
+    </nav>
+
+    <div class="page-hero-copy reveal" style="max-width:60ch;margin:20px 0 40px">
+      <p class="eyebrow">Merken</p>
+      <h1>62+ merken, één showroom.</h1>
+      <p class="lead">Wij zijn niet gebonden aan één fabrikant. Daardoor kunnen we eerlijk adviseren welk merk het beste bij uw wens en budget past — en leggen we collecties letterlijk naast elkaar in de showroom.</p>
+    </div>
+
+    <div class="journal-toolbar reveal">
+      <div class="journal-search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="journal-search" placeholder="Zoek een merk…" aria-label="Zoek een merk">
+      </div>
+      <div class="journal-cats" role="group" aria-label="Filter op categorie">
+        <button class="journal-cat is-active" data-cat="alle">Alle merken</button>
+        <button class="journal-cat" data-cat="vloeren">Vloeren</button>
+        <button class="journal-cat" data-cat="raamdecoratie">Raamdecoratie</button>
+      </div>
+    </div>
+
+    <div class="brand-grid">
+      <a class="article-card brand-card reveal" href="/merken/floer.html" data-cat="vloeren" data-search="floer vloeren">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Floer</h3></div>
+        <p class="desc">Breed en toegankelijk assortiment vloeren voor vrijwel elke ruimte en elk budget.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/belakos.html" data-cat="vloeren" data-search="belakos vloeren">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Belakos</h3></div>
+        <p class="desc">Kwalitatieve laminaat- en PVC-vloeren met een ruime keuze aan houtlooks.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/meister.html" data-cat="vloeren" data-search="meister vloeren duits">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Meister</h3></div>
+        <p class="desc">Duits vloerenmerk bekend om precisie-afwerking in laminaat- en houten vloeren.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/floor-life.html" data-cat="vloeren" data-search="floor life vloeren">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Floor Life</h3></div>
+        <p class="desc">Waterbestendige PVC-vloeren, geschikt voor drukbelopen ruimtes en vloerverwarming.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/ambiant.html" data-cat="vloeren" data-search="ambiant vloeren tapijt">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Ambiant</h3></div>
+        <p class="desc">Nederlands merk met een breed aanbod tapijt, laminaat en vinylvloeren.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/hebeta.html" data-cat="vloeren" data-search="hebeta vloeren">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Hebeta</h3></div>
+        <p class="desc">Stijlvolle vloercollecties met aandacht voor natuurlijke houtstructuren.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/gelasta.html" data-cat="vloeren" data-search="gelasta vloeren belgisch">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Gelasta</h3></div>
+        <p class="desc">Belgisch merk, bekend van kwalitatief tapijt en vinylvloeren.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/moduleo.html" data-cat="vloeren" data-search="moduleo design floors vloeren vinyl">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Moduleo</h3></div>
+        <p class="desc">Internationaal bekend vinylvloerenmerk met realistische houten designs.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/coretec.html" data-cat="vloeren" data-search="coretec vloeren rigid core">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">COREtec</h3></div>
+        <p class="desc">Rigid-core vinylvloeren met een stabiele kern, ook geschikt voor vloerverwarming.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/cerdomus.html" data-cat="vloeren" data-search="cerdomus tegels italiaans">
+        <div><span class="cat">Vloeren</span><h3 class="brand-name">Cerdomus</h3></div>
+        <p class="desc">Italiaans keramisch tegelmerk voor vloer- en wandtegels met karakter.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/keje.html" data-cat="raamdecoratie" data-search="keje raamdecoratie gordijnen">
+        <div><span class="cat">Raamdecoratie</span><h3 class="brand-name">KeJe</h3></div>
+        <p class="desc">Raamdecoratie op maat: van jaloezieën tot gordijnen, met persoonlijk ontwerpadvies.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/lifestyle-gordijnen.html" data-cat="raamdecoratie" data-search="lifestyle gordijnen stoffen">
+        <div><span class="cat">Raamdecoratie</span><h3 class="brand-name">Lifestyle gordijnen</h3></div>
+        <p class="desc">Eigentijdse gordijnstoffen die eenvoudig meebewegen met uw interieurstijl.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/mart-visser.html" data-cat="raamdecoratie" data-search="mart visser gordijnen ontwerper">
+        <div><span class="cat">Raamdecoratie</span><h3 class="brand-name">Mart Visser</h3></div>
+        <p class="desc">Stijlvolle gordijncollecties met de signatuur van modeontwerper Mart Visser.</p>
+      </a>
+      <a class="article-card brand-card reveal" href="/merken/eijffinger.html" data-cat="raamdecoratie" data-search="eijffinger gordijnen stoffen dessins">
+        <div><span class="cat">Raamdecoratie</span><h3 class="brand-name">Eijffinger</h3></div>
+        <p class="desc">Bekend Nederlands merk met sfeervolle stoffen en dessins voor behang en raamdecoratie.</p>
+      </a>
+    </div>
+
+    <div class="journal-empty">
+      <p>Geen merken gevonden. Probeer een andere zoekterm of categorie.</p>
+    </div>
+
+    <p class="reveal" style="margin:48px 0 0;font-size:14px;color:var(--ink-soft)">Naast deze veelgevraagde merken voeren wij in totaal 62+ merken, waaronder ook een uitgebreide selectie tegelvloerenmerken. Vraag in de showroom gerust naar een specifiek merk.</p>
+  </div>
+
+  <section class="page-cta" style="margin-top:80px">
+    <div class="page-cta-media">
+      <img src="/assets/img/showroom.png" alt="" loading="lazy">
+    </div>
+    <div class="wrap">
+      <div class="page-cta-inner">
+        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Zie het verschil</p>
+        <h2>Leg de merken naast elkaar.</h2>
+        <p>In de showroom staan de collecties letterlijk naast elkaar — zo kiest u op gevoel, niet op naam.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
+          <a class="btn-text magnetic" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+</body>
+</html>

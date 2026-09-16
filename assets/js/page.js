@@ -38,6 +38,30 @@
     });
   }
 
+  /* Magnetische knoppen — zelfde gevoel als de homepage, maar zonder GSAP:
+     subpagina's laden die library niet, dus een lichte rAF-tween volstaat
+     voor dit ene effect. Houdt de knoppen-ervaring overal identiek. */
+  function initMagnetic() {
+    if (reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
+    document.querySelectorAll(".magnetic").forEach(function (el) {
+      var x = 0, y = 0, tx = 0, ty = 0, raf = null;
+      function tick() {
+        x += (tx - x) * .18; y += (ty - y) * .18;
+        el.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px)";
+        if (Math.abs(tx - x) > .1 || Math.abs(ty - y) > .1) { raf = requestAnimationFrame(tick); }
+        else { raf = null; }
+      }
+      function kick() { if (!raf) raf = requestAnimationFrame(tick); }
+      el.addEventListener("mousemove", function (e) {
+        var r = el.getBoundingClientRect();
+        tx = (e.clientX - r.left - r.width / 2) * .35;
+        ty = (e.clientY - r.top - r.height / 2) * .35;
+        kick();
+      });
+      el.addEventListener("mouseleave", function () { tx = 0; ty = 0; kick(); });
+    });
+  }
+
   /* FAQ-accordeon (Contactpagina) — één open tegelijk, met toetsenbord- en
      screenreader-ondersteuning via aria-expanded. */
   function initFaq() {
@@ -76,6 +100,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
+    initMagnetic();
     initFaq();
     initContactForm();
   });

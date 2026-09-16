@@ -181,3 +181,90 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
   .page-section { padding: 64px 0; }
   .page-cta { padding: 80px 0; }
 }
+
+/* ---- Journal: zoekbalk + categoriefilter ---- */
+.journal-toolbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  padding-bottom: 32px; margin-bottom: 40px; border-bottom: 1px solid var(--line);
+}
+.journal-search { position: relative; flex: 1 1 260px; max-width: 360px; }
+.journal-search svg { position: absolute; left: 2px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); }
+.journal-search input {
+  width: 100%; background: none; border: none; border-bottom: 1px solid var(--line);
+  padding: 8px 2px 8px 28px; font-family: var(--sans); font-size: 15px; color: var(--ink);
+}
+.journal-search input:focus { outline: none; border-color: var(--accent); }
+.journal-cats { display: flex; flex-wrap: wrap; gap: 8px; }
+.journal-cat {
+  font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; transition: color .2s, border-color .2s, background .2s;
+}
+.journal-cat:hover { color: var(--ink); }
+.journal-cat.is-active { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.journal-empty { display: none; padding: 60px 0; text-align: center; color: var(--ink-soft); }
+.journal-empty.is-visible { display: block; }
+
+/* ---- Journal: artikelkaarten ---- */
+.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 32px; }
+.article-card { display: block; }
+.article-card .thumb { position: relative; aspect-ratio: 4/3; border-radius: 3px; overflow: hidden; background: var(--surface-2); margin-bottom: 18px; }
+.article-card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
+.article-card:hover .thumb img { transform: scale(1.05); }
+.article-card .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.article-card h3 { font-weight: 500; font-size: 20px; line-height: 1.25; margin-bottom: 8px; letter-spacing: -.005em; }
+.article-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
+.article-card .meta { font-size: 12.5px; color: var(--ink-soft); }
+@media (max-width: 900px) { .article-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 24px; } }
+@media (max-width: 600px) { .article-grid { grid-template-columns: 1fr; } .journal-toolbar { flex-direction: column; align-items: stretch; } .journal-search { max-width: none; } }
+
+/* ---- Journal: artikeldetail (langere leestekst) ---- */
+.article-head { max-width: 70ch; margin: 20px 0 40px; }
+.article-head .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+.article-head h1 { font-weight: 300; letter-spacing: -.01em; line-height: 1.08; font-size: clamp(32px, 4.4vw, 52px); margin-bottom: 18px; text-wrap: balance; }
+.article-head .meta { font-size: 13.5px; color: var(--ink-soft); }
+.article-hero { aspect-ratio: 21/9; border-radius: 4px; overflow: hidden; margin-bottom: 48px; background: var(--surface-2); }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.article-body { max-width: 68ch; margin: 0 auto; font-size: 16.5px; line-height: 1.8; color: var(--ink); }
+.article-body p { margin: 0 0 22px; }
+.article-body h2 { font-weight: 500; font-size: clamp(23px, 2.6vw, 29px); margin: 44px 0 18px; }
+.article-body blockquote {
+  margin: 34px 0; padding-left: 22px; border-left: 2px solid var(--accent);
+  font-family: var(--serif); font-weight: 300; font-style: italic; font-size: 21px; color: var(--ink);
+}
+.article-body ul { list-style: none; margin: 0 0 22px; padding: 0; }
+.article-body li { position: relative; padding-left: 22px; margin-bottom: 10px; color: var(--ink-soft); }
+.article-body li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+.article-foot { max-width: 68ch; margin: 48px auto 0; padding-top: 28px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+@media (max-width: 640px) { .article-hero { aspect-ratio: 4/3.4; margin-bottom: 32px; } }
+
+/* ---- Merkenstrip (compacte weergave op bv. Vloeren-overzicht) ---- */
+.brand-strip { display: flex; flex-wrap: wrap; gap: 10px; }
+.brand-pill {
+  font-size: 14px; font-weight: 500; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb), .06); }
+
+/* ---- Merken: overzicht + detailpagina ---- */
+.brand-toolbar { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 32px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
+.brand-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.brand-card {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
+  aspect-ratio: 1/.85; padding: 26px; border-radius: 6px; background: var(--surface);
+  border: 1px solid var(--line); transition: border-color .2s, transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.brand-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+.brand-card .brand-name { font-family: var(--serif); font-weight: 500; font-size: 21px; letter-spacing: -.01em; }
+.brand-card .cat { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+.brand-card .desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+@media (max-width: 900px) { .brand-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .brand-grid { grid-template-columns: 1fr; } }
+
+.brand-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding: 28px 0 44px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+.brand-hero .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+.brand-hero h1 { font-weight: 300; letter-spacing: -.01em; font-size: clamp(34px, 5vw, 58px); margin: 0; }
+.brand-hero .lead { max-width: 46ch; color: var(--ink-soft); font-size: 17px; margin: 0; }
+.brand-kenmerken { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 32px; margin: 40px 0; }
+.brand-kenmerken .item { border-top: 2px solid var(--ink); padding-top: 14px; font-size: 14.5px; color: var(--ink-soft); }
+@media (max-width: 700px) { .brand-hero { flex-direction: column; align-items: flex-start; gap: 14px; } .brand-kenmerken { grid-template-columns: 1fr 1fr; } }

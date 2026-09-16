@@ -45,9 +45,9 @@
 @keyframes logo-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .brand-logo { animation: none; } }
 
-/* Het logo is wit+rood (bedoeld voor donkere achtergronden). Op het lichte
-   glas van modus B wordt het daarom volledig donker weergegeven. */
-.site-header[data-mode="b"] .brand-logo { filter: brightness(0); }
+/* Modus B laadt een eigen logo-variant (donkere tekst + rood merkteken)
+   i.p.v. het wit+rode logo van modus A — zo blijft het rode accent altijd
+   zichtbaar, ook op het lichte glas. Zie header.js. */
 
 .cta-short { display: none; }
 
@@ -94,8 +94,8 @@
 }
 .site-header[data-mode="a"] #header-cta { background: var(--accent); color: var(--on-accent); }
 .site-header[data-mode="a"] #header-cta:hover { background: #fff; color: var(--ink); }
-.site-header[data-mode="b"] #header-cta { border-color: var(--line); color: var(--ink); }
-.site-header[data-mode="b"] #header-cta:hover { border-color: var(--accent); color: var(--accent); }
+.site-header[data-mode="b"] #header-cta { background: var(--accent); color: var(--on-accent); }
+.site-header[data-mode="b"] #header-cta:hover { background: var(--ink); color: var(--on-accent); }
 
 .overlay-toggle {
   display: inline-flex; align-items: center; gap: 10px; color: #fff;
@@ -119,7 +119,7 @@
   font-size: 14.5px; font-weight: 500; color: var(--ink-soft); border-radius: 999px;
   transition: background .2s, color .2s;
 }
-.nav-link:hover, .nav-link[aria-expanded="true"] { color: var(--ink); background: var(--surface-2); }
+.nav-link:hover, .nav-link[aria-expanded="true"] { color: var(--accent); background: rgba(var(--accent-rgb), .08); }
 .nav-link .chev { font-size: 10px; transition: transform .25s var(--ease); opacity: .6; }
 .nav-link[aria-expanded="true"] .chev { transform: rotate(180deg); }
 
@@ -129,7 +129,7 @@
   width: 40px; height: 40px; border-radius: 999px; color: var(--ink-soft);
   transition: background .2s, color .2s;
 }
-.icon-btn:hover { background: var(--surface-2); color: var(--ink); }
+.icon-btn:hover { background: rgba(var(--accent-rgb), .08); color: var(--accent); }
 .icon-btn .count {
   position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 3px;
   border-radius: 999px; background: var(--accent); color: var(--on-accent);
@@ -146,11 +146,15 @@
 /* ---- Mega-menu ---- */
 .mega {
   position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(6px);
-  width: min(640px, 90vw); background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px;
+  width: min(640px, 90vw); background: rgba(var(--surface-rgb), .92);
+  backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px;
   display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px;
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mega { background: var(--surface); }
 }
 .nav-item.is-open .mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
 
