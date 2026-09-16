@@ -193,8 +193,6 @@ var KIND_VERB = {
   }
 };
 
-var THEME_LABEL = { warm: "Warm Premium", brand: "Huisstijl (Rood)" };
-
 function buildSummary(items) {
   var lines = items.map(function (i, idx) {
     var fn = KIND_VERB[i.action_type];
@@ -214,26 +212,10 @@ function buildSummary(items) {
   });
   var sectionSummary = Object.keys(bySection).map(function (k) { return k + " (" + bySection[k] + ")"; }).join(", ");
 
-  // Designrichting-vergelijker: laat zien hoeveel feedback bij welke
-  // homepage-versie hoort, zodat direct duidelijk is of een punt bij de
-  // warme of de huisstijlversie hoort (zie assets/css/home.css).
-  var byTheme = {};
-  items.forEach(function (i) {
-    if (!i.design_theme) return;
-    byTheme[i.design_theme] = (byTheme[i.design_theme] || 0) + 1;
-  });
-  var themeKeys = Object.keys(byTheme);
-  var themeSummary = themeKeys.length
-    ? themeKeys.map(function (k) { return (THEME_LABEL[k] || k) + " (" + byTheme[k] + ")"; }).join(", ")
-    : null;
-
   var summaryHtml =
     "<p>Verdeeld over: " + escapeHtml(sectionSummary) + ".</p>" +
-    (themeSummary ? "<p>Designrichting: " + escapeHtml(themeSummary) + ".</p>" : "") +
-    "<ol>" + items.map(function (i, idx) {
-      var text = lines[idx].replace(/^\d+\.\s*/, "");
-      var tag = i.design_theme ? ' <span style="color:#9a5b3b;font-weight:600">[' + escapeHtml(THEME_LABEL[i.design_theme] || i.design_theme) + "]</span>" : "";
-      return "<li>" + escapeHtml(text) + tag + "</li>";
+    "<ol>" + lines.map(function (l) {
+      return "<li>" + escapeHtml(l.replace(/^\d+\.\s*/, "")) + "</li>";
     }).join("") + "</ol>";
 
   var attachments = items

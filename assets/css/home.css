@@ -5,60 +5,38 @@
    ========================================================================== */
 
 body[data-page="home"] {
-  /* Warm, koffiekleurig donker in plaats van galerie-zwart — hetzelfde
-     premium contrast, maar met de warmte van de showroomverlichting
-     in plaats van een architectuurstudio. Dit is "Versie A · Warm Premium",
-     het standaardthema. */
-  --hp-bg: #1b140e;
+  /* Donker, krachtig canvas in de definitieve huisstijlkleur (rood, zelfde
+     tint als het logo) — dit was "Versie B · Huisstijl" tijdens het
+     vergelijken van richtingen; die keuze is nu definitief en permanent. */
+  --hp-bg: #140d0b;
   --hp-ink: #f4eee1;
   --hp-ink-soft: #bcad97;
   --hp-line: rgba(244,238,225,.14);
-  --hp-accent: #d7a274;
+  --hp-accent: #e20e18;
   background: var(--hp-bg);
 }
 
-/* ==========================================================================
-   Designrichting-vergelijker (feedbackomgeving) — "Versie B · Huisstijl"
-   Zet [data-theme="brand"] op <body> (via de toggle in feedback-mode.js) om
-   de rode huisstijlkleur en een donkerdere, krachtigere basis te activeren.
-   Eén scoped tokenblok — omdat vrijwel alle homepage-CSS al via --hp-* en
-   --accent/--accent-rgb werkt, hoeft er verder nergens dubbele CSS te komen:
-   knoppen, links, hovers, eyebrows, gloed en cijfers volgen automatisch mee.
-   ========================================================================== */
-body[data-page="home"][data-theme="brand"] {
-  --hp-bg: #140d0b;
-  --hp-accent: #e20e18;
-  --accent: #e20e18;
-  --accent-rgb: 226, 14, 24;
-  --accent-soft: #ff5c4d;
-}
-
-/* De lichte "adempauze"-secties (Wat we doen / Verken de collectie /
-   Vertrouwen) draaien onder de huisstijlversie automatisch mee naar donker
-   — precies zoals gevraagd: "geen losse lichte eilandjes meer". Omdat de
-   kaarten/tegels in die secties zelf al via --surface/--ink/--line lezen,
-   volstaat het lokaal herdefiniëren van die tokens op de sectie zelf. */
-body[data-page="home"][data-theme="brand"] .chapter[data-tone="light"] {
-  background: var(--hp-bg); color: var(--hp-ink);
+/* De vroegere lichte "adempauze"-secties (Wat we doen / Verken de collectie /
+   Vertrouwen) zijn nu — net als de rest van de homepage — donker; zie de
+   data-tone="dark" op die secties in index.html. Kaarten/tegels/reviews
+   daarin lezen --surface/--ink/--ink-soft/--line/--accent-rgb rechtstreeks,
+   dus die tokens krijgen hier lokaal hun donkere waarde. */
+body[data-page="home"] .chapter[data-tone="dark"] {
   --bg: var(--hp-bg);
   --ink: var(--hp-ink);
   --ink-soft: var(--hp-ink-soft);
   --line: var(--hp-line);
   --surface: #241a17;
   --surface-2: #2c211d;
+  --accent-rgb: 226, 14, 24;
   --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
   --shadow: 0 14px 44px -14px rgba(0,0,0,.6);
 }
 
-/* Iets krachtiger contrast op de fotografie en de header onder huisstijl —
-   "donkerder, krachtiger, meer merk" in plaats van de zachte warme vignet. */
-body[data-page="home"][data-theme="brand"] .media::after {
-  background: linear-gradient(to top, rgba(10,6,5,.5), rgba(10,6,5,0) 45%);
-}
-body[data-page="home"][data-theme="brand"] .site-header[data-mode="a"] {
+body[data-page="home"] .site-header[data-mode="a"] {
   background-image: linear-gradient(to bottom, rgba(18,10,9,.84), rgba(18,10,9,.36));
 }
-body[data-page="home"][data-theme="brand"] .site-header[data-mode="a"].is-scrolled {
+body[data-page="home"] .site-header[data-mode="a"].is-scrolled {
   background-color: rgba(18,10,9,.9);
 }
 body[data-page="home"] #site-footer .site-footer { background: var(--hp-bg); border-top-color: var(--hp-line); }
@@ -111,7 +89,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 }
 .media::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(30,20,12,.38), rgba(30,20,12,0) 45%);
+  background: linear-gradient(to top, rgba(10,6,5,.5), rgba(10,6,5,0) 45%);
 }
 /* ---- 00 Hero ----
    De showroomfoto is de held; de tekst ondersteunt. Daarom een bewust
@@ -173,33 +151,21 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
   pointer-events: none;
 }
 
-/* Woorden reveal: rustige fade + lichte optilling, per woord vertraagd.
-   Bewust zonder blur-effect — dat oogde als een technische bureau-truc;
-   een zachte fade+optilling voelt menselijker en warmer. */
-.manifest-text .word {
-  display: inline-block; opacity: 0; transform: translateY(14px);
-  transition: opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1);
-}
+/* Woorden reveal: scroll-gekoppelde onthulling (home.js, initManifestReveal)
+   — geen CSS-transition hier, want die zou vechten met GSAP's scrub, die
+   zelf elk frame de inline stijl bijwerkt terwijl je scrolt. Alleen het
+   rust-standpunt (vóór JS, of bij reduced-motion/no-JS) staat hier. */
+.manifest-text .word { display: inline-block; opacity: .16; }
 .manifest-text .word.is-visible,
 html.reduced-motion .manifest-text .word { opacity: 1; transform: none; }
 html.reduced-motion .manifest-text .word { transition: none; }
 
 /* ---- 02 Disciplines — Premium tegeloverzicht ----
-   Bewust rustiger dan de hero: vier grote, klikbare tegels in een 2x2 grid.
-   Geen scroll-hijacking, geen pinning, geen storytelling — alleen een
-   zachte fade-in bij scroll en een subtiele hover (beeld-zoom + tekst-lift).
-   Bewust licht en daglicht-achtig (i.p.v. het donkere canvas): dit is het
-   "kom binnen en kijk rond"-moment, geen galerienis. Breekt meteen na de
-   hero de continue donkere loop, zodat de site niet als één ononderbroken
-   architectuurportfolio aanvoelt. */
-.disciplines-chapter { background: var(--bg); color: var(--ink); }
+   Rustiger dan de hero: vijf grote, klikbare tegels. Geen scroll-hijacking,
+   geen pinning, geen storytelling — alleen een zachte fade-in bij scroll
+   en een subtiele hover (beeld-zoom + tekst-lift). */
 .disciplines-chapter .chapter-inner { padding: 140px 0 160px; }
 .disciplines-chapter .lead { max-width: 54ch; }
-.disciplines-chapter .tile-copy h3 { color: var(--ink); }
-.disciplines-chapter .tile-copy p { color: var(--ink-soft); }
-.disciplines-chapter .tile-link { color: var(--ink); border-color: var(--line); }
-.disciplines-chapter .tile:hover .tile-link,
-.disciplines-chapter .tile:focus-visible .tile-link { color: var(--accent); border-color: var(--accent); }
 
 .tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 28px; margin-top: 64px; }
 
@@ -265,7 +231,6 @@ html.reduced-motion .manifest-text .word { transition: none; }
    Ook licht: een tweede daglicht-moment tussen de donkere hoofdstukken,
    zodat het scrollverhaal ademt tussen "cinematisch" en "showroom overdag"
    in plaats van één lange donkere tunnel. */
-.collection-chapter { background: var(--bg); color: var(--ink); }
 .collection-chapter .chapter-inner { padding: 100px 0 160px; }
 .collection-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 56px; }
 .collection-card { position: relative; aspect-ratio: 3/4.3; border-radius: 2px; overflow: hidden; display: flex; align-items: flex-end; }
@@ -321,16 +286,15 @@ html.reduced-motion .manifest-text .word { transition: none; }
    Harde, directe overgang van donker naar licht — geen fade, geen vignet.
    Een rustige, ruime reviewsectie: sociaal bewijs met een premium afwerking,
    niet als een letterlijke Google-widget. */
-.trust-chapter { background: var(--bg); color: var(--ink); }
 .trust-chapter .chapter-inner { padding: 160px 0; text-align: center; }
 
 .trust-head { display: flex; flex-direction: column; align-items: center; margin-bottom: 64px; }
-.trust-stars { font-size: 22px; letter-spacing: 5px; color: var(--accent); margin-bottom: 6px; }
+.trust-stars { font-size: 22px; letter-spacing: 5px; color: var(--hp-accent); margin-bottom: 6px; }
 .trust-score {
   font-family: var(--serif); font-weight: 300; letter-spacing: -.01em;
-  font-size: clamp(26px, 3vw, 34px); color: var(--ink); margin-bottom: 6px;
+  font-size: clamp(26px, 3vw, 34px); color: var(--hp-ink); margin-bottom: 6px;
 }
-.trust-source { font-size: 13px; color: var(--ink-soft); letter-spacing: .03em; }
+.trust-source { font-size: 13px; color: var(--hp-ink-soft); letter-spacing: .03em; }
 
 /* Kaarten-rij: vloeit over in horizontaal scrollen zodra er meer dan drie
    passen — op desktop een rustige "peek", op mobiel de swipebare carousel. */

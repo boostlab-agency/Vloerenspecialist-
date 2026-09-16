@@ -33,8 +33,8 @@
             title: "Ontdek",
             links: [
               { label: "Alle merken", href: "/merken/index.html", note: "62+ gerenommeerde namen" },
-              { label: "Vloeren in echte ruimtes", href: "/inspiratie/index.html", note: "Inspiratie per ruimte" },
-              { label: "Legpatronen en kleuren", href: "/inspiratie/index.html", note: "Van visgraat tot chevron" }
+              { label: "Vloeren in echte ruimtes", href: "/inspiratie/projecten.html", note: "Inspiratie per ruimte" },
+              { label: "Legpatronen en kleuren", href: "/inspiratie/projecten.html", note: "Van visgraat tot chevron" }
             ]
           }
         ],
@@ -48,9 +48,10 @@
           {
             title: "Disciplines",
             links: [
-              { label: "Interieur op maat", href: "/interieur/op-maat.html", note: "Kasten, keukens, stalen deuren" },
+              { label: "Kasten op maat", href: "/interieur/kasten-op-maat.html", note: "Kasten, garderobes, stalen deuren" },
               { label: "Behang", href: "/interieur/behang.html", note: "Karakter voor je wand" },
-              { label: "Raamdecoratie", href: "/interieur/raamdecoratie.html", note: "Gordijnen, shutters, zonwering" }
+              { label: "Raamdecoratie", href: "/interieur/raamdecoratie.html", note: "Gordijnen, shutters, zonwering" },
+              { label: "Renostuc", href: "/interieur/renostuc.html", note: "Naadloze wandafwerking" }
             ]
           },
           {
@@ -65,7 +66,7 @@
       }
     },
     { label: "Merken", href: "/merken/index.html", key: "merken" },
-    { label: "Inspiratie", href: "/inspiratie/index.html", key: "inspiratie" },
+    { label: "Inspiratie", href: "/inspiratie/projecten.html", key: "inspiratie" },
     { label: "Showroom", href: "/showroom.html", key: "showroom" },
     { label: "Over ons", href: "/over-ons/index.html", key: "over-ons" }
   ];
@@ -151,7 +152,7 @@
     return (
       '<header class="site-header" data-mode="' + mode + '" data-review-id="header" data-review-label="Header">' +
         '<div class="wrap">' +
-          '<a class="brand" href="index.html"><img class="brand-logo" src="assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
+          '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
 
           '<nav aria-label="Hoofdnavigatie">' +
             '<ul class="main-nav">' + renderDesktopNav() + "</ul>" +

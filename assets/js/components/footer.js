@@ -27,7 +27,7 @@
         '<div class="wrap">' +
           '<div class="footer-top">' +
             '<div class="footer-brand">' +
-              '<a class="brand" href="index.html"><img class="brand-logo" src="assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
+              '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
               "<p>Het interieurmerk van Tilburg, met de showroom als hart. Vier disciplines, één team, één standaard.</p>" +
               '<div class="footer-social">' +
                 '<a href="#" aria-label="Instagram">IG</a>' +
@@ -50,7 +50,7 @@
               "<h4>Merk</h4>" +
               "<ul>" +
                 '<li><a href="/interieur/index.html">Interieur</a></li>' +
-                '<li><a href="/inspiratie/index.html">Inspiratie</a></li>' +
+                '<li><a href="/inspiratie/projecten.html">Inspiratie</a></li>' +
                 '<li><a href="/journal/index.html">Journal</a></li>' +
                 '<li><a href="/over-ons/index.html">Over ons</a></li>' +
                 '<li><a href="/over-ons/werkwijze.html">Werkwijze</a></li>' +

@@ -38,22 +38,12 @@
      sessie" bedoeld is voor de eenmalige e-mailnotificatie. */
   var SESSION_KEY = "dvsFeedbackSessionId";
   var EMAIL_SENT_KEY = "dvsFeedbackEmailSent";
-  /* Designrichting-vergelijker: welk homepage-thema (data-theme op <body>)
-     was actief toen dit feedback-item werd gegeven. Puur ter observatie
-     ("hoort dit bij de warme of de huisstijlversie?"), dus net als de
-     modus-voorkeur lokaal in localStorage — geen feedbackdata op zich. */
-  var DESIGN_THEME_KEY = "dvsDesignTheme";
-  var DESIGN_THEME_LABELS = { warm: "Warm Premium", brand: "Huisstijl (Rood)" };
-  function getActiveDesignTheme() {
-    var t = document.body.getAttribute("data-theme");
-    return t || null;
-  }
   /* Kolommen die pas ná feedback_items zijn toegevoegd (zie
      supabase/schema_v2_sessions.sql en schema_v3_theme.sql). Als zo'n
      migratie op een omgeving nog niet is uitgevoerd, wijst Postgres het
      hele insert-verzoek af zodra deze velden worden meegestuurd — dat mag
      nooit de basisfeedback zelf blokkeren, dus die velden zijn hersteloptioneel. */
-  var OPTIONAL_ROW_FIELDS = ["session_id", "design_theme"];
+  var OPTIONAL_ROW_FIELDS = ["session_id"];
 
   /* Herkent "kolom/tabel bestaat niet"-fouten van Postgres/PostgREST, zowel
      de klassieke Postgres-foutcode (42703) als PostgREST's eigen schema-
@@ -129,7 +119,6 @@
       like: row.like_text, change: row.change_text,
       attachment: row.attachment_url ? { name: row.attachment_name, type: row.attachment_type, dataUrl: row.attachment_url } : null,
       imageReplace: row.image_replace, status: row.status, sessionId: row.session_id,
-      designTheme: row.design_theme,
       createdAt: row.created_at, updatedAt: row.updated_at
     };
   }
@@ -137,7 +126,6 @@
     return {
       id: entry.id, path: entry.path, page_title: entry.pageTitle,
       session_id: entry.sessionId || null,
-      design_theme: entry.designTheme || null,
       section_id: entry.sectionId, section_label: entry.sectionLabel,
       target_kind: entry.targetKind, target_kind_label: entry.targetKindLabel, target_detail: entry.targetDetail,
       action_type: entry.actionType, message: entry.message,
@@ -451,61 +439,6 @@
   toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedback geven</span>';
   headerControls.appendChild(toggle);
 
-  /* ---- Designrichting-vergelijker — alleen op de homepage, want alleen
-     daar bestaan de twee thema's (data-theme="warm"/"brand" op <body>,
-     zie home.css). Zet direct bij het laden het opgeslagen (of standaard)
-     thema, zodat de schakelaar meteen de juiste stand toont.
-
-     Bewust een compacte iOS/macOS-achtige switch in plaats van twee grote
-     knoppen: dit is een hulpmiddel voor het vergelijken van stijlen, geen
-     primair onderdeel van de hero — het mag geen aandacht wegtrekken van
-     de foto en de hero-tekst. */
-  if (document.body.getAttribute("data-page") === "home") {
-    var activeDesignTheme = "warm";
-    try { activeDesignTheme = window.localStorage.getItem(DESIGN_THEME_KEY) || "warm"; } catch (e) {}
-    document.body.setAttribute("data-theme", activeDesignTheme);
-
-    var themeSwitch = document.createElement("div");
-    themeSwitch.className = "fb-theme-switch";
-    themeSwitch.innerHTML =
-      '<span class="fb-theme-tag" data-theme-choice="warm">Warm</span>' +
-      '<button type="button" class="fb-theme-toggle" role="switch" aria-label="Designrichting: Warm Premium of Huisstijl">' +
-        '<span class="fb-theme-toggle-thumb"></span>' +
-      "</button>" +
-      '<span class="fb-theme-tag" data-theme-choice="brand">Huisstijl</span>';
-    headerControls.appendChild(themeSwitch);
-
-    var themeToggleBtn = themeSwitch.querySelector(".fb-theme-toggle");
-
-    function syncThemeButtons() {
-      var isBrand = activeDesignTheme === "brand";
-      themeToggleBtn.setAttribute("aria-checked", isBrand ? "true" : "false");
-      themeSwitch.querySelectorAll(".fb-theme-tag").forEach(function (tag) {
-        tag.classList.toggle("is-active", tag.getAttribute("data-theme-choice") === activeDesignTheme);
-      });
-    }
-    syncThemeButtons();
-
-    function setDesignTheme(choice) {
-      if (choice === activeDesignTheme) return;
-      activeDesignTheme = choice;
-      document.body.setAttribute("data-theme", activeDesignTheme);
-      try { window.localStorage.setItem(DESIGN_THEME_KEY, activeDesignTheme); } catch (e2) {}
-      syncThemeButtons();
-      showToast(
-        (choice === "brand" ? "Huisstijlversie" : "Warme versie") +
-        " actief — nieuwe feedback wordt hieraan gekoppeld."
-      );
-    }
-
-    themeToggleBtn.addEventListener("click", function () {
-      setDesignTheme(activeDesignTheme === "brand" ? "warm" : "brand");
-    });
-    themeSwitch.querySelectorAll(".fb-theme-tag").forEach(function (tag) {
-      tag.addEventListener("click", function () { setDesignTheme(tag.getAttribute("data-theme-choice")); });
-    });
-  }
-
   /* ---- Subtiele overlay over de hele site ---- */
   var overlay = document.createElement("div");
   overlay.className = "fb-overlay";
@@ -664,7 +597,6 @@
       path: window.location.pathname,
       pageTitle: document.title,
       sessionId: ensureSessionId(),
-      designTheme: getActiveDesignTheme(),
       sectionId: target.section.getAttribute("data-review-id"),
       sectionLabel: label,
       targetKind: target.kind,
@@ -885,7 +817,6 @@
           addEntry({
             id: uid(), path: window.location.pathname, pageTitle: document.title,
             sessionId: ensureSessionId(),
-            designTheme: getActiveDesignTheme(),
             sectionId: "algemeen", sectionLabel: "Algemene indruk",
             targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
             actionType: "algemeen", like: like, change: change, message: message, attachment: null,
@@ -981,14 +912,12 @@
       var isGeneral = i.actionType === "algemeen";
       var kindLine = i.targetKindLabel || "Sectie";
       if (i.sectionLabel && !isGeneral) kindLine += " · " + i.sectionLabel;
-      var themeLabel = i.designTheme ? DESIGN_THEME_LABELS[i.designTheme] : null;
       return (
         '<div class="fb-item" data-id="' + i.id + '">' +
           '<div class="fb-item-top">' +
             '<span class="fb-item-kind">' + kindLine + "</span>" +
             '<span class="fb-item-date">' + fmtDate(i.createdAt) + "</span>" +
           "</div>" +
-          (themeLabel ? '<span class="fb-item-theme fb-item-theme--' + i.designTheme + '">' + themeLabel + "</span>" : "") +
           itemBodyHtml(i) +
           attachmentThumbHtml(i.attachment) +
           '<div class="fb-item-foot">' +

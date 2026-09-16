@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vloeren — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="PVC, hout, laminaat, visgraat en tapijt — met 62+ topmerken onder één dak. Ontdek ons volledige vloerenassortiment in de showroom in Tilburg.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/review-mode.css">
+<link rel="stylesheet" href="/assets/css/feedback-mode.css">
+<link rel="stylesheet" href="/assets/css/page.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+
+<script src="/assets/js/components/header.js" defer></script>
+<script src="/assets/js/components/footer.js" defer></script>
+<script src="/assets/js/modules/wishlist.js" defer></script>
+<script src="/assets/js/modules/review-mode.js" defer></script>
+<script src="/assets/js/modules/feedback-mode.js" defer></script>
+<script src="/assets/js/modules/nav.js" defer></script>
+<script src="/assets/js/page.js" defer></script>
+</head>
+<body data-page="sub">
+
+<a class="skip-link" href="#main">Naar de inhoud</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Kruimelpad">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <span aria-current="page">Vloeren</span>
+    </nav>
+
+    <section class="page-hero">
+      <div class="page-hero-media">
+        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Woonkamer met een rijke houten plankenvloer" loading="eager">
+      </div>
+      <div class="page-hero-copy">
+        <p class="eyebrow">Vloeren</p>
+        <h1>Vijf vloertypes, 62+ merken, één showroom.</h1>
+        <p class="lead">Of u nu op zoek bent naar een waterbestendige PVC-vloer, massief eikenhout of een klassiek visgraatpatroon — bij ons vindt u vloeren voor elk budget en elke ruimte, met de hand uitgezocht en geplaatst door ons eigen team.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
+          <a class="btn-text magnetic" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="page-section">
+    <div class="wrap">
+      <div class="page-section-head">
+        <p class="eyebrow">Het assortiment</p>
+        <h2>Kies op type, en ontdek de mogelijkheden.</h2>
+      </div>
+      <div class="variant-grid">
+        <a class="variant-card reveal" href="/vloeren/pvc.html">
+          <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="PVC vloer in een moderne woonkamer" loading="lazy">
+          <div class="variant-card-copy"><span class="name">PVC vloeren</span><span class="desc">Waterbestendig &amp; onderhoudsarm</span></div>
+        </a>
+        <a class="variant-card reveal" href="/vloeren/hout.html">
+          <img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Houten vloer met natuurlijk licht" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Houten vloeren</span><span class="desc">Tijdloos &amp; ambachtelijk</span></div>
+        </a>
+        <a class="variant-card reveal" href="/vloeren/laminaat.html">
+          <img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Laminaatvloer bij een open haard" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Laminaat</span><span class="desc">Slim geprijsd, snel gelegd</span></div>
+        </a>
+        <a class="variant-card reveal" href="/vloeren/visgraat.html">
+          <img src="https://images.unsplash.com/photo-1607403219525-6c60fa4f20fa?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Visgraatparket close-up" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Visgraat</span><span class="desc">Het signature-patroon</span></div>
+        </a>
+        <a class="variant-card reveal" href="/vloeren/tapijt.html">
+          <img src="https://images.unsplash.com/photo-1636716018960-eb737dccb185?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Grijs tapijt close-up" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Tapijt</span><span class="desc">Warm &amp; geluiddempend</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section is-alt">
+    <div class="wrap">
+      <div class="page-section-head is-center" style="margin-inline:auto;text-align:center">
+        <p class="eyebrow">Waarom bij ons</p>
+        <h2>Eén adres, van advies tot plaatsing.</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item reveal">
+          <h3>62+ topmerken</h3>
+          <p>Een breed assortiment onder één dak, voor elk budget en elke smaak.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>Gratis levering in Brabant</h3>
+          <p>Uw vloer wordt gratis bij u thuisbezorgd, snel en betrouwbaar.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>Eigen plaatsingsteam</h3>
+          <p>Geen onderaannemers — dezelfde vakmensen die u in de showroom spreekt, leggen ook uw vloer.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>Complete ontzorging</h3>
+          <p>Oude vloer verwijderen, nieuwe vloer leggen — wij regelen het geheel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-cta">
+    <div class="page-cta-media">
+      <img src="/assets/img/showroom.png" alt="" loading="lazy">
+    </div>
+    <div class="wrap">
+      <div class="page-cta-inner">
+        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Zien &amp; voelen</p>
+        <h2>Leg vloeren naast elkaar en voel het verschil.</h2>
+        <p>In de showroom van 1.800 m² ziet u alle vloertypes in complete woonopstellingen — niet los op een rek.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
+          <a class="btn-text magnetic" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+</body>
+</html>

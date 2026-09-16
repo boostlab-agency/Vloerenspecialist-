@@ -5,10 +5,30 @@
 
 #site-header { position: relative; z-index: 100; }
 
+/* ---- Glas-header — rustig, doorschijnend, zwevend boven de content ----
+   Geïnspireerd op Apple.com / visionOS: een dun glaspaneel in plaats van
+   een platte balk, met een zachte diepte-schaduw in plaats van een harde
+   lijn. Bij scrollen wordt het glas alleen iets voller en iets meer
+   vervaagd — geen abrupte kleurwissel, geen "witte balk". */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background-color: var(--surface);
-  transition: border-color .4s var(--ease), box-shadow .4s var(--ease), background-color .5s var(--ease);
+  background-color: rgba(var(--surface-rgb), .58);
+  backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid rgba(var(--surface-rgb), 0);
+  box-shadow: 0 1px 0 rgba(20,18,15,.04), 0 18px 40px -28px rgba(20,18,15,.35);
+  transition: background-color .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease), backdrop-filter .5s var(--ease);
+}
+.site-header.is-scrolled {
+  background-color: rgba(var(--surface-rgb), .8);
+  backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-bottom-color: rgba(20,18,15,.07);
+  box-shadow: 0 1px 0 rgba(20,18,15,.05), 0 22px 48px -26px rgba(20,18,15,.4);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  /* Nette val terug op een effen balk als de browser geen backdrop-filter
+     ondersteunt, i.p.v. een half-doorzichtig paneel over de content heen. */
+  .site-header { background-color: var(--surface); }
+  .site-header.is-scrolled { background-color: var(--surface); }
 }
 .site-header .wrap {
   height: var(--header-h);
@@ -25,29 +45,31 @@
 @keyframes logo-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .brand-logo { animation: none; } }
 
-/* Het logo is wit+rood (bedoeld voor donkere achtergronden). Op de lichte
-   modus-B-balk wordt het daarom volledig donker weergegeven. */
+/* Het logo is wit+rood (bedoeld voor donkere achtergronden). Op het lichte
+   glas van modus B wordt het daarom volledig donker weergegeven. */
 .site-header[data-mode="b"] .brand-logo { filter: brightness(0); }
 
 .cta-short { display: none; }
 
-/* ---- Modus A: immersief, donker en consistent ----
-   Op de homepage blijft de header permanent in deze rustige, donkere
-   stijl — geen wissel naar een lichte balk. Tijdens scrollen (.is-scrolled,
-   generiek gezet door nav.js) wordt de balk enkel iets compacter en iets
-   solider (voor leesbaarheid boven wisselende secties), zonder van
-   uitstraling te veranderen. */
+/* ---- Modus A: immersief glas over de hero ----
+   Zelfde glasfilosofie als de basisstijl, maar donker getint zodat het
+   paneel leesbaar blijft boven wisselende foto's. Subtiele blur is altijd
+   actief (niet pas bij scrollen) — bij scrollen wordt het glas alleen iets
+   voller en iets meer vervaagd, nooit een harde overgang. */
 .site-header[data-mode="a"] {
-  background-color: transparent;
-  background-image: linear-gradient(to bottom, rgba(26,18,11,.8), rgba(26,18,11,.32));
-  color: #fff; border-bottom: 1px solid transparent;
-  transition: background-color .5s var(--ease), background-image .5s var(--ease), border-color .5s var(--ease), backdrop-filter .5s var(--ease);
+  background-color: rgba(18,12,9,.32);
+  backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+  color: #fff; border-bottom: 1px solid rgba(244,238,225,.08);
+  box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 18px 40px -28px rgba(0,0,0,.5);
 }
 .site-header[data-mode="a"].is-scrolled {
-  background-image: none;
-  background-color: rgba(27,20,14,.86);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom-color: rgba(244,238,225,.1);
+  background-color: rgba(18,12,9,.66);
+  backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border-bottom-color: rgba(244,238,225,.12);
+  box-shadow: 0 1px 0 rgba(0,0,0,.14), 0 22px 48px -26px rgba(0,0,0,.55);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header[data-mode="a"] { background-color: rgba(18,12,9,.86); }
 }
 .site-header[data-mode="a"].is-scrolled .wrap { height: calc(var(--header-h) - 20px); }
 .site-header[data-mode="a"].is-scrolled .brand-logo { height: 25px; }
@@ -85,12 +107,10 @@
 .overlay-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
 .overlay-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
-/* ---- Modus B: vast, rustige balk met mega-menu ---- */
-.site-header[data-mode="b"] {
-  background-color: var(--surface); background-image: none;
-  border-bottom: 1px solid var(--line);
-}
-.site-header[data-mode="b"].is-scrolled { box-shadow: var(--shadow-sm); }
+/* ---- Modus B: vast glaspaneel met mega-menu ----
+   Geen eigen achtergrond meer — erft het lichte glas van de basisstijl
+   (.site-header), zodat interne pagina's nooit meer een harde witte balk
+   tonen, alleen een rustig, licht doorschijnend paneel. */
 
 .main-nav { display: flex; align-items: center; gap: 4px; }
 .main-nav > li { position: relative; }

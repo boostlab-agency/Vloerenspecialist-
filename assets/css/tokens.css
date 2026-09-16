@@ -7,13 +7,17 @@
   /* Kleur */
   --bg: #f6f3ee;
   --surface: #fffdf9;
+  --surface-rgb: 255, 253, 249;
   --surface-2: #efeae1;
   --ink: #20201d;
   --ink-soft: #55524b;
   --line: #ddd6ca;
-  --accent: #9a5b3b;
-  --accent-rgb: 154, 91, 59;
-  --accent-soft: #c98a5f;
+  /* Huisstijlrood — definitieve merkkleur (v.h. de "brand"-vergelijkingsoptie),
+     zelfde rood als in het logo. Geldt overal: header-CTA, knoppen, links,
+     eyebrows, focusring. */
+  --accent: #e20e18;
+  --accent-rgb: 226, 14, 24;
+  --accent-soft: #ff5c4d;
   --gold: #8a7a4e;
   --on-accent: #fffdf9;
 
@@ -43,15 +47,16 @@
   @media (prefers-color-scheme: dark) {
     --bg: #171613;
     --surface: #1e1d19;
+    --surface-rgb: 30, 29, 25;
     --surface-2: #26241f;
     --ink: #efe9df;
     --ink-soft: #b3ac9f;
     --line: #33302a;
-    --accent: #d0996f;
-    --accent-rgb: 208, 153, 111;
-    --accent-soft: #c98a5f;
+    --accent: #e2333c;
+    --accent-rgb: 226, 51, 60;
+    --accent-soft: #ff5c4d;
     --gold: #c3b17e;
-    --on-accent: #20201d;
+    --on-accent: #fffdf9;
     --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
     --shadow: 0 12px 40px -12px rgba(0,0,0,.5);
   }
@@ -60,13 +65,14 @@
 :root[data-theme="dark"] {
   --bg: #171613;
   --surface: #1e1d19;
+  --surface-rgb: 30, 29, 25;
   --surface-2: #26241f;
   --ink: #efe9df;
   --ink-soft: #b3ac9f;
   --line: #33302a;
-  --accent: #d0996f;
-  --accent-rgb: 208, 153, 111;
-  --accent-soft: #c98a5f;
+  --accent: #e2333c;
+  --accent-rgb: 226, 51, 60;
+  --accent-soft: #ff5c4d;
   --gold: #c3b17e;
-  --on-accent: #20201d;
+  --on-accent: #fffdf9;
 }

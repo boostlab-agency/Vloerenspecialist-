@@ -64,40 +64,49 @@
     Array.prototype.slice.call(root.childNodes).forEach(walk);
   }
 
-  /* Rustige woord-voor-woord reveal, gedeeld door het manifest ("Wie we
-     zijn") en elke regel van het editorial disciplines-verhaal. Elk element
-     krijgt zijn eigen trigger, zodat hoofdstukken onafhankelijk onthullen
-     terwijl je erdoorheen scrolt. */
-  function initWordReveals() {
-    var els = document.querySelectorAll(".js-split-reveal");
-    els.forEach(function (el) {
-      splitIntoWords(el);
-      var words = el.querySelectorAll(".word");
-      words.forEach(function (w, i) { w.style.transitionDelay = (i * 0.032) + "s"; });
+  /* "Wie we zijn" — scroll-gekoppelde (scrubbed) woordonthulling in plaats
+     van een eenmalige fade-in-trigger. Terwijl je door het manifest
+     scrolt, licht elk woord op van gedimd naar vol contrast; de nadruk-
+     woorden (in <strong>) krijgen daarbovenop een eigen, iets veerkrachtiger
+     kleur- en schaalbeweging naar het huisstijlrood — een herkenbaar maar
+     ingetogen accent, geen blur- of typewriter-effect. Rustig, premium
+     scrollgedrag zoals bij Apple/Arte: de animatie volgt de scrollpositie
+     zelf, niet een timer. */
+  function initManifestReveal() {
+    var el = document.querySelector(".manifest-text.js-split-reveal");
+    if (!el) return;
+    splitIntoWords(el);
+    var words = el.querySelectorAll(".word");
 
-      var revealed = false;
-      function reveal() {
-        if (revealed) return;
-        revealed = true;
-        words.forEach(function (w) { w.classList.add("is-visible"); });
+    if (reduceMotion || !hasGsap || !hasST) {
+      words.forEach(function (w) { w.classList.add("is-visible"); });
+      return;
+    }
+
+    var chapter = el.closest(".manifest-chapter") || el;
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: chapter,
+        start: "top 72%",
+        end: "top 12%",
+        scrub: 0.65
       }
+    });
 
-      if (reduceMotion || !hasST) {
-        reveal();
-      } else {
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top 85%",
-          once: true,
-          onEnter: reveal
-        });
-        // Vangnet: als de trigger om wat voor reden dan ook niet vuurt
-        // terwijl de sectie al in beeld is (bv. na een snelle scroll-jump),
-        // blijft de tekst niet onnodig onzichtbaar.
-        window.addEventListener("scroll", function checkVisible() {
-          var r = el.getBoundingClientRect();
-          if (r.top < window.innerHeight * 0.95) { reveal(); window.removeEventListener("scroll", checkVisible); }
-        }, { passive: true });
+    words.forEach(function (w, i) {
+      var pos = i * 0.055;
+      var isAccent = !!w.closest("strong");
+      tl.fromTo(w,
+        { opacity: .16, y: 10 },
+        { opacity: 1, y: 0, duration: .5, ease: "none" },
+        pos
+      );
+      if (isAccent) {
+        tl.fromTo(w,
+          { color: "#f4eee1", scale: .94 },
+          { color: "#e20e18", scale: 1, duration: .6, ease: "power1.out" },
+          pos
+        );
       }
     });
   }
@@ -241,7 +250,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
-    initWordReveals();
+    initManifestReveal();
     initManifestGlow();
     initHeroIntro();
     initHeaderSync();

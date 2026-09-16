@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Subpagina-template — gedeeld door alle 14 pagina's onder de homepage.
+   Rustiger dan het cinematische homepage-scrollverhaal (geen pinning, geen
+   scroll-hijacking): een heldere, premium "product/infopagina"-opbouw met
+   dezelfde tokens, typografie en huisstijlrood als de rest van de site.
+   ========================================================================== */
+
+body[data-page="sub"] { background: var(--bg); }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.is-visible,
+html.reduced-motion .reveal { opacity: 1; transform: none; }
+
+/* ---- Breadcrumb ---- */
+.crumb {
+  padding: calc(var(--header-h) + 28px) 0 0;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 12.5px; color: var(--ink-soft);
+}
+.crumb a { color: var(--ink-soft); transition: color .2s; }
+.crumb a:hover { color: var(--accent); }
+.crumb span[aria-current] { color: var(--ink); font-weight: 600; }
+.crumb .sep { opacity: .5; }
+
+/* ---- Pagina-hero: beeld + intro, korter en rustiger dan de homepage-hero ---- */
+.page-hero {
+  margin-top: 20px;
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center;
+}
+.page-hero-media {
+  position: relative; aspect-ratio: 4/3.1; border-radius: 4px; overflow: hidden;
+  background: var(--surface-2);
+}
+.page-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.page-hero-copy .eyebrow { margin-bottom: 18px; }
+.page-hero-copy h1 {
+  font-weight: 300; letter-spacing: -.01em; line-height: 1.04;
+  font-size: clamp(36px, 4.4vw, 58px); margin-bottom: 20px; text-wrap: balance;
+}
+.page-hero-copy .lead { font-size: clamp(16px, 1.2vw, 18.5px); color: var(--ink-soft); max-width: 46ch; margin-bottom: 30px; }
+.page-hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .page-hero { grid-template-columns: 1fr; gap: 32px; }
+  .page-hero-media { order: -1; aspect-ratio: 16/11; }
+  .crumb { padding-top: calc(var(--header-h) + 18px); }
+}
+
+/* ---- Generieke sectie ---- */
+.page-section { padding: 96px 0; }
+.page-section.is-tight { padding: 56px 0; }
+.page-section.is-alt { background: var(--surface); }
+.page-section-head { max-width: 62ch; margin-bottom: 48px; }
+.page-section-head h2 { font-weight: 300; letter-spacing: -.01em; font-size: clamp(28px, 3.2vw, 42px); margin-bottom: 16px; text-wrap: balance; }
+.page-section-head .lead { color: var(--ink-soft); font-size: 17px; }
+.page-section-head.is-center { margin-inline: auto; text-align: center; }
+.page-section-head.is-center .eyebrow { justify-content: center; }
+
+/* ---- USP / spec-rij: label + korte toelichting, geen iconenset nodig ---- */
+.spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 32px 40px; }
+.spec-item { border-top: 2px solid var(--ink); padding-top: 18px; }
+.spec-item h3 { font-size: 17px; font-weight: 600; font-family: var(--sans); letter-spacing: -.005em; margin-bottom: 8px; }
+.spec-item p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; margin: 0; }
+
+/* ---- Beeld+tekst blok (afwisselend, project-achtig) ---- */
+.split-block { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.split-block.is-reverse .split-media { order: 2; }
+.split-media { position: relative; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; background: var(--surface-2); }
+.split-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.split-copy h2 { font-weight: 300; font-size: clamp(26px, 3vw, 38px); margin-bottom: 16px; }
+.split-copy p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.7; margin-bottom: 14px; }
+.split-copy .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 26px; }
+.split-copy .tag { font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+@media (max-width: 900px) {
+  .split-block, .split-block.is-reverse { grid-template-columns: 1fr; gap: 28px; }
+  .split-block.is-reverse .split-media { order: -1; }
+  .split-media { aspect-ratio: 16/11; }
+}
+
+/* ---- Variant-/collectiegrid (subtypes, materialen, projecten) ---- */
+.variant-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.variant-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.variant-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.variant-card { position: relative; display: block; aspect-ratio: 3/3.6; border-radius: 3px; overflow: hidden; color: #fff; }
+.variant-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
+.variant-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.72), rgba(10,6,5,0) 55%); }
+.variant-card:hover img { transform: scale(1.05); }
+.variant-card-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px; }
+.variant-card-copy .name { display: block; font-family: var(--serif); font-weight: 400; font-size: 19px; margin-bottom: 4px; }
+.variant-card-copy .desc { display: block; font-size: 12.5px; color: rgba(255,255,255,.8); }
+@media (max-width: 900px) { .variant-grid, .variant-grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .variant-grid, .variant-grid.cols-3, .variant-grid.cols-2 { grid-template-columns: 1fr 1fr; gap: 12px; } }
+
+/* ---- Materiaal-/textuurstrip (macro-opnamen) ---- */
+.texture-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.texture-card { position: relative; aspect-ratio: 1/1.1; border-radius: 3px; overflow: hidden; }
+.texture-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.texture-card span { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-family: var(--serif); font-size: 15px; }
+.texture-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.55), rgba(10,6,5,0) 50%); }
+@media (max-width: 700px) { .texture-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---- Stappen (werkwijze) ---- */
+.step-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: step; }
+.step-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.step-item { counter-increment: step; }
+.step-item::before {
+  content: counter(step, decimal-leading-zero); display: block; font-family: var(--serif); font-weight: 300;
+  font-size: 34px; color: var(--accent); margin-bottom: 12px;
+}
+.step-item h3 { font-size: 16px; font-weight: 600; font-family: var(--sans); margin-bottom: 8px; }
+.step-item p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
+@media (max-width: 900px) { .step-row, .step-row.cols-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .step-row, .step-row.cols-3 { grid-template-columns: 1fr; } }
+
+/* ---- Gallerij (Inspiratie) ---- */
+.masonry-grid { column-count: 3; column-gap: 18px; }
+.masonry-item { break-inside: avoid; margin-bottom: 18px; border-radius: 3px; overflow: hidden; position: relative; }
+.masonry-item img { display: block; width: 100%; height: auto; }
+.masonry-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; color: #fff; z-index: 2; }
+.masonry-cap .name { font-family: var(--serif); font-size: 16px; }
+.masonry-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.65), rgba(10,6,5,0) 45%); }
+@media (max-width: 900px) { .masonry-grid { column-count: 2; } }
+@media (max-width: 560px) { .masonry-grid { column-count: 1; } }
+
+/* ---- Contactpagina: formulier + sidebar ---- */
+.contact-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: start; }
+@media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ---- Showroom-uren-kaart (hergebruikt op Showroom- en Contactpagina) ---- */
+.info-cards { display: flex; flex-wrap: wrap; gap: 20px; }
+.info-card { flex: 1 1 260px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px 28px; }
+.info-card h3 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-family: var(--sans); font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+.info-card .row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 14.5px; color: var(--ink-soft); }
+.info-card .row + .row { border-top: 1px solid var(--line); }
+.info-card .row.is-today { color: var(--ink); font-weight: 600; }
+.info-card .item { display: flex; flex-direction: column; gap: 4px; padding: 9px 0; }
+.info-card .item + .item { border-top: 1px solid var(--line); }
+.info-card .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint, var(--ink-soft)); }
+.info-card .v { color: var(--ink); font-size: 15.5px; }
+.info-card .v a:hover { color: var(--accent); }
+
+/* ---- FAQ (Contact) ---- */
+.faq-list { border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 22px 2px; text-align: left; font-family: var(--serif); font-size: 18px; color: var(--ink);
+}
+.faq-q .chev { font-size: 13px; color: var(--ink-soft); transition: transform .25s var(--ease); flex: none; }
+.faq-item.is-open .faq-q .chev { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .3s var(--ease); }
+.faq-item.is-open .faq-a { max-height: 240px; }
+.faq-a p { padding: 0 2px 22px; font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; max-width: 62ch; margin: 0; }
+
+/* ---- Contactformulier ---- */
+.contact-form { display: flex; flex-direction: column; gap: 20px; max-width: 560px; }
+.form-row { display: flex; flex-direction: column; gap: 8px; }
+.form-row label { font-size: 12.5px; font-weight: 600; letter-spacing: .02em; color: var(--ink); }
+.form-row input, .form-row select, .form-row textarea {
+  font-family: var(--sans); font-size: 15px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 8px; padding: 13px 14px;
+  transition: border-color .2s;
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--accent); }
+.form-row textarea { resize: vertical; min-height: 120px; font-family: var(--sans); }
+.form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 560px) { .form-two { grid-template-columns: 1fr; } }
+
+/* ---- CTA-afsluiter: vol beeld met overlay ---- */
+.page-cta { position: relative; padding: 120px 0; color: #fff; overflow: hidden; }
+.page-cta-media { position: absolute; inset: 0; z-index: -1; background: var(--surface-2); }
+.page-cta-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.page-cta-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.78), rgba(10,6,5,.42)); }
+.page-cta-inner { max-width: 46ch; }
+.page-cta h2 { font-weight: 300; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 18px; color: #fff; }
+.page-cta p { color: rgba(244,238,225,.82); font-size: 16px; margin-bottom: 32px; }
+.page-cta .hero-cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.page-cta .btn-text { color: #fff; border-color: rgba(255,255,255,.4); }
+
+@media (max-width: 640px) {
+  .page-section { padding: 64px 0; }
+  .page-cta { padding: 80px 0; }
+}

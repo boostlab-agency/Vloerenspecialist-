@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Showroom — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="1.800 m² showroom in Tilburg met complete woonopstellingen, 62+ merken en persoonlijk advies zonder verkooppraatjes. Adres, route en openingstijden.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/review-mode.css">
+<link rel="stylesheet" href="/assets/css/feedback-mode.css">
+<link rel="stylesheet" href="/assets/css/page.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+
+<script src="/assets/js/components/header.js" defer></script>
+<script src="/assets/js/components/footer.js" defer></script>
+<script src="/assets/js/modules/wishlist.js" defer></script>
+<script src="/assets/js/modules/review-mode.js" defer></script>
+<script src="/assets/js/modules/feedback-mode.js" defer></script>
+<script src="/assets/js/modules/nav.js" defer></script>
+<script src="/assets/js/page.js" defer></script>
+</head>
+<body data-page="sub">
+
+<a class="skip-link" href="#main">Naar de inhoud</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Kruimelpad">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <span aria-current="page">Showroom</span>
+    </nav>
+
+    <section class="page-hero">
+      <div class="page-hero-media">
+        <img src="/assets/img/showroom.png" alt="Showroom van De Vloerenspecialist met tegelwand en tafelpresentatie" loading="eager">
+      </div>
+      <div class="page-hero-copy">
+        <p class="eyebrow">Showroom</p>
+        <h1>1.800 m² om te zien, te voelen en te ervaren.</h1>
+        <p class="lead">Complete woonopstellingen, 62+ merken onder één dak, en persoonlijk advies zonder verkooppraatjes. Loop gewoon eens binnen, of plan een afspraak voor een uitgebreid adviesgesprek.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary magnetic" href="/contact.html">Plan showroombezoek</a>
+          <a class="btn-text magnetic" href="https://wa.me/31135368598">Stuur een WhatsApp-bericht <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="page-section">
+    <div class="wrap">
+      <div class="page-section-head">
+        <p class="eyebrow">Wat u kunt verwachten</p>
+        <h2>Geen rekken met stalen — complete ruimtes.</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item reveal">
+          <h3>1.800 m² showroomvloer</h3>
+          <p>De grootste vloerenshowroom van Tilburg, met complete woonopstellingen per stijl.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>62+ topmerken</h3>
+          <p>Van vloeren tot raamdecoratie, behang, Renostuc en kasten op maat — alles onder één dak.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>Persoonlijk advies</h3>
+          <p>Onze adviseurs denken mee, zonder verkooppraatjes — inclusief koffie terwijl u rondkijkt.</p>
+        </div>
+        <div class="spec-item reveal">
+          <h3>Op afspraak flexibel</h3>
+          <p>Ook buiten reguliere openingstijden kunt u op afspraak bij ons terecht.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section is-alt">
+    <div class="wrap">
+      <div class="page-section-head">
+        <p class="eyebrow">Praktische informatie</p>
+        <h2>Adres, route en openingstijden.</h2>
+      </div>
+      <div class="info-cards">
+        <div class="info-card">
+          <h3>Openingstijden</h3>
+          <div class="row is-today"><span>Maandag – vrijdag</span><span>09:00 – 17:00</span></div>
+          <div class="row"><span>Zaterdag</span><span>09:00 – 15:00</span></div>
+          <div class="row"><span>Zondag</span><span>Gesloten</span></div>
+          <div class="row"><span style="font-size:12.5px">Op afspraak ook buiten openingstijden</span><span></span></div>
+        </div>
+        <div class="info-card">
+          <h3>Contact &amp; route</h3>
+          <div class="item"><span class="k">Adres</span><span class="v">Jules Verneweg 7a, 5015 BD Tilburg</span></div>
+          <div class="item"><span class="k">Telefoon</span><span class="v"><a href="tel:+31135368598">013 - 536 85 98</a></span></div>
+          <div class="item"><span class="k">Buiten openingstijden</span><span class="v"><a href="tel:+31621598393">06 - 21 59 83 93</a></span></div>
+          <div class="item"><span class="k">WhatsApp</span><span class="v"><a href="https://wa.me/31135368598">Stuur een bericht</a></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="wrap">
+      <div class="page-section-head">
+        <p class="eyebrow">Goed om te weten</p>
+        <h2>Haal het meeste uit uw bezoek.</h2>
+      </div>
+      <div class="step-row cols-3">
+        <div class="step-item reveal">
+          <h3>Neem maten mee</h3>
+          <p>Kamerafmetingen of foto's van uw ruimte helpen onze adviseurs om gerichter mee te denken.</p>
+        </div>
+        <div class="step-item reveal">
+          <h3>Reserveer een adviesgesprek</h3>
+          <p>Voor een uitgebreid gesprek raden we aan vooraf een afspraak te plannen.</p>
+        </div>
+        <div class="step-item reveal">
+          <h3>Volop parkeergelegenheid</h3>
+          <p>Gratis parkeren direct voor de deur aan de Jules Verneweg.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-cta">
+    <div class="page-cta-media">
+      <img src="/assets/img/real/gordijn-linnen-stoel-1800.jpg" alt="" loading="lazy">
+    </div>
+    <div class="wrap">
+      <div class="page-cta-inner">
+        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Kom langs</p>
+        <h2>We staan klaar om u te ontvangen.</h2>
+        <p>Plan een bezoek of loop gewoon eens binnen — de koffie staat klaar.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary magnetic" href="/contact.html">Plan showroombezoek</a>
+          <a class="btn-text magnetic" href="tel:+31135368598">Bel 013 - 536 85 98 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+</body>
+</html>
