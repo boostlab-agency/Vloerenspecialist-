@@ -48,6 +48,38 @@
     var t = document.body.getAttribute("data-theme");
     return t || null;
   }
+  /* Kolommen die pas ná feedback_items zijn toegevoegd (zie
+     supabase/schema_v2_sessions.sql en schema_v3_theme.sql). Als zo'n
+     migratie op een omgeving nog niet is uitgevoerd, wijst Postgres het
+     hele insert-verzoek af zodra deze velden worden meegestuurd — dat mag
+     nooit de basisfeedback zelf blokkeren, dus die velden zijn hersteloptioneel. */
+  var OPTIONAL_ROW_FIELDS = ["session_id", "design_theme"];
+
+  /* Herkent "kolom/tabel bestaat niet"-fouten van Postgres/PostgREST, zowel
+     de klassieke Postgres-foutcode (42703) als PostgREST's eigen schema-
+     cache-variant (PGRST204/PGRST205), onafhankelijk van de exacte tekst. */
+  function isMissingSchemaError(error) {
+    if (!error) return false;
+    var code = String(error.code || "");
+    var msg = String(error.message || "").toLowerCase();
+    return code === "42703" || code === "PGRST204" || code === "PGRST205" ||
+      (msg.indexOf("does not exist") !== -1 && msg.indexOf("column") !== -1) ||
+      msg.indexOf("could not find") !== -1;
+  }
+
+  /* Eén plek die de volledige Supabase-foutdetails logt (in plaats van
+     alleen de generieke "controleer je internetverbinding"-melding) én een
+     korte, bruikbare tekst teruggeeft voor in de gebruikersmelding. */
+  function logSupabaseError(context, error) {
+    console.error(
+      "[Feedbackmodus] " + context + " — Supabase-fout:",
+      "\n  code:", error && error.code,
+      "\n  message:", error && error.message,
+      "\n  details:", error && error.details,
+      "\n  hint:", error && error.hint
+    );
+    return (error && (error.message || error.hint || error.code)) || "onbekende fout";
+  }
   var STATUS = [
     { value: "open", label: "Open" },
     { value: "in-behandeling", label: "In behandeling" },
@@ -124,19 +156,59 @@
     refreshAll();
     armInactivityTimer();
     if (sb) {
-      sb.from(TABLE).insert(entryToRow(entry)).then(function (res) {
-        if (res.error) {
-          console.error("Feedback opslaan mislukt:", res.error);
-          window.alert("Deze feedback kon niet worden opgeslagen. Controleer je internetverbinding en probeer opnieuw.");
-          removeFromCache(entry.id);
-          // Bij mislukte opslag ook de live tekstwijziging terugdraaien —
-          // anders oogt de pagina bijgewerkt terwijl er niets is vastgelegd.
-          if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
-          refreshAll();
-        }
+      var row = entryToRow(entry);
+      // Wacht eerst tot een eventueel nog lopende sessie-aanmaak is
+      // afgerond (zie ensureSessionId) — anders schendt dit item de
+      // foreign-key-constraint naar feedback_sessions vrijwel gegarandeerd.
+      // Is het aanmaken van de sessie zelf mislukt, dan valt session_id
+      // hier terug op null (nog steeds een geldige, niet-verwijzende
+      // waarde) in plaats van de hele feedback-opslag te laten mislukken.
+      Promise.resolve(sessionCreatePromise).then(function (sessionRes) {
+        if (sessionRes && sessionRes.error) row.session_id = null;
+        insertFeedbackRow(row);
       });
     }
     return true;
+
+    function insertFeedbackRow(row) {
+      sb.from(TABLE).insert(row).then(function (res) {
+        if (!res.error) return;
+
+        if (isMissingSchemaError(res.error)) {
+          // Een recentere migratie (sessies/designrichting) is op deze
+          // omgeving nog niet uitgevoerd. Dat mag de basisfeedback niet
+          // blokkeren: opnieuw proberen zonder de optionele velden, zodat
+          // het item alsnog wordt opgeslagen — alleen die extra metadata
+          // ontbreekt dan totdat de migratie is gedraaid.
+          var fallbackRow = {};
+          for (var k in row) if (OPTIONAL_ROW_FIELDS.indexOf(k) === -1) fallbackRow[k] = row[k];
+          console.warn(
+            "[Feedbackmodus] Kolom(men) " + OPTIONAL_ROW_FIELDS.join("/") + " lijken te ontbreken " +
+            "(migratie supabase/schema_v2_sessions.sql en/of schema_v3_theme.sql nog niet uitgevoerd). " +
+            "Val terug op opslaan zonder die velden.",
+            res.error
+          );
+          sb.from(TABLE).insert(fallbackRow).then(function (fallbackRes) {
+            if (fallbackRes.error) {
+              var reason = logSupabaseError("Feedback opslaan (fallback zonder optionele velden)", fallbackRes.error);
+              window.alert("Deze feedback kon niet worden opgeslagen: " + reason + ". Probeer het opnieuw.");
+              removeFromCache(entry.id);
+              if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
+              refreshAll();
+            }
+          });
+          return;
+        }
+
+        var reason = logSupabaseError("Feedback opslaan", res.error);
+        window.alert("Deze feedback kon niet worden opgeslagen: " + reason + ". Probeer het opnieuw.");
+        removeFromCache(entry.id);
+        // Bij mislukte opslag ook de live tekstwijziging terugdraaien —
+        // anders oogt de pagina bijgewerkt terwijl er niets is vastgelegd.
+        if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
+        refreshAll();
+      });
+    }
   }
   function updateStatus(id, status) {
     var entry = cache.filter(function (i) { return i.id === id; })[0];
@@ -144,7 +216,10 @@
     refreshAll();
     if (sb) {
       sb.from(TABLE).update({ status: status, updated_at: new Date().toISOString() }).eq("id", id).then(function (res) {
-        if (res.error) { console.error("Status bijwerken mislukt:", res.error); window.alert("Status bijwerken is niet gelukt. Controleer je internetverbinding."); }
+        if (res.error) {
+          var reason = logSupabaseError("Status bijwerken", res.error);
+          window.alert("Status bijwerken is niet gelukt: " + reason + ".");
+        }
       });
     }
   }
@@ -155,7 +230,7 @@
     refreshAll();
     if (sb) {
       sb.from(TABLE).delete().eq("id", id).then(function (res) {
-        if (res.error) console.error("Feedback verwijderen mislukt:", res.error);
+        if (res.error) logSupabaseError("Feedback verwijderen", res.error);
       });
     }
   }
@@ -169,7 +244,10 @@
       if ("change" in fields) row.change_text = fields.change;
       if ("message" in fields) row.message = fields.message;
       sb.from(TABLE).update(row).eq("id", id).then(function (res) {
-        if (res.error) { console.error("Bijwerken mislukt:", res.error); window.alert("Bijwerken is niet gelukt. Controleer je internetverbinding."); }
+        if (res.error) {
+          var reason = logSupabaseError("Bijwerken", res.error);
+          window.alert("Bijwerken is niet gelukt: " + reason + ".");
+        }
       });
     }
   }
@@ -177,7 +255,7 @@
   function loadInitial() {
     if (!sb) return;
     sb.from(TABLE).select("*").order("created_at", { ascending: false }).then(function (res) {
-      if (res.error) { console.error("Feedback laden mislukt:", res.error); return; }
+      if (res.error) { logSupabaseError("Feedback laden", res.error); return; }
       cache = (res.data || []).map(rowToEntry);
       refreshAll();
     });
@@ -224,6 +302,15 @@
   var currentSessionId = null;
   var emailSentThisSession = false;
   var inactivityTimer = null;
+  /* Wordt gezet zodra een nieuwe sessie wordt aangemaakt en blijft leven
+     tot dat Supabase-verzoek is afgerond. feedback_items.session_id heeft
+     een foreign-key-constraint naar feedback_sessions — zonder deze wacht
+     zou het EERSTE item van een sessie vrijwel altijd worden geweigerd
+     ("violates foreign key constraint ... Key is not present"), omdat de
+     sessie-rij dan nog niet bestond op het moment van invoegen. Blijft
+     null zodra er niets te wachten valt, zodat andere aanroepen niet
+     onnodig vertragen. */
+  var sessionCreatePromise = null;
   try {
     currentSessionId = window.sessionStorage.getItem(SESSION_KEY) || null;
     emailSentThisSession = window.sessionStorage.getItem(EMAIL_SENT_KEY) === "1";
@@ -241,8 +328,9 @@
       window.sessionStorage.setItem(EMAIL_SENT_KEY, "0");
     } catch (e) {}
     if (sb) {
-      sb.from(SESSIONS_TABLE).insert({ id: currentSessionId, started_at: new Date().toISOString() }).then(function (res) {
-        if (res.error) console.error("Feedbacksessie aanmaken mislukt:", res.error);
+      sessionCreatePromise = sb.from(SESSIONS_TABLE).insert({ id: currentSessionId, started_at: new Date().toISOString() }).then(function (res) {
+        if (res.error) logSupabaseError("Feedbacksessie aanmaken", res.error);
+        return res;
       });
     }
     return currentSessionId;
