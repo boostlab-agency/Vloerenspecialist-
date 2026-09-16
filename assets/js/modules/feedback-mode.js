@@ -38,6 +38,16 @@
      sessie" bedoeld is voor de eenmalige e-mailnotificatie. */
   var SESSION_KEY = "dvsFeedbackSessionId";
   var EMAIL_SENT_KEY = "dvsFeedbackEmailSent";
+  /* Designrichting-vergelijker: welk homepage-thema (data-theme op <body>)
+     was actief toen dit feedback-item werd gegeven. Puur ter observatie
+     ("hoort dit bij de warme of de huisstijlversie?"), dus net als de
+     modus-voorkeur lokaal in localStorage — geen feedbackdata op zich. */
+  var DESIGN_THEME_KEY = "dvsDesignTheme";
+  var DESIGN_THEME_LABELS = { warm: "Warm Premium", brand: "Huisstijl (Rood)" };
+  function getActiveDesignTheme() {
+    var t = document.body.getAttribute("data-theme");
+    return t || null;
+  }
   var STATUS = [
     { value: "open", label: "Open" },
     { value: "in-behandeling", label: "In behandeling" },
@@ -87,6 +97,7 @@
       like: row.like_text, change: row.change_text,
       attachment: row.attachment_url ? { name: row.attachment_name, type: row.attachment_type, dataUrl: row.attachment_url } : null,
       imageReplace: row.image_replace, status: row.status, sessionId: row.session_id,
+      designTheme: row.design_theme,
       createdAt: row.created_at, updatedAt: row.updated_at
     };
   }
@@ -94,6 +105,7 @@
     return {
       id: entry.id, path: entry.path, page_title: entry.pageTitle,
       session_id: entry.sessionId || null,
+      design_theme: entry.designTheme || null,
       section_id: entry.sectionId, section_label: entry.sectionLabel,
       target_kind: entry.targetKind, target_kind_label: entry.targetKindLabel, target_detail: entry.targetDetail,
       action_type: entry.actionType, message: entry.message,
@@ -351,6 +363,50 @@
   toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedback geven</span>';
   headerControls.appendChild(toggle);
 
+  /* ---- Designrichting-vergelijker — alleen op de homepage, want alleen
+     daar bestaan de twee thema's (data-theme="warm"/"brand" op <body>,
+     zie home.css). Zet direct bij het laden het opgeslagen (of standaard)
+     thema, zodat de knop meteen de juiste stand toont. */
+  if (document.body.getAttribute("data-page") === "home") {
+    var activeDesignTheme = "warm";
+    try { activeDesignTheme = window.localStorage.getItem(DESIGN_THEME_KEY) || "warm"; } catch (e) {}
+    document.body.setAttribute("data-theme", activeDesignTheme);
+
+    var themeSwitch = document.createElement("div");
+    themeSwitch.className = "fb-theme-switch";
+    themeSwitch.innerHTML =
+      '<p class="fb-theme-switch-label">Vergelijk beide stijlen en geef aan welke richting het beste past bij De Vloerenspecialist.</p>' +
+      '<div class="fb-theme-switch-row" role="group" aria-label="Designrichting">' +
+        '<button type="button" class="fb-theme-btn" data-theme-choice="warm">Warm Premium</button>' +
+        '<button type="button" class="fb-theme-btn" data-theme-choice="brand">Huisstijl <span class="fb-theme-btn-sub">(Rood)</span></button>' +
+      "</div>";
+    headerControls.appendChild(themeSwitch);
+
+    function syncThemeButtons() {
+      themeSwitch.querySelectorAll(".fb-theme-btn").forEach(function (btn) {
+        var on = btn.getAttribute("data-theme-choice") === activeDesignTheme;
+        btn.classList.toggle("is-active", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    syncThemeButtons();
+
+    themeSwitch.addEventListener("click", function (e) {
+      var btn = e.target.closest(".fb-theme-btn");
+      if (!btn) return;
+      var choice = btn.getAttribute("data-theme-choice");
+      if (choice === activeDesignTheme) return;
+      activeDesignTheme = choice;
+      document.body.setAttribute("data-theme", activeDesignTheme);
+      try { window.localStorage.setItem(DESIGN_THEME_KEY, activeDesignTheme); } catch (e2) {}
+      syncThemeButtons();
+      showToast(
+        (choice === "brand" ? "Huisstijlversie" : "Warme versie") +
+        " actief — nieuwe feedback wordt hieraan gekoppeld."
+      );
+    });
+  }
+
   /* ---- Subtiele overlay over de hele site ---- */
   var overlay = document.createElement("div");
   overlay.className = "fb-overlay";
@@ -509,6 +565,7 @@
       path: window.location.pathname,
       pageTitle: document.title,
       sessionId: ensureSessionId(),
+      designTheme: getActiveDesignTheme(),
       sectionId: target.section.getAttribute("data-review-id"),
       sectionLabel: label,
       targetKind: target.kind,
@@ -729,6 +786,7 @@
           addEntry({
             id: uid(), path: window.location.pathname, pageTitle: document.title,
             sessionId: ensureSessionId(),
+            designTheme: getActiveDesignTheme(),
             sectionId: "algemeen", sectionLabel: "Algemene indruk",
             targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
             actionType: "algemeen", like: like, change: change, message: message, attachment: null,
@@ -824,12 +882,14 @@
       var isGeneral = i.actionType === "algemeen";
       var kindLine = i.targetKindLabel || "Sectie";
       if (i.sectionLabel && !isGeneral) kindLine += " · " + i.sectionLabel;
+      var themeLabel = i.designTheme ? DESIGN_THEME_LABELS[i.designTheme] : null;
       return (
         '<div class="fb-item" data-id="' + i.id + '">' +
           '<div class="fb-item-top">' +
             '<span class="fb-item-kind">' + kindLine + "</span>" +
             '<span class="fb-item-date">' + fmtDate(i.createdAt) + "</span>" +
           "</div>" +
+          (themeLabel ? '<span class="fb-item-theme fb-item-theme--' + i.designTheme + '">' + themeLabel + "</span>" : "") +
           itemBodyHtml(i) +
           attachmentThumbHtml(i.attachment) +
           '<div class="fb-item-foot">' +

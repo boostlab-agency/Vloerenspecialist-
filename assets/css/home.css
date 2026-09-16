@@ -7,13 +7,59 @@
 body[data-page="home"] {
   /* Warm, koffiekleurig donker in plaats van galerie-zwart — hetzelfde
      premium contrast, maar met de warmte van de showroomverlichting
-     in plaats van een architectuurstudio. */
+     in plaats van een architectuurstudio. Dit is "Versie A · Warm Premium",
+     het standaardthema. */
   --hp-bg: #1b140e;
   --hp-ink: #f4eee1;
   --hp-ink-soft: #bcad97;
   --hp-line: rgba(244,238,225,.14);
   --hp-accent: #d7a274;
   background: var(--hp-bg);
+}
+
+/* ==========================================================================
+   Designrichting-vergelijker (feedbackomgeving) — "Versie B · Huisstijl"
+   Zet [data-theme="brand"] op <body> (via de toggle in feedback-mode.js) om
+   de rode huisstijlkleur en een donkerdere, krachtigere basis te activeren.
+   Eén scoped tokenblok — omdat vrijwel alle homepage-CSS al via --hp-* en
+   --accent/--accent-rgb werkt, hoeft er verder nergens dubbele CSS te komen:
+   knoppen, links, hovers, eyebrows, gloed en cijfers volgen automatisch mee.
+   ========================================================================== */
+body[data-page="home"][data-theme="brand"] {
+  --hp-bg: #140d0b;
+  --hp-accent: #e20e18;
+  --accent: #e20e18;
+  --accent-rgb: 226, 14, 24;
+  --accent-soft: #ff5c4d;
+}
+
+/* De lichte "adempauze"-secties (Wat we doen / Verken de collectie /
+   Vertrouwen) draaien onder de huisstijlversie automatisch mee naar donker
+   — precies zoals gevraagd: "geen losse lichte eilandjes meer". Omdat de
+   kaarten/tegels in die secties zelf al via --surface/--ink/--line lezen,
+   volstaat het lokaal herdefiniëren van die tokens op de sectie zelf. */
+body[data-page="home"][data-theme="brand"] .chapter[data-tone="light"] {
+  background: var(--hp-bg); color: var(--hp-ink);
+  --bg: var(--hp-bg);
+  --ink: var(--hp-ink);
+  --ink-soft: var(--hp-ink-soft);
+  --line: var(--hp-line);
+  --surface: #241a17;
+  --surface-2: #2c211d;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow: 0 14px 44px -14px rgba(0,0,0,.6);
+}
+
+/* Iets krachtiger contrast op de fotografie en de header onder huisstijl —
+   "donkerder, krachtiger, meer merk" in plaats van de zachte warme vignet. */
+body[data-page="home"][data-theme="brand"] .media::after {
+  background: linear-gradient(to top, rgba(10,6,5,.5), rgba(10,6,5,0) 45%);
+}
+body[data-page="home"][data-theme="brand"] .site-header[data-mode="a"] {
+  background-image: linear-gradient(to bottom, rgba(18,10,9,.84), rgba(18,10,9,.36));
+}
+body[data-page="home"][data-theme="brand"] .site-header[data-mode="a"].is-scrolled {
+  background-color: rgba(18,10,9,.9);
 }
 body[data-page="home"] #site-footer .site-footer { background: var(--hp-bg); border-top-color: var(--hp-line); }
 body[data-page="home"] #site-footer .brand,
