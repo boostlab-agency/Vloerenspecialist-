@@ -134,7 +134,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
   .hero-chapter { min-height: auto; padding-top: 195px; padding-bottom: clamp(40px, 6vw, 70px); }
 }
 .hero-chapter .media { position: absolute; inset: 0; z-index: -1; }
-.hero-chapter .media img { object-position: 20% 32%; }
+.hero-chapter .media img { object-position: center 44%; }
 .hero-chapter .media::after { background: linear-gradient(to top, rgba(20,13,7,.66), rgba(20,13,7,.1) 42%, rgba(20,13,7,.34)); }
 .hero-chapter .wrap { position: relative; }
 .hero-eyebrow { color: rgba(244,238,225,.78); }
@@ -201,7 +201,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .disciplines-chapter .tile:hover .tile-link,
 .disciplines-chapter .tile:focus-visible .tile-link { color: var(--accent); border-color: var(--accent); }
 
-.tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; margin-top: 64px; }
+.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 28px; margin-top: 64px; }
 
 .tile { position: relative; display: block; color: inherit; }
 .tile-media { aspect-ratio: 5/4; border-radius: 2px; }
@@ -228,8 +228,11 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .tile:hover .tile-link .arrow,
 .tile:focus-visible .tile-link .arrow { transform: translateX(4px); }
 
+@media (max-width: 1100px) { .tile-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) {
   .disciplines-chapter .chapter-inner { padding: 100px 0 120px; }
+}
+@media (max-width: 640px) {
   .tile-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 44px; }
 }
 
@@ -289,6 +292,29 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .stat-row { display: flex; gap: 48px; margin: 40px 0 44px; flex-wrap: wrap; }
 .stat b { display: block; font-family: var(--serif); font-weight: 300; font-size: 42px; color: var(--hp-accent); letter-spacing: -.01em; }
 .stat span { font-size: 12.5px; color: var(--hp-ink-soft); letter-spacing: .03em; }
+
+/* ---- Showroom: openingstijden + contact, als rustige kaarten i.p.v. een
+   platte lijst — met een live "nu geopend/gesloten"-indicator (home.js). */
+.showroom-info { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
+.showroom-hours,
+.showroom-contact {
+  flex: 1 1 220px; background: rgba(244,238,225,.04); border: 1px solid var(--hp-line);
+  border-radius: 14px; padding: 20px 22px;
+}
+.hours-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 14px; color: var(--hp-ink-soft); }
+.hours-row + .hours-row { border-top: 1px solid var(--hp-line); }
+.hours-row.is-today { color: var(--hp-ink); }
+.hours-row.is-today .hours-days { font-weight: 600; }
+.hours-row.is-today .hours-days::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--hp-accent); margin-right: 8px; }
+.hours-time { font-variant-numeric: tabular-nums; }
+.hours-status { margin: 12px 0 0; font-size: 12.5px; font-weight: 600; color: var(--hp-accent); }
+.hours-extra { margin: 4px 0 0; font-size: 12px; color: var(--hp-ink-soft); }
+.showroom-contact { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.showroom-contact .item { display: flex; flex-direction: column; gap: 4px; }
+.showroom-contact .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--hp-ink-soft); }
+.showroom-contact .v { color: var(--hp-ink); font-size: 15px; }
+.showroom-contact .v a:hover { color: var(--hp-accent); }
+
 @media (max-width: 900px) { .showroom-grid { grid-template-columns: 1fr; gap: 40px; } .showroom-media { order: -1; aspect-ratio: 16/11; } }
 
 /* ---- 07 Vertrouwen — Reviews ----
