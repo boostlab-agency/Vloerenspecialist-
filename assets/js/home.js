@@ -121,55 +121,11 @@
     gsap.fromTo(heroMedia, { scale: 1.18 }, { scale: 1, duration: 2.6, ease: "power2.out", delay: .2 });
   }
 
-  /* Hero-video: speelt alleen af op precisie-schermen met voldoende
-     breedte en zonder databesparingsvoorkeur — anders blijft de
-     poster-afbeelding (native fallback) gewoon zichtbaar staan. */
-  function initHeroVideo() {
-    var video = document.getElementById("hero-video");
-    if (!video) return;
-    var conn = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
-    var saveData = !!(conn && (conn.saveData || /2g/.test(conn.effectiveType || "")));
-    var tooNarrow = window.innerWidth < 700;
-    if (reduceMotion || saveData || tooNarrow) return;
-    video.setAttribute("preload", "auto");
-    video.load();
-    var playPromise = video.play();
-    if (playPromise && playPromise.catch) playPromise.catch(function () {});
-  }
-
   /* De header blijft op de homepage permanent in de donkere, immersieve
      stijl (modus A) — geen wissel naar de lichte balk. Alleen de
      voortgangsindicator wordt bijgewerkt; het compactere uiterlijk bij
      scrollen wordt al generiek geregeld via de .is-scrolled-klasse
      (nav.js) op basis van CSS. */
-  /* Uitnodiging-video: dezelfde voorzichtige aanpak als de hero-video, maar
-     pas geladen zodra de sectie in de buurt van het beeld komt — hij staat
-     immers ver onderaan de pagina. Op smalle schermen, bij databesparing of
-     reduced-motion blijft simpelweg de posterafbeelding staan. */
-  function initInviteVideo() {
-    var video = document.getElementById("invite-video");
-    if (!video) return;
-    var conn = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
-    var saveData = !!(conn && (conn.saveData || /2g/.test(conn.effectiveType || "")));
-    var tooNarrow = window.innerWidth < 700;
-    if (reduceMotion || saveData || tooNarrow) return;
-
-    function play() {
-      video.setAttribute("preload", "auto");
-      video.load();
-      var playPromise = video.play();
-      if (playPromise && playPromise.catch) playPromise.catch(function () {});
-    }
-
-    if (hasST) {
-      ScrollTrigger.create({
-        trigger: ".invite-chapter", start: "top bottom", once: true, onEnter: play
-      });
-    } else {
-      play();
-    }
-  }
-
   function initHeaderSync() {
     var hero = document.querySelector(".hero-chapter");
     if (!hero || !DVS.header) return;
@@ -239,39 +195,15 @@
     });
   }
 
-  /* Subtiele custom cursor, alleen op precisie-aanwijzers zonder reduced-motion. */
-  function initCursor() {
-    if (reduceMotion || !hasGsap) return;
-    if (!window.matchMedia("(pointer: fine)").matches) return;
-    var dot = document.createElement("div");
-    dot.className = "hp-cursor";
-    document.body.appendChild(dot);
-    var moveX = gsap.quickTo(dot, "x", { duration: .28, ease: "power3.out" });
-    var moveY = gsap.quickTo(dot, "y", { duration: .28, ease: "power3.out" });
-    document.addEventListener("mousemove", function (e) {
-      dot.classList.add("is-visible");
-      moveX(e.clientX);
-      moveY(e.clientY);
-    });
-    document.addEventListener("mouseleave", function () { dot.classList.remove("is-visible"); });
-    document.querySelectorAll("a, button, .collection-card, .material-card, .review-card").forEach(function (el) {
-      el.addEventListener("mouseenter", function () { dot.classList.add("is-hover"); });
-      el.addEventListener("mouseleave", function () { dot.classList.remove("is-hover"); });
-    });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
     initWordReveals();
     initManifestGlow();
     initHeroIntro();
-    initHeroVideo();
-    initInviteVideo();
     initHeaderSync();
     initMediaParallax();
     initMediaBreathe();
     initMagnetic();
-    initCursor();
   });
 })();
