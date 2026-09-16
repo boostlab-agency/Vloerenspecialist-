@@ -366,7 +366,12 @@
   /* ---- Designrichting-vergelijker — alleen op de homepage, want alleen
      daar bestaan de twee thema's (data-theme="warm"/"brand" op <body>,
      zie home.css). Zet direct bij het laden het opgeslagen (of standaard)
-     thema, zodat de knop meteen de juiste stand toont. */
+     thema, zodat de schakelaar meteen de juiste stand toont.
+
+     Bewust een compacte iOS/macOS-achtige switch in plaats van twee grote
+     knoppen: dit is een hulpmiddel voor het vergelijken van stijlen, geen
+     primair onderdeel van de hero — het mag geen aandacht wegtrekken van
+     de foto en de hero-tekst. */
   if (document.body.getAttribute("data-page") === "home") {
     var activeDesignTheme = "warm";
     try { activeDesignTheme = window.localStorage.getItem(DESIGN_THEME_KEY) || "warm"; } catch (e) {}
@@ -375,26 +380,25 @@
     var themeSwitch = document.createElement("div");
     themeSwitch.className = "fb-theme-switch";
     themeSwitch.innerHTML =
-      '<p class="fb-theme-switch-label">Vergelijk beide stijlen en geef aan welke richting het beste past bij De Vloerenspecialist.</p>' +
-      '<div class="fb-theme-switch-row" role="group" aria-label="Designrichting">' +
-        '<button type="button" class="fb-theme-btn" data-theme-choice="warm">Warm Premium</button>' +
-        '<button type="button" class="fb-theme-btn" data-theme-choice="brand">Huisstijl <span class="fb-theme-btn-sub">(Rood)</span></button>' +
-      "</div>";
+      '<span class="fb-theme-tag" data-theme-choice="warm">Warm</span>' +
+      '<button type="button" class="fb-theme-toggle" role="switch" aria-label="Designrichting: Warm Premium of Huisstijl">' +
+        '<span class="fb-theme-toggle-thumb"></span>' +
+      "</button>" +
+      '<span class="fb-theme-tag" data-theme-choice="brand">Huisstijl</span>';
     headerControls.appendChild(themeSwitch);
 
+    var themeToggleBtn = themeSwitch.querySelector(".fb-theme-toggle");
+
     function syncThemeButtons() {
-      themeSwitch.querySelectorAll(".fb-theme-btn").forEach(function (btn) {
-        var on = btn.getAttribute("data-theme-choice") === activeDesignTheme;
-        btn.classList.toggle("is-active", on);
-        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      var isBrand = activeDesignTheme === "brand";
+      themeToggleBtn.setAttribute("aria-checked", isBrand ? "true" : "false");
+      themeSwitch.querySelectorAll(".fb-theme-tag").forEach(function (tag) {
+        tag.classList.toggle("is-active", tag.getAttribute("data-theme-choice") === activeDesignTheme);
       });
     }
     syncThemeButtons();
 
-    themeSwitch.addEventListener("click", function (e) {
-      var btn = e.target.closest(".fb-theme-btn");
-      if (!btn) return;
-      var choice = btn.getAttribute("data-theme-choice");
+    function setDesignTheme(choice) {
       if (choice === activeDesignTheme) return;
       activeDesignTheme = choice;
       document.body.setAttribute("data-theme", activeDesignTheme);
@@ -404,6 +408,13 @@
         (choice === "brand" ? "Huisstijlversie" : "Warme versie") +
         " actief — nieuwe feedback wordt hieraan gekoppeld."
       );
+    }
+
+    themeToggleBtn.addEventListener("click", function () {
+      setDesignTheme(activeDesignTheme === "brand" ? "warm" : "brand");
+    });
+    themeSwitch.querySelectorAll(".fb-theme-tag").forEach(function (tag) {
+      tag.addEventListener("click", function () { setDesignTheme(tag.getAttribute("data-theme-choice")); });
     });
   }
 

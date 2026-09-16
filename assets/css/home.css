@@ -131,7 +131,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
      header + feedbackknoppen rechtsboven. Vaste top-ruimte voorkomt dat
      gegarandeerd; als de tekst zelf niet past groeit de sectie gewoon iets
      door (een klein beetje scrollen), in plaats van overlap. */
-  .hero-chapter { min-height: auto; padding-top: 250px; padding-bottom: clamp(40px, 6vw, 70px); }
+  .hero-chapter { min-height: auto; padding-top: 195px; padding-bottom: clamp(40px, 6vw, 70px); }
 }
 .hero-chapter .media { position: absolute; inset: 0; z-index: -1; }
 .hero-chapter .media img { object-position: 20% 32%; }

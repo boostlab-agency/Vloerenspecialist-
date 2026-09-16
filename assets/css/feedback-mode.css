@@ -30,64 +30,67 @@
 }
 @media (max-width: 640px) { .fb-header-controls { top: 84px; right: 14px; gap: 8px; } }
 
-/* ---- Designrichting-vergelijker — verschijnt onder de feedbackknop, ----
-   alleen op de homepage. Eigen kaart zodat hij los blijft staan van de
-   feedbackknoppen zelf, maar wel in dezelfde vaste hoek meebeweegt. */
+/* ---- Designrichting-vergelijker — een compacte, iOS/macOS-achtige switch
+   onder de feedbackknop. Bewust minimaal (geen kaart, geen toelichtende
+   tekst, geen twee grote knoppen): dit is een hulpmiddel om twee stijlen
+   te vergelijken, geen primair onderdeel van de hero. Track-kleur en
+   duimpje-positie tonen de actieve stand; de labels ernaast blijven
+   herkenbaar zonder veel ruimte te vragen. */
 .fb-theme-switch {
-  flex: 0 0 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px;
-  align-self: flex-end; width: fit-content; max-width: 260px; margin-left: auto;
-  background: var(--fb-surface); border: 1.5px solid var(--fb-line); border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 18px 44px -18px rgba(0,0,0,.55);
+  flex: 0 0 100%; display: flex; align-items: center; justify-content: flex-end; gap: 7px;
+  width: fit-content; margin-left: auto;
+  background: rgba(23,21,27,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--fb-line); border-radius: 999px;
+  padding: 6px 12px;
+  box-shadow: 0 10px 24px -14px rgba(0,0,0,.5);
 }
-.fb-theme-switch-label {
-  margin: 0; font-size: 12px; line-height: 1.5; color: var(--fb-ink-soft);
+.fb-theme-tag {
+  font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .02em;
+  color: var(--fb-ink-soft); white-space: nowrap; cursor: pointer;
+  transition: color .25s ease, font-weight .25s ease;
 }
-.fb-theme-switch-row { display: flex; gap: 8px; }
-.fb-theme-btn {
-  flex: 1; font-family: var(--sans); font-size: 12.5px; font-weight: 700;
-  padding: 9px 10px; border-radius: 10px; border: 1.5px solid var(--fb-line);
-  color: var(--fb-ink-soft); background: transparent; text-align: center;
-  transition: background .2s ease, border-color .2s ease, color .2s ease;
+.fb-theme-tag.is-active { color: var(--fb-ink); font-weight: 700; }
+.fb-theme-tag:hover { color: var(--fb-ink); }
+
+.fb-theme-toggle {
+  position: relative; flex: none; width: 34px; height: 19px; border-radius: 999px;
+  background: #d7a274; border: none; padding: 0; cursor: pointer;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.28);
+  transition: background-color .32s var(--fb-ease);
 }
-.fb-theme-btn-sub { opacity: .75; font-weight: 600; }
-.fb-theme-btn:hover { border-color: rgba(var(--fb-accent-rgb), .5); color: var(--fb-ink); }
-.fb-theme-btn[data-theme-choice="warm"].is-active {
-  background: #d7a274; border-color: #d7a274; color: #211a12;
+.fb-theme-toggle[aria-checked="true"] { background: #e20e18; }
+.fb-theme-toggle-thumb {
+  position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4);
+  transition: transform .32s cubic-bezier(.34, 1.56, .64, 1);
 }
-.fb-theme-btn[data-theme-choice="brand"].is-active {
-  background: #e20e18; border-color: #e20e18; color: #fff;
-}
-/* Op smalle schermen blijft de kaart compact (nooit breder dan wat nodig
-   is) zodat hij zo min mogelijk van de showroomfoto bedekt — dezelfde
-   gedachte als de ingekorte header-CTA hiernaast. */
-@media (max-width: 640px) {
-  .fb-theme-switch { max-width: 210px; padding: 11px 13px; gap: 8px; }
-  .fb-theme-switch-label { font-size: 11px; line-height: 1.4; }
-  .fb-theme-btn { font-size: 11px; padding: 8px 6px; }
-}
-/* Op de kleinste/kortste schermen mag de toelichting weg — de twee
-   knoppen blijven werkend en herkenbaar, maar nemen veel minder hoogte in
-   zodat er meer van de showroomfoto zichtbaar blijft. */
+.fb-theme-toggle[aria-checked="true"] .fb-theme-toggle-thumb { transform: translateX(15px); }
+.fb-theme-toggle:hover { filter: brightness(1.08); }
+.fb-theme-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
 @media (max-width: 480px) {
-  .fb-theme-switch { max-width: 176px; padding: 8px 10px; gap: 6px; }
-  .fb-theme-switch-label { display: none; }
+  .fb-theme-switch { padding: 5px 10px; gap: 6px; }
+  .fb-theme-tag { font-size: 9.5px; }
+  .fb-theme-toggle { width: 30px; height: 17px; }
+  .fb-theme-toggle-thumb { width: 13px; height: 13px; }
+  .fb-theme-toggle[aria-checked="true"] .fb-theme-toggle-thumb { transform: translateX(13px); }
 }
 
-/* Groot en uitnodigend: dit is de enige ingang tot de hele feedbackmodus. */
+/* Duidelijk klikbaar, maar bewust ingetogen: dit is een hulpmiddel naast
+   de pagina, geen primaire actieknop zoals "Plan showroombezoek". */
 .fb-toggle {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: var(--fb-surface); color: var(--fb-ink);
-  border: 1.5px solid rgba(var(--fb-accent-rgb), .45); border-radius: 999px;
-  padding: 16px 28px 16px 20px; font-family: var(--sans); font-size: 15px; font-weight: 700;
-  box-shadow: 0 18px 44px -16px rgba(0,0,0,.55);
+  border: 1px solid rgba(var(--fb-accent-rgb), .3); border-radius: 999px;
+  padding: 11px 18px 11px 14px; font-family: var(--sans); font-size: 13px; font-weight: 600;
+  box-shadow: 0 10px 26px -16px rgba(0,0,0,.5);
   transition: background .25s ease, border-color .25s ease, transform .25s var(--fb-ease), box-shadow .25s ease;
 }
-.fb-toggle:hover { transform: translateY(-2px); border-color: var(--fb-accent); box-shadow: 0 22px 50px -14px rgba(0,0,0,.6); }
-.fb-toggle-icon { font-size: 19px; line-height: 1; }
+.fb-toggle:hover { transform: translateY(-1px); border-color: var(--fb-accent); box-shadow: 0 14px 30px -14px rgba(0,0,0,.55); }
+.fb-toggle-icon { font-size: 15.5px; line-height: 1; }
 .fb-toggle .fb-count {
   background: var(--fb-accent); color: #211a12; border-radius: 999px;
-  min-width: 22px; height: 22px; padding: 0 6px; font-size: 12px; font-weight: 700;
+  min-width: 19px; height: 19px; padding: 0 5px; font-size: 11px; font-weight: 700;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .fb-toggle .fb-count[hidden] { display: none; }
@@ -95,8 +98,8 @@
 .fb-toggle.is-active .fb-count { background: rgba(33,26,18,.16); color: #211a12; }
 
 @media (max-width: 640px) {
-  .fb-toggle { padding: 13px 20px 13px 16px; font-size: 13.5px; gap: 8px; }
-  .fb-toggle-icon { font-size: 17px; }
+  .fb-toggle { padding: 9px 16px 9px 12px; font-size: 12px; gap: 6px; }
+  .fb-toggle-icon { font-size: 14px; }
 }
 
 /* ---- Subtiele overlay over de hele site zodra modus actief is ---- */
@@ -135,28 +138,29 @@ html.feedback-mode .fb-edited,
   padding: 4px 10px; border-radius: 999px; pointer-events: none;
 }
 /* ---- Overzichtsknop ("Mijn feedback") — alleen zichtbaar als de modus
-   actief is; even prominent en tekstueel duidelijk als de hoofdknop. ---- */
+   actief is. Dezelfde ingetogen schaal als .fb-toggle: een hulpmiddel,
+   geen primair paginaonderdeel. ---- */
 .fb-panel-btn {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 7px;
   background: var(--fb-surface); color: var(--fb-ink);
-  border: 1.5px solid var(--fb-line); border-radius: 999px;
-  padding: 14px 20px; font-family: var(--sans); font-size: 14px; font-weight: 700;
-  box-shadow: 0 18px 44px -16px rgba(0,0,0,.55);
+  border: 1px solid var(--fb-line); border-radius: 999px;
+  padding: 10px 16px; font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+  box-shadow: 0 10px 26px -16px rgba(0,0,0,.5);
   transition: background .25s ease, border-color .25s ease, transform .25s var(--fb-ease);
 }
 .fb-panel-btn[hidden] { display: none; }
-.fb-panel-btn:hover { transform: translateY(-2px); border-color: rgba(var(--fb-accent-rgb), .5); }
-.fb-panel-icon { font-size: 17px; line-height: 1; }
+.fb-panel-btn:hover { transform: translateY(-1px); border-color: rgba(var(--fb-accent-rgb), .5); }
+.fb-panel-icon { font-size: 14.5px; line-height: 1; }
 .fb-panel-btn .fb-count {
   background: var(--fb-accent); color: #211a12; border-radius: 999px;
-  min-width: 21px; height: 21px; padding: 0 6px; font-size: 11.5px; font-weight: 700;
+  min-width: 18px; height: 18px; padding: 0 5px; font-size: 10.5px; font-weight: 700;
   display: inline-flex; align-items: center; justify-content: center;
 }
 @media (max-width: 640px) {
-  .fb-panel-btn { padding: 11px 14px; gap: 6px; }
+  .fb-panel-btn { padding: 9px 12px; gap: 5px; }
   .fb-panel-text { display: none; }
-  .fb-panel-icon { font-size: 18px; }
-  .fb-panel-btn .fb-count { font-size: 11px; }
+  .fb-panel-icon { font-size: 15px; }
+  .fb-panel-btn .fb-count { font-size: 10px; }
 }
 
 /* ---- Toast: korte, rustige bevestiging na een opgeslagen voorstel ---- */
