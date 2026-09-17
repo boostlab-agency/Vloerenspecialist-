@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Navigatie-gedrag — mega-menu, overlay-menu, mobiel paneel, zoeken,
-   verlanglijst-lade, header-scroll-status.
+   Navigatie-gedrag — volledig-scherm overlaymenu, zoeken, verlanglijst-lade,
+   header-scroll-status en -voortgang. Eén header-ontwerp op elke pagina en
+   elk formaat, dus geen apart mega-menu of mobiel schuifpaneel meer nodig.
    Draait op alle pagina's; werkt met de door header.js/footer.js
    geïnjecteerde markup.
    ========================================================================== */
@@ -28,49 +29,19 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  function initMegaMenu() {
-    var items = document.querySelectorAll(".nav-item");
-    if (!items.length) return;
-    var closeTimer;
-
-    function closeAll() {
-      items.forEach(function (li) {
-        li.classList.remove("is-open");
-        var btn = li.querySelector(".nav-link");
-        if (btn && btn.tagName === "BUTTON") btn.setAttribute("aria-expanded", "false");
-      });
+  /* Scroll-voortgang in de header — universeel, niet meer homepage-only,
+     zodat de header er op elke pagina identiek uitziet en zich identiek
+     gedraagt. */
+  function initHeaderProgress() {
+    if (!DVS.header) return;
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      DVS.header.setProgress(pct);
     }
-    function openItem(li) {
-      closeAll();
-      li.classList.add("is-open");
-      var btn = li.querySelector(".nav-link");
-      if (btn && btn.tagName === "BUTTON") btn.setAttribute("aria-expanded", "true");
-    }
-
-    items.forEach(function (li) {
-      var btn = li.querySelector(".nav-link");
-      var hasMega = !!li.querySelector(".mega");
-      if (!hasMega) return;
-
-      li.addEventListener("mouseenter", function () {
-        window.clearTimeout(closeTimer);
-        openItem(li);
-      });
-      li.addEventListener("mouseleave", function () {
-        closeTimer = window.setTimeout(closeAll, 120);
-      });
-      btn.addEventListener("click", function () {
-        var isOpen = li.classList.contains("is-open");
-        isOpen ? closeAll() : openItem(li);
-      });
-    });
-
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest(".nav-item")) closeAll();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeAll();
-    });
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
   }
 
   function initOverlayMenu() {
@@ -96,33 +67,6 @@
     nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", close); });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) close();
-    });
-  }
-
-  function initMobileNav() {
-    var toggle = document.getElementById("mobile-nav-toggle");
-    var nav = document.getElementById("mobile-nav");
-    if (!toggle || !nav) return;
-
-    function open() { nav.classList.add("is-open"); toggle.setAttribute("aria-expanded", "true"); lockBody(); }
-    function close() { nav.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); unlockBody(); }
-    toggle.addEventListener("click", function () {
-      nav.classList.contains("is-open") ? close() : open();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("is-open")) close();
-    });
-
-    nav.querySelectorAll(".acc-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var li = btn.closest("li");
-        var isOpen = li.classList.contains("is-open");
-        nav.querySelectorAll(".mobile-nav-list > li").forEach(function (other) {
-          other.classList.remove("is-open");
-          other.querySelector(".acc-btn").setAttribute("aria-expanded", "false");
-        });
-        if (!isOpen) { li.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); }
-      });
     });
   }
 
@@ -213,9 +157,8 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderScrollState();
-    initMegaMenu();
+    initHeaderProgress();
     initOverlayMenu();
-    initMobileNav();
     initSearch();
     initWishlistDrawer();
   });

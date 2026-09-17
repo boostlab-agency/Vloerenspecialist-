@@ -46,13 +46,9 @@ body[data-page="home"] .chapter[data-tone="dark"] {
   --shadow: 0 14px 44px -14px rgba(0,0,0,.6);
 }
 
-body[data-page="home"] .site-header[data-mode="a"] {
-  background-image: linear-gradient(to bottom, rgba(18,10,9,.84), rgba(18,10,9,.36));
-}
-body[data-page="home"] .site-header[data-mode="a"].is-scrolled {
-  background-color: rgba(18,10,9,.9);
-}
-/* De footer zelf heeft geen donkere overrides meer nodig: footer.css leest
+/* De header heeft geen homepage-specifieke override meer nodig — het is nu
+   overal hetzelfde donkere glaspaneel (zie header.css).
+   De footer zelf heeft geen donkere overrides meer nodig: footer.css leest
    --bg/--ink/--ink-soft/--line rechtstreeks, en die zijn nu op elke pagina
    (homepage én subpagina's) al donker via de generieke tokens hierboven. */
 

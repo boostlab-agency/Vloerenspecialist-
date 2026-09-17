@@ -140,19 +140,6 @@
      voortgangsindicator wordt bijgewerkt; het compactere uiterlijk bij
      scrollen wordt al generiek geregeld via de .is-scrolled-klasse
      (nav.js) op basis van CSS. */
-  function initHeaderSync() {
-    var hero = document.querySelector(".hero-chapter");
-    if (!hero || !DVS.header) return;
-    function update() {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-      DVS.header.setProgress(pct);
-    }
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-  }
-
   /* Zachte parallax-drift op alle grote foto's terwijl de sectie voorbijscrolt.
      De tegels in "Wat we doen" blijven hier bewust buiten: die krijgen alleen
      een rustige hover-zoom, geen extra scroll-beweging — eenvoud boven effect. */
@@ -258,7 +245,6 @@
     initManifestReveal();
     initManifestGlow();
     initHeroIntro();
-    initHeaderSync();
     initMediaParallax();
     initMediaBreathe();
     initMagnetic();

@@ -1,6 +1,9 @@
 /* ==========================================================================
-   Header — twee modi
-   Modus A (immersief, alleen homepage-hero) · Modus B (vast, interne pagina's)
+   Header — één ontwerp, overal identiek
+   Logo + twee utility-iconen + CTA + één menuknop die het volledige scherm
+   opent. Geen los mega-menu, geen los mobiel schuifpaneel: hetzelfde patroon
+   op elk formaat en op elke pagina, zoals Apple's navigatie die "boven de
+   content zweeft".
    ========================================================================== */
 
 #site-header { position: relative; z-index: 100; }
@@ -8,129 +11,68 @@
 /* ---- Glas-header — rustig, doorschijnend, zwevend boven de content ----
    Geïnspireerd op Apple.com / visionOS: een dun glaspaneel in plaats van
    een platte balk, met een zachte diepte-schaduw in plaats van een harde
-   lijn. Bij scrollen wordt het glas alleen iets voller en iets meer
-   vervaagd — geen abrupte kleurwissel, geen "witte balk". */
+   lijn. Donker getint — de hele site is één doorlopend donker canvas, dus
+   het glas hoeft niet meer per pagina te wisselen. Bij scrollen wordt het
+   glas alleen iets voller en iets meer vervaagd — geen abrupte kleurwissel. */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background-color: rgba(var(--surface-rgb), .58);
-  backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border-bottom: 1px solid rgba(var(--surface-rgb), 0);
-  box-shadow: 0 1px 0 rgba(20,18,15,.04), 0 18px 40px -28px rgba(20,18,15,.35);
+  background-color: rgba(18,12,9,.42);
+  backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+  color: #fff; border-bottom: 1px solid rgba(244,238,225,.08);
+  box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 18px 40px -28px rgba(0,0,0,.5);
   transition: background-color .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease), backdrop-filter .5s var(--ease);
 }
 .site-header.is-scrolled {
-  background-color: rgba(var(--surface-rgb), .8);
-  backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%);
-  border-bottom-color: rgba(20,18,15,.07);
-  box-shadow: 0 1px 0 rgba(20,18,15,.05), 0 22px 48px -26px rgba(20,18,15,.4);
+  background-color: rgba(18,12,9,.74);
+  backdrop-filter: blur(22px) saturate(170%); -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border-bottom-color: rgba(244,238,225,.12);
+  box-shadow: 0 1px 0 rgba(0,0,0,.14), 0 22px 48px -26px rgba(0,0,0,.55);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   /* Nette val terug op een effen balk als de browser geen backdrop-filter
      ondersteunt, i.p.v. een half-doorzichtig paneel over de content heen. */
-  .site-header { background-color: var(--surface); }
-  .site-header.is-scrolled { background-color: var(--surface); }
+  .site-header { background-color: rgba(18,12,9,.92); }
+  .site-header.is-scrolled { background-color: rgba(18,12,9,.96); }
 }
 .site-header .wrap {
   height: var(--header-h);
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
   transition: height .45s var(--ease);
 }
+.site-header.is-scrolled .wrap { height: calc(var(--header-h) - 14px); }
 
 .brand { display: flex; align-items: center; min-width: 0; flex: none; }
 .brand-logo {
-  display: block; height: 30px; width: auto;
+  display: block; height: 40px; width: auto;
   animation: logo-in .9s cubic-bezier(.16,.8,.24,1) both; animation-delay: .15s;
   transition: height .45s var(--ease);
 }
+.site-header.is-scrolled .brand-logo { height: 33px; }
 @keyframes logo-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .brand-logo { animation: none; } }
 
-/* Beide modi gebruiken hetzelfde wit+rode logo — de hele site is nu één
-   doorlopend donker canvas, dus er is geen aparte lichte logovariant meer
-   nodig. Zie header.js. */
-
 .cta-short { display: none; }
-
-/* ---- Modus A: immersief glas over de hero ----
-   Zelfde glasfilosofie als de basisstijl, maar donker getint zodat het
-   paneel leesbaar blijft boven wisselende foto's. Subtiele blur is altijd
-   actief (niet pas bij scrollen) — bij scrollen wordt het glas alleen iets
-   voller en iets meer vervaagd, nooit een harde overgang. */
-.site-header[data-mode="a"] {
-  background-color: rgba(18,12,9,.32);
-  backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
-  color: #fff; border-bottom: 1px solid rgba(244,238,225,.08);
-  box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 18px 40px -28px rgba(0,0,0,.5);
-}
-.site-header[data-mode="a"].is-scrolled {
-  background-color: rgba(18,12,9,.66);
-  backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%);
-  border-bottom-color: rgba(244,238,225,.12);
-  box-shadow: 0 1px 0 rgba(0,0,0,.14), 0 22px 48px -26px rgba(0,0,0,.55);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header[data-mode="a"] { background-color: rgba(18,12,9,.86); }
-}
-.site-header[data-mode="a"].is-scrolled .wrap { height: calc(var(--header-h) - 20px); }
-.site-header[data-mode="a"].is-scrolled .brand-logo { height: 25px; }
-/* Modus A toont alleen: merk, voortgang, CTA, overlay-toggle. */
-.site-header[data-mode="a"] .main-nav,
-.site-header[data-mode="a"] .menu-btn,
-.site-header[data-mode="a"] #search-toggle,
-.site-header[data-mode="a"] #wishlist-toggle { display: none !important; }
-
-/* Modus B toont de volledige navigatie; geen voortgang of overlay-knop. */
-.site-header[data-mode="b"] .header-progress,
-.site-header[data-mode="b"] .overlay-toggle { display: none !important; }
 
 .header-progress {
   font-family: var(--serif); font-size: 13px; letter-spacing: .08em;
   color: rgba(255,255,255,.75); min-width: 42px;
 }
 
+.header-utility { display: flex; align-items: center; gap: 6px; }
+
 #header-cta {
   padding: 12px 22px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
   border: 1px solid transparent; transition: background .25s, color .25s, border-color .25s;
+  background: var(--accent); color: var(--on-accent);
 }
-.site-header[data-mode="a"] #header-cta { background: var(--accent); color: var(--on-accent); }
-.site-header[data-mode="a"] #header-cta:hover { background: #fff; color: var(--ink); }
-.site-header[data-mode="b"] #header-cta { background: var(--accent); color: var(--on-accent); }
-.site-header[data-mode="b"] #header-cta:hover { background: var(--ink); color: var(--bg); }
+#header-cta:hover { background: #fff; color: var(--ink); }
 
-.overlay-toggle {
-  display: inline-flex; align-items: center; gap: 10px; color: #fff;
-  font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
-}
-.overlay-toggle .bars { display: flex; flex-direction: column; gap: 4px; }
-.overlay-toggle .bars span { width: 22px; height: 1.5px; background: #fff; transition: transform .3s var(--ease), opacity .3s; }
-.overlay-toggle[aria-expanded="true"] .bars span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-.overlay-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
-.overlay-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
-
-/* ---- Modus B: vast glaspaneel met mega-menu ----
-   Geen eigen achtergrond meer — erft het glas van de basisstijl (.site-header),
-   dat via --surface-rgb automatisch donker is op elke pagina (de hele site
-   is nu één doorlopend donker canvas), zodat interne pagina's nooit meer
-   een harde witte balk tonen. */
-
-.main-nav { display: flex; align-items: center; gap: 4px; }
-.main-nav > li { position: relative; }
-.nav-link {
-  display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px;
-  font-size: 14.5px; font-weight: 500; color: var(--ink-soft); border-radius: 999px;
-  transition: background .2s, color .2s;
-}
-.nav-link:hover, .nav-link[aria-expanded="true"] { color: var(--accent); background: rgba(var(--accent-rgb), .08); }
-.nav-link .chev { font-size: 10px; transition: transform .25s var(--ease); opacity: .6; }
-.nav-link[aria-expanded="true"] .chev { transform: rotate(180deg); }
-
-.header-utility { display: flex; align-items: center; gap: 6px; }
 .icon-btn {
   position: relative; display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 999px; color: var(--ink-soft);
+  width: 40px; height: 40px; border-radius: 999px; color: rgba(255,255,255,.8);
   transition: background .2s, color .2s;
 }
-.icon-btn:hover { background: rgba(var(--accent-rgb), .08); color: var(--accent); }
+.icon-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
 .icon-btn .count {
   position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 3px;
   border-radius: 999px; background: var(--accent); color: var(--on-accent);
@@ -138,43 +80,24 @@
 }
 .icon-btn .count[hidden] { display: none; }
 
-.menu-btn {
-  display: none; width: 40px; height: 40px; border-radius: 999px; align-items: center; justify-content: center;
-  color: var(--ink-soft);
+.overlay-toggle {
+  display: inline-flex; align-items: center; gap: 10px; color: #fff;
+  font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  padding: 8px 4px 8px 10px; border-radius: 999px; transition: background .2s;
 }
-.menu-btn:hover { background: var(--surface-2); }
+.overlay-toggle:hover { background: rgba(255,255,255,.08); }
+.overlay-toggle .bars { display: flex; flex-direction: column; gap: 4px; }
+.overlay-toggle .bars span { width: 22px; height: 1.5px; background: #fff; transition: transform .3s var(--ease), opacity .3s; }
+.overlay-toggle[aria-expanded="true"] .bars span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.overlay-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
+.overlay-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
-/* ---- Mega-menu ---- */
-.mega {
-  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(6px);
-  width: min(640px, 90vw); background: rgba(var(--surface-rgb), .92);
-  backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px;
-  display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .mega { background: var(--surface); }
-}
-.nav-item.is-open .mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-
-.mega-col-title { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
-.mega-list { display: flex; flex-direction: column; gap: 2px; }
-.mega-list a { display: block; padding: 8px 10px; border-radius: 6px; font-size: 14.5px; color: var(--ink); transition: background .2s, color .2s, padding-left .2s; }
-.mega-list a:hover { background: var(--surface-2); color: var(--accent); padding-left: 14px; }
-.mega-list a span { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
-
-.mega-promo {
-  border-radius: var(--radius-sm); padding: 20px; background: var(--surface-2);
-  border: 1px solid var(--line);
-}
-.mega-promo .k { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; display: block; margin-bottom: 8px; }
-.mega-promo p { font-size: 14px; color: var(--ink-soft); margin: 0 0 12px; }
-
-/* ---- Overlay-menu (modus A) ---- */
+/* ---- Volledig-scherm navigatiemenu ----
+   Eén patroon voor elk formaat: geen aparte desktop-mega-menu of mobiel
+   schuifpaneel meer, dus geen breekpunt-specifiek gedrag om te onderhouden
+   of dat per pagina kan gaan verschillen. */
 .overlay-nav {
-  position: fixed; inset: 0; z-index: 150; background: #171613; color: #efe9df;
+  position: fixed; inset: 0; z-index: 150; background: #140d0b; color: #f4eee1;
   display: flex; flex-direction: column;
   opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s;
 }
@@ -233,44 +156,19 @@
 .drawer-empty p { font-size: 14.5px; }
 .drawer-foot { padding: 20px 24px; border-top: 1px solid var(--line); }
 
-/* ---- Mobiel navigatiepaneel (modus B) ---- */
-.mobile-nav {
-  position: fixed; inset: 0; z-index: 150; background: var(--surface);
-  display: flex; flex-direction: column;
-  opacity: 0; visibility: hidden; transform: translateY(-10px);
-  transition: opacity .3s var(--ease), visibility .3s, transform .3s var(--ease);
-}
-.mobile-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
-.mobile-nav .wrap { flex: 1; overflow-y: auto; padding-top: calc(var(--header-h) + 12px); padding-bottom: 40px; }
-.mobile-nav-list > li { border-bottom: 1px solid var(--line); }
-.mobile-nav-list > li > a, .mobile-nav-list .acc-btn {
-  display: flex; align-items: center; justify-content: space-between; width: 100%;
-  padding: 18px 4px; font-family: var(--serif); font-size: 21px; color: var(--ink);
-}
-.mobile-nav-list .acc-panel { max-height: 0; overflow: hidden; transition: max-height .3s var(--ease); }
-.mobile-nav-list li.is-open .acc-panel { max-height: 480px; }
-.mobile-nav-list li.is-open .acc-btn .chev { transform: rotate(180deg); }
-.mobile-nav-list .acc-panel a {
-  display: block; padding: 10px 4px 10px 14px; font-size: 15px; color: var(--ink-soft);
-}
-.mobile-nav-list .acc-panel a:hover { color: var(--accent); }
-.mobile-nav-foot { display: flex; flex-direction: column; gap: 14px; padding: 20px 4px 0; }
-
-@media (max-width: 900px) {
-  .main-nav { display: none; }
-  .menu-btn { display: inline-flex; }
-  .header-utility .search-only-desktop { display: none; }
-}
-
-/* Smalle telefoons: header-inhoud verdicht zodat niets overloopt. */
+/* Smalle telefoons: header-inhoud verdicht zodat niets overloopt. Zoeken en
+   verlanglijst wijken op dit formaat — logo, CTA en menu blijven prioriteit;
+   zoeken/verlanglijst staan een klik verder via het volledige menu. */
 @media (max-width: 640px) {
-  .wrap { padding: 0 16px; }
-  .header-utility { gap: 4px; }
-  .brand-logo { height: 22px; }
+  .wrap { padding: 0 14px; gap: 8px; }
+  .header-utility { gap: 2px; }
+  .brand-logo { height: 30px; }
+  .site-header.is-scrolled .brand-logo { height: 26px; }
   .header-progress { display: none; }
-  #header-cta { padding: 9px 14px; font-size: 12px; }
+  #search-toggle, #wishlist-toggle { display: none; }
+  #header-cta { padding: 9px 12px; font-size: 12px; }
   .cta-full { display: none; }
   .cta-short { display: inline; }
   .overlay-toggle .ov-label { display: none; }
-  .overlay-toggle { gap: 0; padding: 8px; }
+  .overlay-toggle { gap: 0; padding: 6px; }
 }
