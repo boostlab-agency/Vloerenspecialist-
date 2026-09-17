@@ -1,9 +1,8 @@
 /* ==========================================================================
    Header-component — één ontwerp, overal identiek (homepage én subpagina's):
-   logo, twee utility-iconen, CTA en een enkele menuknop die het volledige
-   scherm openslaat. Geen los mega-menu of los mobiel paneel meer — één
-   navigatiepatroon op elk formaat, zoals Apple's "boven de content zwevende"
-   navigatie.
+   logo, twee utility-iconen, CTA en een menuknop die een premium split-panel
+   navigatie-ervaring opent (categorieën links, bijbehorende content rechts,
+   glas + blur), in plaats van een eenvoudige lijst of klassieke dropdowns.
    Wordt synchroon geïnjecteerd (script met defer, dus DOM al geparsed).
    ========================================================================== */
 (function () {
@@ -13,28 +12,158 @@
   var ICONS = {
     search: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
     heart: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2 4.5 5.6 4c2-.3 3.7.7 4.9 2.3.2.3.7.3.9 0C12.7 4.7 14.4 3.7 16.4 4 20 4.5 21.5 8 20 11.7 17.5 16.4 12 21 12 21z"/></svg>',
-    close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+    close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    arrow: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
   };
 
-  /* Platte lijst — geen mega-menu meer, dus geen sub-kolommen. Elke rubriek
-     heeft een eigen overzichtspagina die op zijn beurt weer naar de
-     subpagina's doorlinkt (Vloeren → PVC/hout/laminaat/…, Interieur →
-     kasten/behang/raamdecoratie/Renostuc). */
-  var NAV = [
-    { label: "Vloeren", href: "/vloeren/index.html" },
-    { label: "Interieur", href: "/interieur/index.html" },
-    { label: "Merken", href: "/merken/index.html" },
-    { label: "Journal", href: "/journal/index.html" },
-    { label: "Inspiratie", href: "/inspiratie/projecten.html" },
-    { label: "Showroom", href: "/showroom.html" },
-    { label: "Over ons", href: "/over-ons/index.html" }
+  function img(src, w) {
+    if (src.indexOf("images.unsplash.com") !== -1) return src + "?fm=jpg&q=72&auto=format&fit=crop&w=" + w;
+    return src;
+  }
+
+  /* Eén datamodel voor het volledige-schermmenu: "rich" categorieën tonen
+     een lijst met sublinks (evt. met thumbnail) plus een uitgelicht beeld;
+     "simple" categorieën (Showroom, Over ons, Contact) tonen één groot
+     beeld met een korte pitch en CTA — zo oogt elk paneel altijd gevuld,
+     nooit als een lege dropdown. */
+  var PANELS = [
+    {
+      key: "vloeren", label: "Vloeren", href: "/vloeren/index.html", type: "rich",
+      media: { src: img("https://images.unsplash.com/photo-1584622781564-1d987f7333c1", 900), label: "Alle vloeren bekijken", href: "/vloeren/index.html" },
+      groups: [
+        {
+          title: "Vloertypes",
+          links: [
+            { label: "PVC vloeren", href: "/vloeren/pvc.html", img: img("https://images.unsplash.com/photo-1716315325541-776e39f9725f", 160) },
+            { label: "Houten vloeren", href: "/vloeren/hout.html", img: img("https://images.unsplash.com/photo-1772797583328-f83bc3f94f80", 160) },
+            { label: "Laminaat", href: "/vloeren/laminaat.html", img: img("https://images.unsplash.com/photo-1560184897-1ee3713708ee", 160) },
+            { label: "Visgraat", href: "/vloeren/visgraat.html", img: img("https://images.unsplash.com/photo-1607403219525-6c60fa4f20fa", 160) },
+            { label: "Tapijt", href: "/vloeren/tapijt.html", img: img("https://images.unsplash.com/photo-1636716018960-eb737dccb185", 160) }
+          ]
+        },
+        {
+          title: "Merken",
+          links: [
+            { label: "Floer", href: "/merken/floer.html" },
+            { label: "Belakos", href: "/merken/belakos.html" },
+            { label: "Moduleo", href: "/merken/moduleo.html" },
+            { label: "COREtec", href: "/merken/coretec.html" },
+            { label: "Alle 62+ merken", href: "/merken/index.html", more: true }
+          ]
+        }
+      ]
+    },
+    {
+      key: "interieur", label: "Interieur", href: "/interieur/index.html", type: "rich",
+      media: { src: img("https://images.unsplash.com/photo-1717429541792-5c59021d6ceb", 900), label: "Heel interieur bekijken", href: "/interieur/index.html" },
+      groups: [
+        {
+          title: "Disciplines",
+          links: [
+            { label: "Kasten op maat", href: "/interieur/kasten-op-maat.html", img: img("https://images.unsplash.com/photo-1717429541792-5c59021d6ceb", 160) },
+            { label: "Behang", href: "/interieur/behang.html", img: img("https://images.unsplash.com/photo-1787920990191-ef4618d03298", 160) },
+            { label: "Raamdecoratie", href: "/interieur/raamdecoratie.html", img: "/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" },
+            { label: "Renostuc", href: "/interieur/renostuc.html", img: img("https://images.unsplash.com/photo-1787145879056-d02365c5b911", 160) }
+          ]
+        }
+      ]
+    },
+    {
+      key: "inspiratie", label: "Inspiratie", href: "/inspiratie/projecten.html", type: "rich",
+      media: { src: "/assets/img/real/visgraat-kastenwand-1800.jpg", label: "Naar de projecten", href: "/inspiratie/projecten.html" },
+      groups: [
+        {
+          title: "Ontdek",
+          links: [
+            { label: "Journal — advies & achtergrond", href: "/journal/index.html", img: img("https://images.unsplash.com/photo-1772442364639-20fe5e5438a1", 160) },
+            { label: "Projecten — echte interieurs", href: "/inspiratie/projecten.html", img: "/assets/img/real/tapijt-pouf-1-1800.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "showroom", label: "Showroom", href: "/showroom.html", type: "simple",
+      media: { src: "/assets/img/showroom.png", label: "" },
+      pitch: "1.800 m² complete woonopstellingen, 62+ merken en persoonlijk advies zonder verkooppraatjes.",
+      cta: { label: "Plan showroombezoek", href: "/showroom.html" }
+    },
+    {
+      key: "over-ons", label: "Over ons", href: "/over-ons/index.html", type: "simple",
+      media: { src: "/assets/img/real/gordijn-wit-sculptuur-1800.jpg", label: "" },
+      pitch: "Nog steeds een vloerenzaak in hart en nieren — inmiddels ook uw adres voor kasten op maat, behang, raamdecoratie en Renostuc.",
+      cta: { label: "Ons verhaal & werkwijze", href: "/over-ons/index.html" }
+    },
+    {
+      key: "contact", label: "Contact", href: "/contact.html", type: "simple",
+      media: { src: "/assets/img/real/gordijn-linnen-stoel-1800.jpg", label: "" },
+      pitch: "Jules Verneweg 7a, 5015 BD Tilburg — Ma–vr 09:00–17:00, za 09:00–15:00.",
+      cta: { label: "013 - 536 85 98", href: "tel:+31135368598" },
+      ctaSecondary: { label: "Stuur een bericht", href: "/contact.html" }
+    }
   ];
 
-  function renderOverlayNav() {
-    var items = [{ label: "Home", href: "/index.html" }].concat(NAV).concat([{ label: "Contact", href: "/contact.html" }]);
-    return items.map(function (item, i) {
-      var no = String(i).padStart(2, "0");
-      return '<li><a href="' + item.href + '"><span class="no">' + no + "</span>" + item.label + "</a></li>";
+  function renderCats() {
+    return PANELS.map(function (p, i) {
+      return (
+        '<button class="overlay-cat' + (i === 0 ? " is-active" : "") + '" data-cat="' + p.key + '" role="tab" aria-selected="' + (i === 0 ? "true" : "false") + '">' +
+          '<span class="oc-no">' + String(i + 1).padStart(2, "0") + "</span>" +
+          '<span class="oc-label">' + p.label + "</span>" +
+        "</button>"
+      );
+    }).join("");
+  }
+
+  function renderGroupLinks(links) {
+    return links.map(function (l) {
+      return (
+        '<a href="' + l.href + '" class="op-link' + (l.more ? " is-more" : "") + '">' +
+          (l.img ? '<span class="op-thumb"><img src="' + l.img + '" alt="" loading="lazy"></span>' : "") +
+          '<span class="op-link-label">' + l.label + (l.more ? " " + ICONS.arrow : "") + "</span>" +
+        "</a>"
+      );
+    }).join("");
+  }
+
+  function renderRichPanel(p) {
+    var groups = p.groups.map(function (g) {
+      return (
+        '<div class="op-group">' +
+          '<p class="op-group-title">' + g.title + "</p>" +
+          '<div class="op-list">' + renderGroupLinks(g.links) + "</div>" +
+        "</div>"
+      );
+    }).join("");
+    return (
+      '<div class="op-groups">' + groups + "</div>" +
+      '<a class="op-media" href="' + p.media.href + '">' +
+        '<img src="' + p.media.src + '" alt="" loading="lazy">' +
+        '<span class="op-media-cap">' + p.media.label + " " + ICONS.arrow + "</span>" +
+      "</a>"
+    );
+  }
+
+  function renderSimplePanel(p) {
+    return (
+      '<a class="op-hero" href="' + p.cta.href + '">' +
+        '<img src="' + p.media.src + '" alt="" loading="lazy">' +
+      "</a>" +
+      '<div class="op-hero-copy">' +
+        "<p>" + p.pitch + "</p>" +
+        '<div class="op-hero-actions">' +
+          '<a class="btn btn-primary magnetic" href="' + p.cta.href + '">' + p.cta.label + "</a>" +
+          (p.ctaSecondary ? '<a class="btn-text magnetic" href="' + p.ctaSecondary.href + '">' + p.ctaSecondary.label + " " + ICONS.arrow + "</a>" : "") +
+        "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderPanels() {
+    return PANELS.map(function (p, i) {
+      return (
+        '<div class="overlay-panel' + (i === 0 ? " is-active" : "") + '" data-panel="' + p.key + '" role="tabpanel">' +
+          (p.type === "rich" ? renderRichPanel(p) : renderSimplePanel(p)) +
+        "</div>"
+      );
     }).join("");
   }
 
@@ -66,9 +195,13 @@
       "</header>" +
 
       '<nav class="overlay-nav" id="overlay-nav" aria-label="Volledige navigatie">' +
-        '<button class="overlay-close" id="overlay-close" aria-label="Sluit menu">' + ICONS.close + "</button>" +
-        '<div class="wrap">' +
-          '<ul class="overlay-list">' + renderOverlayNav() + "</ul>" +
+        '<div class="overlay-backdrop" id="overlay-backdrop"></div>' +
+        '<div class="overlay-shell">' +
+          '<button class="overlay-close" id="overlay-close" aria-label="Sluit menu">' + ICONS.close + "</button>" +
+          '<div class="overlay-body">' +
+            '<div class="overlay-cats" id="overlay-cats" role="tablist" aria-label="Categorieën">' + renderCats() + "</div>" +
+            '<div class="overlay-panels" id="overlay-panels">' + renderPanels() + "</div>" +
+          "</div>" +
           '<div class="overlay-foot">' +
             "<span>Jules Verneweg 7a, 5015 BD Tilburg</span>" +
             "<span>Ma–vr 09:00–17:00 · Za 09:00–15:00 · Zo gesloten</span>" +

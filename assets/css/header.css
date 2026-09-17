@@ -1,9 +1,11 @@
 /* ==========================================================================
    Header — één ontwerp, overal identiek
-   Logo + twee utility-iconen + CTA + één menuknop die het volledige scherm
-   opent. Geen los mega-menu, geen los mobiel schuifpaneel: hetzelfde patroon
-   op elk formaat en op elke pagina, zoals Apple's navigatie die "boven de
-   content zweeft".
+   Logo + twee utility-iconen + CTA + één menuknop. Die knop opent geen
+   klassiek dropdown-menu, maar een split-screen glaspaneel (~70% van het
+   scherm) met categorieën links en bijbehorende content — sublinks,
+   merken, beeldmateriaal — rechts. Zelfde ervaring op elk formaat en op
+   elke pagina; alleen de vorm van de rechterkolom verandert op smalle
+   schermen (zie de mobiel/tablet-media queries verderop in dit bestand).
    ========================================================================== */
 
 #site-header { position: relative; z-index: 100; }
@@ -97,30 +99,170 @@
    schuifpaneel meer, dus geen breekpunt-specifiek gedrag om te onderhouden
    of dat per pagina kan gaan verschillen. */
 .overlay-nav {
-  position: fixed; inset: 0; z-index: 150; background: #140d0b; color: #f4eee1;
+  position: fixed; inset: 0; z-index: 150; color: #f4eee1;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .3s var(--ease), visibility .5s;
+}
+.overlay-nav.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+
+/* Twee lagen glas: een gedimde, vervaagde achtergrond die de pagina er nog
+   net doorheen laat zien (diepte), en daarop een eigen, dichter glaspaneel
+   dat het menu zelf draagt — het spatial-UI-gevoel van visionOS, niet een
+   platte overlay. */
+.overlay-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(8,5,4,.5);
+  backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%);
+  opacity: 0; transition: opacity .5s var(--ease);
+}
+.overlay-nav.is-open .overlay-backdrop { opacity: 1; }
+
+.overlay-shell {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(74vw, 1180px);
+  background: rgba(17,11,9,.86);
+  backdrop-filter: blur(36px) saturate(190%); -webkit-backdrop-filter: blur(36px) saturate(190%);
+  border-left: 1px solid rgba(244,238,225,.1);
+  box-shadow: -60px 0 100px -40px rgba(0,0,0,.65);
   display: flex; flex-direction: column;
-  opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s;
+  transform: translateX(100%);
+  transition: transform .6s cubic-bezier(.19,1,.22,1);
 }
-.overlay-nav.is-open { opacity: 1; visibility: visible; }
-.overlay-nav .wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: var(--header-h); padding-bottom: var(--header-h); }
+.overlay-nav.is-open .overlay-shell { transform: translateX(0); transition-delay: .05s; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .overlay-shell { background: rgba(17,11,9,.98); }
+}
+
 .overlay-close {
-  position: absolute; top: 22px; right: var(--gutter); color: #efe9df;
-  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-  font-size: 22px; border-radius: 999px;
+  position: absolute; top: 22px; right: 28px; z-index: 2; color: #efe9df;
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; border-radius: 999px; transition: background .2s, transform .3s var(--ease);
 }
-.overlay-close:hover { background: rgba(255,255,255,.1); }
-.overlay-list { display: flex; flex-direction: column; }
-.overlay-list li { border-top: 1px solid rgba(255,255,255,.12); }
-.overlay-list li:last-child { border-bottom: 1px solid rgba(255,255,255,.12); }
-.overlay-list a {
-  display: flex; align-items: baseline; gap: 18px; padding: 16px 4px;
-  font-family: var(--serif); font-size: clamp(24px, 4.4vw, 40px); color: #efe9df;
-  transition: color .25s, padding-left .25s;
+.overlay-close:hover { background: rgba(255,255,255,.1); transform: rotate(90deg); }
+
+.overlay-body { flex: 1; display: flex; overflow: hidden; padding-top: calc(var(--header-h) + 4px); }
+
+/* ---- Linkerkolom: grote, uitgesproken categorienamen ---- */
+.overlay-cats {
+  flex: none; width: 300px; padding: 12px 8px 24px 40px;
+  display: flex; flex-direction: column; overflow-y: auto;
 }
-.overlay-list a .no { font-family: var(--sans); font-size: 13px; color: var(--accent-soft); letter-spacing: .1em; }
-.overlay-list a:hover { color: var(--accent-soft); padding-left: 14px; }
-.overlay-foot { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 24px 4px 0; font-size: 13.5px; color: #b3ac9f; }
-.overlay-foot a { border-bottom: 1px solid rgba(255,255,255,.25); }
+.overlay-cat {
+  display: flex; align-items: baseline; gap: 14px; text-align: left;
+  padding: 15px 14px; border-radius: 14px; color: rgba(244,238,225,.55);
+  transition: color .3s var(--ease), background .3s var(--ease), padding-left .3s var(--ease);
+}
+.oc-no { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; color: var(--accent-soft); opacity: 0; transition: opacity .3s var(--ease); }
+.oc-label { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.01em; }
+.overlay-cat:hover { color: rgba(244,238,225,.85); }
+.overlay-cat.is-active { color: #fff; background: rgba(244,238,225,.06); padding-left: 20px; }
+.overlay-cat.is-active .oc-no { opacity: 1; }
+
+/* ---- Rechterkolom: content per categorie, gekruisd gefade ---- */
+.overlay-panels { position: relative; flex: 1; padding: 12px 40px 24px 8px; overflow-y: auto; }
+.overlay-panel {
+  position: absolute; inset: 12px 40px 24px 8px;
+  display: flex; gap: 36px;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+  pointer-events: none;
+}
+.overlay-panel.is-active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+
+.op-groups { flex: 1.15; display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.op-group-title {
+  font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent-soft); margin-bottom: 12px;
+}
+.op-list { display: flex; flex-direction: column; }
+.op-link {
+  display: flex; align-items: center; gap: 14px; padding: 10px 10px;
+  border-radius: 10px; color: #f0eae0; font-size: 17px; transition: background .2s, color .2s, padding-left .2s;
+}
+.op-link:hover { background: rgba(244,238,225,.06); color: #fff; padding-left: 16px; }
+.op-thumb { flex: none; width: 44px; height: 44px; border-radius: 8px; overflow: hidden; background: rgba(244,238,225,.08); }
+.op-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.op-link.is-more { color: var(--accent-soft); font-weight: 600; font-size: 14.5px; margin-top: 2px; }
+.op-link.is-more:hover { color: #fff; }
+.op-link.is-more svg { flex: none; }
+
+.op-media {
+  flex: 1; position: relative; border-radius: 16px; overflow: hidden;
+  display: block; min-height: 220px;
+}
+.op-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.16,.8,.24,1); }
+.op-media:hover img { transform: scale(1.05); }
+.op-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,5,4,.75), rgba(8,5,4,0) 55%); }
+.op-media-cap {
+  position: absolute; left: 20px; bottom: 18px; right: 20px; z-index: 2;
+  color: #fff; font-family: var(--serif); font-weight: 600; font-size: 17px;
+  display: flex; align-items: center; gap: 8px;
+}
+.op-media-cap svg { transition: transform .25s var(--ease); }
+.op-media:hover .op-media-cap svg { transform: translateX(4px); }
+
+/* ---- Eenvoudige categorieën (Showroom, Over ons, Contact): één groot
+   beeld met een korte pitch en CTA, zodat elk paneel — ook zonder lijst
+   met sublinks — als een volwaardige ervaring aanvoelt. ---- */
+.op-hero { flex: 1.3; position: relative; border-radius: 18px; overflow: hidden; min-height: 320px; }
+.op-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.op-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(8,5,4,.7) 0%, rgba(8,5,4,.15) 55%); }
+.op-hero-copy {
+  flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px;
+  padding-right: 12px;
+}
+.op-hero-copy p { font-family: var(--serif); font-weight: 500; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.35; color: #f4eee1; margin: 0; }
+.op-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.op-hero-actions .btn-text { color: #efe9df; border-color: rgba(255,255,255,.35); }
+.op-hero-actions .btn-text:hover { color: var(--accent-soft); border-color: var(--accent-soft); }
+
+.overlay-foot {
+  flex: none; display: flex; flex-wrap: wrap; gap: 10px 28px;
+  padding: 18px 40px; font-size: 13px; color: rgba(244,238,225,.5);
+  border-top: 1px solid rgba(244,238,225,.1);
+}
+.overlay-foot a { border-bottom: 1px solid rgba(255,255,255,.25); transition: color .2s; }
+.overlay-foot a:hover { color: var(--accent-soft); border-color: var(--accent-soft); }
+
+@media (max-width: 1100px) {
+  .overlay-shell { width: min(84vw, 900px); }
+  .overlay-cats { width: 240px; padding-left: 28px; }
+}
+
+/* ---- Tablet/mobiel: kolommen worden een gestapelde, scrollbare ervaring —
+   categorieën als compacte rij bovenaan, het gekozen paneel eronder in
+   volle breedte. Zelfde databron, zelfde sfeer, compactere vorm. ---- */
+@media (max-width: 860px) {
+  .overlay-shell { width: 100vw; border-left: none; }
+  .overlay-body { flex-direction: column; padding-top: calc(var(--header-h) + 2px); }
+  .overlay-cats {
+    width: auto; flex-direction: row; flex-wrap: wrap; gap: 6px;
+    /* Extra ruimte bovenaan: de vaste "Feedback geven"-knop (intern
+       reviewtool, altijd bovenop) zweeft rechtsboven en zou anders met de
+       eerste rij categorieën overlappen op smalle schermen. */
+    padding: 56px 20px 14px; overflow-y: visible;
+    border-bottom: 1px solid rgba(244,238,225,.1);
+  }
+  .overlay-cat { padding: 9px 14px; border-radius: 999px; }
+  .overlay-cat.is-active { padding-left: 14px; }
+  .oc-no { display: none; }
+  .oc-label { font-size: 16px; font-weight: 600; }
+
+  .overlay-panels { flex: 1; padding: 4px 20px 24px; }
+  .overlay-panel {
+    position: static; inset: auto; display: none; opacity: 1; visibility: visible; transform: none;
+    flex-direction: column; gap: 24px; pointer-events: auto;
+  }
+  .overlay-panel.is-active { display: flex; }
+  .op-media, .op-hero { min-height: 170px; }
+  .op-link { font-size: 16px; }
+  .op-hero-copy p { font-size: 17px; }
+}
+@media (max-width: 420px) {
+  .oc-label { font-size: 15px; }
+  .overlay-cat { padding: 8px 12px; }
+  .overlay-foot { padding: 14px 20px; }
+}
 
 /* ---- Zoeken ---- */
 .search-panel {

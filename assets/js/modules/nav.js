@@ -48,6 +48,7 @@
     var toggle = document.getElementById("overlay-toggle");
     var nav = document.getElementById("overlay-nav");
     var closeBtn = document.getElementById("overlay-close");
+    var backdrop = document.getElementById("overlay-backdrop");
     if (!toggle || !nav) return;
 
     function open() {
@@ -64,9 +65,44 @@
       nav.classList.contains("is-open") ? close() : open();
     });
     if (closeBtn) closeBtn.addEventListener("click", close);
-    nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", close); });
+    if (backdrop) backdrop.addEventListener("click", close);
+    nav.querySelectorAll(".overlay-panels a, .overlay-foot a").forEach(function (a) { a.addEventListener("click", close); });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) close();
+    });
+
+    /* Categorie ↔ paneel-koppeling: links de rubrieken, rechts de bijbehorende
+       content, zoals een split-screen productcatalogus i.p.v. een dropdown.
+       Op muis/trackpad schakelt hover al (met een kleine vertraging tegen
+       trilling); klik en toetsenbord werken op elk apparaat. Op mobiel/
+       touch (zie CSS) valt de rechterkolom weg en wordt elke categorie
+       een uitklapbaar paneel — dezelfde data, een compactere vorm. */
+    var cats = nav.querySelectorAll(".overlay-cat");
+    var panels = nav.querySelectorAll(".overlay-panel");
+    var hoverTimer;
+
+    function select(key) {
+      cats.forEach(function (btn) {
+        var active = btn.getAttribute("data-cat") === key;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.getAttribute("data-panel") === key);
+      });
+    }
+
+    var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    cats.forEach(function (btn) {
+      var key = btn.getAttribute("data-cat");
+      btn.addEventListener("click", function () { select(key); });
+      if (canHover) {
+        btn.addEventListener("mouseenter", function () {
+          window.clearTimeout(hoverTimer);
+          hoverTimer = window.setTimeout(function () { select(key); }, 60);
+        });
+      }
+      btn.addEventListener("focus", function () { select(key); });
     });
   }
 
