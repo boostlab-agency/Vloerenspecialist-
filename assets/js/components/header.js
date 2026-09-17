@@ -152,7 +152,7 @@
     return (
       '<header class="site-header" data-mode="' + mode + '" data-review-id="header" data-review-label="Header">' +
         '<div class="wrap">' +
-          '<a class="brand" href="/index.html"><img class="brand-logo" src="' + (isHome ? "/assets/img/logo.svg" : "/assets/img/logo-dark.svg") + '" alt="De Vloerenspecialist" width="230" height="34"></a>' +
+          '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
 
           '<nav aria-label="Hoofdnavigatie">' +
             '<ul class="main-nav">' + renderDesktopNav() + "</ul>" +

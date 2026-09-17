@@ -14,6 +14,19 @@ body[data-page="home"] {
   --hp-line: rgba(244,238,225,.14);
   --hp-accent: #e20e18;
   background: var(--hp-bg);
+
+  /* Generieke tokens ook op donker gezet: gedeelde componenten (header,
+     footer, base.css-knoppen) lezen --bg/--ink/etc rechtstreeks, en de
+     hele site is nu hetzelfde doorlopende donkere canvas als de subpagina's
+     (zie page.css voor de identieke herdefinitie op body[data-page="sub"]). */
+  --bg: #140d0b;
+  --ink: #f4eee1;
+  --ink-soft: #bcad97;
+  --line: rgba(244,238,225,.14);
+  --surface: #1e1512;
+  --surface-2: #251a16;
+  --surface-rgb: 20, 13, 11;
+  --accent-rgb: 226, 14, 24;
 }
 
 /* De vroegere lichte "adempauze"-secties (Wat we doen / Verken de collectie /
@@ -39,20 +52,9 @@ body[data-page="home"] .site-header[data-mode="a"] {
 body[data-page="home"] .site-header[data-mode="a"].is-scrolled {
   background-color: rgba(18,10,9,.9);
 }
-body[data-page="home"] #site-footer .site-footer { background: var(--hp-bg); border-top-color: var(--hp-line); }
-body[data-page="home"] #site-footer .brand,
-body[data-page="home"] #site-footer h4 { color: var(--hp-ink); }
-body[data-page="home"] #site-footer .brand-logo { filter: none; }
-body[data-page="home"] #site-footer p,
-body[data-page="home"] #site-footer .footer-col a,
-body[data-page="home"] #site-footer .footer-bottom { color: var(--hp-ink-soft); }
-body[data-page="home"] #site-footer .footer-top,
-body[data-page="home"] #site-footer .footer-bottom { border-color: var(--hp-line); }
-body[data-page="home"] #site-footer .footer-social a { border-color: var(--hp-line); color: var(--hp-ink-soft); }
-body[data-page="home"] #site-footer .info strong { color: var(--hp-accent); }
-body[data-page="home"] #site-footer .footer-showroom .info { color: var(--hp-ink); }
-body[data-page="home"] #site-footer .footer-showroom .info a { color: var(--hp-ink); }
-body[data-page="home"] #site-footer .footer-showroom .info a:hover { color: var(--hp-accent); }
+/* De footer zelf heeft geen donkere overrides meer nodig: footer.css leest
+   --bg/--ink/--ink-soft/--line rechtstreeks, en die zijn nu op elke pagina
+   (homepage én subpagina's) al donker via de generieke tokens hierboven. */
 
 /* z-index:0 dwingt een eigen stacking context af, anders "lekt" de
    negatieve z-index van hero/invite-achtergrondbeelden weg tot achter
@@ -118,7 +120,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .hero-eyebrow { color: rgba(244,238,225,.78); }
 .hero-eyebrow::before { background: var(--hp-accent); }
 .hero-chapter h1 {
-  color: #fff; max-width: 18ch; font-weight: 300; letter-spacing: -.02em;
+  color: #fff; max-width: 18ch; font-weight: 600; letter-spacing: -.02em;
   font-size: clamp(42px, 35px + 1.92vw, 72px); line-height: 1.04; margin-bottom: 22px;
 }
 .hero-chapter .lead { color: rgba(244,238,225,.82); max-width: 42ch; font-size: clamp(15.5px, 14.7px + 0.23vw, 18px); }
@@ -138,7 +140,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .manifest-chapter .wrap { display: flex; flex-direction: column; align-items: center; }
 .manifest-chapter .eyebrow { justify-content: center; }
 .manifest-text {
-  max-width: 20ch; font-family: var(--serif); font-weight: 300;
+  max-width: 20ch; font-family: var(--serif); font-weight: 600;
   font-size: clamp(30px, 5.4vw, 62px); line-height: 1.18; letter-spacing: -.01em; color: var(--hp-ink);
 }
 .manifest-text strong { color: var(--hp-accent); font-weight: 500; }
@@ -155,9 +157,9 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
    — geen CSS-transition hier, want die zou vechten met GSAP's scrub, die
    zelf elk frame de inline stijl bijwerkt terwijl je scrolt. Alleen het
    rust-standpunt (vóór JS, of bij reduced-motion/no-JS) staat hier. */
-.manifest-text .word { display: inline-block; opacity: .16; }
+.manifest-text .word { display: inline-block; opacity: .08; filter: blur(9px); will-change: opacity, filter; }
 .manifest-text .word.is-visible,
-html.reduced-motion .manifest-text .word { opacity: 1; transform: none; }
+html.reduced-motion .manifest-text .word { opacity: 1; filter: none; transform: none; }
 html.reduced-motion .manifest-text .word { transition: none; }
 
 /* ---- 02 Disciplines — Premium tegeloverzicht ----
@@ -179,7 +181,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .tile:hover .tile-copy,
 .tile:focus-visible .tile-copy { transform: translateY(-4px); }
 .tile-copy h3 {
-  font-family: var(--serif); font-weight: 300; letter-spacing: -.01em;
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.01em;
   font-size: clamp(23px, 2.2vw, 29px); color: var(--hp-ink); margin-bottom: 10px;
 }
 .tile-copy p { color: var(--hp-ink-soft); font-size: 15.5px; line-height: 1.6; max-width: 40ch; margin-bottom: 16px; }
@@ -210,7 +212,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .material-card:hover .media { transform: scale(1.04); }
 .material-name {
   position: absolute; left: 20px; bottom: 20px; z-index: 2; color: #fff;
-  font-family: var(--serif); font-weight: 300; font-size: clamp(19px, 1.8vw, 24px);
+  font-family: var(--serif); font-weight: 600; font-size: clamp(19px, 1.8vw, 24px);
 }
 @media (max-width: 900px) { .material-grid { grid-template-columns: repeat(2, 1fr); } }
 
@@ -219,8 +221,8 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .project-grid { display: grid; grid-template-columns: 1.5fr .8fr; gap: 72px; align-items: center; margin-top: 48px; }
 .project-media { aspect-ratio: 4/5; border-radius: 2px; }
 .project-copy .project-loc { color: var(--hp-ink-soft); font-size: 13.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
-.project-copy h2 { font-weight: 300; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 22px; }
-.project-quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 21px; color: var(--hp-ink); margin: 26px 0; padding-left: 22px; border-left: 1px solid var(--hp-accent); }
+.project-copy h2 { font-weight: 600; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 22px; }
+.project-quote { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 21px; color: var(--hp-ink); margin: 26px 0; padding-left: 22px; border-left: 1px solid var(--hp-accent); }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 30px; }
 .tag { font-size: 12px; color: var(--hp-ink-soft); background: rgba(244,238,225,.06); border: 1px solid var(--hp-line); border-radius: 999px; padding: 7px 14px; }
 .project-chapter .btn-text { color: var(--hp-ink); border-color: var(--hp-line); }
@@ -236,7 +238,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .collection-card { position: relative; aspect-ratio: 3/4.3; border-radius: 2px; overflow: hidden; display: flex; align-items: flex-end; }
 .collection-card .media { position: absolute; inset: 0; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
 .collection-card:hover .media { transform: scale(1.04); }
-.collection-card .name { position: relative; z-index: 2; color: #fff; font-family: var(--serif); font-weight: 300; font-size: 18px; padding: 20px; }
+.collection-card .name { position: relative; z-index: 2; color: #fff; font-family: var(--serif); font-weight: 600; font-size: 18px; padding: 20px; }
 .collection-card::before {
   content: "→"; position: absolute; z-index: 2; top: 18px; right: 18px; color: #fff;
   width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px;
@@ -252,10 +254,10 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .showroom-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
 .showroom-media { aspect-ratio: 3/2; border-radius: 2px; }
 .showroom-copy .eyebrow { color: var(--hp-accent); } .showroom-copy .eyebrow::before { background: var(--hp-accent); }
-.showroom-copy h2 { font-weight: 300; font-size: clamp(34px, 4.2vw, 58px); margin-bottom: 20px; }
+.showroom-copy h2 { font-weight: 600; font-size: clamp(34px, 4.2vw, 58px); margin-bottom: 20px; }
 .showroom-copy .lead { color: var(--hp-ink-soft); font-size: 18px; }
 .stat-row { display: flex; gap: 48px; margin: 40px 0 44px; flex-wrap: wrap; }
-.stat b { display: block; font-family: var(--serif); font-weight: 300; font-size: 42px; color: var(--hp-accent); letter-spacing: -.01em; }
+.stat b { display: block; font-family: var(--serif); font-weight: 600; font-size: 42px; color: var(--hp-accent); letter-spacing: -.01em; }
 .stat span { font-size: 12.5px; color: var(--hp-ink-soft); letter-spacing: .03em; }
 
 /* ---- Showroom: openingstijden + contact, als rustige kaarten i.p.v. een
@@ -291,7 +293,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .trust-head { display: flex; flex-direction: column; align-items: center; margin-bottom: 64px; }
 .trust-stars { font-size: 22px; letter-spacing: 5px; color: var(--hp-accent); margin-bottom: 6px; }
 .trust-score {
-  font-family: var(--serif); font-weight: 300; letter-spacing: -.01em;
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.01em;
   font-size: clamp(26px, 3vw, 34px); color: var(--hp-ink); margin-bottom: 6px;
 }
 .trust-source { font-size: 13px; color: var(--hp-ink-soft); letter-spacing: .03em; }
@@ -346,7 +348,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .invite-chapter .media::after { background: linear-gradient(to top, rgba(20,13,7,.62), rgba(20,13,7,.14) 55%, rgba(20,13,7,.36)); }
 .invite-chapter .chapter-inner { padding: 140px 0 110px; width: 100%; }
 .invite-copy .eyebrow { color: var(--hp-accent); } .invite-copy .eyebrow::before { background: var(--hp-accent); }
-.invite-copy h2 { color: #fff; font-weight: 300; font-size: clamp(34px, 5vw, 64px); max-width: 14ch; margin-bottom: 36px; }
+.invite-copy h2 { color: #fff; font-weight: 600; font-size: clamp(34px, 5vw, 64px); max-width: 14ch; margin-bottom: 36px; }
 .invite-details { display: flex; flex-wrap: wrap; gap: 28px 56px; margin-top: 8px; }
 .invite-details .item { display: flex; flex-direction: column; gap: 6px; }
 .invite-details .k { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,238,225,.55); }

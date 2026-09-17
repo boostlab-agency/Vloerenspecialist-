@@ -64,14 +64,14 @@
     Array.prototype.slice.call(root.childNodes).forEach(walk);
   }
 
-  /* "Wie we zijn" — scroll-gekoppelde (scrubbed) woordonthulling in plaats
-     van een eenmalige fade-in-trigger. Terwijl je door het manifest
-     scrolt, licht elk woord op van gedimd naar vol contrast; de nadruk-
-     woorden (in <strong>) krijgen daarbovenop een eigen, iets veerkrachtiger
-     kleur- en schaalbeweging naar het huisstijlrood — een herkenbaar maar
-     ingetogen accent, geen blur- of typewriter-effect. Rustig, premium
-     scrollgedrag zoals bij Apple/Arte: de animatie volgt de scrollpositie
-     zelf, niet een timer. */
+  /* "Wie we zijn" — scroll-gekoppelde (scrubbed), cinematische focus-reveal.
+     Elk woord lost op uit een zachte blur/schaduw, komt kort scherp in
+     beeld, en vervaagt daarna weer terug — als een langzame rack-focus die
+     over de tekst trekt, niet als een cumulatieve "blijft staan"-onthulling.
+     Bewust geen verticale beweging (geen "zwevend" gevoel): alleen
+     opacity + blur + een fractie schaal geven de diepte. De nadruk-woorden
+     (in <strong>) krijgen daarbovenop een kleurbeweging naar het huisstijl-
+     rood, samenvallend met hun scherpstelmoment. */
   function initManifestReveal() {
     var el = document.querySelector(".manifest-text.js-split-reveal");
     if (!el) return;
@@ -87,24 +87,29 @@
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: chapter,
-        start: "top 72%",
-        end: "top 12%",
-        scrub: 0.65
+        start: "top 78%",
+        end: "top 6%",
+        scrub: 0.9
       }
     });
 
+    var stagger = .07, fadeIn = .42, hold = .22, fadeOut = .5;
+
     words.forEach(function (w, i) {
-      var pos = i * 0.055;
+      var pos = i * stagger;
       var isAccent = !!w.closest("strong");
       tl.fromTo(w,
-        { opacity: .16, y: 10 },
-        { opacity: 1, y: 0, duration: .5, ease: "none" },
+        { opacity: .08, filter: "blur(9px)", scale: .985 },
+        { opacity: 1, filter: "blur(0px)", scale: 1, duration: fadeIn, ease: "sine.inOut" },
         pos
+      ).to(w,
+        { opacity: .24, filter: "blur(5px)", scale: .992, duration: fadeOut, ease: "sine.inOut" },
+        pos + fadeIn + hold
       );
       if (isAccent) {
         tl.fromTo(w,
-          { color: "#f4eee1", scale: .94 },
-          { color: "#e20e18", scale: 1, duration: .6, ease: "power1.out" },
+          { color: "#f4eee1" },
+          { color: "#e20e18", duration: fadeIn, ease: "sine.inOut" },
           pos
         );
       }

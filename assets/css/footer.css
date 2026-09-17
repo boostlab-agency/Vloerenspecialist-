@@ -12,10 +12,9 @@
 
 .footer-brand .brand { display: inline-flex; margin-bottom: 22px; }
 .footer-brand .brand-logo { height: 28px; width: auto; }
-/* Het logo is wit+rood; de footer heeft standaard een lichte achtergrond,
-   dus wordt het logo hier donker weergegeven (zie home.css voor de
-   donkere-footer-uitzondering op de homepage). */
-.footer-brand .brand-logo { filter: brightness(0); }
+/* De footer is overal donker (zelfde canvas als de rest van de site), dus
+   het wit+rode logo staat hier zonder filter — geen aparte donkere variant
+   meer nodig. */
 .footer-brand p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; max-width: 32ch; }
 .footer-social { display: flex; gap: 10px; margin-top: 24px; }
 .footer-social a {

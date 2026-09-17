@@ -23,7 +23,7 @@ body {
 
 img, svg, video { display: block; max-width: 100%; }
 
-h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; margin: 0 0 .5em; color: var(--ink); }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; margin: 0 0 .5em; color: var(--ink); }
 h1 { font-size: clamp(38px, 6vw, 68px); line-height: 1.04; }
 h2 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.1; }
 h3 { font-size: clamp(21px, 2.4vw, 26px); line-height: 1.2; }
@@ -142,11 +142,11 @@ main { display: block; }
 .section-intro { color: var(--ink-soft); font-size: 18px; max-width: 62ch; margin-bottom: 8px; }
 
 .showroom-cta-band {
-  background: var(--ink); color: var(--bg);
+  background: var(--surface); border-top: 1px solid var(--line); color: var(--ink);
 }
 .showroom-cta-band .wrap {
   padding-top: 56px; padding-bottom: 56px;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
 }
-.showroom-cta-band h3 { color: var(--bg); margin: 0; font-size: clamp(22px, 3vw, 30px); }
-.showroom-cta-band p { color: #cfc9bd; margin: 6px 0 0; }
+.showroom-cta-band h3 { color: var(--ink); margin: 0; font-size: clamp(22px, 3vw, 30px); }
+.showroom-cta-band p { color: var(--ink-soft); margin: 6px 0 0; }

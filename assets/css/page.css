@@ -1,11 +1,37 @@
 /* ==========================================================================
-   Subpagina-template — gedeeld door alle 14 pagina's onder de homepage.
+   Subpagina-template — gedeeld door alle pagina's onder de homepage.
    Rustiger dan het cinematische homepage-scrollverhaal (geen pinning, geen
-   scroll-hijacking): een heldere, premium "product/infopagina"-opbouw met
-   dezelfde tokens, typografie en huisstijlrood als de rest van de site.
+   scroll-hijacking), maar wel hetzelfde donkere canvas: de homepage is de
+   bron van waarheid. Zelfde mechanisme als home.css's dark chapter-tokens
+   — lokale herdefinitie van --bg/--ink/--surface/etc, zodat alle bestaande
+   componenten (kaarten, forms, footer) automatisch mee overschakelen zonder
+   dat elke regel losstaand herschreven hoeft te worden.
    ========================================================================== */
 
-body[data-page="sub"] { background: var(--bg); }
+body[data-page="sub"] {
+  --bg: #140d0b;
+  --ink: #f4eee1;
+  --ink-soft: #bcad97;
+  --line: rgba(244,238,225,.14);
+  --surface: #1e1512;
+  --surface-2: #251a16;
+  --surface-rgb: 20, 13, 11;
+  --accent: #e20e18;
+  --accent-rgb: 226, 14, 24;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow: 0 14px 44px -14px rgba(0,0,0,.6);
+  background: var(--bg);
+}
+
+/* Diepte op fotografie: een zachte donkere vignet, zoals de homepage op
+   elke .media toepast, zodat beelden niet los "zweven" op het donkere
+   canvas maar er optisch in wegzakken. */
+body[data-page="sub"] .page-hero-media::after,
+body[data-page="sub"] .split-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,6,5,.05), rgba(10,6,5,.32));
+  pointer-events: none;
+}
 
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.is-visible,
@@ -34,7 +60,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .page-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .page-hero-copy .eyebrow { margin-bottom: 18px; }
 .page-hero-copy h1 {
-  font-weight: 300; letter-spacing: -.01em; line-height: 1.04;
+  font-weight: 600; letter-spacing: -.01em; line-height: 1.04;
   font-size: clamp(36px, 4.4vw, 58px); margin-bottom: 20px; text-wrap: balance;
 }
 .page-hero-copy .lead { font-size: clamp(16px, 1.2vw, 18.5px); color: var(--ink-soft); max-width: 46ch; margin-bottom: 30px; }
@@ -47,11 +73,11 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 }
 
 /* ---- Generieke sectie ---- */
-.page-section { padding: 96px 0; }
-.page-section.is-tight { padding: 56px 0; }
+.page-section { padding: 132px 0; }
+.page-section.is-tight { padding: 72px 0; }
 .page-section.is-alt { background: var(--surface); }
 .page-section-head { max-width: 62ch; margin-bottom: 48px; }
-.page-section-head h2 { font-weight: 300; letter-spacing: -.01em; font-size: clamp(28px, 3.2vw, 42px); margin-bottom: 16px; text-wrap: balance; }
+.page-section-head h2 { font-weight: 600; letter-spacing: -.01em; font-size: clamp(28px, 3.2vw, 42px); margin-bottom: 16px; text-wrap: balance; }
 .page-section-head .lead { color: var(--ink-soft); font-size: 17px; }
 .page-section-head.is-center { margin-inline: auto; text-align: center; }
 .page-section-head.is-center .eyebrow { justify-content: center; }
@@ -67,7 +93,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .split-block.is-reverse .split-media { order: 2; }
 .split-media { position: relative; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; background: var(--surface-2); }
 .split-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.split-copy h2 { font-weight: 300; font-size: clamp(26px, 3vw, 38px); margin-bottom: 16px; }
+.split-copy h2 { font-weight: 600; font-size: clamp(26px, 3vw, 38px); margin-bottom: 16px; }
 .split-copy p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.7; margin-bottom: 14px; }
 .split-copy .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 26px; }
 .split-copy .tag { font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
@@ -104,7 +130,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .step-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .step-item { counter-increment: step; }
 .step-item::before {
-  content: counter(step, decimal-leading-zero); display: block; font-family: var(--serif); font-weight: 300;
+  content: counter(step, decimal-leading-zero); display: block; font-family: var(--serif); font-weight: 600;
   font-size: 34px; color: var(--accent); margin-bottom: 12px;
 }
 .step-item h3 { font-size: 16px; font-weight: 600; font-family: var(--sans); margin-bottom: 8px; }
@@ -172,13 +198,13 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .page-cta-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .page-cta-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.78), rgba(10,6,5,.42)); }
 .page-cta-inner { max-width: 46ch; }
-.page-cta h2 { font-weight: 300; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 18px; color: #fff; }
+.page-cta h2 { font-weight: 600; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 18px; color: #fff; }
 .page-cta p { color: rgba(244,238,225,.82); font-size: 16px; margin-bottom: 32px; }
 .page-cta .hero-cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .page-cta .btn-text { color: #fff; border-color: rgba(255,255,255,.4); }
 
 @media (max-width: 640px) {
-  .page-section { padding: 64px 0; }
+  .page-section { padding: 76px 0; }
   .page-cta { padding: 80px 0; }
 }
 
@@ -220,7 +246,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 /* ---- Journal: artikeldetail (langere leestekst) ---- */
 .article-head { max-width: 70ch; margin: 20px 0 40px; }
 .article-head .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
-.article-head h1 { font-weight: 300; letter-spacing: -.01em; line-height: 1.08; font-size: clamp(32px, 4.4vw, 52px); margin-bottom: 18px; text-wrap: balance; }
+.article-head h1 { font-weight: 600; letter-spacing: -.01em; line-height: 1.08; font-size: clamp(32px, 4.4vw, 52px); margin-bottom: 18px; text-wrap: balance; }
 .article-head .meta { font-size: 13.5px; color: var(--ink-soft); }
 .article-hero { aspect-ratio: 21/9; border-radius: 4px; overflow: hidden; margin-bottom: 48px; background: var(--surface-2); }
 .article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -229,7 +255,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .article-body h2 { font-weight: 500; font-size: clamp(23px, 2.6vw, 29px); margin: 44px 0 18px; }
 .article-body blockquote {
   margin: 34px 0; padding-left: 22px; border-left: 2px solid var(--accent);
-  font-family: var(--serif); font-weight: 300; font-style: italic; font-size: 21px; color: var(--ink);
+  font-family: var(--serif); font-weight: 600; font-style: italic; font-size: 21px; color: var(--ink);
 }
 .article-body ul { list-style: none; margin: 0 0 22px; padding: 0; }
 .article-body li { position: relative; padding-left: 22px; margin-bottom: 10px; color: var(--ink-soft); }
@@ -263,7 +289,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 
 .brand-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding: 28px 0 44px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
 .brand-hero .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
-.brand-hero h1 { font-weight: 300; letter-spacing: -.01em; font-size: clamp(34px, 5vw, 58px); margin: 0; }
+.brand-hero h1 { font-weight: 600; letter-spacing: -.01em; font-size: clamp(34px, 5vw, 58px); margin: 0; }
 .brand-hero .lead { max-width: 46ch; color: var(--ink-soft); font-size: 17px; margin: 0; }
 .brand-kenmerken { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 32px; margin: 40px 0; }
 .brand-kenmerken .item { border-top: 2px solid var(--ink); padding-top: 14px; font-size: 14.5px; color: var(--ink-soft); }

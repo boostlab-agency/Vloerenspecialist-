@@ -45,9 +45,9 @@
 @keyframes logo-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .brand-logo { animation: none; } }
 
-/* Modus B laadt een eigen logo-variant (donkere tekst + rood merkteken)
-   i.p.v. het wit+rode logo van modus A — zo blijft het rode accent altijd
-   zichtbaar, ook op het lichte glas. Zie header.js. */
+/* Beide modi gebruiken hetzelfde wit+rode logo — de hele site is nu één
+   doorlopend donker canvas, dus er is geen aparte lichte logovariant meer
+   nodig. Zie header.js. */
 
 .cta-short { display: none; }
 
@@ -95,7 +95,7 @@
 .site-header[data-mode="a"] #header-cta { background: var(--accent); color: var(--on-accent); }
 .site-header[data-mode="a"] #header-cta:hover { background: #fff; color: var(--ink); }
 .site-header[data-mode="b"] #header-cta { background: var(--accent); color: var(--on-accent); }
-.site-header[data-mode="b"] #header-cta:hover { background: var(--ink); color: var(--on-accent); }
+.site-header[data-mode="b"] #header-cta:hover { background: var(--ink); color: var(--bg); }
 
 .overlay-toggle {
   display: inline-flex; align-items: center; gap: 10px; color: #fff;
@@ -108,9 +108,10 @@
 .overlay-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* ---- Modus B: vast glaspaneel met mega-menu ----
-   Geen eigen achtergrond meer — erft het lichte glas van de basisstijl
-   (.site-header), zodat interne pagina's nooit meer een harde witte balk
-   tonen, alleen een rustig, licht doorschijnend paneel. */
+   Geen eigen achtergrond meer — erft het glas van de basisstijl (.site-header),
+   dat via --surface-rgb automatisch donker is op elke pagina (de hele site
+   is nu één doorlopend donker canvas), zodat interne pagina's nooit meer
+   een harde witte balk tonen. */
 
 .main-nav { display: flex; align-items: center; gap: 4px; }
 .main-nav > li { position: relative; }
