@@ -77,10 +77,15 @@
     splitIntoWords(el);
     var words = el.querySelectorAll(".word");
 
-    if (reduceMotion || !hasGsap || !hasST) {
+    /* Bewust óók bij prefers-reduced-motion: dit effect is alleen een
+       fade van vaag naar scherp, zonder beweging. Veel Windows-pc's hebben
+       "Animatie-effecten" uit staan, en dan zou de tekst anders nooit
+       onthullen. Alleen de lichte schaal laten we dan weg. */
+    if (!hasGsap || !hasST) {
       words.forEach(function (w) { w.classList.add("is-visible"); });
       return;
     }
+    var fromScale = reduceMotion ? 1 : .985;
 
     /* Getriggerd op de tekst zelf (niet de hele sectie), zodat de laatste
        woorden ook op een smal scherm scherp zijn zodra ze in beeld staan. */
@@ -99,7 +104,7 @@
       var pos = i * stagger;
       var isAccent = !!w.closest("strong");
       tl.fromTo(w,
-        { opacity: .08, filter: "blur(9px)", scale: .985 },
+        { opacity: .08, filter: "blur(9px)", scale: fromScale },
         { opacity: 1, filter: "blur(0px)", scale: 1, duration: fadeIn, ease: "sine.inOut" },
         pos
       );
