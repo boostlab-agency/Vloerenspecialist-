@@ -65,9 +65,8 @@
   }
 
   /* "Wie we zijn" — scroll-gekoppelde (scrubbed), cinematische focus-reveal.
-     Elk woord lost op uit een zachte blur/schaduw, komt kort scherp in
-     beeld, en vervaagt daarna weer terug — als een langzame rack-focus die
-     over de tekst trekt, niet als een cumulatieve "blijft staan"-onthulling.
+     Elk woord lost tijdens het scrollen op uit een zachte blur en blijft
+     daarna scherp staan, zodat de tekst van vaag naar leesbaar gaat.
      Bewust geen verticale beweging (geen "zwevend" gevoel): alleen
      opacity + blur + een fractie schaal geven de diepte. De nadruk-woorden
      (in <strong>) krijgen daarbovenop een kleurbeweging naar het huisstijl-
@@ -83,17 +82,18 @@
       return;
     }
 
-    var chapter = el.closest(".manifest-chapter") || el;
+    /* Getriggerd op de tekst zelf (niet de hele sectie), zodat de laatste
+       woorden ook op een smal scherm scherp zijn zodra ze in beeld staan. */
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: chapter,
-        start: "top 78%",
-        end: "top 6%",
+        trigger: el,
+        start: "top 85%",
+        end: "bottom 60%",
         scrub: 0.9
       }
     });
 
-    var stagger = .07, fadeIn = .42, hold = .22, fadeOut = .5;
+    var stagger = .07, fadeIn = .42;
 
     words.forEach(function (w, i) {
       var pos = i * stagger;
@@ -102,9 +102,6 @@
         { opacity: .08, filter: "blur(9px)", scale: .985 },
         { opacity: 1, filter: "blur(0px)", scale: 1, duration: fadeIn, ease: "sine.inOut" },
         pos
-      ).to(w,
-        { opacity: .24, filter: "blur(5px)", scale: .992, duration: fadeOut, ease: "sine.inOut" },
-        pos + fadeIn + hold
       );
       if (isAccent) {
         tl.fromTo(w,

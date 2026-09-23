@@ -200,17 +200,32 @@ html.reduced-motion .manifest-text .word { transition: none; }
   .tile-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 44px; }
 }
 
-/* ---- 03 Materiaal en ambacht ---- */
+/* ---- 03 Keuze uit behang — vijf soorten, elk met één korte regel ---- */
 .material-chapter .chapter-inner { padding: 160px 0 200px; }
-.material-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 64px; }
-.material-card { position: relative; aspect-ratio: 1/1.2; border-radius: 2px; overflow: hidden; }
-.material-card .media { position: absolute; inset: 0; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
-.material-card:hover .media { transform: scale(1.04); }
-.material-name {
-  position: absolute; left: 20px; bottom: 20px; z-index: 2; color: #fff;
-  font-family: var(--serif); font-weight: 600; font-size: clamp(19px, 1.8vw, 24px);
+.material-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 64px; }
+.material-card {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+  aspect-ratio: 1/1.35; padding: 20px; border-radius: 2px; overflow: hidden; color: #fff; text-decoration: none;
 }
-@media (max-width: 900px) { .material-grid { grid-template-columns: repeat(2, 1fr); } }
+.material-card .media { position: absolute; inset: 0; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
+/* Diepere verloop onderaan, zodat de omschrijving ook op lichte beelden leesbaar blijft. */
+.material-card .media::after { background: linear-gradient(to top, rgba(10,6,5,.85), rgba(10,6,5,.4) 38%, rgba(10,6,5,0) 65%); }
+.material-card:hover .media { transform: scale(1.04); }
+.material-name,
+.material-desc { position: relative; z-index: 2; }
+.material-name { font-family: var(--serif); font-weight: 600; font-size: clamp(19px, 1.6vw, 24px); }
+.material-desc { font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.82); }
+@media (max-width: 1100px) {
+  .material-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Vijfde kaart over de volle breedte, zodat er geen losse kaart overblijft. */
+  .material-card:last-child { grid-column: 1 / -1; aspect-ratio: 2/1.1; }
+}
+@media (max-width: 560px) {
+  .material-grid { gap: 12px; }
+  .material-card { padding: 14px; gap: 4px; }
+  .material-name { font-size: 18px; }
+  .material-desc { font-size: 13px; }
+}
 
 /* ---- 04 Signature project — beeld voert de boventoon ---- */
 .project-chapter .chapter-inner { padding: 100px 0 200px; }
