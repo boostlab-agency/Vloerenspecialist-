@@ -144,8 +144,10 @@
 
 /* ---- Linkerkolom: grote, uitgesproken categorienamen ---- */
 .overlay-cats {
-  flex: none; width: 300px; padding: 12px 8px 24px 40px;
-  display: flex; flex-direction: column; overflow-y: auto;
+  flex: none; width: 340px; padding: 12px 8px 24px 40px;
+  /* Geen horizontale scrollbalk: labels zijn zo gedimensioneerd dat ook
+     "Raamdecoratie" op één regel past. */
+  display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden;
 }
 .overlay-cat {
   display: flex; align-items: baseline; gap: 14px; text-align: left;
@@ -153,7 +155,7 @@
   transition: color .3s var(--ease), background .3s var(--ease), padding-left .3s var(--ease);
 }
 .oc-no { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; color: var(--accent-soft); opacity: 0; transition: opacity .3s var(--ease); }
-.oc-label { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.01em; }
+.oc-label { font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 1.9vw, 28px); letter-spacing: -.01em; }
 .overlay-cat:hover { color: rgba(244,238,225,.85); }
 .overlay-cat.is-active { color: #fff; background: rgba(244,238,225,.06); padding-left: 20px; }
 .overlay-cat.is-active .oc-no { opacity: 1; }
@@ -230,7 +232,7 @@
 
 @media (max-width: 1100px) {
   .overlay-shell { width: min(84vw, 900px); }
-  .overlay-cats { width: 240px; padding-left: 28px; }
+  .overlay-cats { width: 270px; padding-left: 28px; }
 }
 
 /* ---- Tablet/mobiel: kolommen worden een gestapelde, scrollbare ervaring —

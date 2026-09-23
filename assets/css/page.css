@@ -166,6 +166,9 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .info-card .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint, var(--ink-soft)); }
 .info-card .v { color: var(--ink); font-size: 15.5px; }
 .info-card .v a:hover { color: var(--accent); }
+.call-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.call-row .btn { white-space: normal; text-align: center; }
+.contact-map { min-height: 220px; margin-bottom: 14px; }
 
 /* ---- FAQ (Contact) ---- */
 .faq-list { border-top: 1px solid var(--line); }

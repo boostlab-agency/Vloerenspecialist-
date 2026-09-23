@@ -83,19 +83,28 @@
 
     function select(key) {
       cats.forEach(function (btn) {
-        var active = btn.getAttribute("data-cat") === key;
-        btn.classList.toggle("is-active", active);
-        btn.setAttribute("aria-selected", active ? "true" : "false");
+        btn.classList.toggle("is-active", btn.getAttribute("data-cat") === key);
       });
       panels.forEach(function (panel) {
         panel.classList.toggle("is-active", panel.getAttribute("data-panel") === key);
       });
     }
 
+    /* De categorieën zijn links naar hun overzichtspagina. Met muis toont
+       hover het paneel en opent een klik de pagina. Op touch (geen hover)
+       toont de eerste tik het paneel en opent een tik op de al actieve
+       categorie de pagina. */
     var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     cats.forEach(function (btn) {
       var key = btn.getAttribute("data-cat");
-      btn.addEventListener("click", function () { select(key); });
+      btn.addEventListener("click", function (e) {
+        if (!canHover && !btn.classList.contains("is-active")) {
+          e.preventDefault();
+          select(key);
+          return;
+        }
+        close();
+      });
       if (canHover) {
         btn.addEventListener("mouseenter", function () {
           window.clearTimeout(hoverTimer);

@@ -108,6 +108,34 @@ main { display: block; }
 
 .btn-sm { padding: 10px 18px; font-size: 13.5px; }
 
+/* Belknop: duidelijk herkenbaar als "hier bel je" (icoon + nummer). */
+.btn-call { border-color: rgba(244,238,225,.28); color: var(--ink); }
+.btn-call:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-call svg { flex: none; }
+
+/* Google Maps-kaartje in de donkere huisstijl: de standaardkaart wordt via
+   een filter omgekeerd naar donker en licht warm getint. De hele kaart is
+   één link naar de routeplanner (de iframe zelf vangt geen klikken). */
+.map-embed {
+  position: relative; display: block; overflow: hidden; border-radius: 12px;
+  min-height: 170px; background: #1e1512; border: 1px solid rgba(244,238,225,.1);
+}
+.map-embed iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none;
+  filter: invert(.9) hue-rotate(180deg) sepia(.35) saturate(.7) brightness(.9) contrast(.95);
+}
+.map-embed::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(20,13,11,.85), rgba(20,13,11,0) 55%);
+}
+.map-cap {
+  position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 3;
+  display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #f4eee1;
+}
+.map-cap .arrow { transition: transform .25s var(--ease); }
+.map-embed:hover .map-cap { color: var(--accent); }
+.map-embed:hover .map-cap .arrow { transform: translateX(4px); }
+
 /* ---------- Kaarten & placeholders ---------- */
 .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);

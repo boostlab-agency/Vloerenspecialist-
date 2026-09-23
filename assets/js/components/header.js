@@ -115,7 +115,7 @@
     },
     {
       key: "showroom", label: "Showroom", href: "/showroom.html", type: "simple",
-      media: { src: "/assets/img/showroom.png", label: "" },
+      media: { src: img("https://images.unsplash.com/photo-1680503146454-0fe569cef4eb", 1200), label: "" },
       pitch: "1.800 m² complete woonopstellingen, 62+ merken en persoonlijk advies zonder verkooppraatjes.",
       cta: { label: "Plan showroombezoek", href: "/showroom.html" }
     },
@@ -137,11 +137,14 @@
 
   function renderCats() {
     return PANELS.map(function (p, i) {
+      /* Echte link naar de overzichtspagina: hover (muis) toont het paneel,
+         klikken opent de pagina. Op touch opent de eerste tik het paneel,
+         een tweede tik de pagina (zie nav.js). */
       return (
-        '<button class="overlay-cat' + (i === 0 ? " is-active" : "") + '" data-cat="' + p.key + '" role="tab" aria-selected="' + (i === 0 ? "true" : "false") + '">' +
+        '<a class="overlay-cat' + (i === 0 ? " is-active" : "") + '" href="' + p.href + '" data-cat="' + p.key + '">' +
           '<span class="oc-no">' + String(i + 1).padStart(2, "0") + "</span>" +
           '<span class="oc-label">' + p.label + "</span>" +
-        "</button>"
+        "</a>"
       );
     }).join("");
   }
@@ -232,7 +235,7 @@
         '<div class="overlay-shell">' +
           '<button class="overlay-close" id="overlay-close" aria-label="Sluit menu">' + ICONS.close + "</button>" +
           '<div class="overlay-body">' +
-            '<div class="overlay-cats" id="overlay-cats" role="tablist" aria-label="Categorieën">' + renderCats() + "</div>" +
+            '<div class="overlay-cats" id="overlay-cats" aria-label="Categorieën">' + renderCats() + "</div>" +
             '<div class="overlay-panels" id="overlay-panels">' + renderPanels() + "</div>" +
           "</div>" +
           '<div class="overlay-foot">' +
