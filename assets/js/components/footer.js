@@ -41,19 +41,22 @@
                 '<li><a href="/vloeren/pvc.html">PVC vloeren</a></li>' +
                 '<li><a href="/vloeren/hout.html">Houten vloeren</a></li>' +
                 '<li><a href="/vloeren/laminaat.html">Laminaat</a></li>' +
-                '<li><a href="/vloeren/visgraat.html">Visgraat</a></li>' +
-                '<li><a href="/vloeren/tapijt.html">Tapijt</a></li>' +
+                '<li><a href="/vloeren/tegelvloer.html">Tegelvloer</a></li>' +
+                '<li><a href="/vloeren/vloerbedekking.html">Vloerbedekking</a></li>' +
+                '<li><a href="/vloeren/gietvloer.html">Gietvloer</a></li>' +
+                '<li><a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloer</a></li>' +
                 '<li><a href="/merken/index.html">Alle merken</a></li>' +
               "</ul>" +
             "</div>" +
             '<div class="footer-col">' +
-              "<h4>Merk</h4>" +
+              "<h4>Assortiment</h4>" +
               "<ul>" +
-                '<li><a href="/interieur/index.html">Interieur</a></li>' +
-                '<li><a href="/inspiratie/projecten.html">Inspiratie</a></li>' +
-                '<li><a href="/journal/index.html">Journal</a></li>' +
+                '<li><a href="/interieur/index.html">Interieur op maat</a></li>' +
+                '<li><a href="/interieur/behang.html">Behang</a></li>' +
+                '<li><a href="/interieur/raamdecoratie.html">Raamdecoratie</a></li>' +
+                '<li><a href="/showroom.html">Showroom</a></li>' +
+                '<li><a href="/inspiratie/projecten.html">Projecten</a></li>' +
                 '<li><a href="/over-ons/index.html">Over ons</a></li>' +
-                '<li><a href="/over-ons/index.html#werkwijze">Werkwijze</a></li>' +
               "</ul>" +
             "</div>" +
             '<div class="footer-col footer-showroom">' +

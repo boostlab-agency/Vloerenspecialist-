@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Journal-overzicht — zoeken + categoriefilter, puur client-side.
-   Alleen actief op /journal/index.html (aanwezigheid van .journal-toolbar).
+   Zoeken + categoriefilter voor kaartoverzichten, puur client-side.
+   Gebruikt op /merken/index.html; alleen actief als .journal-toolbar bestaat.
    ========================================================================== */
 (function () {
   "use strict";

@@ -76,6 +76,8 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .page-section { padding: 132px 0; }
 .page-section.is-tight { padding: 72px 0; }
 .page-section.is-alt { background: var(--surface); }
+/* Secties waar het menu naartoe linkt (bv. #kasten): niet onder de vaste header laten vallen. */
+.page-section[id] { scroll-margin-top: var(--header-h); }
 .page-section-head { max-width: 62ch; margin-bottom: 48px; }
 .page-section-head h2 { font-weight: 600; letter-spacing: -.01em; font-size: clamp(28px, 3.2vw, 42px); margin-bottom: 16px; text-wrap: balance; }
 .page-section-head .lead { color: var(--ink-soft); font-size: 17px; }

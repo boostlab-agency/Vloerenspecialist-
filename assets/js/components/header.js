@@ -26,6 +26,10 @@
      "simple" categorieën (Showroom, Over ons, Contact) tonen één groot
      beeld met een korte pitch en CTA — zo oogt elk paneel altijd gevuld,
      nooit als een lege dropdown. */
+  /* Indeling volgt het assortiment van de bestaande website: vier
+     categorieën (Vloeren, Interieur op maat, Behang, Raamdecoratie).
+     Vloeren heeft per type een eigen pagina; bij de andere drie verwijzen
+     de sublinks naar een sectie op één overzichtspagina. */
   var PANELS = [
     {
       key: "vloeren", label: "Vloeren", href: "/vloeren/index.html", type: "rich",
@@ -37,8 +41,10 @@
             { label: "PVC vloeren", href: "/vloeren/pvc.html", img: img("https://images.unsplash.com/photo-1716315325541-776e39f9725f", 160) },
             { label: "Houten vloeren", href: "/vloeren/hout.html", img: img("https://images.unsplash.com/photo-1772797583328-f83bc3f94f80", 160) },
             { label: "Laminaat", href: "/vloeren/laminaat.html", img: img("https://images.unsplash.com/photo-1560184897-1ee3713708ee", 160) },
-            { label: "Visgraat", href: "/vloeren/visgraat.html", img: img("https://images.unsplash.com/photo-1607403219525-6c60fa4f20fa", 160) },
-            { label: "Tapijt", href: "/vloeren/tapijt.html", img: img("https://images.unsplash.com/photo-1636716018960-eb737dccb185", 160) }
+            { label: "Tegelvloer", href: "/vloeren/tegelvloer.html", img: img("https://images.unsplash.com/photo-1708540084677-dc5838b37627", 160) },
+            { label: "Vloerbedekking", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1770941633927-b7a15557e0e1", 160) },
+            { label: "Gietvloer", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1765728614529-4749706523d9", 160) },
+            { label: "Hybride houtenvloer", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef", 160) }
           ]
         },
         {
@@ -48,35 +54,61 @@
             { label: "Belakos", href: "/merken/belakos.html" },
             { label: "Moduleo", href: "/merken/moduleo.html" },
             { label: "COREtec", href: "/merken/coretec.html" },
-            { label: "Alle 62+ merken", href: "/merken/index.html", more: true }
+            { label: "Alle merken", href: "/merken/index.html", more: true }
           ]
         }
       ]
     },
     {
-      key: "interieur", label: "Interieur", href: "/interieur/index.html", type: "rich",
-      media: { src: img("https://images.unsplash.com/photo-1717429541792-5c59021d6ceb", 900), label: "Heel interieur bekijken", href: "/interieur/index.html" },
+      key: "interieur", label: "Interieur op maat", href: "/interieur/index.html", type: "rich",
+      media: { src: img("https://images.unsplash.com/photo-1717429541792-5c59021d6ceb", 900), label: "Interieur op maat bekijken", href: "/interieur/index.html" },
       groups: [
         {
-          title: "Disciplines",
+          title: "Keuze uit interieur op maat",
           links: [
-            { label: "Kasten op maat", href: "/interieur/kasten-op-maat.html", img: img("https://images.unsplash.com/photo-1717429541792-5c59021d6ceb", 160) },
-            { label: "Behang", href: "/interieur/behang.html", img: img("https://images.unsplash.com/photo-1787920990191-ef4618d03298", 160) },
-            { label: "Raamdecoratie", href: "/interieur/raamdecoratie.html", img: "/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" },
-            { label: "Renostuc", href: "/interieur/renostuc.html", img: img("https://images.unsplash.com/photo-1787145879056-d02365c5b911", 160) }
+            { label: "Kasten op maat", href: "/interieur/index.html#kasten", img: "/assets/img/real/kasten-garderobe-900.jpg" },
+            { label: "Deuren en wanden op maat", href: "/interieur/index.html#deuren-wanden", img: img("https://images.unsplash.com/photo-1721742151032-e0c159fe5097", 160) },
+            { label: "Meubels op maat", href: "/interieur/index.html#meubels", img: img("https://images.unsplash.com/photo-1781032392300-ed3bdf78ef4c", 160) }
           ]
         }
       ]
     },
     {
-      key: "inspiratie", label: "Inspiratie", href: "/inspiratie/projecten.html", type: "rich",
-      media: { src: "/assets/img/real/visgraat-kastenwand-1800.jpg", label: "Naar de projecten", href: "/inspiratie/projecten.html" },
+      key: "behang", label: "Behang", href: "/interieur/behang.html", type: "rich",
+      media: { src: "/assets/img/real/behang-woonkamer-900.jpg", label: "Alle behang bekijken", href: "/interieur/behang.html" },
       groups: [
         {
-          title: "Ontdek",
+          title: "Keuze uit behang",
           links: [
-            { label: "Journal — advies & achtergrond", href: "/journal/index.html", img: img("https://images.unsplash.com/photo-1772442364639-20fe5e5438a1", 160) },
-            { label: "Projecten — echte interieurs", href: "/inspiratie/projecten.html", img: "/assets/img/real/tapijt-pouf-1-1800.jpg" }
+            { label: "Fotobehang", href: "/interieur/behang.html#fotobehang", img: img("https://images.unsplash.com/photo-1759774313806-7c564f3bd592", 160) },
+            { label: "Papierbehang", href: "/interieur/behang.html#papierbehang", img: img("https://images.unsplash.com/photo-1783403716758-27e30a7976ca", 160) },
+            { label: "Vinylbehang", href: "/interieur/behang.html#vinylbehang", img: "/assets/img/real/behang-woonkamer-900.jpg" },
+            { label: "Vliesbehang", href: "/interieur/behang.html#vliesbehang", img: img("https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", 160) },
+            { label: "Renostuc", href: "/interieur/behang.html#renostuc", img: "/assets/img/real/renostuc-bedroom-sage-1600.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "raamdecoratie", label: "Raamdecoratie", href: "/interieur/raamdecoratie.html", type: "rich",
+      media: { src: "/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg", label: "Alle raamdecoratie bekijken", href: "/interieur/raamdecoratie.html" },
+      groups: [
+        {
+          title: "Keuze uit raamdecoratie",
+          links: [
+            { label: "Jaloezieën", href: "/interieur/raamdecoratie.html#jaloezieen", img: img("https://images.unsplash.com/photo-1609534117141-ff9f20450902", 160) },
+            { label: "Rolgordijnen", href: "/interieur/raamdecoratie.html#rolgordijnen", img: img("https://images.unsplash.com/photo-1776261293170-66fd3b09273e", 160) },
+            { label: "Plisségordijnen", href: "/interieur/raamdecoratie.html#plissegordijnen", img: img("https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", 160) },
+            { label: "Vouwgordijnen", href: "/interieur/raamdecoratie.html#vouwgordijnen", img: img("https://images.unsplash.com/photo-1779078652928-6d941878d32e", 160) }
+          ]
+        },
+        {
+          title: "Merken",
+          links: [
+            { label: "KeJe", href: "/merken/keje.html" },
+            { label: "Lifestyle gordijnen", href: "/merken/lifestyle-gordijnen.html" },
+            { label: "Mart Visser", href: "/merken/mart-visser.html" },
+            { label: "Eijffinger", href: "/merken/eijffinger.html" }
           ]
         }
       ]
@@ -90,8 +122,9 @@
     {
       key: "over-ons", label: "Over ons", href: "/over-ons/index.html", type: "simple",
       media: { src: "/assets/img/real/gordijn-wit-sculptuur-1800.jpg", label: "" },
-      pitch: "Nog steeds een vloerenzaak in hart en nieren — inmiddels ook uw adres voor kasten op maat, behang, raamdecoratie en Renostuc.",
-      cta: { label: "Ons verhaal & werkwijze", href: "/over-ons/index.html" }
+      pitch: "Nog steeds een vloerenzaak in hart en nieren — inmiddels ook uw adres voor interieur op maat, behang en raamdecoratie.",
+      cta: { label: "Ons verhaal", href: "/over-ons/index.html" },
+      ctaSecondary: { label: "Bekijk projecten", href: "/inspiratie/projecten.html" }
     },
     {
       key: "contact", label: "Contact", href: "/contact.html", type: "simple",
@@ -134,7 +167,7 @@
       );
     }).join("");
     return (
-      '<div class="op-groups">' + groups + "</div>" +
+      '<div class="op-groups' + (p.groups.length > 1 ? " is-split" : "") + '">' + groups + "</div>" +
       '<a class="op-media" href="' + p.media.href + '">' +
         '<img src="' + p.media.src + '" alt="" loading="lazy">' +
         '<span class="op-media-cap">' + p.media.label + " " + ICONS.arrow + "</span>" +

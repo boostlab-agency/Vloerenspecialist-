@@ -170,6 +170,10 @@
 .overlay-panel.is-active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
 
 .op-groups { flex: 1.15; display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+/* Types + merken naast elkaar, zodat lange lijsten (Vloeren) niet onder de vouw verdwijnen. */
+.op-groups.is-split { flex: 1.9; flex-direction: row; gap: 24px; }
+.op-groups.is-split .op-group:first-child { flex: 1.5; min-width: 0; }
+.op-groups.is-split .op-group:not(:first-child) { flex: 1; min-width: 0; }
 .op-group-title {
   font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent-soft); margin-bottom: 12px;
@@ -254,6 +258,7 @@
     flex-direction: column; gap: 24px; pointer-events: auto;
   }
   .overlay-panel.is-active { display: flex; }
+  .op-groups.is-split { flex-direction: column; gap: 28px; }
   .op-media, .op-hero { min-height: 170px; }
   .op-link { font-size: 16px; }
   .op-hero-copy p { font-size: 17px; }

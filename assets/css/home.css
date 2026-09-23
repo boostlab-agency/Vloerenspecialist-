@@ -158,17 +158,18 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 html.reduced-motion .manifest-text .word { opacity: 1; filter: none; transform: none; }
 html.reduced-motion .manifest-text .word { transition: none; }
 
-/* ---- 02 Disciplines — Premium tegeloverzicht ----
-   Rustiger dan de hero: vijf grote, klikbare tegels. Geen scroll-hijacking,
-   geen pinning, geen storytelling — alleen een zachte fade-in bij scroll
-   en een subtiele hover (beeld-zoom + tekst-lift). */
+/* ---- 02 Assortiment — Premium tegeloverzicht ----
+   Rustiger dan de hero: vier staande, klikbare tegels — dezelfde vier
+   categorieën als het menu (Vloeren, Interieur op maat, Behang,
+   Raamdecoratie). Alleen een zachte fade-in bij scroll en een subtiele
+   hover (beeld-zoom + tekst-lift). */
 .disciplines-chapter .chapter-inner { padding: 140px 0 160px; }
 .disciplines-chapter .lead { max-width: 54ch; }
 
-.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 28px; margin-top: 64px; }
+.tile-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 24px; margin-top: 64px; }
 
 .tile { position: relative; display: block; color: inherit; }
-.tile-media { aspect-ratio: 5/4; border-radius: 2px; }
+.tile-media { aspect-ratio: 4/5; border-radius: 2px; }
 .tile-media img { transition: transform 1.1s cubic-bezier(.16,.8,.24,1); }
 .tile:hover .tile-media img,
 .tile:focus-visible .tile-media img { transform: scale(1.045); }
@@ -192,7 +193,7 @@ html.reduced-motion .manifest-text .word { transition: none; }
 .tile:hover .tile-link .arrow,
 .tile:focus-visible .tile-link .arrow { transform: translateX(4px); }
 
-@media (max-width: 1100px) { .tile-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) { .tile-grid { grid-template-columns: repeat(2, 1fr); } .tile-media { aspect-ratio: 5/4; } }
 @media (max-width: 900px) {
   .disciplines-chapter .chapter-inner { padding: 100px 0 120px; }
 }
