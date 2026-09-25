@@ -30,9 +30,12 @@
               '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
               "<p>Het interieurmerk van Tilburg, met de showroom als hart. Vier disciplines, één team, één standaard.</p>" +
               '<div class="footer-social">' +
-                '<a href="#" aria-label="Instagram">IG</a>' +
-                '<a href="#" aria-label="Pinterest">PI</a>' +
-                '<a href="#" aria-label="LinkedIn">LI</a>' +
+                '<a href="https://www.instagram.com/vloerenspecialisttilburg/" target="_blank" rel="noopener" aria-label="Instagram">' +
+                  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>' +
+                "</a>" +
+                '<a href="https://www.facebook.com/p/Vloerenspecialist-Tilburg-61574414801570/" target="_blank" rel="noopener" aria-label="Facebook">' +
+                  '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.87.25-1.46 1.5-1.46h1.55V4.46A20.6 20.6 0 0 0 14.3 4.3c-2.23 0-3.76 1.36-3.76 3.86v2.34H8v3h2.54V21h2.96z"/></svg>' +
+                "</a>" +
               "</div>" +
             "</div>" +
             '<div class="footer-col">' +

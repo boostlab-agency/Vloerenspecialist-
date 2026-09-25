@@ -45,11 +45,11 @@
 
 .brand { display: flex; align-items: center; min-width: 0; flex: none; }
 .brand-logo {
-  display: block; height: 40px; width: auto;
+  display: block; height: 52px; width: auto;
   animation: logo-in .9s cubic-bezier(.16,.8,.24,1) both; animation-delay: .15s;
   transition: height .45s var(--ease);
 }
-.site-header.is-scrolled .brand-logo { height: 33px; }
+.site-header.is-scrolled .brand-logo { height: 44px; }
 @keyframes logo-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .brand-logo { animation: none; } }
 
@@ -305,16 +305,17 @@
 .drawer-empty p { font-size: 14.5px; }
 .drawer-foot { padding: 20px 24px; border-top: 1px solid var(--line); }
 
-/* Smalle telefoons: header-inhoud verdicht zodat niets overloopt. Zoeken en
-   verlanglijst wijken op dit formaat — logo, CTA en menu blijven prioriteit;
-   zoeken/verlanglijst staan een klik verder via het volledige menu. */
+/* Smalle telefoons: header-inhoud verdicht zodat niets overloopt. Zoeken
+   wijkt op dit formaat — logo, CTA en menu blijven prioriteit; het logo
+   mag krimpen (object-fit) als de ruimte echt op is. */
 @media (max-width: 640px) {
   .wrap { padding: 0 14px; gap: 8px; }
   .header-utility { gap: 2px; }
-  .brand-logo { height: 30px; }
-  .site-header.is-scrolled .brand-logo { height: 26px; }
+  .brand { flex: 0 1 auto; min-width: 0; }
+  .brand-logo { height: 34px; max-width: 100%; object-fit: contain; object-position: left center; }
+  .site-header.is-scrolled .brand-logo { height: 30px; }
   .header-progress { display: none; }
-  #search-toggle, #wishlist-toggle { display: none; }
+  #search-toggle { display: none; }
   #header-cta { padding: 9px 12px; font-size: 12px; }
   .cta-full { display: none; }
   .cta-short { display: inline; }

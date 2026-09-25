@@ -23,6 +23,9 @@
    ========================================================================== */
 (function () {
   "use strict";
+  /* Nooit twee keer opstarten (bijv. als header.js de tool ook laadt). */
+  if (window.__dvsFeedbackMode) return;
+  window.__dvsFeedbackMode = true;
   var SUPABASE_URL = "https://wxpyvoisvmtrclztgdrk.supabase.co";
   var SUPABASE_KEY = "sb_publishable_sfXqpISGr8lwpIeZxWfELg_KVHCi5mX";
   var TABLE = "feedback_items";

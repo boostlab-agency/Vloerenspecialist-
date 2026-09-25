@@ -18,7 +18,7 @@
 .footer-brand p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; max-width: 32ch; }
 .footer-social { display: flex; gap: 10px; margin-top: 24px; }
 .footer-social a {
-  width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 999px;
+  width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 999px;
   display: flex; align-items: center; justify-content: center; color: var(--ink-soft);
   transition: color .2s, border-color .2s;
 }

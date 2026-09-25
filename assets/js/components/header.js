@@ -1,6 +1,6 @@
 /* ==========================================================================
    Header-component — één ontwerp, overal identiek (homepage én subpagina's):
-   logo, twee utility-iconen, CTA en een menuknop die een premium split-panel
+   logo, zoekicoon, CTA en een menuknop die een premium split-panel
    navigatie-ervaring opent (categorieën links, bijbehorende content rechts,
    glas + blur), in plaats van een eenvoudige lijst of klassieke dropdowns.
    Wordt synchroon geïnjecteerd (script met defer, dus DOM al geparsed).
@@ -11,7 +11,6 @@
 
   var ICONS = {
     search: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
-    heart: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2 4.5 5.6 4c2-.3 3.7.7 4.9 2.3.2.3.7.3.9 0C12.7 4.7 14.4 3.7 16.4 4 20 4.5 21.5 8 20 11.7 17.5 16.4 12 21 12 21z"/></svg>',
     close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>',
     arrow: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
   };
@@ -115,7 +114,7 @@
     },
     {
       key: "showroom", label: "Showroom", href: "/showroom.html", type: "simple",
-      media: { src: img("https://images.unsplash.com/photo-1680503146454-0fe569cef4eb", 1200), label: "" },
+      media: { src: "/assets/img/real/showroom-gevel-1800.jpg", label: "" },
       pitch: "1.800 m² complete woonopstellingen, 62+ merken en persoonlijk advies zonder verkooppraatjes.",
       cta: { label: "Plan showroombezoek", href: "/showroom.html" }
     },
@@ -212,7 +211,6 @@
           '<div class="header-utility">' +
             '<span class="header-progress" id="scroll-progress" aria-hidden="true">00%</span>' +
             '<button class="icon-btn" id="search-toggle" aria-expanded="false" aria-label="Zoeken">' + ICONS.search + "</button>" +
-            '<button class="icon-btn" id="wishlist-toggle" aria-label="Verlanglijst">' + ICONS.heart + '<span class="count" id="wishlist-count" hidden>0</span></button>' +
             '<a class="btn btn-sm" href="/showroom.html" id="header-cta"><span class="cta-full">Plan showroombezoek</span><span class="cta-short">Bezoek plannen</span></a>' +
             '<button class="overlay-toggle" id="overlay-toggle" aria-expanded="false" aria-controls="overlay-nav"><span class="bars"><span></span><span></span><span></span></span><span class="ov-label">Menu</span></button>' +
           "</div>" +
@@ -244,14 +242,7 @@
             '<a href="tel:+31135368598">013 - 536 85 98</a>' +
           "</div>" +
         "</div>" +
-      "</nav>" +
-
-      '<div class="drawer-scrim" id="wishlist-scrim"></div>' +
-      '<aside class="drawer" id="wishlist-drawer" aria-label="Verlanglijst">' +
-        '<div class="drawer-head"><h3>Verlanglijst</h3><button class="icon-btn" id="wishlist-close" aria-label="Sluit verlanglijst">' + ICONS.close + "</button></div>" +
-        '<div class="drawer-body" id="wishlist-body"></div>' +
-        '<div class="drawer-foot"><a class="btn btn-outline" style="width:100%" href="/showroom.html">Neem je verlanglijst mee naar de showroom</a></div>' +
-      "</aside>"
+      "</nav>"
     );
   }
 
@@ -262,6 +253,30 @@
   }
 
   mount();
+
+  /* Feedbacktool overal beschikbaar: elke pagina laadt deze header, dus
+     hier zorgen we dat ook de feedbackmodus (en de Supabase-client waar die
+     op leunt) geladen wordt — ook op toekomstige pagina's waar de losse
+     <script>-tags vergeten zijn. Staan ze er al, dan gebeurt er niets. */
+  function ensureFeedbackTool() {
+    if (document.querySelector('script[src*="feedback-mode.js"]')) return;
+    if (!document.querySelector('link[href*="feedback-mode.css"]')) {
+      var css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "/assets/css/feedback-mode.css";
+      document.head.appendChild(css);
+    }
+    function loadScript(src, onload) {
+      var s = document.createElement("script");
+      s.src = src;
+      if (onload) s.onload = onload;
+      document.head.appendChild(s);
+    }
+    function loadFeedback() { loadScript("/assets/js/modules/feedback-mode.js"); }
+    if (typeof window.supabase !== "undefined") loadFeedback();
+    else loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js", loadFeedback);
+  }
+  ensureFeedbackTool();
 
   DVS.header = {
     isHome: document.body.getAttribute("data-page") === "home",
