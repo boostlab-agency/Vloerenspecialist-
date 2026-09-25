@@ -140,7 +140,8 @@ main { display: block; }
   padding: 11px 14px; border-radius: 10px; font-size: 14.5px; color: var(--ink-soft);
 }
 .open-week-row + .open-week-row { margin-top: 2px; }
-.open-week-row .t { font-variant-numeric: tabular-nums; }
+.open-week-row .t { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.open-week-row .d { white-space: nowrap; }
 .open-week-row.is-today { background: rgba(244,238,225,.06); color: var(--ink); font-weight: 600; }
 .open-week-row.is-today .d::after {
   content: "Vandaag"; margin-left: 10px; padding: 2px 8px; border-radius: 999px;

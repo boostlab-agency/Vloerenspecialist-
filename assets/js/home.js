@@ -198,49 +198,6 @@
     });
   }
 
-  /* Toont welke dag "vandaag" is en of de showroom nu open is — puur op
-     basis van de lokale klok van de bezoeker (de showroom zit in Tilburg,
-     dus geen tijdzone-gedoe nodig). Schema: ma–vr 09:00–17:00, za
-     09:00–15:00, zo dicht. Bij twijfel (bv. geen JS) blijft de lijst met
-     tijden gewoon leesbaar staan, alleen zonder live-indicator. */
-  function initShowroomHours() {
-    var rows = document.querySelectorAll(".hours-row");
-    var statusEl = document.getElementById("hours-status");
-    if (!rows.length || !statusEl) return;
-
-    var DAY_NAMES = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
-    var SCHEDULE = { 0: null, 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: [9, 15] };
-
-    var now = new Date();
-    var today = now.getDay();
-    var minutesNow = now.getHours() * 60 + now.getMinutes();
-
-    rows.forEach(function (row) {
-      var days = (row.getAttribute("data-days") || "").split(",").map(function (d) { return parseInt(d, 10); });
-      if (days.indexOf(today) !== -1) row.classList.add("is-today");
-    });
-
-    function fmt(h) { return (h < 10 ? "0" : "") + h + ":00"; }
-
-    var todayHours = SCHEDULE[today];
-    if (todayHours && minutesNow >= todayHours[0] * 60 && minutesNow < todayHours[1] * 60) {
-      statusEl.textContent = "Nu geopend — sluit om " + fmt(todayHours[1]);
-      return;
-    }
-
-    // Gesloten: zoek de eerstvolgende dag (of vandaag, vóór openingstijd) met openingsuren.
-    for (var i = 0; i <= 7; i++) {
-      var d = (today + i) % 7;
-      var hours = SCHEDULE[d];
-      if (!hours) continue;
-      if (i === 0 && minutesNow >= hours[1] * 60) continue; // vandaag al voorbij
-      var when = i === 0 ? "om " + fmt(hours[0]) : (i === 1 ? "morgen om " + fmt(hours[0]) : DAY_NAMES[d] + " om " + fmt(hours[0]));
-      statusEl.textContent = "Nu gesloten — opent " + when;
-      return;
-    }
-    statusEl.textContent = "Nu gesloten";
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
@@ -250,6 +207,5 @@
     initMediaParallax();
     initMediaBreathe();
     initMagnetic();
-    initShowroomHours();
   });
 })();

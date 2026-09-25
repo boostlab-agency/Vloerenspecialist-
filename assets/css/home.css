@@ -278,22 +278,20 @@ html.reduced-motion .manifest-text .word { transition: none; }
   .stat + .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--hp-line); padding-top: 22px; }
 }
 
-/* ---- Showroom: openingstijden + contact, als rustige kaarten i.p.v. een
-   platte lijst — met een live "nu geopend/gesloten"-indicator (home.js). */
+/* ---- Showroom: live openingsstatus + weekrooster en kaart als rustige
+   kaarten. De pil onder de eyebrow en het rooster komen uit
+   open-status.js — dezelfde live weergave als op de showroompagina. */
+.showroom-live { margin: 2px 0 22px; }
 .showroom-info { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
 .showroom-hours,
 .showroom-contact {
   flex: 1 1 220px; background: rgba(244,238,225,.04); border: 1px solid var(--hp-line);
   border-radius: 14px; padding: 20px 22px;
 }
-.hours-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 14px; color: var(--hp-ink-soft); }
-.hours-row + .hours-row { border-top: 1px solid var(--hp-line); }
-.hours-row.is-today { color: var(--hp-ink); }
-.hours-row.is-today .hours-days { font-weight: 600; }
-.hours-row.is-today .hours-days::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--hp-accent); margin-right: 8px; }
-.hours-time { font-variant-numeric: tabular-nums; }
-.hours-status { margin: 12px 0 0; font-size: 12.5px; font-weight: 600; color: var(--hp-accent); }
-.hours-extra { margin: 4px 0 0; font-size: 12px; color: var(--hp-ink-soft); }
+.showroom-hours { padding: 12px; }
+.showroom-hours .open-week-row { padding: 7px 10px; font-size: 13.5px; gap: 8px; }
+.showroom-hours .open-week-row.is-today .d::after { margin-left: 6px; padding: 1px 6px; font-size: 9.5px; }
+.hours-extra { margin: 8px 10px 2px; font-size: 12px; color: var(--hp-ink-soft); }
 /* Kaart + belknop in plaats van platte adres- en telefoonregels. */
 .showroom-contact { display: flex; flex-direction: column; gap: 12px; padding: 12px; }
 .showroom-contact .map-embed { flex: 1; }

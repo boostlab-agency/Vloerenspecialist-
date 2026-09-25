@@ -30,6 +30,7 @@
 <script src="assets/js/modules/review-mode.js" defer></script>
 <script src="assets/js/modules/feedback-mode.js" defer></script>
 <script src="assets/js/modules/nav.js" defer></script>
+<script src="assets/js/modules/open-status.js" defer></script>
 <script src="assets/js/home.js" defer></script>
 </head>
 <body data-page="home">
@@ -232,6 +233,7 @@
           <div class="media showroom-media reveal"><img src="/assets/img/real/showroom-gevel-1800.jpg" alt="Gevel van de showroom met grote glazen etalage" loading="lazy"></div>
           <div class="showroom-copy reveal">
             <p class="eyebrow">06 — De showroom</p>
+            <span class="showroom-live" data-open-status></span>
             <h2>1.800 m² om te zien, te voelen en te ervaren.</h2>
             <p class="lead">Complete woonopstellingen, persoonlijk advies zonder verkooppraatjes, gratis levering in heel Noord-Brabant, en koffie terwijl u rondkijkt.</p>
             <div class="stat-row">
@@ -241,10 +243,7 @@
             </div>
             <div class="showroom-info">
               <div class="showroom-hours" id="showroom-hours">
-                <div class="hours-row" data-days="1,2,3,4,5"><span class="hours-days">Maandag – vrijdag</span><span class="hours-time">09:00 – 17:00</span></div>
-                <div class="hours-row" data-days="6"><span class="hours-days">Zaterdag</span><span class="hours-time">09:00 – 15:00</span></div>
-                <div class="hours-row" data-days="0"><span class="hours-days">Zondag</span><span class="hours-time">Gesloten</span></div>
-                <p class="hours-status" id="hours-status"></p>
+                <div data-open-week></div>
                 <p class="hours-extra">Op afspraak ook buiten openingstijden.</p>
               </div>
               <div class="showroom-contact">

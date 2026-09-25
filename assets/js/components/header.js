@@ -206,6 +206,64 @@
     }).join("");
   }
 
+  /* ---- Telefoonmenu: eigen, eenvoudiger ontwerp (alleen ≤860px) ----
+     Eén kolom met grote, duidelijke rijen. Categorieën met onderdelen
+     klappen open (accordeon, één tegelijk); Showroom/Over ons/Contact
+     linken direct. Onderaan snelle acties: plannen, bellen, WhatsApp,
+     route — de dingen die je op je telefoon het vaakst wilt. */
+  var M_ICONS = {
+    phone: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
+    whatsapp: '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>',
+    pin: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+    plus: '<svg class="m-cat-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'
+  };
+
+  function renderMobileNav() {
+    var here = window.location.pathname;
+    var cats = PANELS.map(function (p) {
+      var current = here === p.href || (p.key === "vloeren" && here.indexOf("/vloeren/") === 0);
+      if (p.type !== "rich") {
+        return '<a class="m-cat m-cat-link' + (current ? " is-current" : "") + '" href="' + p.href + '"><span>' + p.label + "</span>" + ICONS.arrow + "</a>";
+      }
+      var groups = p.groups.map(function (g) {
+        var isBrands = !g.links.some(function (l) { return l.img; });
+        var links = g.links.map(function (l) {
+          if (isBrands) return '<a class="m-chip' + (l.more ? " is-more" : "") + '" href="' + l.href + '">' + l.label + "</a>";
+          return '<a class="m-sub-link" href="' + l.href + '">' +
+            (l.img ? '<span class="m-thumb"><img src="' + l.img + '" alt="" loading="lazy"></span>' : "") +
+            "<span>" + l.label + "</span></a>";
+        }).join("");
+        return '<p class="m-group-title">' + g.title + "</p>" +
+          '<div class="' + (isBrands ? "m-chips" : "m-sub-list") + '">' + links + "</div>";
+      }).join("");
+      return (
+        '<details class="m-cat m-cat-acc' + (current ? " is-current" : "") + '">' +
+          "<summary><span>" + p.label + "</span>" + M_ICONS.plus + "</summary>" +
+          '<div class="m-sub">' +
+            '<a class="m-all" href="' + p.href + '">Bekijk alles over ' + p.label.toLowerCase() + " " + ICONS.arrow + "</a>" +
+            groups +
+          "</div>" +
+        "</details>"
+      );
+    }).join("");
+
+    return (
+      '<div class="m-nav">' +
+        '<span class="m-status" data-open-status></span>' +
+        '<div class="m-cats">' + cats + "</div>" +
+        '<div class="m-actions">' +
+          '<a class="btn btn-primary m-plan" href="/showroom.html">Plan showroombezoek</a>' +
+          '<div class="m-quick">' +
+            '<a href="tel:+31135368598">' + M_ICONS.phone + "<span>Bellen</span></a>" +
+            '<a href="https://wa.me/31135368598" target="_blank" rel="noopener">' + M_ICONS.whatsapp + "<span>WhatsApp</span></a>" +
+            '<a href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">' + M_ICONS.pin + "<span>Route</span></a>" +
+          "</div>" +
+          '<p class="m-address">Jules Verneweg 7a, Tilburg<br>Ma–vr 09:00–17:00 · Za 09:00–15:00</p>' +
+        "</div>" +
+      "</div>"
+    );
+  }
+
   function headerTemplate() {
     return (
       '<header class="site-header" data-review-id="header" data-review-label="Header">' +
@@ -240,6 +298,7 @@
             '<div class="overlay-cats" id="overlay-cats" aria-label="Categorieën">' + renderCats() + "</div>" +
             '<div class="overlay-panels" id="overlay-panels">' + renderPanels() + "</div>" +
           "</div>" +
+          renderMobileNav() +
           '<div class="overlay-foot">' +
             "<span>Jules Verneweg 7a, 5015 BD Tilburg</span>" +
             "<span>Ma–vr 09:00–17:00 · Za 09:00–15:00 · Zo gesloten</span>" +
@@ -281,6 +340,14 @@
     else loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js", loadFeedback);
   }
   ensureFeedbackTool();
+
+  /* De live openingsstatus in het telefoonmenu heeft open-status.js nodig;
+     laad die mee op pagina's die hem nog niet zelf laden. */
+  if (!document.querySelector('script[src*="open-status.js"]')) {
+    var os = document.createElement("script");
+    os.src = "/assets/js/modules/open-status.js";
+    document.head.appendChild(os);
+  }
 
   DVS.header = {
     isHome: document.body.getAttribute("data-page") === "home",

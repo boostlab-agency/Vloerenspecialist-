@@ -283,6 +283,76 @@
   .overlay-foot { padding: 14px 20px; }
 }
 
+/* ==========================================================================
+   Telefoonmenu (≤860px) — eigen ontwerp: één kolom met grote rijen,
+   uitklapbare categorieën en onderaan snelle acties. Op computer blijft het
+   split-panel-menu hierboven actief; dit blok is daar verborgen.
+   ========================================================================== */
+.m-nav { display: none; }
+@media (max-width: 860px) {
+  .overlay-body, .overlay-foot { display: none; }
+  .m-nav {
+    display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto;
+    padding: calc(var(--header-h) + 58px) 20px 24px;
+    overscroll-behavior: contain;
+  }
+  .m-status { align-self: flex-start; margin-bottom: 18px; }
+
+  .m-cats { border-top: 1px solid rgba(244,238,225,.1); }
+  .m-cat { border-bottom: 1px solid rgba(244,238,225,.1); }
+  .m-cat > summary, .m-cat-link {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 17px 2px; min-height: 60px; cursor: pointer; list-style: none;
+    font-family: var(--serif); font-weight: 600; font-size: 24px; letter-spacing: -.01em; color: #f4eee1;
+  }
+  .m-cat > summary::-webkit-details-marker { display: none; }
+  .m-cat-link svg { color: rgba(244,238,225,.5); }
+  .m-cat.is-current > summary > span, .m-cat-link.is-current > span { color: var(--accent-soft); }
+  .m-cat-chev { flex: none; color: rgba(244,238,225,.6); transition: transform .3s var(--ease); }
+  .m-cat[open] .m-cat-chev { transform: rotate(45deg); color: var(--accent-soft); }
+
+  .m-sub { padding: 0 2px 20px; animation: m-sub-in .3s var(--ease); }
+  @keyframes m-sub-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .m-all {
+    display: inline-flex; align-items: center; gap: 8px; margin: 2px 0 14px;
+    font-size: 14px; font-weight: 600; color: var(--accent-soft);
+  }
+  .m-group-title {
+    margin: 14px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(244,238,225,.45);
+  }
+  .m-sub-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .m-sub-link {
+    display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 12px;
+    background: rgba(244,238,225,.05); border: 1px solid rgba(244,238,225,.08);
+    font-size: 14px; line-height: 1.25; color: #f0eae0; min-height: 56px;
+  }
+  .m-sub-link:active { background: rgba(244,238,225,.1); }
+  .m-thumb { flex: none; width: 38px; height: 38px; border-radius: 8px; overflow: hidden; background: rgba(244,238,225,.08); }
+  .m-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .m-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .m-chip {
+    padding: 8px 14px; border-radius: 999px; font-size: 13.5px; color: #f0eae0;
+    border: 1px solid rgba(244,238,225,.16);
+  }
+  .m-chip.is-more { color: var(--accent-soft); border-color: rgba(226,51,60,.35); }
+
+  .m-actions { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+  .m-plan { width: 100%; padding: 16px 20px; font-size: 15px; }
+  .m-quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .m-quick a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    padding: 14px 6px; border-radius: 14px; font-size: 12.5px; font-weight: 600; color: #f4eee1;
+    background: rgba(244,238,225,.05); border: 1px solid rgba(244,238,225,.1);
+  }
+  .m-quick a:active { background: rgba(244,238,225,.1); }
+  .m-address { margin: 6px 0 0; font-size: 12.5px; line-height: 1.6; color: rgba(244,238,225,.5); text-align: center; }
+}
+@media (max-width: 360px) {
+  .m-sub-list { grid-template-columns: 1fr; }
+  .m-cat > summary, .m-cat-link { font-size: 21px; }
+}
+
 /* ---- Zoeken ---- */
 .search-panel {
   position: fixed; top: 0; left: 0; right: 0; z-index: 140;

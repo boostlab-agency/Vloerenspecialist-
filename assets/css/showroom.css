@@ -12,7 +12,7 @@
 }
 .sr-hero-media { position: absolute; inset: 0; z-index: -1; }
 .sr-hero-media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 55%;
   animation: sr-breathe 2.4s cubic-bezier(.16,.8,.24,1) both;
 }
 @keyframes sr-breathe { from { transform: scale(1.08); } to { transform: none; } }
@@ -54,17 +54,26 @@
 }
 .sr-stat span { display: block; font-size: 14px; line-height: 1.55; color: var(--ink-soft); max-width: 30ch; }
 
-/* ---- 3 · Wandeling: horizontaal scrollende afdelingen ---- */
+/* ---- 3 · Wandeling langs de afdelingen ----
+   Computer: de vier afdelingen passen naast elkaar, dus gewoon een raster
+   (geen scrollen, geen hint). Tablet/telefoon: een veegbare rij met hint. */
 .sr-walk-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
 .sr-walk-head h2 { font-size: clamp(28px, 3.2vw, 44px); font-weight: 600; margin: 0; }
-.sr-walk-hint { margin: 0; font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+.sr-walk-hint { display: none; margin: 0; font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
 .sr-walk-hint span { display: inline-block; animation: sr-nudge 1.8s ease-in-out infinite; }
 @keyframes sr-nudge { 50% { transform: translateX(5px); } }
 .sr-walk-track {
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 30%); gap: 20px;
-  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
-  padding: 0 max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))) 18px;
-  scrollbar-width: thin; scrollbar-color: rgba(244,238,225,.25) transparent;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
+}
+@media (max-width: 1000px) {
+  .sr-walk-hint { display: block; }
+  .sr-walk-track {
+    max-width: none; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 42%;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--gutter);
+    padding: 0 var(--gutter) 18px;
+    scrollbar-width: thin; scrollbar-color: rgba(244,238,225,.25) transparent;
+  }
 }
 .sr-walk-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .sr-zone {
@@ -120,6 +129,7 @@
   .sr-stat, .sr-stat + .sr-stat { padding: 26px 0; border-left: 0; }
   .sr-stat + .sr-stat { border-top: 1px solid var(--line); }
   .sr-walk-track { grid-auto-columns: 78%; }
-  .sr-walk-hint { display: none; }
+  .sr-walk-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .sr-walk-hint { order: 2; }
   .sr-visit-card { padding: 22px; }
 }

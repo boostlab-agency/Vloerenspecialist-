@@ -66,7 +66,15 @@
     });
     if (closeBtn) closeBtn.addEventListener("click", close);
     if (backdrop) backdrop.addEventListener("click", close);
-    nav.querySelectorAll(".overlay-panels a, .overlay-foot a").forEach(function (a) { a.addEventListener("click", close); });
+    nav.querySelectorAll(".overlay-panels a, .overlay-foot a, .m-nav a").forEach(function (a) { a.addEventListener("click", close); });
+    /* Telefoonmenu: accordeon met één open categorie tegelijk. */
+    var accs = nav.querySelectorAll(".m-cat-acc");
+    accs.forEach(function (d) {
+      d.addEventListener("toggle", function () {
+        if (!d.open) return;
+        accs.forEach(function (other) { if (other !== d) other.open = false; });
+      });
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) close();
     });
