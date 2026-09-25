@@ -129,7 +129,7 @@
       key: "contact", label: "Contact", href: "/contact.html", type: "simple",
       /* Een gezicht i.p.v. een sfeerbeeld: een klik op de adviseur opent de
          contactpagina. */
-      media: { src: img("https://images.unsplash.com/photo-1748184201792-8bee75fceb41", 900), label: "Stel uw vraag aan een adviseur", href: "/contact.html", person: true },
+      media: { src: img("https://images.unsplash.com/photo-1655759738595-418970010986", 900), label: "Neem contact met ons op", href: "/contact.html", person: true },
       pitch: "Jules Verneweg 7a, 5015 BD Tilburg — Ma–vr 09:00–17:00, za 09:00–15:00.",
       cta: { label: "013 - 536 85 98", href: "tel:+31135368598" },
       ctaSecondary: { label: "Stuur een bericht", href: "/contact.html" }
