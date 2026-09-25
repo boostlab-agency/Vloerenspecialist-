@@ -132,12 +132,14 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 @keyframes cue { 0%{transform:translateX(-100%)} 50%{transform:translateX(0)} 100%{transform:translateX(100%)} }
 
 /* ---- 01 Manifest — puur typografisch rustpunt ---- */
-.manifest-chapter .chapter-inner { padding: 240px 0; display: flex; justify-content: center; text-align: center; position: relative; z-index: 1; }
+.manifest-chapter .chapter-inner { padding: clamp(120px, 22vh, 240px) 0; display: flex; justify-content: center; text-align: center; position: relative; z-index: 1; }
 .manifest-chapter .wrap { display: flex; flex-direction: column; align-items: center; }
 .manifest-chapter .eyebrow { justify-content: center; }
 .manifest-text {
-  max-width: 20ch; font-family: var(--serif); font-weight: 600;
-  font-size: clamp(30px, 5.4vw, 62px); line-height: 1.18; letter-spacing: -.01em; color: var(--hp-ink);
+  /* Schaalt mee met breedte én hoogte (min()), zodat het hele manifest ook
+     op een laag laptopscherm in beeld past terwijl de woorden scherp worden. */
+  max-width: 22ch; font-family: var(--serif); font-weight: 600;
+  font-size: clamp(26px, min(3.8vw, 5.4vh), 50px); line-height: 1.2; letter-spacing: -.01em; color: var(--hp-ink);
 }
 .manifest-text strong { color: var(--hp-accent); font-weight: 500; }
 
