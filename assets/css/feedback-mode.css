@@ -63,12 +63,23 @@
 }
 html.feedback-mode .fb-overlay { background: rgba(12,10,14,.14); }
 
-/* ---- Klikbare doelen: crosshair + rustige dashed outline ---- */
-html.feedback-mode [data-review-id] { cursor: crosshair; }
+/* ---- Klikbare doelen: rustige, premium markering bij hover ----
+   Losse onderdelen (tekst, knop, afbeelding, kaart) krijgen een dunne
+   doorgetrokken lijn met een zweem van de accentkleur; een hele sectie
+   een nog zachtere, gestippelde lijn — zo is direct duidelijk wát je
+   aanklikt, zonder dat de pagina schreeuwerig wordt. */
+html.feedback-mode [data-review-id],
+html.feedback-mode [data-review-id] * { cursor: pointer; }
 html.feedback-mode .fb-target-hover {
-  outline: 2px dashed var(--fb-accent);
-  outline-offset: 2px;
-  transition: outline-color .15s ease;
+  outline: 1.5px solid rgba(var(--fb-accent-rgb), .9);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(var(--fb-accent-rgb), .12);
+  transition: outline-color .18s ease, box-shadow .18s ease;
+}
+html.feedback-mode .fb-target-hover.fb-hover-soft {
+  outline: 1px dashed rgba(var(--fb-accent-rgb), .55);
+  outline-offset: -6px;
+  box-shadow: inset 0 0 0 9999px rgba(var(--fb-accent-rgb), .025);
 }
 
 /* ---- Live-bewerkte tekst / gemarkeerde elementen ---- */
@@ -311,6 +322,13 @@ html.reduced-motion .fb-sidebar { transition: none; }
 .fb-item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
 .fb-item-kind { font-size: 13.5px; font-weight: 700; color: var(--fb-ink); }
 .fb-item-date { font-size: 12.5px; color: var(--fb-ink-soft); flex: none; }
+/* Paginalabel: het overzicht is centraal voor de hele site. */
+.fb-item-page {
+  display: inline-block; margin: -4px 0 12px; padding: 3px 10px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 600; color: var(--fb-ink-soft);
+  background: rgba(255,255,255,.05); border: 1px solid var(--fb-line);
+}
+.fb-item-page.is-current { color: var(--fb-accent); border-color: rgba(var(--fb-accent-rgb), .35); }
 
 .fb-item-msg { font-size: 15px; line-height: 1.6; color: var(--fb-ink); margin: 0 0 14px; white-space: pre-wrap; }
 

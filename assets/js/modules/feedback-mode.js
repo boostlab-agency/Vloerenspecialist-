@@ -398,19 +398,123 @@
     }
   }
 
-  /* ---------------- Doel van een klik herkennen ---------------- */
+  /* ---------------- Feedbackzones automatisch aanmaken ----------------
+     OORZAAK van "werkt alleen op de homepage": klikken en hover reageren
+     alleen binnen een element met [data-review-id]. Die attributen stonden
+     met de hand in index.html (13 zones), maar op geen enkele subpagina —
+     daar vingen alleen header en footer (uit de componenten) feedback op.
+
+     Daarom worden zones nu automatisch toegekend, op elke pagina: elke
+     sectie in <main>, plus overige losse blokken (kruimelpad, paginakop),
+     en het volledige-schermmenu. Handmatig gezette zones blijven leidend.
+     Een MutationObserver doet hetzelfde voor later toegevoegde inhoud, zodat
+     ook toekomstige pagina's en dynamische content zonder extra werk
+     feedback ondersteunen. De id's zijn afgeleid van positie + kop, dus
+     stabiel bij elke paginaweergave (nodig om live tekst terug te zetten). */
+  var SKIP_ZONE = "script, style, link, noscript, template, .skip-link, [class^='fb-'], [class*=' fb-']";
+  var autoZoneCount = 0;
+
+  function slug(s) {
+    return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
+  }
+  function zoneLabel(el) {
+    var h = el.querySelector("h1, h2, h3");
+    var txt = h ? h.textContent.trim() : "";
+    if (!txt) { var eb = el.querySelector(".eyebrow"); txt = eb ? eb.textContent.replace(/^[—\s]+/, "").trim() : ""; }
+    if (!txt) {
+      if (el.matches(".crumb, nav[aria-label='Kruimelpad']")) txt = "Kruimelpad";
+      else if (el.matches(".page-hero")) txt = "Paginakop";
+      else if (el.matches(".page-cta")) txt = "Afsluitende oproep";
+      else if (el.matches("form")) txt = "Formulier";
+    }
+    if (!txt) txt = "Blok " + (autoZoneCount + 1);
+    return txt.replace(/\s+/g, " ").slice(0, 60);
+  }
+  function tagZone(el) {
+    if (el.hasAttribute("data-review-id") || el.matches(SKIP_ZONE)) return;
+    if (!el.textContent.trim() && !el.querySelector("img, video, iframe, picture, svg")) return;
+    var label = zoneLabel(el);
+    autoZoneCount++;
+    el.setAttribute("data-review-id", "auto-" + autoZoneCount + "-" + (slug(label) || "blok"));
+    el.setAttribute("data-review-label", label);
+  }
+  /* Loopt de kinderen af: bevat een kind al een zone, dan dieper zoeken
+     (zodat een wrapper niet alles in één grote zone opslokt); anders wordt
+     het kind zelf een zone. */
+  function tagLeftovers(parent) {
+    Array.prototype.forEach.call(parent.children, function (child) {
+      if (child.matches(SKIP_ZONE) || child.hasAttribute("data-review-id")) return;
+      if (child.querySelector("[data-review-id]")) tagLeftovers(child);
+      else tagZone(child);
+    });
+  }
+  function autoTagZones() {
+    var main = document.querySelector("main") || document.body;
+    // 1. Elke buitenste sectie in de hoofdinhoud is een zone.
+    main.querySelectorAll("section").forEach(function (s) {
+      if (!s.parentElement || !s.parentElement.closest("section, [data-review-id]")) tagZone(s);
+    });
+    // 2. Overige losse blokken (kruimelpad, intro zonder <section>, …).
+    tagLeftovers(main);
+    // 3. Het menu staat buiten <header>, dus apart: ook navigatie telt mee.
+    var menu = document.querySelector(".overlay-nav");
+    if (menu && !menu.hasAttribute("data-review-id")) {
+      menu.setAttribute("data-review-id", "menu");
+      menu.setAttribute("data-review-label", "Menu");
+    }
+  }
+  var retagTimer = null;
+  function scheduleRetag() {
+    window.clearTimeout(retagTimer);
+    retagTimer = window.setTimeout(autoTagZones, 150);
+  }
+
+  /* ---------------- Doel van een klik herkennen ----------------
+     Van specifiek naar algemeen: media → knop/kaart/navigatie → tekst →
+     contentblok → sectie. Zo is elk onderdeel van een pagina aanklikbaar. */
+  var CARD_SEL = "[class*='card'], .tile, .masonry-item, .brand-pill";
+  var BLOCK_SEL = "[class*='card'], .spec-item, .step-item, .stat, .faq-item, .hours-row, .item, article, li, form, .map-embed";
+  var TEXT_SEL = "h1,h2,h3,h4,h5,h6,p,span,li,blockquote,figcaption,b,strong,em,small,label,dt,dd,td,th,cite,q";
+
+  function directText(el) {
+    var t = "";
+    el.childNodes.forEach(function (n) { if (n.nodeType === 3) t += n.textContent; });
+    return t.trim();
+  }
   function describeTarget(el, section) {
+    var media = el.closest("img, picture, video, iframe");
+    if (media && section.contains(media)) {
+      if (media.tagName === "PICTURE") media = media.querySelector("img") || media;
+      if (media.tagName === "VIDEO") return { el: media, kind: "video", kindLabel: "Video", detail: media.getAttribute("aria-label") || "" };
+      if (media.tagName === "IFRAME") return { el: media.closest(".map-embed") || media, kind: "embed", kindLabel: "Kaart / embed", detail: media.getAttribute("title") || "" };
+      return { el: media, kind: "afbeelding", kindLabel: "Afbeelding", detail: media.getAttribute("alt") || "" };
+    }
     var btn = el.closest("a,button,[role='button']");
     if (btn && section.contains(btn)) {
-      return { el: btn, kind: "knop", kindLabel: "Knop", detail: getEditableText(btn).slice(0, 60) };
+      var label = getEditableText(btn).replace(/\s+/g, " ").slice(0, 60) || btn.getAttribute("aria-label") || (btn.querySelector("img") || {}).alt || "";
+      // Echte knoppen (CTA's) blijven knoppen, ook in header of footer.
+      if (btn.matches(".btn, .btn-text, button")) {
+        return { el: btn, kind: "knop", kindLabel: "Knop", detail: label };
+      }
+      // Links in menu, header, footer en kruimelpad (ook het logo) = navigatie.
+      if (btn.closest("nav, .overlay-nav, .site-header, .site-footer, .crumb")) {
+        return { el: btn, kind: "navigatie", kindLabel: "Navigatie", detail: label };
+      }
+      if (btn.matches(CARD_SEL) || btn.querySelector("img, video, h2, h3, h4")) {
+        return { el: btn, kind: "kaart", kindLabel: "Kaart", detail: label };
+      }
+      return { el: btn, kind: "knop", kindLabel: "Knop", detail: label };
     }
-    var img = el.closest("img");
-    if (img && section.contains(img)) {
-      return { el: img, kind: "afbeelding", kindLabel: "Afbeelding", detail: img.getAttribute("alt") || "" };
-    }
-    var textEl = el.closest("h1,h2,h3,h4,h5,p,span,li,blockquote,figcaption");
+    var textEl = el.closest(TEXT_SEL);
+    if (!textEl && directText(el)) textEl = el; // bv. <div class="item">Tekst</div>
     if (textEl && section.contains(textEl) && textEl.textContent && textEl.textContent.trim() && !textEl.closest("a,button")) {
       return { el: textEl, kind: "tekst", kindLabel: "Tekst", detail: getEditableText(textEl).slice(0, 60) };
+    }
+    var block = el.closest(BLOCK_SEL);
+    if (block && block !== section && section.contains(block)) {
+      var h = block.querySelector("h1,h2,h3,h4,b,strong");
+      return { el: block, kind: "blok", kindLabel: "Contentblok", detail: (h ? h.textContent : block.textContent).trim().replace(/\s+/g, " ").slice(0, 60) };
     }
     return { el: section, kind: "sectie", kindLabel: "Sectie", detail: "" };
   }
@@ -466,7 +570,7 @@
 
   var lastHoverEl = null;
   function clearHover() {
-    if (lastHoverEl) lastHoverEl.classList.remove("fb-target-hover");
+    if (lastHoverEl) lastHoverEl.classList.remove("fb-target-hover", "fb-hover-soft");
     lastHoverEl = null;
     hint.classList.remove("is-visible");
   }
@@ -477,9 +581,11 @@
     if (!section) { clearHover(); return; }
     var t = describeTarget(e.target, section);
     if (t.el === lastHoverEl) return;
-    if (lastHoverEl) lastHoverEl.classList.remove("fb-target-hover");
+    if (lastHoverEl) lastHoverEl.classList.remove("fb-target-hover", "fb-hover-soft");
     lastHoverEl = t.el;
     lastHoverEl.classList.add("fb-target-hover");
+    // Hele secties krijgen een zachtere markering dan losse onderdelen.
+    if (t.kind === "sectie") lastHoverEl.classList.add("fb-hover-soft");
     hint.textContent = t.kindLabel;
     hint.classList.add("is-visible");
   });
@@ -664,12 +770,13 @@
   }
 
   function renderImageForm(target) {
+    var what = target.kind === "video" ? "video" : target.kind === "embed" ? "kaart" : "afbeelding";
     formBody.innerHTML =
-      "<h3>Voorstel voor deze afbeelding</h3>" +
+      "<h3>Voorstel voor deze " + what + "</h3>" +
       '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong></p>" +
-      '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de afbeelding zelf verandert niet.</p>' +
+      '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de ' + what + " zelf verandert niet.</p>" +
       '<div class="fb-field"><label for="fb-img-note">Opmerking</label><textarea id="fb-img-note" placeholder="Bijvoorbeeld: gebruik liever een andere foto"></textarea></div>' +
-      '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Andere afbeelding voorstellen</span></label>' +
+      '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Andere ' + what + " voorstellen</span></label>" +
       attachmentFieldHtml() +
       '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Feedback opslaan</button></div>';
     wireAttachmentField();
@@ -678,7 +785,7 @@
       var note = document.getElementById("fb-img-note").value.trim();
       var replace = document.getElementById("fb-img-replace").checked;
       if (!note && !replace && !pendingAttachment) { document.getElementById("fb-img-note").focus(); return; }
-      var msg = note ? "Voorstel: " + note : "Voorstel: andere afbeelding gewenst";
+      var msg = note ? "Voorstel: " + note : "Voorstel: andere " + what + " gewenst";
       var saved = addEntry(baseEntry(target, { actionType: replace ? "afbeelding-vervangen" : "afbeelding-opmerking", message: msg, imageReplace: replace }));
       if (saved) {
         if (replace || pendingAttachment) (target.el.closest(".media") || target.el).classList.add("fb-image-flagged");
@@ -687,6 +794,28 @@
       }
     };
     window.setTimeout(function () { var f = document.getElementById("fb-img-note"); if (f) f.focus(); }, 150);
+  }
+
+  /* Kaarten (klikbare tegels) en contentblokken: één vrije opmerking,
+     met optionele bijlage. */
+  function renderCommentForm(target) {
+    formBody.innerHTML =
+      "<h3>Opmerking over dit" + (target.kind === "kaart" ? "e kaart" : " blok") + "</h3>" +
+      '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong>" +
+        (target.detail ? " · " + target.detail.replace(/</g, "&lt;") : "") + "</p>" +
+      '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de pagina verandert niet.</p>' +
+      '<div class="fb-field"><label for="fb-comment">Wat wil je aanpassen?</label><textarea id="fb-comment" placeholder="Bijvoorbeeld: andere tekst, foto of volgorde"></textarea></div>' +
+      attachmentFieldHtml() +
+      '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Feedback opslaan</button></div>';
+    wireAttachmentField();
+
+    currentSaveHandler = function () {
+      var msg = document.getElementById("fb-comment").value.trim();
+      if (!msg && !pendingAttachment) { document.getElementById("fb-comment").focus(); return; }
+      var saved = addEntry(baseEntry(target, { actionType: "opmerking", message: "Voorstel: " + (msg || "zie bijlage") }));
+      if (saved) { showToast("Voorstel opgeslagen."); closePopover(); }
+    };
+    window.setTimeout(function () { var f = document.getElementById("fb-comment"); if (f) f.focus(); }, 150);
   }
 
   var ACTION_LABELS = {
@@ -739,8 +868,9 @@
   function openPopover(target) {
     activeTarget = target;
     document.getElementById("fb-form-kind").textContent = target.kindLabel;
-    if (target.kind === "tekst" || target.kind === "knop") renderTextForm(target);
-    else if (target.kind === "afbeelding") renderImageForm(target);
+    if (target.kind === "tekst" || target.kind === "knop" || target.kind === "navigatie") renderTextForm(target);
+    else if (target.kind === "afbeelding" || target.kind === "video" || target.kind === "embed") renderImageForm(target);
+    else if (target.kind === "kaart" || target.kind === "blok") renderCommentForm(target);
     else renderSectionForm(target);
     scrim.classList.add("is-open");
   }
@@ -915,12 +1045,19 @@
       var isGeneral = i.actionType === "algemeen";
       var kindLine = i.targetKindLabel || "Sectie";
       if (i.sectionLabel && !isGeneral) kindLine += " · " + i.sectionLabel;
+      // Eén centraal overzicht voor de hele site: toon altijd op welke pagina.
+      var pageName = (i.pageTitle || "").split(" — ")[0] || i.path || "";
+      var pageLine = pageName
+        ? '<span class="fb-item-page' + (i.path === window.location.pathname ? " is-current" : "") + '">' +
+            (i.path === window.location.pathname ? "Deze pagina" : "Pagina") + ": " + pageName.replace(/</g, "&lt;") + "</span>"
+        : "";
       return (
         '<div class="fb-item" data-id="' + i.id + '">' +
           '<div class="fb-item-top">' +
             '<span class="fb-item-kind">' + kindLine + "</span>" +
             '<span class="fb-item-date">' + fmtDate(i.createdAt) + "</span>" +
           "</div>" +
+          pageLine +
           itemBodyHtml(i) +
           attachmentThumbHtml(i.attachment) +
           '<div class="fb-item-foot">' +
@@ -1019,6 +1156,19 @@
     var countEl = document.getElementById("fb-toggle-count");
     if (countEl && isActive) countEl.textContent = String(readAll().length);
     if (sidebar.classList.contains("is-open")) renderList();
+  }
+
+  autoTagZones();
+  if (window.MutationObserver) {
+    new MutationObserver(function (muts) {
+      for (var m = 0; m < muts.length; m++) {
+        var t = muts[m].target;
+        // Wijzigingen binnen de eigen feedback-UI negeren.
+        if (t.nodeType === 1 && t.closest && t.closest("[class^='fb-'], [class*=' fb-']")) continue;
+        scheduleRetag();
+        return;
+      }
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
   applyState();
