@@ -97,11 +97,48 @@
     });
   }
 
+  /* Scrollspy voor een vaste inhoudsindex ([data-scrollspy] met #-links):
+     markeert het onderdeel dat nu in beeld is (Behang-stalenboek). */
+  function initScrollspy() {
+    document.querySelectorAll("[data-scrollspy]").forEach(function (nav) {
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+      var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+      if (typeof IntersectionObserver === "undefined") return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var i = targets.indexOf(entry.target);
+          links.forEach(function (a, j) { a.classList.toggle("is-active", j === i); });
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      targets.forEach(function (t) { if (t) io.observe(t); });
+    });
+  }
+
+  /* Lichtregelaar (Raamdecoratie-hero): een schuifje dat de lamellen over
+     de foto open en dicht laat gaan — "speel met het licht". */
+  function initLightSlider() {
+    document.querySelectorAll("[data-light-slider]").forEach(function (wrap) {
+      var input = wrap.querySelector("input[type=range]");
+      var label = wrap.querySelector("[data-light-label]");
+      if (!input) return;
+      function apply() {
+        var v = Number(input.value); // 0 = dicht, 100 = open
+        wrap.style.setProperty("--slat-open", (v / 100).toFixed(2));
+        if (label) label.textContent = v < 25 ? "Privé & gedimd" : v < 70 ? "Zacht gefilterd licht" : "Volop daglicht";
+      }
+      input.addEventListener("input", apply);
+      apply();
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
     initMagnetic();
     initFaq();
     initContactForm();
+    initScrollspy();
+    initLightSlider();
   });
 })();

@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Behangpagina — opgebouwd als een stalenboek i.p.v. het standaard
+   split-sjabloon: hero met vijf "behangbanen" die openschuiven, een vaste
+   index die meeloopt met het scrollen, en een keuzehulp als vergelijking.
+   ========================================================================== */
+
+/* ---- Hero ---- */
+.bh-hero { margin-top: 24px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: end; }
+.bh-hero-copy h1 { font-weight: 600; letter-spacing: -.02em; line-height: 1; font-size: clamp(40px, 5.2vw, 76px); margin: 14px 0 20px; text-wrap: balance; }
+.bh-hero-copy .lead { color: var(--ink-soft); font-size: clamp(16px, 1.2vw, 18px); max-width: 40ch; margin: 0; }
+
+/* Vijf banen naast elkaar; de baan onder de muis schuift breed open. */
+.bh-strips { display: flex; gap: 10px; height: clamp(360px, 52vh, 540px); }
+.bh-strip {
+  position: relative; flex: 1; min-width: 0; border-radius: 6px; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 16px; color: #fff;
+  transition: flex-grow .7s cubic-bezier(.16,.8,.24,1);
+}
+.bh-strip img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.16,.8,.24,1); }
+.bh-strip::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(12,8,7,.85), rgba(12,8,7,.05) 60%); }
+.bh-strips:hover .bh-strip { flex-grow: .7; }
+.bh-strips .bh-strip:hover, .bh-strips .bh-strip:focus-visible { flex-grow: 3.2; }
+.bh-strip:hover img { transform: scale(1.04); }
+.bh-strip-no { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--accent); }
+.bh-strip-name {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(16px, 1.4vw, 21px); white-space: nowrap;
+  writing-mode: vertical-rl; transform: rotate(180deg); margin-top: 8px;
+  transition: opacity .3s ease;
+}
+.bh-strip:hover .bh-strip-name, .bh-strip:focus-visible .bh-strip-name { writing-mode: horizontal-tb; transform: none; }
+
+/* ---- Stalenboek ---- */
+.bh-book { padding-top: 110px; }
+.bh-book-grid { display: grid; grid-template-columns: 240px 1fr; gap: 64px; align-items: start; }
+.bh-index { position: sticky; top: calc(var(--header-h) + 28px); display: flex; flex-direction: column; gap: 4px; }
+.bh-index-title { font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+.bh-index a {
+  display: flex; align-items: baseline; gap: 12px; padding: 10px 12px; border-radius: 10px;
+  font-family: var(--serif); font-size: 19px; color: var(--ink-soft);
+  transition: color .25s ease, background .25s ease, padding-left .25s ease;
+}
+.bh-index a span { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; color: rgba(244,238,225,.35); }
+.bh-index a:hover { color: var(--ink); }
+.bh-index a.is-active { color: #fff; background: rgba(244,238,225,.06); padding-left: 18px; }
+.bh-index a.is-active span { color: var(--accent); }
+.bh-index .bh-index-cta { margin-top: 18px; font-family: var(--sans); font-size: 13.5px; font-weight: 600; color: var(--accent); }
+
+.bh-pages { display: flex; flex-direction: column; gap: 120px; }
+.bh-page { padding: 0; display: grid; grid-template-columns: 1.15fr .85fr; gap: 44px; align-items: center; }
+.bh-page:nth-child(even) .bh-page-media { order: 2; }
+.bh-page-media { position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+.bh-page-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bh-page-no { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--accent); margin-bottom: 14px; }
+.bh-page-copy h2 { font-weight: 600; font-size: clamp(30px, 3vw, 44px); margin-bottom: 16px; }
+.bh-page-copy p { color: var(--ink-soft); font-size: 16px; line-height: 1.7; margin-bottom: 22px; }
+.bh-fit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bh-fit .tag { font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; }
+.bh-fit-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-right: 4px; }
+
+/* ---- Keuzehulp ---- */
+.bh-matrix-wrap { overflow-x: auto; }
+.bh-matrix { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 15px; }
+.bh-matrix th, .bh-matrix td { padding: 16px 14px; border-bottom: 1px solid var(--line); text-align: center; }
+.bh-matrix thead th { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+.bh-matrix thead th:first-child, .bh-matrix tbody th { text-align: left; }
+.bh-matrix tbody th { font-weight: 500; color: var(--ink); }
+.bh-matrix td { color: rgba(244,238,225,.3); font-size: 17px; }
+.bh-matrix tbody tr { transition: background .2s ease; }
+.bh-matrix tbody tr:hover { background: rgba(244,238,225,.03); }
+.bh-matrix .yes, .bh-matrix-legend .yes { color: var(--accent); }
+.bh-matrix .mid, .bh-matrix-legend .mid { color: #d7a274; }
+.bh-matrix-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
+
+/* ---- Responsief ---- */
+@media (max-width: 1000px) {
+  .bh-hero { grid-template-columns: 1fr; gap: 32px; }
+  .bh-book-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* Index wordt een horizontale, plakkende tabbalk. */
+  .bh-index {
+    top: var(--header-h); z-index: 5; flex-direction: row; overflow-x: auto; gap: 6px;
+    padding: 10px 0;
+    background: rgba(20,13,11,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .bh-index-title, .bh-index .bh-index-cta { display: none; }
+  .bh-index a { flex: none; font-size: 15px; padding: 8px 12px; }
+  .bh-index a.is-active { padding-left: 12px; }
+  .bh-page { grid-template-columns: 1fr; gap: 24px; scroll-margin-top: calc(var(--header-h) + 70px); }
+  .bh-page:nth-child(even) .bh-page-media { order: 0; }
+  .bh-page-media { aspect-ratio: 4/3; }
+  .bh-pages { gap: 72px; }
+}
+@media (max-width: 640px) {
+  /* Op telefoon: banen onder elkaar als brede, lage stroken. */
+  .bh-strips { flex-direction: column; height: auto; }
+  .bh-strip { flex: none; height: 84px; padding: 14px 16px; flex-direction: row; align-items: flex-end; gap: 12px; }
+  .bh-strips:hover .bh-strip, .bh-strips .bh-strip:hover { flex-grow: 0; }
+  .bh-strip-name { writing-mode: horizontal-tb; transform: none; margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .bh-strip, .bh-strip img { transition: none; } }

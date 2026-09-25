@@ -112,6 +112,45 @@ main { display: block; }
 .btn-call { border-color: rgba(244,238,225,.28); color: var(--ink); }
 .btn-call:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-call svg { flex: none; }
+.btn-whatsapp:hover { background: #25d366; border-color: #25d366; color: #0b2e1a; }
+
+/* ---- Live openingsstatus (open-status.js) ----
+   Pil met een zacht pulserende stip: groen = nu open, rood = gesloten. */
+.open-pill {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 9px 16px 9px 14px; border-radius: 999px;
+  background: rgba(20,13,11,.55); border: 1px solid rgba(244,238,225,.16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  color: #f4eee1; font-size: 13.5px; line-height: 1.3;
+}
+.open-pill strong { font-weight: 700; }
+.open-pill .open-sub { color: rgba(244,238,225,.72); }
+.open-dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: #e2333c; flex: none; }
+.open-pill.is-open .open-dot { background: #3ddc84; }
+.open-pill.is-open .open-dot::after {
+  content: ""; position: absolute; inset: -5px; border-radius: 50%;
+  border: 2px solid rgba(61,220,132,.55); animation: open-pulse 2s ease-out infinite;
+}
+@keyframes open-pulse { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .open-pill.is-open .open-dot::after { animation: none; opacity: .5; } }
+
+.open-week { display: flex; flex-direction: column; }
+.open-week-row {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 10px; font-size: 14.5px; color: var(--ink-soft);
+}
+.open-week-row + .open-week-row { margin-top: 2px; }
+.open-week-row .t { font-variant-numeric: tabular-nums; }
+.open-week-row.is-today { background: rgba(244,238,225,.06); color: var(--ink); font-weight: 600; }
+.open-week-row.is-today .d::after {
+  content: "Vandaag"; margin-left: 10px; padding: 2px 8px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--accent); color: #fff; vertical-align: 2px;
+}
+/* Dagbalk: hoe ver de openingstijd van vandaag al gevorderd is. */
+.open-today-bar { grid-column: 1 / -1; height: 4px; border-radius: 4px; background: rgba(244,238,225,.1); overflow: hidden; margin-top: 4px; }
+.open-today-bar span { display: block; height: 100%; border-radius: 4px; background: #3ddc84; }
+.open-week-row.is-closed-now .open-today-bar span { background: rgba(244,238,225,.3); }
 
 /* Google Maps-kaartje in de donkere huisstijl: de standaardkaart wordt via
    een filter omgekeerd naar donker en licht warm getint. De hele kaart is

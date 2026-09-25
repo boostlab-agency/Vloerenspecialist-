@@ -41,7 +41,7 @@
             { label: "Houten vloeren", href: "/vloeren/hout.html", img: img("https://images.unsplash.com/photo-1772797583328-f83bc3f94f80", 160) },
             { label: "Laminaat", href: "/vloeren/laminaat.html", img: img("https://images.unsplash.com/photo-1560184897-1ee3713708ee", 160) },
             { label: "Tegelvloer", href: "/vloeren/tegelvloer.html", img: img("https://images.unsplash.com/photo-1708540084677-dc5838b37627", 160) },
-            { label: "Vloerbedekking", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1770941633927-b7a15557e0e1", 160) },
+            { label: "Vloerbedekking", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1772563214602-3c6434766700", 160) },
             { label: "Gietvloer", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1765728614529-4749706523d9", 160) },
             { label: "Hybride houtenvloer", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef", 160) }
           ]
@@ -67,7 +67,7 @@
           links: [
             { label: "Kasten op maat", href: "/interieur/index.html#kasten", img: "/assets/img/real/kasten-garderobe-900.jpg" },
             { label: "Deuren en wanden op maat", href: "/interieur/index.html#deuren-wanden", img: img("https://images.unsplash.com/photo-1721742151032-e0c159fe5097", 160) },
-            { label: "Meubels op maat", href: "/interieur/index.html#meubels", img: img("https://images.unsplash.com/photo-1781032392300-ed3bdf78ef4c", 160) }
+            { label: "Meubels op maat", href: "/interieur/index.html#meubels", img: "/assets/img/real/meubels-op-maat-900.jpg" }
           ]
         }
       ]
@@ -127,7 +127,9 @@
     },
     {
       key: "contact", label: "Contact", href: "/contact.html", type: "simple",
-      media: { src: "/assets/img/real/gordijn-linnen-stoel-1800.jpg", label: "" },
+      /* Een gezicht i.p.v. een sfeerbeeld: een klik op de adviseur opent de
+         contactpagina. */
+      media: { src: img("https://images.unsplash.com/photo-1781888679143-01d758aedbe6", 900), label: "Stel uw vraag aan een adviseur", href: "/contact.html", person: true },
       pitch: "Jules Verneweg 7a, 5015 BD Tilburg — Ma–vr 09:00–17:00, za 09:00–15:00.",
       cta: { label: "013 - 536 85 98", href: "tel:+31135368598" },
       ctaSecondary: { label: "Stuur een bericht", href: "/contact.html" }
@@ -179,8 +181,10 @@
 
   function renderSimplePanel(p) {
     return (
-      '<a class="op-hero" href="' + p.cta.href + '">' +
+      '<a class="op-hero' + (p.media.person ? " is-person" : "") + '" href="' + (p.media.href || p.cta.href) + '"' +
+        (p.media.label ? ' aria-label="' + p.media.label + '"' : "") + ">" +
         '<img src="' + p.media.src + '" alt="" loading="lazy">' +
+        (p.media.label ? '<span class="op-hero-cap">' + p.media.label + " " + ICONS.arrow + "</span>" : "") +
       "</a>" +
       '<div class="op-hero-copy">' +
         "<p>" + p.pitch + "</p>" +

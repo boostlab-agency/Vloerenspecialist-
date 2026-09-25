@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Showroompagina — dé uitnodiging van de site (hun belangrijkste CTA).
+   Opbouw: volle-breedte hero met live openingsstatus → kerncijfers →
+   horizontale "wandeling" langs de afdelingen → kaart + live weekrooster +
+   belknoppen → drie bezoekstappen → afsluitende uitnodiging.
+   ========================================================================== */
+
+/* ---- 1 · Hero over de volle breedte ---- */
+.sr-hero {
+  position: relative; min-height: min(92vh, 860px);
+  display: flex; align-items: flex-end; overflow: hidden; isolation: isolate;
+}
+.sr-hero-media { position: absolute; inset: 0; z-index: -1; }
+.sr-hero-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
+  animation: sr-breathe 2.4s cubic-bezier(.16,.8,.24,1) both;
+}
+@keyframes sr-breathe { from { transform: scale(1.08); } to { transform: none; } }
+.sr-hero-media::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(20,13,11,.96) 4%, rgba(20,13,11,.55) 42%, rgba(20,13,11,.15) 70%, rgba(20,13,11,.55) 100%),
+    linear-gradient(90deg, rgba(20,13,11,.55), rgba(20,13,11,0) 60%);
+}
+.sr-hero-inner {
+  position: relative; width: 100%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: inherit; padding-bottom: 64px;
+}
+.sr-crumb { color: rgba(244,238,225,.75); }
+.sr-crumb a { color: rgba(244,238,225,.75); }
+.sr-hero-copy { margin-top: auto; max-width: 640px; }
+.sr-hero-copy .open-pill { margin-bottom: 26px; }
+.sr-hero-copy h1 {
+  font-weight: 600; letter-spacing: -.02em; line-height: 1;
+  font-size: clamp(44px, 6.4vw, 92px); margin-bottom: 22px; color: #fff;
+}
+.sr-hero-copy .lead { font-size: clamp(16.5px, 1.3vw, 19px); color: rgba(244,238,225,.85); max-width: 48ch; margin-bottom: 32px; }
+.sr-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.sr-hero-address {
+  margin: 40px 0 0; padding-top: 20px; border-top: 1px solid rgba(244,238,225,.16);
+  font-size: 13.5px; letter-spacing: .02em; color: rgba(244,238,225,.7);
+}
+@media (prefers-reduced-motion: reduce) { .sr-hero-media img { animation: none; } }
+
+/* ---- 2 · Kerncijfers ---- */
+.sr-stats { border-bottom: 1px solid var(--line); }
+.sr-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.sr-stat { padding: 44px 28px 44px 0; }
+.sr-stat + .sr-stat { padding-left: 28px; border-left: 1px solid var(--line); }
+.sr-stat b {
+  display: block; font-family: var(--serif); font-weight: 600; letter-spacing: -.01em;
+  font-size: clamp(34px, 3.4vw, 52px); color: var(--accent); margin-bottom: 10px;
+}
+.sr-stat span { display: block; font-size: 14px; line-height: 1.55; color: var(--ink-soft); max-width: 30ch; }
+
+/* ---- 3 · Wandeling: horizontaal scrollende afdelingen ---- */
+.sr-walk-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+.sr-walk-head h2 { font-size: clamp(28px, 3.2vw, 44px); font-weight: 600; margin: 0; }
+.sr-walk-hint { margin: 0; font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+.sr-walk-hint span { display: inline-block; animation: sr-nudge 1.8s ease-in-out infinite; }
+@keyframes sr-nudge { 50% { transform: translateX(5px); } }
+.sr-walk-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 30%); gap: 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  padding: 0 max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))) 18px;
+  scrollbar-width: thin; scrollbar-color: rgba(244,238,225,.25) transparent;
+}
+.sr-walk-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.sr-zone {
+  position: relative; scroll-snap-align: start; aspect-ratio: 3/4; border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 26px;
+  color: #fff; isolation: isolate;
+}
+.sr-zone img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.16,.8,.24,1); }
+.sr-zone::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(12,8,7,.88), rgba(12,8,7,.1) 60%); }
+.sr-zone:hover img { transform: scale(1.05); }
+.sr-zone-no { font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.sr-zone-name { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.2vw, 32px); }
+.sr-zone-desc { font-size: 14px; color: rgba(255,255,255,.8); max-width: 30ch; }
+
+/* ---- 4 · Kaart + live weekrooster ---- */
+.sr-visit-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 24px; align-items: stretch; }
+.sr-map { min-height: 460px; border-radius: 14px; }
+.sr-visit-card {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 28px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.sr-visit-card .open-pill { align-self: flex-start; background: rgba(244,238,225,.05); backdrop-filter: none; }
+.sr-visit-note { margin: 0; font-size: 13px; color: var(--ink-soft); }
+.sr-visit-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.sr-visit-actions .btn { width: 100%; white-space: normal; text-align: center; }
+
+/* ---- 5 · Bezoekstappen ---- */
+.sr-steps-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: none; }
+.sr-steps-list li {
+  position: relative; padding: 30px 28px 32px; border-radius: 14px;
+  background: var(--surface); border: 1px solid var(--line);
+}
+.sr-step-no {
+  display: block; font-family: var(--serif); font-weight: 600; font-size: 48px; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(226,14,24,.8); margin-bottom: 22px;
+}
+.sr-steps-list h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+.sr-steps-list p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ---- Responsief ---- */
+@media (max-width: 1000px) {
+  .sr-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .sr-stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .sr-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .sr-visit-grid { grid-template-columns: 1fr; }
+  .sr-map { min-height: 320px; }
+  .sr-steps-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .sr-hero { min-height: 88vh; }
+  .sr-hero-inner { padding-bottom: 40px; }
+  .sr-stats-grid { grid-template-columns: 1fr; }
+  .sr-stat, .sr-stat + .sr-stat { padding: 26px 0; border-left: 0; }
+  .sr-stat + .sr-stat { border-top: 1px solid var(--line); }
+  .sr-walk-track { grid-auto-columns: 78%; }
+  .sr-walk-hint { display: none; }
+  .sr-visit-card { padding: 22px; }
+}

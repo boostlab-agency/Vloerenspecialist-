@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Raamdecoratiepagina — het verhaal draait om licht: een lichtregelaar in
+   de hero (lamellen die over de foto open en dicht gaan), typekaarten met
+   eigen iconen en meters, een werkwijze als tijdlijn en een typografische
+   merkenrij.
+   ========================================================================== */
+
+/* ---- Hero ---- */
+.rd-hero { margin-top: 20px; display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+.rd-hero-copy h1 { font-weight: 600; letter-spacing: -.02em; line-height: 1.02; font-size: clamp(38px, 4.8vw, 68px); margin: 14px 0 20px; text-wrap: balance; }
+.rd-hero-copy .lead { color: var(--ink-soft); font-size: clamp(16px, 1.2vw, 18px); max-width: 44ch; margin-bottom: 30px; }
+
+.rd-light { --slat-open: .55; }
+.rd-light-media { position: relative; aspect-ratio: 4/3.4; border-radius: 6px; overflow: hidden; background: #0c0807; }
+.rd-light-media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(calc(.35 + .7 * var(--slat-open))) saturate(calc(.6 + .4 * var(--slat-open)));
+  transition: filter .25s ease;
+}
+/* Lamellen: donkere banden waarvan de dikte meebeweegt met het schuifje. */
+.rd-slats {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(180deg,
+    rgba(26,18,15,.94) 0,
+    rgba(26,18,15,.94) calc(26px * (1 - var(--slat-open))),
+    rgba(26,18,15,0) calc(26px * (1 - var(--slat-open))),
+    rgba(26,18,15,0) 26px);
+  box-shadow: inset 0 0 80px rgba(0,0,0,.45);
+  transition: background .25s ease;
+}
+.rd-light-control {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  margin-top: 16px; padding: 14px 18px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line);
+}
+.rd-light-control label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+.rd-light-state { font-size: 13.5px; font-weight: 600; color: var(--ink); min-width: 15ch; text-align: right; }
+.rd-light-control input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+/* ---- Typekaarten ---- */
+.rd-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.rd-type {
+  display: grid; grid-template-columns: .9fr 1.1fr; border-radius: 14px; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--line);
+  scroll-margin-top: calc(var(--header-h) + 20px);
+  transition: border-color .3s ease, transform .4s cubic-bezier(.16,.8,.24,1);
+}
+.rd-type:hover { border-color: rgba(226,14,24,.45); transform: translateY(-3px); }
+.rd-type:target { border-color: var(--accent); }
+.rd-type-media { position: relative; min-height: 280px; }
+.rd-type-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rd-type-body { padding: 26px 26px 28px; display: flex; flex-direction: column; }
+.rd-icon { width: 38px; height: 38px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 16px; }
+.rd-type h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+.rd-type p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 18px; }
+.rd-meters { margin: auto 0 0; display: flex; flex-direction: column; gap: 9px; }
+.rd-meters div { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; }
+.rd-meters dt { font-size: 12px; color: var(--ink-soft); }
+.rd-meters dd { margin: 0; height: 5px; border-radius: 5px; background: rgba(244,238,225,.1); overflow: hidden; }
+.rd-meters dd span { display: block; height: 100%; width: calc(var(--v) * 20%); border-radius: 5px; background: linear-gradient(90deg, #d7a274, var(--accent)); }
+
+/* ---- Tijdlijn ---- */
+.rd-timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+.rd-timeline::before { content: ""; position: absolute; left: 7px; right: 7px; top: 7px; height: 1px; background: var(--line); }
+.rd-timeline li { position: relative; padding-top: 34px; }
+.rd-dot { position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.rd-timeline h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.rd-timeline p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ---- Merken ---- */
+.rd-brands { padding: 90px 0; }
+.rd-brand-list { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 44px; margin-top: 18px; }
+.rd-brand-list a {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.02em;
+  font-size: clamp(30px, 4.4vw, 60px); color: rgba(244,238,225,.28); transition: color .3s ease;
+}
+.rd-brand-list a:hover { color: var(--ink); }
+
+/* ---- Responsief ---- */
+@media (max-width: 1000px) {
+  .rd-hero { grid-template-columns: 1fr; gap: 32px; }
+  .rd-types { grid-template-columns: 1fr; }
+  .rd-timeline { grid-template-columns: repeat(2, 1fr); row-gap: 36px; }
+  .rd-timeline::before { display: none; }
+}
+@media (max-width: 640px) {
+  .rd-type { grid-template-columns: 1fr; }
+  .rd-type-media { min-height: 200px; }
+  .rd-light-control { grid-template-columns: 1fr; gap: 8px; }
+  .rd-light-state { text-align: left; }
+  .rd-timeline { grid-template-columns: 1fr; }
+}

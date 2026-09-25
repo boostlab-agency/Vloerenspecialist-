@@ -213,6 +213,18 @@
 .op-hero { flex: 1.3; position: relative; border-radius: 18px; overflow: hidden; min-height: 320px; }
 .op-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .op-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(8,5,4,.7) 0%, rgba(8,5,4,.15) 55%); }
+/* Portret (Contact): gezicht bovenin houden, alleen onderaan verdonkeren
+   voor het bijschrift; klik opent de contactpagina. */
+.op-hero.is-person img { object-position: center 18%; transition: transform .8s cubic-bezier(.16,.8,.24,1); }
+.op-hero.is-person:hover img { transform: scale(1.04); }
+.op-hero.is-person::after { background: linear-gradient(to top, rgba(8,5,4,.78), rgba(8,5,4,0) 45%); }
+.op-hero-cap {
+  position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+  color: #fff; font-family: var(--serif); font-weight: 600; font-size: 17px;
+}
+.op-hero-cap svg { transition: transform .25s var(--ease); }
+.op-hero:hover .op-hero-cap svg { transform: translateX(4px); }
 .op-hero-copy {
   flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px;
   padding-right: 12px;

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Raamdecoratie — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Gordijnen, jaloezieën, rolgordijnen en plissé- of vouwgordijnen op maat. Vraag gratis inmeetadvies of bekijk stoffen en stalen in onze showroom in Tilburg.">
+<meta name="description" content="Jaloezieën, rolgordijnen, plissé- en vouwgordijnen op maat. Gratis inmeten aan huis, stalen in onze showroom in Tilburg en montage door ons eigen team.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/raamdecoratie.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -42,112 +43,120 @@
       <span aria-current="page">Raamdecoratie</span>
     </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijn in warm avondlicht" loading="eager">
-      </div>
-      <div class="page-hero-copy">
+    <!-- Hero met lichtregelaar -->
+    <section class="rd-hero">
+      <div class="rd-hero-copy">
         <p class="eyebrow">Raamdecoratie</p>
         <h1>Licht en privacy, precies naar uw wens.</h1>
-        <p class="lead">Gordijnen, jaloezieën, rolgordijnen, plissé- en vouwgordijnen — allemaal op maat gemaakt en geplaatst door ons eigen team. Van lichte linnen vitrage tot verduisterende stoffen voor de slaapkamer.</p>
+        <p class="lead">Met de juiste raamdecoratie bepaalt ú hoeveel licht er binnenkomt. Probeer het maar: schuif en zie hoe een ruimte verandert.</p>
         <div class="page-hero-actions">
           <a class="btn btn-primary magnetic" href="/contact.html">Vraag gratis inmeetadvies</a>
-          <a class="btn-text magnetic" href="/showroom.html">Bekijk stoffen in de showroom <span class="arrow">→</span></a>
+          <a class="btn-text magnetic" href="#soorten">Bekijk de soorten <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="rd-light" data-light-slider>
+        <div class="rd-light-media">
+          <img src="https://images.unsplash.com/photo-1758974775331-c5400bbef625?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Woonkamer met zonlicht door het raam" loading="eager">
+          <div class="rd-slats" aria-hidden="true"></div>
+        </div>
+        <div class="rd-light-control">
+          <label for="rd-light-range">Speel met het licht</label>
+          <input type="range" id="rd-light-range" min="0" max="100" value="55" aria-describedby="rd-light-state">
+          <span class="rd-light-state" id="rd-light-state" data-light-label>Zacht gefilterd licht</span>
         </div>
       </div>
     </section>
   </div>
 
-  <section class="page-section is-tight">
+  <!-- Soorten -->
+  <section class="page-section" id="soorten">
     <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="/assets/img/real/gordijn-caramel-tapijt-900.jpg" alt="Caramelkleurige gordijnstof in de showroom" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <p class="eyebrow">Onze service</p>
-          <h2>Inmeten, advies en plaatsing — allemaal bij ons.</h2>
-          <p>Onze adviseurs komen bij u thuis om te meten en de juiste stof, kleur en bediening te bepalen. Daarna wordt alles op maat gemaakt en door ons eigen team geplaatst.</p>
-          <p>In de showroom hangen tientallen stoffen en stalen om echt te voelen — foto's op een scherm doen een stof nooit helemaal recht.</p>
-          <div class="tag-row">
-            <span class="tag">Gratis inmeten</span>
-            <span class="tag">Eigen plaatsing</span>
-            <span class="tag">Stalen in de showroom</span>
+      <div class="page-section-head">
+        <p class="eyebrow">Keuze uit raamdecoratie</p>
+        <h2>Vier manieren om het licht te regelen.</h2>
+      </div>
+      <div class="rd-types">
+        <article class="rd-type reveal" id="jaloezieen">
+          <div class="rd-type-media"><img src="https://images.unsplash.com/photo-1609534117141-ff9f20450902?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Houten jaloezie voor een raam met een plant" loading="lazy"></div>
+          <div class="rd-type-body">
+            <svg class="rd-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 8h28M6 14h28M6 20h28M6 26h28M6 32h28M30 6v28"/></svg>
+            <h3>Jaloezieën</h3>
+            <p>Kantel de lamellen en bepaal precies hoeveel licht en inkijk u toelaat. In hout, kunststof of aluminium.</p>
+            <dl class="rd-meters">
+              <div><dt>Lichtregeling</dt><dd><span style="--v:5"></span></dd></div>
+              <div><dt>Privacy</dt><dd><span style="--v:4"></span></dd></div>
+              <div><dt>Isolatie</dt><dd><span style="--v:2"></span></dd></div>
+            </dl>
           </div>
-          <a class="btn-text magnetic" href="/contact.html">Vraag inmeetadvies aan <span class="arrow">→</span></a>
-        </div>
+        </article>
+        <article class="rd-type reveal" id="rolgordijnen">
+          <div class="rd-type-media"><img src="https://images.unsplash.com/photo-1776261293170-66fd3b09273e?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Grijs rolgordijn voor een modern raam" loading="lazy"></div>
+          <div class="rd-type-body">
+            <svg class="rd-icon" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="5" width="28" height="5" rx="2.5"/><path d="M8 10v18h24V10M20 28v6"/></svg>
+            <h3>Rolgordijnen</h3>
+            <p>Strak en praktisch: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend.</p>
+            <dl class="rd-meters">
+              <div><dt>Lichtregeling</dt><dd><span style="--v:3"></span></dd></div>
+              <div><dt>Privacy</dt><dd><span style="--v:5"></span></dd></div>
+              <div><dt>Isolatie</dt><dd><span style="--v:3"></span></dd></div>
+            </dl>
+          </div>
+        </article>
+        <article class="rd-type reveal" id="plissegordijnen">
+          <div class="rd-type-media"><img src="https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Plisségordijn boven een raam in een lichte woonkamer" loading="lazy"></div>
+          <div class="rd-type-body">
+            <svg class="rd-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6h28M6 34h28M6 6l28 4-28 4 28 4-28 4 28 4-28 4 28 4"/></svg>
+            <h3>Plisségordijnen</h3>
+            <p>Van boven én van onderen te bedienen, en passend in lastige raamvormen. Isoleert bovendien uitstekend.</p>
+            <dl class="rd-meters">
+              <div><dt>Lichtregeling</dt><dd><span style="--v:4"></span></dd></div>
+              <div><dt>Privacy</dt><dd><span style="--v:4"></span></dd></div>
+              <div><dt>Isolatie</dt><dd><span style="--v:5"></span></dd></div>
+            </dl>
+          </div>
+        </article>
+        <article class="rd-type reveal" id="vouwgordijnen">
+          <div class="rd-type-media"><img src="https://images.unsplash.com/photo-1779078652928-6d941878d32e?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Vouwgordijn boven een raam in een slaapkamer" loading="lazy"></div>
+          <div class="rd-type-body">
+            <svg class="rd-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6h28M8 6v8c4 3 20 3 24 0V6M8 14v8c4 3 20 3 24 0v-8M8 22v8c4 3 20 3 24 0v-8"/></svg>
+            <h3>Vouwgordijnen</h3>
+            <p>Zachte plooien van stof die het raam warm afmaken — van luchtig linnen tot verduisterend, modern of klassiek.</p>
+            <dl class="rd-meters">
+              <div><dt>Lichtregeling</dt><dd><span style="--v:3"></span></dd></div>
+              <div><dt>Privacy</dt><dd><span style="--v:4"></span></dd></div>
+              <div><dt>Isolatie</dt><dd><span style="--v:4"></span></dd></div>
+            </dl>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="page-section is-alt" id="jaloezieen">
-    <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1609534117141-ff9f20450902?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Houten jaloezie voor een raam met een plant" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <p class="eyebrow">Keuze uit raamdecoratie</p>
-          <h2>Jaloezieën</h2>
-          <p>Een uitstekende keuze voor het regelen van lichtinval en privacy. Jaloezieën zijn verkrijgbaar in hout, kunststof en aluminium, en de lamellen zijn eenvoudig te kantelen voor precies de sfeer die u wilt.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section" id="rolgordijnen">
-    <div class="wrap">
-      <div class="split-block is-reverse">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1776261293170-66fd3b09273e?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Grijs rolgordijn voor een modern raam" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Rolgordijnen</h2>
-          <p>Stijlvol en praktisch, met volledige controle over de lichtinval. Kies uit lichtdoorlatende of verduisterende stoffen, in talloze kleuren en patronen — handmatig of elektrisch bediend.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section is-alt" id="plissegordijnen">
-    <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Plisségordijn boven een raam in een lichte woonkamer" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Plisségordijnen</h2>
-          <p>De perfecte combinatie van stijl en veelzijdigheid. Met hun gevouwen structuur zijn plisségordijnen van boven én van onderen te bedienen, en ze passen ook in lastige raamvormen. Ze isoleren bovendien goed.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section" id="vouwgordijnen">
-    <div class="wrap">
-      <div class="split-block is-reverse">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1779078652928-6d941878d32e?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Vouwgordijn boven een raam in een slaapkamer" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Vouwgordijnen</h2>
-          <p>Een stijlvolle keuze voor elke ruimte. Vouwgordijnen vouwen zich in zachte plooien op en geven het raam een warme, afgewerkte uitstraling — van lichte linnen stof tot verduisterend, modern of klassiek.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Werkwijze als tijdlijn -->
   <section class="page-section is-alt">
     <div class="wrap">
       <div class="page-section-head">
-        <p class="eyebrow">Onze merken</p>
-        <h2>Raamdecoratie van topmerken.</h2>
+        <p class="eyebrow">Onze service</p>
+        <h2>Van meetlint tot montage — wij regelen het.</h2>
       </div>
-      <div class="brand-strip reveal">
-        <a class="brand-pill" href="/merken/keje.html">KeJe raamdecoratie</a>
-        <a class="brand-pill" href="/merken/lifestyle-gordijnen.html">Lifestyle gordijnen</a>
-        <a class="brand-pill" href="/merken/mart-visser.html">Mart Visser</a>
-        <a class="brand-pill" href="/merken/eijffinger.html">Eijffinger gordijnen</a>
+      <ol class="rd-timeline">
+        <li class="reveal"><span class="rd-dot"></span><h3>Gratis inmeten</h3><p>Onze adviseur meet uw ramen thuis op en bekijkt de lichtinval.</p></li>
+        <li class="reveal"><span class="rd-dot"></span><h3>Advies &amp; stalen</h3><p>Voel de stoffen in de showroom of thuis, en kies de bediening.</p></li>
+        <li class="reveal"><span class="rd-dot"></span><h3>Op maat gemaakt</h3><p>Alles wordt tot op de millimeter voor uw ramen geproduceerd.</p></li>
+        <li class="reveal"><span class="rd-dot"></span><h3>Montage</h3><p>Ons eigen team hangt alles strak op — u hoeft niets zelf te doen.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Merken -->
+  <section class="page-section rd-brands">
+    <div class="wrap">
+      <p class="eyebrow">Onze merken</p>
+      <div class="rd-brand-list">
+        <a href="/merken/keje.html">KeJe</a>
+        <a href="/merken/lifestyle-gordijnen.html">Lifestyle</a>
+        <a href="/merken/mart-visser.html">Mart Visser</a>
+        <a href="/merken/eijffinger.html">Eijffinger</a>
       </div>
     </div>
   </section>
@@ -163,7 +172,7 @@
         <p>Foto's doen een stof nooit helemaal recht — bekijk en voel het volledige assortiment in onze showroom.</p>
         <div class="hero-cta-row">
           <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text magnetic" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+          <a class="btn-text magnetic" href="/contact.html">Vraag gratis inmeetadvies <span class="arrow">→</span></a>
         </div>
       </div>
     </div>
