@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
@@ -39,27 +39,28 @@
 
   <!-- 1 · Hero: in één oogopslag wat, waar en hoe -->
   <section class="h-hero" data-review-id="hero" data-review-label="Hero">
-    <div class="wrap h-hero-grid">
-      <div class="h-hero-copy">
-        <p class="eyebrow">Vloerenspecialist in Tilburg</p>
-        <h1>Vloeren en interieur op maat, onder één dak.</h1>
-        <p class="lead">Van PVC tot gietvloer, van kasten op maat tot behang en raamdecoratie. Bekijk alles in onze showroom van 1.800 m² en krijg persoonlijk advies — van keuze tot plaatsing.</p>
-        <div class="h-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn btn-outline" href="/vloeren/index.html">Bekijk alle vloeren</a>
-        </div>
-        <ul class="h-usps">
-          <li>62+ topmerken</li>
-          <li>Eigen plaatsingsteam</li>
-          <li>Gratis levering in Noord-Brabant</li>
-        </ul>
-      </div>
+    <div class="wrap">
       <div class="h-hero-media">
-        <img src="/assets/img/hero-showroom-1400.jpg"
-             srcset="/assets/img/hero-showroom-800.jpg 800w, /assets/img/hero-showroom-1400.jpg 1400w, /assets/img/hero-showroom-2200.jpg 2200w"
-             sizes="(max-width: 900px) 100vw, 50vw"
-             alt="Rustige woonkamer met lichte vloer, grijze bank en wandkast op maat" loading="eager">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=2200" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="eager">
+        <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
         <span class="h-hero-status" data-open-status></span>
+      </div>
+      <a class="h-scroll" href="#vloeren">Scroll om te ontdekken <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+
+      <div class="h-hero-intro">
+        <h1>Vloeren en interieur op maat, onder één dak</h1>
+        <div class="h-hero-copy">
+          <p class="lead">Van PVC tot gietvloer, van kasten op maat tot behang en raamdecoratie. Bekijk alles in onze showroom van 1.800 m² en krijg persoonlijk advies — van keuze tot plaatsing.</p>
+          <div class="h-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
+            <a class="btn btn-outline" href="/vloeren/index.html">Bekijk alle vloeren</a>
+          </div>
+          <ul class="h-usps">
+            <li>62+ topmerken</li>
+            <li>Eigen plaatsingsteam</li>
+            <li>Gratis levering in Noord-Brabant</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -69,12 +70,12 @@
     <div class="wrap">
       <div class="h-head">
         <div>
-          <p class="eyebrow">Onze vloeren</p>
-          <h2>Voor elke ruimte de juiste vloer.</h2>
+          <h2>Voor elke ruimte de juiste vloer</h2>
+          <p class="eyebrow">Onze vloersoorten</p>
         </div>
         <a class="btn-text" href="/vloeren/index.html">Alle vloeren <span class="arrow">→</span></a>
       </div>
-      <div class="h-grid cols-4">
+      <div class="h-grid cols-4 is-divided">
         <a class="h-card" href="/vloeren/pvc.html">
           <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="PVC vloer in een moderne woonkamer" loading="lazy">
           <h3>PVC vloeren</h3><p>Waterbestendig en onderhoudsarm</p>
@@ -119,11 +120,11 @@
     <div class="wrap">
       <div class="h-head">
         <div>
+          <h2>Ook voor wand, raam en maatwerk</h2>
           <p class="eyebrow">Meer dan vloeren</p>
-          <h2>Ook voor wand, raam en maatwerk.</h2>
         </div>
       </div>
-      <div class="h-grid cols-3">
+      <div class="h-grid cols-3 is-divided">
         <a class="h-card" href="/interieur/index.html">
           <img src="/assets/img/real/kasten-garderobe-900.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
           <h3>Interieur op maat</h3><p>Kasten, deuren, wanden en meubels — ontworpen voor uw woning</p>
@@ -157,8 +158,8 @@
         <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy">
       </div>
       <div class="h-showroom-copy">
-        <p class="eyebrow">De showroom</p>
-        <h2>Kom langs — de koffie staat klaar.</h2>
+        <h2>Kom langs — de koffie staat klaar</h2>
+        <p class="eyebrow">Onze showroom</p>
         <p class="lead">Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen of plan een afspraak voor uitgebreid advies.</p>
         <span data-open-status></span>
         <div class="h-showroom-info">
@@ -191,8 +192,8 @@
     <div class="wrap">
       <div class="h-head">
         <div>
-          <p class="eyebrow">Ervaringen</p>
-          <h2>Wat klanten over ons zeggen.</h2>
+          <h2>Wat klanten over ons zeggen</h2>
+          <p class="eyebrow">Klantervaringen</p>
         </div>
         <p class="h-score"><span class="h-stars" aria-hidden="true">★★★★★</span> 4,8 / 5 op Google</p>
       </div>

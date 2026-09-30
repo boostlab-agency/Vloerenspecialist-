@@ -1,44 +1,45 @@
 /* ==========================================================================
    Design tokens — De Vloerenspecialist
-   Licht, rustig en overzichtelijk: veel wit, warme lichte vlakken en het
-   huisstijlrood alleen als accent (knoppen, labels, actieve status).
-   Bewust altijd licht — geen automatische donkere modus.
+   Rustig en tijdloos, naar het voorbeeld van een klassieke vloerenshowroom
+   (referentie: knulst.nl): wit en warm beige, warm bijna-zwart als enige
+   accentkleur, grote koppen in hoofdletters en een cursief sierlettertype
+   voor kleine labels. Rood komt alleen nog voor in het logo.
    ========================================================================== */
 
 :root {
   /* Kleur */
   --bg: #ffffff;
-  --surface: #f5f2ed;          /* warme lichte vlakken (zoals een showroomvloer) */
-  --surface-rgb: 245, 242, 237;
-  --surface-2: #ece7df;
-  --ink: #1d1b19;
-  --ink-soft: #5f5a52;
-  --ink-faint: #8a847a;
-  --line: #e6e0d6;
-  /* Huisstijlrood — zelfde rood als in het logo. */
-  --accent: #e20e18;
-  --accent-rgb: 226, 14, 24;
-  --accent-soft: #c50c15;       /* iets donkerder rood voor tekst/hover op wit */
+  --surface: #f4f3ef;          /* warm beige vlak */
+  --surface-rgb: 244, 243, 239;
+  --surface-2: #ebe9e3;
+  --ink: #272521;              /* warm bijna-zwart: tekst, knoppen, accenten */
+  --ink-soft: #6f6a63;
+  --ink-faint: #939290;
+  --line: #d9d6cf;             /* dunne scheidingslijnen */
+  --accent: #272521;           /* accent = zelfde warm zwart (geen rood meer) */
+  --accent-rgb: 39, 37, 33;
+  --accent-soft: #000000;      /* hover */
   --on-accent: #ffffff;
 
   /* Typografie */
-  --serif: "Archivo", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;  /* koppen */
+  --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;   /* tekst */
+  --script: "Lora", Georgia, serif;                                                           /* cursieve labels */
 
   /* Schaal */
-  --container: 1280px;
+  --container: 1400px;
   --container-narrow: 860px;
-  --gutter: 24px;
-  --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 14px;
-  --header-h: 76px;
+  --gutter: 28px;
+  --radius-sm: 0;
+  --radius: 0;                 /* strakke, rechte hoeken op beeld en vlakken */
+  --radius-lg: 0;
+  --header-h: 88px;
 
   /* Beweging — alleen subtiel */
   --ease: cubic-bezier(.22,.61,.36,1);
   --dur: .3s;
 
   /* Schaduw */
-  --shadow-sm: 0 1px 2px rgba(29,27,25,.06);
-  --shadow: 0 16px 40px -18px rgba(29,27,25,.22);
+  --shadow-sm: 0 1px 2px rgba(39,37,33,.06);
+  --shadow: 0 18px 40px -20px rgba(39,37,33,.25);
 }

@@ -1,73 +1,111 @@
 /* ==========================================================================
-   Homepage — licht, rustig en overzichtelijk. Zes duidelijke blokken:
-   hero, vloersoorten, overige vakgebieden, kerncijfers, showroom, reviews.
-   Geen scroll-animaties of storytelling: in één oogopslag zien wat
-   De Vloerenspecialist doet.
+   Homepage — rustig en overzichtelijk, naar het voorbeeld van een
+   klassieke vloerenshowroom: brede hero-foto, grote kop in hoofdletters,
+   productcategorieën in een raster met dunne scheidingslijnen, beige vlakken.
    ========================================================================== */
 
-.h-section { padding: 88px 0; }
+.h-section { padding: 96px 0; }
 .h-section.is-surface { background: var(--surface); }
 
-/* Kop van een blok: titel links, eventuele link rechts. */
-.h-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
-.h-head h2 { margin: 0; }
-.h-head .btn-text { flex: none; margin-bottom: 6px; }
+/* Kop van een blok: grote kop, daaronder het cursieve label met lijntje. */
+.h-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 56px; }
+.h-head h2 { margin: 0 0 16px; max-width: 18ch; }
+.h-head .eyebrow { margin: 0; }
+.h-head > .btn-text { flex: none; margin-bottom: 4px; }
 
 /* ---- 1 · Hero ---- */
-.h-hero { padding: 56px 0 72px; }
-.h-hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
-.h-hero-copy h1 { margin-bottom: 18px; text-wrap: balance; }
-.h-hero-copy .lead { max-width: 46ch; margin-bottom: 28px; }
-.h-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
-.h-usps { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.h-usps li { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 500; color: var(--ink); }
-.h-usps li::before {
-  content: ""; width: 18px; height: 18px; flex: none; border-radius: 50%;
-  background: rgba(var(--accent-rgb), .1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e20e18' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 11px no-repeat;
+.h-hero { padding: 0 0 88px; }
+.h-hero-media { position: relative; aspect-ratio: 2.15 / 1; overflow: hidden; background: var(--surface); }
+.h-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+/* Verticale regel links in de foto, zoals "AMBACHTELIJKE VLOEREN SINDS 1958". */
+.h-hero-vertical {
+  position: absolute; left: 30px; bottom: 34px; margin: 0;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 13px; font-weight: 300; letter-spacing: .08em; text-transform: uppercase; color: #fff;
+  text-shadow: 0 1px 12px rgba(0,0,0,.35);
 }
-.h-hero-media { position: relative; aspect-ratio: 5/4; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
-.h-hero-media img { width: 100%; height: 100%; object-fit: cover; }
-.h-hero-status { position: absolute; left: 16px; bottom: 16px; box-shadow: var(--shadow-sm); }
+.h-hero-vertical strong { color: #fff; font-weight: 700; }
+.h-hero-status { position: absolute; right: 24px; bottom: 24px; }
+.h-scroll {
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  margin: 18px 0 0; font-size: 14px; color: var(--ink);
+}
+.h-scroll:hover { color: var(--ink-soft); }
+.h-hero-intro { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; margin-top: 64px; }
+.h-hero-intro h1 { margin: 0; }
+.h-hero-copy .lead { margin: 6px 0 30px; }
+.h-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.h-usps { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.h-usps li { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); }
+.h-usps li::before {
+  content: ""; width: 16px; height: 16px; flex: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23272521' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
 
-/* ---- Kaartrasters (vloersoorten, vakgebieden, reviews) ---- */
+/* ---- Kaartrasters ---- */
 .h-grid { display: grid; gap: 40px 28px; }
 .h-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .h-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-/* Kaart: foto, titel, korte omschrijving — meer niet. */
+/* Kaart: foto, titel, korte omschrijving — gecentreerd. */
 .h-card { display: block; text-align: center; color: var(--ink); }
-.h-card img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: var(--radius); background: var(--surface-2); transition: opacity .2s ease; }
-.h-card h3 { margin: 18px 0 4px; font-size: 18px; }
-.h-card p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
-.h-card:hover img { opacity: .88; }
-.h-card:hover h3 { color: var(--accent); }
+.h-card img { width: 100%; aspect-ratio: 5 / 3; object-fit: cover; background: var(--surface-2); transition: opacity .2s ease; }
+.h-card h3 { margin: 26px 0 8px; font-size: 16px; font-weight: 500; }
+.h-card p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+.h-card:hover img { opacity: .86; }
 
-/* Achtste vak: uitnodiging om te komen kijken (vult het raster netjes). */
-.h-card-cta { display: flex; }
-.h-card-cta-inner {
-  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  aspect-ratio: 3/2; padding: 20px; border-radius: var(--radius); border: 1px dashed var(--ink-faint);
+/* Raster met dunne scheidingslijnen: verticaal tussen kolommen, horizontaal
+   tussen rijen. Per schermformaat eigen, afgebakende regels (4 / 3 / 2 kolommen),
+   zodat er nooit een lijn op de verkeerde plek blijft staan. */
+/* Alle vakken gelijke binnenruimte (dus gelijke fotomaat); het raster loopt
+   links en rechts evenveel uit, zodat de buitenkant netjes uitlijnt. */
+.h-grid.is-divided { gap: 0; margin: 0 -28px; }
+.h-grid.is-divided > * { padding: 0 28px 48px; }
+@media (min-width: 1101px) {
+  .h-grid.is-divided.cols-4 > *:not(:nth-child(4n+1)) { border-left: 1px solid var(--line); }
+  .h-grid.is-divided.cols-4 > *:nth-child(n+5) { border-top: 1px solid var(--line); padding-top: 48px; }
 }
+@media (min-width: 641px) {
+  .h-grid.is-divided.cols-3 > *:not(:nth-child(3n+1)) { border-left: 1px solid var(--line); }
+  .h-grid.is-divided.cols-3 > *:nth-child(n+4) { border-top: 1px solid var(--line); padding-top: 48px; }
+}
+@media (min-width: 641px) and (max-width: 1100px) {
+  .h-grid.is-divided.cols-4 { margin: 0 -24px; }
+  .h-grid.is-divided.cols-4 > * { padding: 0 24px 40px; }
+  .h-grid.is-divided.cols-4 > *:not(:nth-child(3n+1)) { border-left: 1px solid var(--line); }
+  .h-grid.is-divided.cols-4 > *:nth-child(n+4) { border-top: 1px solid var(--line); padding-top: 40px; }
+}
+@media (max-width: 640px) {
+  .h-grid.is-divided, .h-grid.is-divided.cols-4 { margin: 0 -14px; }
+  .h-grid.is-divided > *, .h-grid.is-divided.cols-4 > * { padding: 0 14px 28px; }
+  .h-grid.is-divided > *:nth-child(2n) { border-left: 1px solid var(--line); }
+  .h-grid.is-divided > *:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: 28px; }
+}
+
+/* Achtste vak: uitnodiging om te komen kijken. */
+.h-card-cta { display: flex; }
+.h-card-cta-inner { flex: 1; min-width: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: var(--bg); padding: 24px 20px; }
 .h-card-cta h3 { margin: 0; }
 .h-card-cta p { max-width: 26ch; }
-.h-card-cta .btn-text { margin-top: 6px; }
-.h-card-cta:hover .h-card-cta-inner { border-color: var(--accent); }
+.h-card-cta .btn-text { margin-top: 8px; }
 
 /* ---- 4 · Kerncijfers ---- */
-.h-stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.h-stats { border-bottom: 1px solid var(--line); }
 .h-stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.h-stat { padding: 40px 28px 40px 0; }
-.h-stat + .h-stat { padding-left: 28px; border-left: 1px solid var(--line); }
-.h-stat b { display: block; font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 3vw, 42px); color: var(--accent); line-height: 1.1; margin-bottom: 8px; }
-.h-stat span { display: block; font-size: 14px; line-height: 1.55; color: var(--ink-soft); max-width: 30ch; }
+.h-stat { padding: 48px 32px 48px 0; }
+.h-stat + .h-stat { padding-left: 32px; border-left: 1px solid var(--line); }
+.h-stat b { display: block; font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 3vw, 44px); color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
+.h-stat span { display: block; font-size: 14px; line-height: 1.6; color: var(--ink-soft); max-width: 30ch; }
 
 /* ---- 5 · Showroom ---- */
-.h-showroom { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.h-showroom-media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; background: var(--surface-2); }
+.h-showroom { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.h-showroom-media { aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface-2); }
 .h-showroom-media img { width: 100%; height: 100%; object-fit: cover; }
-.h-showroom-copy .lead { margin-bottom: 20px; }
-.h-showroom-info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 24px; }
-.h-hours { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 10px; }
+.h-showroom-copy h2 { margin-bottom: 16px; }
+.h-showroom-copy .eyebrow { margin-bottom: 26px; }
+.h-showroom-copy .lead { margin-bottom: 22px; }
+.h-showroom-info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0 26px; }
+.h-hours { background: var(--bg); padding: 10px; }
 .h-hours .open-week-row { padding: 7px 10px; font-size: 14px; }
 .h-contact { display: flex; flex-direction: column; gap: 12px; }
 .h-address { margin: 0; font-size: 15px; line-height: 1.55; }
@@ -76,11 +114,11 @@
 .h-showroom-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* ---- 6 · Reviews ---- */
-.h-score { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-weight: 600; font-size: 15px; }
-.h-stars { color: #f5a623; letter-spacing: 2px; }
-.h-review { margin: 0; padding: 28px; border-radius: var(--radius-lg); background: var(--surface); display: flex; flex-direction: column; gap: 16px; }
-.h-review blockquote { margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink); }
-.h-review figcaption { margin-top: auto; font-size: 13.5px; font-weight: 600; color: var(--ink-soft); }
+.h-score { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-weight: 500; font-size: 15px; }
+.h-stars { color: var(--ink); letter-spacing: 2px; }
+.h-review { margin: 0; padding: 32px 28px; background: var(--surface); display: flex; flex-direction: column; gap: 18px; }
+.h-review blockquote { margin: 0; font-family: var(--script); font-style: italic; font-weight: 500; font-size: 17px; line-height: 1.6; color: var(--ink); }
+.h-review figcaption { margin-top: auto; font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
 
 /* ---- Responsief ---- */
 @media (max-width: 1100px) {
@@ -91,19 +129,22 @@
   .h-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 900px) {
-  .h-hero { padding: 28px 0 56px; }
-  .h-hero-grid, .h-showroom { grid-template-columns: 1fr; gap: 32px; }
-  .h-hero-media { order: -1; aspect-ratio: 16/11; }
-  .h-showroom-media { aspect-ratio: 16/11; }
-  .h-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .h-hero-intro, .h-showroom { grid-template-columns: 1fr; gap: 28px; }
+  .h-hero-intro { margin-top: 40px; }
+  .h-showroom-media { aspect-ratio: 16 / 11; }
 }
 @media (max-width: 640px) {
-  .h-section { padding: 60px 0; }
-  .h-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 28px; }
-  .h-grid { gap: 28px 16px; }
+  .h-section { padding: 64px 0; }
+  .h-hero { padding-bottom: 60px; }
+  .h-hero-media { aspect-ratio: 4 / 3.4; margin: 0 calc(var(--gutter) * -1); }
+  .h-hero-vertical { left: 16px; bottom: 18px; font-size: 11px; }
+  .h-hero-status { right: 12px; bottom: 12px; font-size: 12px; }
+  .h-hero-status .open-sub { display: none; }
+  .h-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 36px; }
+  /* Telefoon: 2 kolommen. */
   .h-grid.cols-4, .h-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .h-card h3 { font-size: 16px; margin-top: 12px; }
-  .h-card p { font-size: 13.5px; }
+  .h-card h3 { font-size: 15px; margin-top: 16px; }
+  .h-card p { font-size: 13px; }
   .h-showroom-info { grid-template-columns: 1fr; }
   .h-stats-grid { grid-template-columns: 1fr; }
   .h-stat, .h-stat + .h-stat { padding: 24px 0; border-left: 0; }
