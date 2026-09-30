@@ -33,7 +33,7 @@
   --radius-sm: 0;
   --radius: 0;                 /* strakke, rechte hoeken op beeld en vlakken */
   --radius-lg: 0;
-  --header-h: 88px;
+  --header-h: 108px;
 
   /* Beweging — alleen subtiel */
   --ease: cubic-bezier(.22,.61,.36,1);

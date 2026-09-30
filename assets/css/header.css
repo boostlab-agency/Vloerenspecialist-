@@ -12,10 +12,16 @@
   transition: box-shadow .25s var(--ease);
 }
 .site-header.is-scrolled { box-shadow: 0 6px 24px -18px rgba(29,27,25,.35); }
-.header-bar { height: var(--header-h); display: flex; align-items: center; gap: 28px; }
+.header-bar { height: var(--header-h); display: flex; align-items: center; gap: 28px; transition: height .25s var(--ease); }
+/* Bij scrollen: compacter, zodat de balk niet te veel ruimte inneemt. */
+.brand-logo { transition: height .25s var(--ease); }
+@media (min-width: 641px) {
+  .site-header.is-scrolled .header-bar { height: 76px; }
+  .site-header.is-scrolled .brand-logo { height: 34px; }
+}
 
 .brand { display: flex; align-items: center; flex: none; min-width: 0; }
-.brand-logo { display: block; height: 36px; width: auto; }
+.brand-logo { display: block; height: 48px; width: auto; }
 
 /* ---- Hoofdnavigatie ---- */
 .main-nav { flex: 1; display: flex; justify-content: center; }
@@ -91,6 +97,7 @@
 /* Iets smallere computerschermen: telefoonnummer alleen als icoon. */
 @media (max-width: 1499px) {
   .header-phone-nr { display: none; }
+  .brand-logo { height: 40px; }
   .header-phone { width: 40px; height: 40px; justify-content: center; border: 1px solid var(--line); border-radius: 999px; }
   .header-bar { gap: 16px; }
   .main-nav > ul { gap: 2px; }
@@ -104,6 +111,7 @@
 
 /* ---- Onder 1360px: menupaneel i.p.v. navigatiebalk ---- */
 @media (max-width: 1359px) {
+  :root { --header-h: 88px; }
   .main-nav { display: none; }
   .header-bar { justify-content: space-between; }
   .menu-toggle { display: inline-flex; }

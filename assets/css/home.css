@@ -1,23 +1,23 @@
 /* ==========================================================================
-   Homepage — rustig en overzichtelijk, naar het voorbeeld van een
-   klassieke vloerenshowroom: brede hero-foto, grote kop in hoofdletters,
-   productcategorieën in een raster met dunne scheidingslijnen, beige vlakken.
+   Homepage — minimalistisch, naar het voorbeeld van een klassieke
+   vloerenshowroom. Zes rustige blokken: filmpje, welkom (beeld + tekst),
+   vloersoorten, overige vakgebieden, showroom, reviews.
    ========================================================================== */
 
-.h-section { padding: 96px 0; }
+.h-section { padding: 110px 0; }
 .h-section.is-surface { background: var(--surface); }
 
 /* Kop van een blok: grote kop, daaronder het cursieve label met lijntje. */
-.h-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 56px; }
+.h-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 60px; }
 .h-head h2 { margin: 0 0 16px; max-width: 18ch; }
 .h-head .eyebrow { margin: 0; }
 .h-head > .btn-text { flex: none; margin-bottom: 4px; }
 
-/* ---- 1 · Hero ---- */
-.h-hero { padding: 0 0 88px; }
+/* ---- 1 · Hero: alleen het filmpje ---- */
+.h-hero { padding: 0 0 12px; }
 .h-hero-media { position: relative; aspect-ratio: 2.15 / 1; overflow: hidden; background: var(--surface); }
-.h-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
-/* Verticale regel links in de foto, zoals "AMBACHTELIJKE VLOEREN SINDS 1958". */
+.h-hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Verticale regel links in beeld, zoals "AMBACHTELIJKE VLOEREN SINDS 1958". */
 .h-hero-vertical {
   position: absolute; left: 30px; bottom: 34px; margin: 0;
   writing-mode: vertical-rl; transform: rotate(180deg);
@@ -25,10 +25,12 @@
   text-shadow: 0 1px 12px rgba(0,0,0,.35);
 }
 .h-hero-vertical strong { color: #fff; font-weight: 700; }
-.h-hero-status { position: absolute; right: 24px; bottom: 24px; }
+.h-scroll {
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  margin: 18px 0 0; font-size: 14px; color: var(--ink);
+}
+.h-scroll:hover { color: var(--ink-soft); }
 
-/* Hero als filmpje (concept) */
-.h-hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 /* Conceptmelding: verschijnt bij hover (muis); op touch klein en altijd zichtbaar. */
 .h-concept {
   position: absolute; left: 50%; top: 50%; z-index: 3; margin: 0;
@@ -61,23 +63,20 @@
 .h-video-toggle .i-play { display: none; }
 .h-video-toggle.is-paused .i-play { display: block; }
 .h-video-toggle.is-paused .i-pause { display: none; }
-/* Touch: conceptlabel staat linksboven, dus de knop rechtsboven. */
 @media (hover: none) { .h-video-toggle { left: auto; right: 12px; top: 12px; } }
-.h-scroll {
-  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
-  margin: 18px 0 0; font-size: 14px; color: var(--ink);
-}
-.h-scroll:hover { color: var(--ink-soft); }
-.h-hero-intro { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; margin-top: 64px; }
-.h-hero-intro h1 { margin: 0; }
-.h-hero-copy .lead { margin: 6px 0 30px; }
-.h-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
-.h-usps { display: flex; flex-wrap: wrap; gap: 10px 24px; }
-.h-usps li { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); }
-.h-usps li::before {
-  content: ""; width: 16px; height: 16px; flex: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23272521' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat;
-}
+
+/* ---- 2 · Welkom / 5 · Showroom: beeld + kop, tekst en één knop ---- */
+.h-welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.h-welcome-grid.is-reverse .h-welcome-media { order: 2; }
+.h-welcome-media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--surface-2); }
+.h-welcome-media img { width: 100%; height: 100%; object-fit: cover; }
+.h-welcome-copy { max-width: 560px; }
+.h-welcome-copy h1, .h-welcome-copy h2 { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.25; margin-bottom: 36px; max-width: 20ch; }
+.h-welcome-copy p { font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 36px; }
+.h-status { display: inline-flex; margin-bottom: 18px; }
+.h-welcome-copy .h-address { margin-bottom: 32px; font-size: 15px; line-height: 1.7; }
+.h-address span { color: var(--ink-soft); font-size: 14px; }
+.h-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
 
 /* ---- Kaartrasters ---- */
 .h-grid { display: grid; gap: 40px 28px; }
@@ -92,10 +91,8 @@
 .h-card:hover img { opacity: .86; }
 
 /* Raster met dunne scheidingslijnen: verticaal tussen kolommen, horizontaal
-   tussen rijen. Per schermformaat eigen, afgebakende regels (4 / 3 / 2 kolommen),
-   zodat er nooit een lijn op de verkeerde plek blijft staan. */
-/* Alle vakken gelijke binnenruimte (dus gelijke fotomaat); het raster loopt
-   links en rechts evenveel uit, zodat de buitenkant netjes uitlijnt. */
+   tussen rijen. Alle vakken gelijke binnenruimte (dus gelijke fotomaat); het
+   raster loopt links en rechts evenveel uit. Per schermformaat eigen regels. */
 .h-grid.is-divided { gap: 0; margin: 0 -28px; }
 .h-grid.is-divided > * { padding: 0 28px 48px; }
 @media (min-width: 1101px) {
@@ -126,30 +123,6 @@
 .h-card-cta p { max-width: 26ch; }
 .h-card-cta .btn-text { margin-top: 8px; }
 
-/* ---- 4 · Kerncijfers ---- */
-.h-stats { border-bottom: 1px solid var(--line); }
-.h-stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.h-stat { padding: 48px 32px 48px 0; }
-.h-stat + .h-stat { padding-left: 32px; border-left: 1px solid var(--line); }
-.h-stat b { display: block; font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 3vw, 44px); color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
-.h-stat span { display: block; font-size: 14px; line-height: 1.6; color: var(--ink-soft); max-width: 30ch; }
-
-/* ---- 5 · Showroom ---- */
-.h-showroom { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.h-showroom-media { aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface-2); }
-.h-showroom-media img { width: 100%; height: 100%; object-fit: cover; }
-.h-showroom-copy h2 { margin-bottom: 16px; }
-.h-showroom-copy .eyebrow { margin-bottom: 26px; }
-.h-showroom-copy .lead { margin-bottom: 22px; }
-.h-showroom-info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0 26px; }
-.h-hours { background: var(--bg); padding: 10px; }
-.h-hours .open-week-row { padding: 7px 10px; font-size: 14px; }
-.h-contact { display: flex; flex-direction: column; gap: 12px; }
-.h-address { margin: 0; font-size: 15px; line-height: 1.55; }
-.h-address span { font-size: 13.5px; color: var(--ink-soft); }
-.h-map { flex: 1; min-height: 180px; }
-.h-showroom-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
 /* ---- 6 · Reviews ---- */
 .h-score { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-weight: 500; font-size: 15px; }
 .h-stars { color: var(--ink); letter-spacing: 2px; }
@@ -161,31 +134,23 @@
 @media (max-width: 1100px) {
   .h-grid.cols-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .h-card-cta { display: none; }
-  .h-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .h-stat:nth-child(3) { padding-left: 0; border-left: 0; }
-  .h-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .h-welcome-grid { gap: 56px; }
 }
 @media (max-width: 900px) {
-  .h-hero-intro, .h-showroom { grid-template-columns: 1fr; gap: 28px; }
-  .h-hero-intro { margin-top: 40px; }
-  .h-showroom-media { aspect-ratio: 16 / 11; }
+  .h-welcome-grid { grid-template-columns: 1fr; gap: 32px; }
+  .h-welcome-grid.is-reverse .h-welcome-media { order: 0; }
+  .h-welcome-copy { max-width: none; }
 }
 @media (max-width: 640px) {
   .h-section { padding: 64px 0; }
-  .h-hero { padding-bottom: 60px; }
   .h-hero-media { aspect-ratio: 4 / 3.4; margin: 0 calc(var(--gutter) * -1); }
   .h-hero-vertical { left: 16px; bottom: 18px; font-size: 11px; }
-  .h-hero-status { right: 12px; bottom: 12px; font-size: 12px; }
-  .h-hero-status .open-sub { display: none; }
   .h-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 36px; }
+  .h-welcome-copy h1, .h-welcome-copy h2 { margin-bottom: 20px; }
+  .h-welcome-copy p { margin-bottom: 26px; }
   /* Telefoon: 2 kolommen. */
   .h-grid.cols-4, .h-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .h-card h3 { font-size: 15px; margin-top: 16px; }
   .h-card p { font-size: 13px; }
-  .h-showroom-info { grid-template-columns: 1fr; }
-  .h-stats-grid { grid-template-columns: 1fr; }
-  .h-stat, .h-stat + .h-stat { padding: 24px 0; border-left: 0; }
-  .h-stat + .h-stat { border-top: 1px solid var(--line); }
   #reviews .h-grid { grid-template-columns: 1fr; }
-  .h-hero-actions .btn { flex: 1 1 auto; }
 }
