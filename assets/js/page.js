@@ -135,7 +135,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initGridStagger();
     initReveals();
-    initMagnetic();
+    // initMagnetic() bewust uit: rustig ontwerp zonder bewegende knoppen.
     initFaq();
     initContactForm();
     initScrollspy();

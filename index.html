@@ -3,35 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>De Vloerenspecialist Tilburg — Interieurs die kwaliteit uitstralen</title>
-<meta name="description" content="Vloeren, interieur op maat, behang en raamdecoratie onder één dak. Ontdek De Vloerenspecialist in Tilburg en plan uw bezoek aan onze showroom van 1.800 m².">
+<title>De Vloerenspecialist Tilburg — Vloeren, interieur op maat, behang en raamdecoratie</title>
+<meta name="description" content="Vloeren, interieur op maat, behang en raamdecoratie onder één dak. Bekijk alles in onze showroom van 1.800 m² in Tilburg en krijg persoonlijk advies.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500..900;1,600..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/header.css">
-<link rel="stylesheet" href="assets/css/footer.css">
-<link rel="stylesheet" href="assets/css/review-mode.css">
-<link rel="stylesheet" href="assets/css/feedback-mode.css">
-<link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/review-mode.css">
+<link rel="stylesheet" href="/assets/css/feedback-mode.css">
+<link rel="stylesheet" href="/assets/css/home.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
-<script src="assets/js/components/header.js" defer></script>
-<script src="assets/js/components/footer.js" defer></script>
-<script src="assets/js/modules/wishlist.js" defer></script>
-<script src="assets/js/modules/review-mode.js" defer></script>
-<script src="assets/js/modules/feedback-mode.js" defer></script>
-<script src="assets/js/modules/nav.js" defer></script>
-<script src="assets/js/modules/open-status.js" defer></script>
-<script src="assets/js/home.js" defer></script>
+<script src="/assets/js/components/header.js" defer></script>
+<script src="/assets/js/components/footer.js" defer></script>
+<script src="/assets/js/modules/wishlist.js" defer></script>
+<script src="/assets/js/modules/review-mode.js" defer></script>
+<script src="/assets/js/modules/feedback-mode.js" defer></script>
+<script src="/assets/js/modules/nav.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 </head>
 <body data-page="home">
 
@@ -40,357 +37,183 @@
 
 <main id="main">
 
-  <!-- 00 · HERO -->
-  <section id="hero" class="chapter hero-chapter" data-tone="dark" data-review-id="hero" data-review-label="Hero">
-    <div class="media hero-media" aria-hidden="true">
-      <img
-        src="assets/img/hero-showroom-2200.jpg"
-        srcset="assets/img/hero-showroom-800.jpg 800w, assets/img/hero-showroom-1400.jpg 1400w, assets/img/hero-showroom-2200.jpg 2200w"
-        sizes="100vw"
-        alt="Warm, licht interieur zoals De Vloerenspecialist het samenstelt — vloer, wand en raamdecoratie in perfecte balans"
-        loading="eager" fetchpriority="high">
+  <!-- 1 · Hero: in één oogopslag wat, waar en hoe -->
+  <section class="h-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="wrap h-hero-grid">
+      <div class="h-hero-copy">
+        <p class="eyebrow">Vloerenspecialist in Tilburg</p>
+        <h1>Vloeren en interieur op maat, onder één dak.</h1>
+        <p class="lead">Van PVC tot gietvloer, van kasten op maat tot behang en raamdecoratie. Bekijk alles in onze showroom van 1.800 m² en krijg persoonlijk advies — van keuze tot plaatsing.</p>
+        <div class="h-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
+          <a class="btn btn-outline" href="/vloeren/index.html">Bekijk alle vloeren</a>
+        </div>
+        <ul class="h-usps">
+          <li>62+ topmerken</li>
+          <li>Eigen plaatsingsteam</li>
+          <li>Gratis levering in Noord-Brabant</li>
+        </ul>
+      </div>
+      <div class="h-hero-media">
+        <img src="/assets/img/hero-showroom-1400.jpg"
+             srcset="/assets/img/hero-showroom-800.jpg 800w, /assets/img/hero-showroom-1400.jpg 1400w, /assets/img/hero-showroom-2200.jpg 2200w"
+             sizes="(max-width: 900px) 100vw, 50vw"
+             alt="Rustige woonkamer met lichte vloer, grijze bank en wandkast op maat" loading="eager">
+        <span class="h-hero-status" data-open-status></span>
+      </div>
     </div>
+  </section>
+
+  <!-- 2 · Vloersoorten: het hart van het bedrijf, direct zichtbaar -->
+  <section class="h-section is-surface" id="vloeren" data-review-id="vloeren" data-review-label="Onze vloeren">
     <div class="wrap">
-      <p class="eyebrow hero-eyebrow">De Vloerenspecialist · Tilburg</p>
-      <h1 class="hero-title reveal is-visible">Een showroom om gewoon eens binnen te lopen.</h1>
-      <p class="lead reveal">Vloeren, interieur op maat, behang en raamdecoratie — allemaal onder één dak, met de hand uitgezocht en geplaatst door ons eigen team. Kom langs, voel de materialen, en laat u verrassen.</p>
-      <div class="hero-cta-row reveal">
-        <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
-        <a class="btn-text magnetic" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+      <div class="h-head">
+        <div>
+          <p class="eyebrow">Onze vloeren</p>
+          <h2>Voor elke ruimte de juiste vloer.</h2>
+        </div>
+        <a class="btn-text" href="/vloeren/index.html">Alle vloeren <span class="arrow">→</span></a>
+      </div>
+      <div class="h-grid cols-4">
+        <a class="h-card" href="/vloeren/pvc.html">
+          <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="PVC vloer in een moderne woonkamer" loading="lazy">
+          <h3>PVC vloeren</h3><p>Waterbestendig en onderhoudsarm</p>
+        </a>
+        <a class="h-card" href="/vloeren/hout.html">
+          <img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Houten vloer met natuurlijk licht" loading="lazy">
+          <h3>Houten vloeren</h3><p>Tijdloos en ambachtelijk</p>
+        </a>
+        <a class="h-card" href="/vloeren/laminaat.html">
+          <img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Laminaatvloer in een woonkamer" loading="lazy">
+          <h3>Laminaat</h3><p>Slim geprijsd, snel gelegd</p>
+        </a>
+        <a class="h-card" href="/vloeren/tegelvloer.html">
+          <img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Woonkamer met grote tegelvloer in marmerlook" loading="lazy">
+          <h3>Tegelvloeren</h3><p>Duurzaam en slijtvast</p>
+        </a>
+        <a class="h-card" href="/vloeren/vloerbedekking.html">
+          <img src="https://images.unsplash.com/photo-1772563214602-3c6434766700?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy">
+          <h3>Vloerbedekking</h3><p>Warm en geluiddempend</p>
+        </a>
+        <a class="h-card" href="/vloeren/gietvloer.html">
+          <img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Lichte, naadloze gietvloer in een loft" loading="lazy">
+          <h3>Gietvloeren</h3><p>Naadloos en modern</p>
+        </a>
+        <a class="h-card" href="/vloeren/hybride-houtenvloer.html">
+          <img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Lichte eikenhouten vloer in een zonnige kamer" loading="lazy">
+          <h3>Hybride houtenvloeren</h3><p>Echt hout, waterbestendig</p>
+        </a>
+        <a class="h-card h-card-cta" href="/showroom.html">
+          <span class="h-card-cta-inner">
+            <h3>Twijfelt u nog?</h3>
+            <p>Leg de vloeren naast elkaar in onze showroom en voel het verschil.</p>
+            <span class="btn-text">Plan uw bezoek <span class="arrow">→</span></span>
+          </span>
+        </a>
       </div>
     </div>
-    <div class="scroll-cue"><span class="line"></span> Scroll om te ontdekken</div>
   </section>
 
-  <!-- 01 · MANIFEST -->
-  <section id="manifest" class="chapter manifest-chapter" data-tone="dark" data-review-id="manifest" data-review-label="Manifest">
-    <div class="manifest-glow" aria-hidden="true"></div>
-    <div class="chapter-inner">
-      <div class="wrap">
-        <p class="eyebrow reveal">01 — Wie we zijn</p>
-        <p class="manifest-text js-split-reveal">Nog steeds een vloerenzaak in hart en nieren. Inmiddels ook uw adres voor <strong>interieur op maat, behang en raamdecoratie</strong> — met dezelfde handen, dezelfde aandacht.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 · DISCIPLINES — Premium tegeloverzicht -->
-  <section id="disciplines" class="chapter disciplines-chapter" data-tone="dark" data-review-id="disciplines" data-review-label="Disciplines">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <p class="eyebrow reveal">02 — Wat we doen</p>
-        <h2 class="reveal">Eén adres voor uw complete interieur.</h2>
-        <p class="lead reveal">Vier vakgebieden, één vertrouwd team — van vloer tot wand, allemaal onder één dak in Tilburg.</p>
-
-        <div class="tile-grid">
-          <a class="tile reveal" href="/vloeren/index.html" data-review-id="tile-vloeren" data-review-label="Vloeren">
-            <div class="tile-media media">
-              <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Woonkamer met een rijke houten plankenvloer" loading="lazy">
-            </div>
-            <div class="tile-copy">
-              <h3>Vloeren</h3>
-              <p>PVC, hout, laminaat, tegels, vloerbedekking en gietvloer — met 62+ merken onder één dak.</p>
-              <span class="tile-link">Ontdek Vloeren <span class="arrow">→</span></span>
-            </div>
-          </a>
-
-          <a class="tile reveal" href="/interieur/index.html" data-review-id="tile-interieur" data-review-label="Interieur op maat">
-            <div class="tile-media media">
-              <img src="https://images.unsplash.com/photo-1717429541792-5c59021d6ceb?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Keuken met maatwerk kastenwand" loading="lazy">
-            </div>
-            <div class="tile-copy">
-              <h3>Interieur op maat</h3>
-              <p>Kasten, deuren, wanden en meubels, volledig ontworpen op uw woning.</p>
-              <span class="tile-link">Ontdek Interieur op maat <span class="arrow">→</span></span>
-            </div>
-          </a>
-
-          <a class="tile reveal" href="/interieur/behang.html" data-review-id="tile-behang" data-review-label="Behang">
-            <div class="tile-media media">
-              <img src="https://images.unsplash.com/photo-1787920990191-ef4618d03298?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Ruimte met sfeervol behang" loading="lazy">
-            </div>
-            <div class="tile-copy">
-              <h3>Behang</h3>
-              <p>Foto-, papier-, vinyl- en vliesbehang en Renostuc, met stalen om te voelen.</p>
-              <span class="tile-link">Ontdek Behang <span class="arrow">→</span></span>
-            </div>
-          </a>
-
-          <a class="tile reveal" href="/interieur/raamdecoratie.html" data-review-id="tile-raamdecoratie" data-review-label="Raamdecoratie">
-            <div class="tile-media media">
-              <img src="https://images.unsplash.com/photo-1787684047668-58cbac5e5929?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Zonlicht door linnen gordijnen" loading="lazy">
-            </div>
-            <div class="tile-copy">
-              <h3>Raamdecoratie</h3>
-              <p>Jaloezieën, rol-, plissé- en vouwgordijnen — voor licht en privacy op maat.</p>
-              <span class="tile-link">Ontdek Raamdecoratie <span class="arrow">→</span></span>
-            </div>
-          </a>
+  <!-- 3 · Wand en raam: de andere drie vakgebieden -->
+  <section class="h-section" id="interieur" data-review-id="interieur" data-review-label="Interieur, behang en raamdecoratie">
+    <div class="wrap">
+      <div class="h-head">
+        <div>
+          <p class="eyebrow">Meer dan vloeren</p>
+          <h2>Ook voor wand, raam en maatwerk.</h2>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 03 · KEUZE UIT BEHANG -->
-  <section id="material" class="chapter material-chapter" data-tone="dark" data-review-id="material" data-review-label="Keuze uit behang">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <p class="eyebrow reveal">03 — Keuze uit behang</p>
-        <h2 class="reveal">Een wand die uw verhaal vertelt.</h2>
-        <p class="lead reveal">Van rustige textuur tot een statement over de volle muur — in onze showroom ziet en voelt u elke soort, en neemt u stalen gewoon mee naar huis.</p>
-        <div class="material-grid">
-          <a class="material-card reveal" href="/interieur/behang.html#fotobehang">
-            <div class="media"><img src="https://images.unsplash.com/photo-1759774313806-7c564f3bd592?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Salon met een wandvullend geschilderd landschap als fotobehang" loading="lazy"></div>
-            <span class="material-name">Fotobehang</span>
-            <span class="material-desc">Een panorama of kunstwerk over de volle wand.</span>
-          </a>
-          <a class="material-card reveal" href="/interieur/behang.html#papierbehang">
-            <div class="media"><img src="https://images.unsplash.com/photo-1783403716758-27e30a7976ca?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Klassiek papierbehang met blauw boom- en hertenpatroon" loading="lazy"></div>
-            <span class="material-name">Papierbehang</span>
-            <span class="material-desc">Tijdloos en ademend, van klassiek tot modern.</span>
-          </a>
-          <a class="material-card reveal" href="/interieur/behang.html#vinylbehang">
-            <div class="media"><img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen vinylbehang in hexagonpatroon" loading="lazy"></div>
-            <span class="material-name">Vinylbehang</span>
-            <span class="material-desc">Waterbestendig en ideaal voor keuken of badkamer.</span>
-          </a>
-          <a class="material-card reveal" href="/interieur/behang.html#vliesbehang">
-            <div class="media"><img src="https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Vliesbehang met grafisch driehoekpatroon achter een bank" loading="lazy"></div>
-            <span class="material-name">Vliesbehang</span>
-            <span class="material-desc">Sterk en scheurvast, de lijm gaat op de muur.</span>
-          </a>
-          <a class="material-card reveal" href="/interieur/behang.html#renostuc">
-            <div class="media"><img src="/assets/img/real/renostuc-bedroom-sage-1600.jpg" alt="Slaapkamer met strakke, naadloze Renostuc-wanden" loading="lazy"></div>
-            <span class="material-name">Renostuc</span>
-            <span class="material-desc">Strak en glad over oude of beschadigde muren.</span>
-          </a>
-        </div>
+      <div class="h-grid cols-3">
+        <a class="h-card" href="/interieur/index.html">
+          <img src="/assets/img/real/kasten-garderobe-900.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
+          <h3>Interieur op maat</h3><p>Kasten, deuren, wanden en meubels — ontworpen voor uw woning</p>
+        </a>
+        <a class="h-card" href="/interieur/behang.html">
+          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen behang" loading="lazy">
+          <h3>Behang</h3><p>Foto-, papier-, vinyl- en vliesbehang en Renostuc</p>
+        </a>
+        <a class="h-card" href="/interieur/raamdecoratie.html">
+          <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijnen in een woonkamer" loading="lazy">
+          <h3>Raamdecoratie</h3><p>Jaloezieën, rol-, plissé- en vouwgordijnen op maat</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 04 · SIGNATURE PROJECT -->
-  <section id="project" class="chapter project-chapter" data-tone="dark" data-review-id="project" data-review-label="Signature project">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <p class="eyebrow reveal">04 — Een project, verteld</p>
-        <div class="project-grid">
-          <div class="media project-media reveal"><img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Open keuken met lichte eikenhouten visgraatvloer" loading="lazy"></div>
-          <div class="project-copy reveal">
-            <p class="project-loc">Tilburg · Open leefkeuken</p>
-            <h2>Van kale vloer tot warme leefkeuken.</h2>
-            <p>Eén plan, één team. De eikenhouten visgraatvloer, de kasten en de raamdecoratie op maat kwamen allemaal uit dezelfde showroom — en werden geplaatst door de vakmensen die u ook gewoon aan de balie treft.</p>
-            <p class="project-quote">"Precies zoals we het samen in de showroom hadden uitgezocht — en het voelde alsof de buurman het kwam leggen."</p>
-            <div class="tag-row">
-              <span class="tag">Eiken visgraat</span>
-              <span class="tag">Kasten op maat</span>
-              <span class="tag">Raamdecoratie</span>
-            </div>
-            <a class="btn-text magnetic" href="/inspiratie/projecten.html">Bekijk meer projecten <span class="arrow">→</span></a>
-          </div>
-        </div>
-      </div>
+  <!-- 4 · Kerncijfers (zoals op de huidige website) -->
+  <section class="h-stats" data-review-id="cijfers" data-review-label="Kerncijfers">
+    <div class="wrap h-stats-grid">
+      <div class="h-stat"><b>1.800 m²</b><span>showroom met alle soorten vloeren, raamdecoratie, behang en interieur op maat</span></div>
+      <div class="h-stat"><b>62+</b><span>topmerken, leverbaar en als voorbeeld in onze showroom</span></div>
+      <div class="h-stat"><b>6 dagen</b><span>per week open — en op afspraak ook daarbuiten</span></div>
+      <div class="h-stat"><b>9+</b><span>waardering van klanten voor prijs/kwaliteit, afwerking en service</span></div>
     </div>
   </section>
 
-  <!-- 05 · VERKEN DE COLLECTIE (hybride naad) -->
-  <section id="collection" class="chapter collection-chapter" data-tone="dark" data-review-id="collection" data-review-label="Verken de collectie">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <p class="eyebrow reveal">05 — Verken de collectie</p>
-        <h2 class="reveal">Voor elke ruimte de juiste vloer.</h2>
-        <p class="lead reveal">Blader door ons volledige aanbod en ontdek welke vloer bij uw ruimte past.</p>
-        <div class="collection-grid">
-          <a class="collection-card reveal" href="/vloeren/pvc.html">
-            <div class="media"><img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="PVC vloer in een moderne woonkamer" loading="lazy"></div>
-            <span class="name">PVC vloeren</span>
-          </a>
-          <a class="collection-card reveal" href="/vloeren/hout.html">
-            <div class="media"><img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Houten vloer met natuurlijk licht" loading="lazy"></div>
-            <span class="name">Houten vloeren</span>
-          </a>
-          <a class="collection-card reveal" href="/vloeren/laminaat.html">
-            <div class="media"><img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Laminaatvloer bij een open haard" loading="lazy"></div>
-            <span class="name">Laminaat</span>
-          </a>
-          <a class="collection-card reveal" href="/vloeren/gietvloer.html">
-            <div class="media"><img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Lichte, naadloze gietvloer in een loft met grote ramen" loading="lazy"></div>
-            <span class="name">Gietvloer</span>
-          </a>
-          <a class="collection-card reveal" href="/vloeren/vloerbedekking.html">
-            <div class="media"><img src="https://images.unsplash.com/photo-1772563214602-3c6434766700?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=800" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></div>
-            <span class="name">Vloerbedekking</span>
-          </a>
-        </div>
+  <!-- 5 · Showroom -->
+  <section class="h-section is-surface" id="showroom" data-review-id="showroom" data-review-label="De showroom">
+    <div class="wrap h-showroom">
+      <div class="h-showroom-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy">
       </div>
-    </div>
-  </section>
-
-  <!-- 06 · DE SHOWROOM (climax) -->
-  <section id="showroom" class="chapter showroom-chapter" data-tone="dark" data-review-id="showroom" data-review-label="De showroom">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <div class="showroom-grid">
-          <div class="media showroom-media reveal"><img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy"></div>
-          <div class="showroom-copy reveal">
-            <p class="eyebrow">06 — De showroom</p>
-            <span class="showroom-live" data-open-status></span>
-            <h2>1.800 m² om te zien, te voelen en te ervaren.</h2>
-            <p class="lead">Complete woonopstellingen, persoonlijk advies zonder verkooppraatjes, gratis levering in heel Noord-Brabant, en koffie terwijl u rondkijkt.</p>
-            <div class="stat-row">
-              <div class="stat"><b>1.800 m²</b><span>Onze showroom heeft meer dan 1.800 vierkante meter aan alle soorten vloeren, raamdecoratie, behang en interieur op maat.</span></div>
-              <div class="stat"><b>62+</b><span>Meer dan 62 topmerken leverbaar en als voorbeeld in onze showroom.</span></div>
-              <div class="stat"><b>9+</b><span>Onze klanten waarderen ons met een 9+ voor prijs/kwaliteit, afwerking en service!</span></div>
-            </div>
-            <div class="showroom-info">
-              <div class="showroom-hours" id="showroom-hours">
-                <div data-open-week></div>
-                <p class="hours-extra">Op afspraak ook buiten openingstijden.</p>
-              </div>
-              <div class="showroom-contact">
-                <a class="map-embed" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
-                  <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=15&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
-                  <span class="map-cap">Jules Verneweg 7a, Tilburg <span class="arrow">→</span></span>
-                </a>
-                <a class="btn btn-call" href="tel:+31135368598">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-                  Bel 013 - 536 85 98
-                </a>
-              </div>
-            </div>
-            <div class="hero-cta-row">
-              <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
-              <a class="btn-text magnetic" href="/showroom.html">Bekijk de showroom <span class="arrow">→</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 07 · VERTROUWEN — Reviews -->
-  <section id="trust" class="chapter trust-chapter" data-tone="dark" data-review-id="trust" data-review-label="Vertrouwen">
-    <div class="chapter-inner">
-      <div class="wrap">
-        <div class="trust-head">
-          <p class="eyebrow reveal" style="justify-content:center">07 — Vertrouwen</p>
-          <div class="trust-stars reveal" aria-hidden="true">★★★★★</div>
-          <p class="trust-score reveal">4.8 / 5 beoordeling</p>
-          <p class="trust-source reveal">Gebaseerd op Google Reviews</p>
-        </div>
-
-        <div class="review-grid">
-          <article class="review-card reveal">
-            <div class="review-head">
-              <span class="review-avatar">MJ</span>
-              <div class="review-who">
-                <p class="review-name">Marieke Jansen</p>
-                <div class="review-meta">
-                  <div class="review-stars" aria-hidden="true">★★★★★</div>
-                  <span class="review-date">Augustus 2026</span>
-                </div>
-              </div>
-            </div>
-            <p class="review-text">Van eerste advies tot plaatsing — alles klopte. De showroom gaf meteen een goed gevoel en het eindresultaat overtreft onze verwachtingen.</p>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-head">
-              <span class="review-avatar">RD</span>
-              <div class="review-who">
-                <p class="review-name">Robin de Groot</p>
-                <div class="review-meta">
-                  <div class="review-stars" aria-hidden="true">★★★★★</div>
-                  <span class="review-date">Juli 2026</span>
-                </div>
-              </div>
-            </div>
-            <p class="review-text">Professioneel, deskundig en ontzettend netjes opgeleverd. Onze eiken visgraatvloer is precies zoals we 'm in de showroom hadden uitgezocht.</p>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-head">
-              <span class="review-avatar">SB</span>
-              <div class="review-who">
-                <p class="review-name">Sanne Bakker</p>
-                <div class="review-meta">
-                  <div class="review-stars" aria-hidden="true">★★★★★</div>
-                  <span class="review-date">Juli 2026</span>
-                </div>
-              </div>
-            </div>
-            <p class="review-text">Eindelijk een zaak die vloer, raamdecoratie én interieur in één keer goed regelt. Persoonlijk advies zonder verkooppraatjes — dat maakt het verschil.</p>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-head">
-              <span class="review-avatar">TV</span>
-              <div class="review-who">
-                <p class="review-name">Thomas van Dijk</p>
-                <div class="review-meta">
-                  <div class="review-stars" aria-hidden="true">★★★★★</div>
-                  <span class="review-date">Juni 2026</span>
-                </div>
-              </div>
-            </div>
-            <p class="review-text">De plaatsers dachten actief mee met lastige overgangen in huis. Kwaliteit en vakmanschap die je niet vaak meer tegenkomt.</p>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-head">
-              <span class="review-avatar">EH</span>
-              <div class="review-who">
-                <p class="review-name">Eva Hermans</p>
-                <div class="review-meta">
-                  <div class="review-stars" aria-hidden="true">★★★★★</div>
-                  <span class="review-date">Mei 2026</span>
-                </div>
-              </div>
-            </div>
-            <p class="review-text">De showroom van 1.800 m² moet je gezien hebben. Konden alles naast elkaar leggen en voelen voordat we een keuze maakten — top begeleiding.</p>
-          </article>
-        </div>
-
-        <p class="trust-cta reveal"><a class="btn-text magnetic" href="https://www.google.com/search?q=de+vloerenspecialist+tilburg+reviews" target="_blank" rel="noopener">Bekijk alle reviews op Google <span class="arrow">→</span></a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 08 · UITNODIGING (slot) -->
-  <section id="invite" class="chapter invite-chapter" data-tone="dark" data-review-id="invite" data-review-label="Uitnodiging">
-    <div class="media" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1772442364639-20fe5e5438a1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Warme eethoek met eikenhouten stoelen en linnen gordijnen in avondlicht" loading="lazy">
-    </div>
-    <div class="chapter-inner">
-      <div class="wrap">
-        <div class="invite-copy reveal">
-          <p class="eyebrow">08 — De uitnodiging</p>
-          <h2>Ervaar het zelf. Kom langs in Tilburg.</h2>
-          <div class="invite-details">
-            <div class="item"><span class="k">Adres</span><span class="v">Jules Verneweg 7a, 5015 BD Tilburg</span></div>
-            <div class="item"><span class="k">Openingstijden</span><span class="v">Ma–vr 09:00–17:00 · Za 09:00–15:00 · Zo gesloten</span></div>
-          </div>
-          <div class="invite-contact">
-            <a class="btn btn-call" href="tel:+31135368598">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-              Bel 013 - 536 85 98
-            </a>
-            <a class="btn btn-call btn-whatsapp" href="https://wa.me/31135368598" target="_blank" rel="noopener">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-              WhatsApp ons
+      <div class="h-showroom-copy">
+        <p class="eyebrow">De showroom</p>
+        <h2>Kom langs — de koffie staat klaar.</h2>
+        <p class="lead">Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen of plan een afspraak voor uitgebreid advies.</p>
+        <span data-open-status></span>
+        <div class="h-showroom-info">
+          <div class="h-hours" data-open-week></div>
+          <div class="h-contact">
+            <p class="h-address"><strong>Jules Verneweg 7a</strong><br>5015 BD Tilburg<br><span>Gratis parkeren voor de deur</span></p>
+            <a class="map-embed h-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
+              <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=15&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
+              <span class="map-cap">Plan route <span class="arrow">→</span></span>
             </a>
           </div>
-          <div class="invite-actions">
-            <a class="btn btn-primary magnetic" href="/showroom.html">Plan showroombezoek</a>
-            <a class="invite-quiet" href="/contact.html">Liever eerst een indicatie? Vraag vrijblijvend advies</a>
-          </div>
+        </div>
+        <div class="h-showroom-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
+          <a class="btn btn-call" href="tel:+31135368598">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            013 - 536 85 98
+          </a>
+          <a class="btn btn-call btn-whatsapp" href="https://wa.me/31135368598" target="_blank" rel="noopener">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+            WhatsApp
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 6 · Reviews -->
+  <section class="h-section" id="reviews" data-review-id="reviews" data-review-label="Reviews">
+    <div class="wrap">
+      <div class="h-head">
+        <div>
+          <p class="eyebrow">Ervaringen</p>
+          <h2>Wat klanten over ons zeggen.</h2>
+        </div>
+        <p class="h-score"><span class="h-stars" aria-hidden="true">★★★★★</span> 4,8 / 5 op Google</p>
+      </div>
+      <div class="h-grid cols-3">
+        <figure class="h-review">
+          <blockquote>"Van eerste advies tot plaatsing — alles klopte. De showroom gaf meteen een goed gevoel en het eindresultaat overtreft onze verwachtingen."</blockquote>
+          <figcaption>Marieke Jansen · augustus 2026</figcaption>
+        </figure>
+        <figure class="h-review">
+          <blockquote>"Professioneel, deskundig en ontzettend netjes opgeleverd. Onze eiken visgraatvloer is precies zoals we 'm in de showroom hadden uitgezocht."</blockquote>
+          <figcaption>Robin de Groot · juli 2026</figcaption>
+        </figure>
+        <figure class="h-review">
+          <blockquote>"Eindelijk een zaak die vloer, raamdecoratie én interieur in één keer goed regelt. Persoonlijk advies zonder verkooppraatjes."</blockquote>
+          <figcaption>Sanne Bakker · juli 2026</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 </main>
 
 <div id="site-footer"></div>
-
 </body>
 </html>

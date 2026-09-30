@@ -38,79 +38,68 @@
 <div id="site-header"></div>
 
 <main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Kruimelpad">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <span aria-current="page">Showroom</span>
+    </nav>
 
-  <!-- 1 · Uitnodiging: volle breedte, met live status -->
-  <section class="sr-hero">
-    <div class="sr-hero-media">
-      <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=80&amp;auto=format&amp;fit=crop&amp;w=2200" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="eager">
-    </div>
-    <div class="wrap sr-hero-inner">
-      <nav class="crumb sr-crumb" aria-label="Kruimelpad">
-        <a href="/index.html">Home</a><span class="sep">/</span>
-        <span aria-current="page">Showroom</span>
-      </nav>
-      <div class="sr-hero-copy">
-        <span data-open-status></span>
-        <h1>Kom binnen.<br>De koffie staat klaar.</h1>
+    <!-- 1 · Uitnodiging met live status -->
+    <section class="page-hero sr-hero">
+      <div class="page-hero-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="eager">
+      </div>
+      <div class="page-hero-copy">
+        <span class="sr-status" data-open-status></span>
+        <h1>Kom binnen. De koffie staat klaar.</h1>
         <p class="lead">1.800 m² complete woonopstellingen in Tilburg. Loop gewoon binnen, voel de materialen en krijg advies zonder verkooppraatjes.</p>
-        <div class="sr-hero-actions">
-          <a class="btn btn-primary magnetic" href="/contact.html">Plan showroombezoek</a>
-          <a class="btn btn-ghost-light magnetic" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="/contact.html">Plan showroombezoek</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
             Route plannen
           </a>
         </div>
+        <p class="sr-hero-address">Jules Verneweg 7a, 5015 BD Tilburg · Gratis parkeren voor de deur</p>
       </div>
-      <p class="sr-hero-address">Jules Verneweg 7a, Tilburg · Gratis parkeren voor de deur</p>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- 2 · Kerncijfers -->
   <section class="sr-stats">
     <div class="wrap sr-stats-grid">
-      <div class="sr-stat reveal"><b>1.800 m²</b><span>showroom met alle soorten vloeren, raamdecoratie, behang en interieur op maat</span></div>
-      <div class="sr-stat reveal"><b>62+</b><span>topmerken, leverbaar én als voorbeeld in de showroom</span></div>
-      <div class="sr-stat reveal"><b>9+</b><span>waardering van onze klanten voor prijs/kwaliteit, afwerking en service</span></div>
-      <div class="sr-stat reveal"><b>6</b><span>dagen per week open, en op afspraak ook daarbuiten</span></div>
+      <div class="sr-stat"><b>1.800 m²</b><span>showroom met alle soorten vloeren, raamdecoratie, behang en interieur op maat</span></div>
+      <div class="sr-stat"><b>62+</b><span>topmerken, leverbaar én als voorbeeld in de showroom</span></div>
+      <div class="sr-stat"><b>9+</b><span>waardering van onze klanten voor prijs/kwaliteit, afwerking en service</span></div>
+      <div class="sr-stat"><b>6 dagen</b><span>per week open, en op afspraak ook daarbuiten</span></div>
     </div>
   </section>
 
-  <!-- 3 · Wandeling door de showroom -->
-  <section class="page-section sr-walk">
+  <!-- 3 · Wat u in de showroom vindt -->
+  <section class="page-section">
     <div class="wrap">
-      <div class="sr-walk-head">
-        <div>
-          <p class="eyebrow">Een wandeling door de showroom</p>
-          <h2>Geen rekken met stalen — complete ruimtes.</h2>
-        </div>
-        <p class="sr-walk-hint" aria-hidden="true">Veeg opzij <span>→</span></p>
+      <div class="page-section-head">
+        <p class="eyebrow">In de showroom</p>
+        <h2>Geen rekken met stalen — complete ruimtes.</h2>
       </div>
-    </div>
-    <div class="sr-walk-track" tabindex="0" aria-label="Afdelingen in de showroom">
-      <a class="sr-zone reveal" href="/vloeren/index.html">
-        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1000" alt="Woonkamer met houten plankenvloer" loading="lazy">
-        <span class="sr-zone-no">Afdeling 01</span>
-        <span class="sr-zone-name">Vloeren</span>
-        <span class="sr-zone-desc">Zeven vloertypes naast elkaar — van PVC tot gietvloer.</span>
-      </a>
-      <a class="sr-zone reveal" href="/interieur/index.html">
-        <img src="/assets/img/real/meubels-op-maat-900.jpg" alt="Zithoek met meubels op maat" loading="lazy">
-        <span class="sr-zone-no">Afdeling 02</span>
-        <span class="sr-zone-name">Interieur op maat</span>
-        <span class="sr-zone-desc">Kasten, deuren en meubels om aan te raken.</span>
-      </a>
-      <a class="sr-zone reveal" href="/interieur/behang.html">
-        <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen behang" loading="lazy">
-        <span class="sr-zone-no">Afdeling 03</span>
-        <span class="sr-zone-name">Behang</span>
-        <span class="sr-zone-desc">Stalenboeken om mee naar huis te nemen.</span>
-      </a>
-      <a class="sr-zone reveal" href="/interieur/raamdecoratie.html">
-        <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijnen in een woonkamer" loading="lazy">
-        <span class="sr-zone-no">Afdeling 04</span>
-        <span class="sr-zone-name">Raamdecoratie</span>
-        <span class="sr-zone-desc">Voel stoffen in echt daglicht.</span>
-      </a>
+      <div class="variant-grid">
+        <a class="variant-card" href="/vloeren/index.html">
+          <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=800" alt="Woonkamer met houten plankenvloer" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Vloeren</span><span class="desc">Zeven vloertypes naast elkaar, van PVC tot gietvloer</span></div>
+        </a>
+        <a class="variant-card" href="/interieur/index.html">
+          <img src="/assets/img/real/meubels-op-maat-900.jpg" alt="Zithoek met meubels op maat" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Interieur op maat</span><span class="desc">Kasten, deuren en meubels om aan te raken</span></div>
+        </a>
+        <a class="variant-card" href="/interieur/behang.html">
+          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen behang" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Behang</span><span class="desc">Stalenboeken om mee naar huis te nemen</span></div>
+        </a>
+        <a class="variant-card" href="/interieur/raamdecoratie.html">
+          <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijnen in een woonkamer" loading="lazy">
+          <div class="variant-card-copy"><span class="name">Raamdecoratie</span><span class="desc">Voel de stoffen in echt daglicht</span></div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -122,12 +111,12 @@
         <h2>Adres, route en openingstijden.</h2>
       </div>
       <div class="sr-visit-grid">
-        <a class="map-embed sr-map reveal" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
+        <a class="map-embed sr-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
           <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=15&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
           <span class="map-cap">Jules Verneweg 7a, 5015 BD Tilburg · Plan route <span class="arrow">→</span></span>
         </a>
 
-        <div class="sr-visit-card reveal">
+        <div class="sr-visit-card">
           <span data-open-status></span>
           <div data-open-week></div>
           <p class="sr-visit-note">Op afspraak ook buiten openingstijden welkom.</p>
@@ -188,8 +177,8 @@
         <h2>Zien we u deze week in de showroom?</h2>
         <p>Plan een bezoek of loop gewoon eens binnen — we ontvangen u graag.</p>
         <div class="hero-cta-row">
-          <a class="btn btn-primary magnetic" href="/contact.html">Plan showroombezoek</a>
-          <a class="btn-text magnetic" href="#route">Route &amp; openingstijden <span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="/contact.html">Plan showroombezoek</a>
+          <a class="btn-text" href="#route">Route &amp; openingstijden <span class="arrow">→</span></a>
         </div>
       </div>
     </div>

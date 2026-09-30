@@ -27,7 +27,7 @@
         '<div class="wrap">' +
           '<div class="footer-top">' +
             '<div class="footer-brand">' +
-              '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo.svg" alt="De Vloerenspecialist" width="230" height="34"></a>' +
+              '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo-dark.svg" alt="De Vloerenspecialist Tilburg" width="230" height="34"></a>' +
               "<p>Het interieurmerk van Tilburg, met de showroom als hart. Vier disciplines, één team, één standaard.</p>" +
               '<div class="footer-social">' +
                 '<a href="https://www.instagram.com/vloerenspecialisttilburg/" target="_blank" rel="noopener" aria-label="Instagram">' +
@@ -89,7 +89,9 @@
     var target = document.getElementById("site-footer");
     if (!target) return;
     var isHome = document.body.getAttribute("data-page") === "home";
-    target.innerHTML = (isHome ? "" : bandTemplate()) + footerTemplate();
+    // Geen dubbele oproep: pagina's met een eigen afsluiter (.page-cta) krijgen de band niet.
+    var hasOwnCta = !!document.querySelector(".page-cta");
+    target.innerHTML = (isHome || hasOwnCta ? "" : bandTemplate()) + footerTemplate();
   }
 
   mount();

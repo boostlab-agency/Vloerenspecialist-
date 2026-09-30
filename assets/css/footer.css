@@ -2,8 +2,8 @@
    Footer
    ========================================================================== */
 
-.site-footer { background: var(--bg); border-top: 1px solid var(--line); }
-.site-footer .wrap { padding: 96px var(--gutter) 40px; }
+.site-footer { background: var(--surface-2); border-top: 1px solid var(--line); }
+.site-footer .wrap { padding: 72px var(--gutter) 36px; }
 
 .footer-top {
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 56px;
@@ -11,10 +11,7 @@
 }
 
 .footer-brand .brand { display: inline-flex; margin-bottom: 22px; }
-.footer-brand .brand-logo { height: 28px; width: auto; }
-/* De footer is overal donker (zelfde canvas als de rest van de site), dus
-   het wit+rode logo staat hier zonder filter — geen aparte donkere variant
-   meer nodig. */
+.footer-brand .brand-logo { height: 36px; width: auto; }
 .footer-brand p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; max-width: 32ch; }
 .footer-social { display: flex; gap: 10px; margin-top: 24px; }
 .footer-social a {

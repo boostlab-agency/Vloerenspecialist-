@@ -1,45 +1,17 @@
 /* ==========================================================================
    Subpagina-template — gedeeld door alle pagina's onder de homepage.
-   Rustiger dan het cinematische homepage-scrollverhaal (geen pinning, geen
-   scroll-hijacking), maar wel hetzelfde donkere canvas: de homepage is de
-   bron van waarheid. Zelfde mechanisme als home.css's dark chapter-tokens
-   — lokale herdefinitie van --bg/--ink/--surface/etc, zodat alle bestaande
-   componenten (kaarten, forms, footer) automatisch mee overschakelen zonder
-   dat elke regel losstaand herschreven hoeft te worden.
+   Licht en rustig: witte pagina, warme lichte vlakken voor afwisseling,
+   duidelijke koppen en kaarten met foto + titel + korte omschrijving.
    ========================================================================== */
 
-body[data-page="sub"] {
-  --bg: #140d0b;
-  --ink: #f4eee1;
-  --ink-soft: #bcad97;
-  --line: rgba(244,238,225,.14);
-  --surface: #1e1512;
-  --surface-2: #251a16;
-  --surface-rgb: 20, 13, 11;
-  --accent: #e20e18;
-  --accent-rgb: 226, 14, 24;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
-  --shadow: 0 14px 44px -14px rgba(0,0,0,.6);
-  background: var(--bg);
-}
-
-/* Diepte op fotografie: een zachte donkere vignet, zoals de homepage op
-   elke .media toepast, zodat beelden niet los "zweven" op het donkere
-   canvas maar er optisch in wegzakken. */
-body[data-page="sub"] .page-hero-media::after,
-body[data-page="sub"] .split-media::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10,6,5,.05), rgba(10,6,5,.32));
-  pointer-events: none;
-}
-
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+/* Heel subtiel intro-effect (alleen een korte fade), geen beweging. */
+.reveal { opacity: 0; transition: opacity .5s ease; }
 .reveal.is-visible,
-html.reduced-motion .reveal { opacity: 1; transform: none; }
+html.reduced-motion .reveal { opacity: 1; }
 
 /* ---- Breadcrumb ---- */
 .crumb {
-  padding: calc(var(--header-h) + 28px) 0 0;
+  padding: 22px 0 0;
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   font-size: 12.5px; color: var(--ink-soft);
 }
@@ -69,12 +41,12 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 @media (max-width: 900px) {
   .page-hero { grid-template-columns: 1fr; gap: 32px; }
   .page-hero-media { order: -1; aspect-ratio: 16/11; }
-  .crumb { padding-top: calc(var(--header-h) + 18px); }
+  .crumb { padding-top: 16px; }
 }
 
 /* ---- Generieke sectie ---- */
-.page-section { padding: 132px 0; }
-.page-section.is-tight { padding: 72px 0; }
+.page-section { padding: 96px 0; }
+.page-section.is-tight { padding: 64px 0; }
 .page-section.is-alt { background: var(--surface); }
 /* Secties waar het menu naartoe linkt (bv. #kasten): niet onder de vaste header laten vallen. */
 .page-section[id] { scroll-margin-top: var(--header-h); }
@@ -106,30 +78,43 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 }
 
 /* ---- Variant-/collectiegrid (subtypes, materialen, projecten) ---- */
-.variant-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.variant-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.variant-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.variant-card { position: relative; display: block; aspect-ratio: 3/3.6; border-radius: 3px; overflow: hidden; color: #fff; }
-.variant-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
-.variant-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.72), rgba(10,6,5,0) 55%); }
-.variant-card:hover img { transform: scale(1.05); }
-.variant-card-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px; }
-.variant-card-copy .name { display: block; font-family: var(--serif); font-weight: 400; font-size: 19px; margin-bottom: 4px; }
-.variant-card-copy .desc { display: block; font-size: 12.5px; color: rgba(255,255,255,.8); }
-@media (max-width: 900px) { .variant-grid, .variant-grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+.variant-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px 24px; }
+.variant-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.variant-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Kaart: foto boven, titel + korte omschrijving eronder (rustig, zonder overlay). */
+.variant-card { display: block; color: var(--ink); }
+.variant-card img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); background: var(--surface); transition: opacity .2s ease; }
+.variant-card:hover img { opacity: .9; }
+.variant-card-copy { padding: 14px 2px 0; }
+.variant-card-copy .name { display: block; font-family: var(--serif); font-weight: 700; font-size: 18px; margin-bottom: 2px; }
+.variant-card:hover .name { color: var(--accent); }
+.variant-card-copy .desc { display: block; font-size: 14px; color: var(--ink-soft); }
+@media (max-width: 900px) { .variant-grid, .variant-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .variant-grid, .variant-grid.cols-3, .variant-grid.cols-2 { grid-template-columns: 1fr 1fr; gap: 12px; } }
 
+/* ---- Soortkaarten (Behang, Raamdecoratie): foto, titel, uitleg, "ideaal voor" ---- */
+.type-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 28px; }
+.type-card { scroll-margin-top: calc(var(--header-h) + 20px); }
+.type-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); background: var(--surface); margin-bottom: 16px; }
+.type-card h3 { font-size: 20px; margin-bottom: 8px; }
+.type-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 10px; }
+.type-card .type-fit { font-size: 14px; color: var(--ink-soft); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+.type-card .type-fit strong { color: var(--ink); }
+.type-card:target h3 { color: var(--accent); }
+@media (max-width: 900px) { .type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .type-grid { grid-template-columns: 1fr; gap: 36px; } }
+
 /* ---- Materiaal-/textuurstrip (macro-opnamen) ---- */
-.texture-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.texture-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .texture-card { position: relative; aspect-ratio: 1/1.1; border-radius: 3px; overflow: hidden; }
 .texture-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .texture-card span { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #fff; font-family: var(--serif); font-size: 15px; }
 .texture-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.55), rgba(10,6,5,0) 50%); }
-@media (max-width: 700px) { .texture-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .texture-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---- Stappen (werkwijze) ---- */
-.step-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: step; }
-.step-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.step-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; counter-reset: step; }
+.step-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .step-item { counter-increment: step; }
 .step-item::before {
   content: counter(step, decimal-leading-zero); display: block; font-family: var(--serif); font-weight: 600;
@@ -197,20 +182,20 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 560px) { .form-two { grid-template-columns: 1fr; } }
 
-/* ---- CTA-afsluiter: vol beeld met overlay ---- */
-.page-cta { position: relative; padding: 120px 0; color: #fff; overflow: hidden; }
-.page-cta-media { position: absolute; inset: 0; z-index: -1; background: var(--surface-2); }
-.page-cta-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.page-cta-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,.78), rgba(10,6,5,.42)); }
-.page-cta-inner { max-width: 46ch; }
-.page-cta h2 { font-weight: 600; font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 18px; color: #fff; }
-.page-cta p { color: rgba(244,238,225,.82); font-size: 16px; margin-bottom: 32px; }
+/* ---- CTA-afsluiter: rustig licht vlak, geen fotoband ----
+   (Het oude beeld in .page-cta-media wordt niet meer getoond.) */
+.page-cta { position: relative; padding: 80px 0; background: var(--surface); border-top: 1px solid var(--line); }
+.page-cta-media { display: none; }
+.page-cta-inner { max-width: 56ch; }
+.page-cta .eyebrow { color: var(--accent) !important; }
+.page-cta .eyebrow span { display: none; }
+.page-cta h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 12px; }
+.page-cta p { color: var(--ink-soft); font-size: 16px; margin-bottom: 26px; }
 .page-cta .hero-cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.page-cta .btn-text { color: #fff; border-color: rgba(255,255,255,.4); }
 
 @media (max-width: 640px) {
-  .page-section { padding: 76px 0; }
-  .page-cta { padding: 80px 0; }
+  .page-section { padding: 64px 0; }
+  .page-cta { padding: 60px 0; }
 }
 
 /* ---- Journal: zoekbalk + categoriefilter ---- */
@@ -236,7 +221,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .journal-empty.is-visible { display: block; }
 
 /* ---- Journal: artikelkaarten ---- */
-.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 32px; }
+.article-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 32px; }
 .article-card { display: block; }
 .article-card .thumb { position: relative; aspect-ratio: 4/3; border-radius: 3px; overflow: hidden; background: var(--surface-2); margin-bottom: 18px; }
 .article-card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,.8,.24,1); }
@@ -245,7 +230,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .article-card h3 { font-weight: 500; font-size: 20px; line-height: 1.25; margin-bottom: 8px; letter-spacing: -.005em; }
 .article-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
 .article-card .meta { font-size: 12.5px; color: var(--ink-soft); }
-@media (max-width: 900px) { .article-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 24px; } }
+@media (max-width: 900px) { .article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; } }
 @media (max-width: 600px) { .article-grid { grid-template-columns: 1fr; } .journal-toolbar { flex-direction: column; align-items: stretch; } .journal-search { max-width: none; } }
 
 /* ---- Journal: artikeldetail (langere leestekst) ---- */
@@ -279,7 +264,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 
 /* ---- Merken: overzicht + detailpagina ---- */
 .brand-toolbar { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 32px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
-.brand-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.brand-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .brand-card {
   display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
   aspect-ratio: 1/.85; padding: 26px; border-radius: 6px; background: var(--surface);
@@ -289,13 +274,13 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .brand-card .brand-name { font-family: var(--serif); font-weight: 500; font-size: 21px; letter-spacing: -.01em; }
 .brand-card .cat { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
 .brand-card .desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
-@media (max-width: 900px) { .brand-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) { .brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .brand-grid { grid-template-columns: 1fr; } }
 
 .brand-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding: 28px 0 44px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
 .brand-hero .cat { display: inline-block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
 .brand-hero h1 { font-weight: 600; letter-spacing: -.01em; font-size: clamp(34px, 5vw, 58px); margin: 0; }
 .brand-hero .lead { max-width: 46ch; color: var(--ink-soft); font-size: 17px; margin: 0; }
-.brand-kenmerken { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 32px; margin: 40px 0; }
+.brand-kenmerken { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 32px; margin: 40px 0; }
 .brand-kenmerken .item { border-top: 2px solid var(--ink); padding-top: 14px; font-size: 14.5px; color: var(--ink-soft); }
 @media (max-width: 700px) { .brand-hero { flex-direction: column; align-items: flex-start; gap: 14px; } .brand-kenmerken { grid-template-columns: 1fr 1fr; } }

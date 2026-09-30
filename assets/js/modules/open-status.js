@@ -42,7 +42,9 @@
   }
 
   function renderPill(el, s) {
-    el.className = "open-pill" + (s.open ? " is-open" : "");
+    // classList i.p.v. className: extra klassen zoals .is-on-dark blijven staan.
+    el.classList.add("open-pill");
+    el.classList.toggle("is-open", s.open);
     el.setAttribute("role", "status");
     el.innerHTML = '<span class="open-dot" aria-hidden="true"></span><strong>' + s.title + "</strong>" +
       (s.sub ? '<span class="open-sub">' + s.sub + "</span>" : "");
