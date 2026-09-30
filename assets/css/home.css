@@ -13,19 +13,23 @@
 .h-head .eyebrow { margin: 0; }
 .h-head > .btn-text { flex: none; margin-bottom: 4px; }
 
-/* ---- 1 · Hero: alleen het filmpje ---- */
-.h-hero { padding: 0 0 12px; }
-.h-hero-media { position: relative; aspect-ratio: 2.15 / 1; overflow: hidden; background: var(--surface); }
+/* ---- 1 · Hero: filmpje op een beige vlak ----
+   Het vlak begint links tegen de rand, loopt tot ruim voorbij het midden en
+   stopt halverwege het filmpje; het filmpje ligt er iets verschoven op.
+   Links naast het filmpje, op het vlak, een verticale regel. */
+.h-hero { position: relative; padding: 76px 0 12px; }
+.h-hero-panel { position: absolute; left: 0; top: 0; width: 68%; bottom: 34%; background: var(--surface); }
+.h-hero-inner { position: relative; display: grid; grid-template-columns: 80px minmax(0, 1fr); }
+.h-hero-media { grid-column: 2; position: relative; aspect-ratio: 2.3 / 1; overflow: hidden; background: var(--surface-2); }
 .h-hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* Verticale regel links in beeld, zoals "AMBACHTELIJKE VLOEREN SINDS 1958". */
 .h-hero-vertical {
-  position: absolute; left: 30px; bottom: 34px; margin: 0;
+  grid-column: 1; grid-row: 1; align-self: end; justify-self: start; margin: 0 0 4px;
   writing-mode: vertical-rl; transform: rotate(180deg);
-  font-size: 13px; font-weight: 300; letter-spacing: .08em; text-transform: uppercase; color: #fff;
-  text-shadow: 0 1px 12px rgba(0,0,0,.35);
+  font-size: 13px; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
 }
-.h-hero-vertical strong { color: #fff; font-weight: 700; }
+.h-hero-vertical strong { color: var(--ink); font-weight: 600; }
 .h-scroll {
+  grid-column: 2;
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
   margin: 18px 0 0; font-size: 14px; color: var(--ink);
 }
@@ -143,8 +147,11 @@
 }
 @media (max-width: 640px) {
   .h-section { padding: 64px 0; }
-  .h-hero-media { aspect-ratio: 4 / 3.4; margin: 0 calc(var(--gutter) * -1); }
-  .h-hero-vertical { left: 16px; bottom: 18px; font-size: 11px; }
+  .h-hero { padding-top: 28px; }
+  .h-hero-panel { width: 86%; bottom: 40%; }
+  .h-hero-inner { grid-template-columns: 34px minmax(0, 1fr); }
+  .h-hero-media { aspect-ratio: 4 / 3.6; }
+  .h-hero-vertical { font-size: 10.5px; letter-spacing: .1em; }
   .h-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 36px; }
   .h-welcome-copy h1, .h-welcome-copy h2 { margin-bottom: 20px; }
   .h-welcome-copy p { margin-bottom: 26px; }

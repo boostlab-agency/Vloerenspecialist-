@@ -14,7 +14,7 @@
   var ICONS = {
     close: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>',
     arrow: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    caret: '<svg class="nav-caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+    caret: '<svg class="nav-caret" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 8h16l-8 9z"/></svg>',
     phone: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
     whatsapp: '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>',
     pin: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
@@ -129,22 +129,23 @@
       if (!item.groups) {
         return '<li class="' + cls + '"><a class="nav-link" href="' + item.href + '">' + item.label + "</a></li>";
       }
+      /* Eenvoudige tekstlijst: soorten in (maximaal) twee kolommen, merken
+         als aparte kolom met een klein kopje. Geen foto's. */
       var cols = item.groups.map(function (g) {
         var brands = isBrandGroup(g);
         var links = g.links.map(function (l) {
-          return '<a class="drop-link' + (l.more ? " is-more" : "") + '" href="' + l.href + '">' +
-            (l.img ? '<span class="drop-thumb"><img src="' + l.img + '" alt="" loading="lazy"></span>' : "") +
-            "<span>" + l.label + "</span></a>";
+          return '<a class="drop-link' + (l.more ? " is-more" : "") + '" href="' + l.href + '">' + l.label + "</a>";
         }).join("");
         return '<div class="drop-col' + (brands ? " is-brands" : "") + '">' +
-          '<p class="drop-title">' + g.title + "</p>" +
-          '<div class="drop-list' + (!brands && g.links.length > 5 ? " is-two-col" : "") + '">' + links + "</div>" +
+          (brands ? '<p class="drop-title">' + g.title + "</p>" : "") +
+          '<div class="drop-list' + (!brands && g.links.length > 4 ? " is-two-col" : "") + '">' + links + "</div>" +
         "</div>";
       }).join("");
+      var id = "drop-" + item.key;
       return (
         '<li class="' + cls + '">' +
-          '<a class="nav-link" href="' + item.href + '" aria-haspopup="true" aria-expanded="false">' + item.label + ICONS.caret + "</a>" +
-          '<div class="nav-drop">' +
+          '<button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' + item.label + ICONS.caret + "</button>" +
+          '<div class="nav-drop" id="' + id + '">' +
             '<div class="drop-inner">' + cols + "</div>" +
             '<a class="drop-all" href="' + item.href + '">' + item.all + " " + ICONS.arrow + "</a>" +
           "</div>" +

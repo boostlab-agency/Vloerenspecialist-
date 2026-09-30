@@ -14,34 +14,29 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* Uitklapmenu's: openen bij hover (CSS) en bij toetsenbordfocus. Op touch
-     opent de eerste tik op een hoofdlink het menu, een tweede tik de pagina.
-     Klik buiten het menu of Escape sluit alles. */
+  /* Uitklapmenu's: klappen open (en weer dicht) bij een klik op het
+     hoofditem — muis, touch en toetsenbord gelijk. Eén menu tegelijk;
+     klik buiten het menu, focus weg of Escape sluit alles. */
   function initDropdowns() {
     var items = document.querySelectorAll(".main-nav .has-drop");
     if (!items.length) return;
-    var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+    function setOpen(li, open) {
+      li.classList.toggle("is-open", open);
+      li.querySelector(".nav-trigger").setAttribute("aria-expanded", open ? "true" : "false");
+    }
     function closeAll(except) {
-      items.forEach(function (li) {
-        if (li === except) return;
-        li.classList.remove("is-open");
-        li.querySelector(".nav-link").setAttribute("aria-expanded", "false");
-      });
+      items.forEach(function (li) { if (li !== except) setOpen(li, false); });
     }
     items.forEach(function (li) {
-      var link = li.querySelector(".nav-link");
-      link.addEventListener("click", function (e) {
-        if (canHover || li.classList.contains("is-open")) return; // gewoon naar de pagina
-        e.preventDefault();
+      var trigger = li.querySelector(".nav-trigger");
+      trigger.addEventListener("click", function () {
+        var open = !li.classList.contains("is-open");
         closeAll(li);
-        li.classList.add("is-open");
-        link.setAttribute("aria-expanded", "true");
+        setOpen(li, open);
       });
-      li.addEventListener("mouseenter", function () { link.setAttribute("aria-expanded", "true"); });
-      li.addEventListener("mouseleave", function () { link.setAttribute("aria-expanded", "false"); li.classList.remove("is-open"); });
       li.addEventListener("focusout", function (e) {
-        if (!li.contains(e.relatedTarget)) { li.classList.remove("is-open"); link.setAttribute("aria-expanded", "false"); }
+        if (e.relatedTarget && !li.contains(e.relatedTarget)) setOpen(li, false);
       });
     });
     document.addEventListener("click", function (e) {

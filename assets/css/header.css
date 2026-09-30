@@ -24,56 +24,48 @@
 .brand-logo { display: block; height: 48px; width: auto; }
 
 /* ---- Hoofdnavigatie ---- */
-.main-nav { flex: 1; display: flex; justify-content: center; }
-.main-nav > ul { display: flex; align-items: center; gap: 4px; }
-.nav-item { position: relative; }
+/* De navigatie vult de volle hoogte van de balk, zodat een uitklapmenu
+   precies onder de header begint (ook als de balk bij scrollen krimpt). */
+.main-nav { flex: 1; display: flex; justify-content: center; align-self: stretch; }
+.main-nav > ul { display: flex; align-items: stretch; gap: 4px; }
+.nav-item { position: relative; display: flex; align-items: center; }
 .nav-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 12px; border-radius: 8px;
-  font-size: 14.5px; font-weight: 500; color: var(--ink); white-space: nowrap;
-  transition: color .15s ease, background .15s ease;
+  position: relative; display: inline-flex; align-items: center; gap: 7px;
+  padding: 10px 12px; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 14.5px; font-weight: 500; color: var(--ink); white-space: nowrap;
+  transition: color .15s ease;
 }
-.nav-link:hover, .nav-item.is-open > .nav-link, .nav-item:focus-within > .nav-link { color: var(--accent); }
-.nav-item.is-current > .nav-link { color: var(--accent); }
+.nav-link:hover, .nav-item.is-open > .nav-link { color: var(--ink-soft); }
 .nav-item.is-current > .nav-link::after {
-  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent);
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 1px; background: var(--ink);
 }
-.nav-caret { flex: none; width: 11px; height: 11px; color: var(--ink-faint); transition: transform .2s var(--ease); }
-.nav-item:hover .nav-caret, .nav-item.is-open .nav-caret { transform: rotate(180deg); }
+.nav-caret { flex: none; width: 10px; height: 10px; color: var(--ink); transition: transform .2s var(--ease); }
+.nav-item.is-open .nav-caret { transform: rotate(180deg); }
 
-/* ---- Uitklapmenu ---- */
+/* ---- Uitklapmenu: eenvoudige tekstlijst die onder de header openklapt ---- */
 .nav-drop {
-  position: absolute; top: calc(100% + 10px); left: 50%; transform: translate(-50%, 6px);
-  min-width: 300px; padding: 22px 22px 16px;
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
-  box-shadow: 0 24px 60px -24px rgba(29,27,25,.35);
-  opacity: 0; visibility: hidden; pointer-events: none;
+  position: absolute; top: calc(100% + 1px); left: 0;
+  padding: 26px 34px 24px 24px;
+  background: #fff; border: 1px solid var(--line); border-top: 0;
+  box-shadow: 0 24px 40px -30px rgba(29,27,25,.3);
+  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px);
   transition: opacity .18s ease, transform .18s ease, visibility .18s;
 }
-/* Onzichtbare brug zodat het menu niet sluit tijdens het bewegen van de muis. */
-.nav-drop::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
-.nav-item:hover > .nav-drop, .nav-item.is-open > .nav-drop, .nav-item:focus-within > .nav-drop {
-  opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
-}
-.drop-inner { display: flex; gap: 28px; }
-.drop-col { min-width: 220px; }
-.drop-col.is-brands { min-width: 150px; padding-left: 24px; border-left: 1px solid var(--line); }
-.drop-title { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
-.drop-list { display: flex; flex-direction: column; gap: 2px; }
-.drop-list.is-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px; }
-.drop-link {
-  display: flex; align-items: center; gap: 12px; padding: 7px 8px; border-radius: 8px;
-  font-size: 14.5px; color: var(--ink); white-space: nowrap; transition: background .15s ease, color .15s ease;
-}
-.drop-link:hover { background: var(--surface); color: var(--accent); }
-.drop-col.is-brands .drop-link { padding: 6px 8px; color: var(--ink-soft); }
-.drop-col.is-brands .drop-link:hover { color: var(--accent); }
-.drop-link.is-more { color: var(--accent); font-weight: 600; }
-.drop-thumb { flex: none; width: 40px; height: 40px; border-radius: 8px; overflow: hidden; background: var(--surface); }
-.drop-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+.drop-inner { display: flex; gap: 40px; }
+.drop-col.is-brands { padding-left: 32px; border-left: 1px solid var(--line); }
+.drop-title { margin: 0 0 8px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+.drop-list { display: flex; flex-direction: column; }
+/* Twee kolommen, van boven naar beneden gevuld (zoals een lijstje). */
+.drop-list.is-two-col { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); column-gap: 48px; }
+.drop-link { display: block; padding: 7px 0; font-size: 15px; color: var(--ink); white-space: nowrap; transition: color .15s ease; }
+.drop-link:hover { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 4px; }
+.drop-col.is-brands .drop-link { color: var(--ink-soft); }
+.drop-col.is-brands .drop-link:hover { color: var(--ink); }
+.drop-link.is-more { font-weight: 500; color: var(--ink); }
 .drop-all {
-  display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 12px 8px 2px;
-  border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--accent);
+  display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--line); font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink);
 }
 .drop-all svg { transition: transform .2s var(--ease); }
 .drop-all:hover svg { transform: translateX(3px); }

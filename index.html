@@ -30,6 +30,8 @@
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
 <script src="/assets/js/modules/hero-video.js" defer></script>
+<link rel="stylesheet" href="/assets/css/design-b.css">
+<script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="home">
 
@@ -38,30 +40,101 @@
 
 <main id="main">
 
-  <!-- 1 · Hero: alleen een rustig filmpje -->
-  <section class="h-hero" data-review-id="hero" data-review-label="Hero">
-    <div class="wrap">
+  <!-- ===== Ontwerp B (concept) — alleen zichtbaar als met de schakelaar links ontwerp B gekozen is ===== -->
+  <!-- B1 · Hero: grote kop, korte intro met knop, kleine foto van de showroom, daaronder breed beeld -->
+  <section class="hb-hero only-b" data-review-id="hero-b" data-review-label="Hero (ontwerp B)">
+    <div class="wrap hb-hero-top">
+      <h1 class="hb-title">Vloeren &amp;<br>interieur</h1>
+      <div class="hb-hero-intro">
+        <p>Alle vloeren, interieur op maat, behang en raamdecoratie onder één dak. Bekijk en voel alles in onze showroom van 1.800 m² in Tilburg.</p>
+        <a class="btn btn-primary" href="/showroom.html">Plan uw bezoek</a>
+      </div>
+      <a class="hb-hero-thumb" href="/showroom.html">
+        <img src="/assets/img/real/showroom-gevel-900.jpg" alt="De showroom aan de Jules Verneweg in Tilburg" loading="lazy">
+        <span>+ Onze showroom</span>
+      </a>
+    </div>
+    <div class="hb-hero-media">
+      <img src="/assets/img/real/meubels-op-maat-1600.jpg" alt="Lichte woonkamer met meubels op maat, ronde salontafels en zonlicht" loading="lazy">
+    </div>
+  </section>
+
+  <!-- B2 · Over ons: klein label + foto links, grote tekst en kerncijfers rechts -->
+  <section class="hb-about only-b" data-review-id="over-b" data-review-label="Over ons (ontwerp B)">
+    <div class="wrap hb-about-grid">
+      <div class="hb-about-side">
+        <p class="hb-label">Over ons</p>
+        <a class="hb-about-thumb" href="/inspiratie/projecten.html">
+          <img src="/assets/img/real/visgraat-kastenwand-900.jpg" alt="Visgraatvloer met kastenwand op maat" loading="lazy">
+          <span>+ Onze projecten</span>
+        </a>
+      </div>
+      <div class="hb-about-main">
+        <p class="hb-statement">Een nieuwe vloer, een kast op maat, het juiste behang en de gordijnen die erbij passen: bij De Vloerenspecialist komt het samen onder één dak. Met een eigen team dat alles plaatst, van eerste advies tot oplevering.</p>
+        <div class="hb-stats">
+          <div><strong>1.800<sup>m²</sup></strong><span>Showroom</span></div>
+          <div><strong>62<sup>+</sup></strong><span>Topmerken</span></div>
+          <div><strong>9<sup>+</sup></strong><span>Klantwaardering</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B3 · Sfeerbeeld met grote kop en de vier vakgebieden als genummerde kaarten -->
+  <section class="hb-style only-b" data-review-id="vakgebieden-b" data-review-label="Vakgebieden (ontwerp B)">
+    <img class="hb-style-bg" src="/assets/img/real/renostuc-bedroom-brown-1600.jpg" alt="" loading="lazy">
+    <div class="wrap hb-style-inner">
+      <div class="hb-style-copy">
+        <h2>Waar stijl en vakmanschap samenkomen</h2>
+        <a class="btn hb-btn-light" href="/showroom.html">Kom kijken</a>
+      </div>
+      <div class="hb-cards">
+        <a class="hb-card" href="/vloeren/index.html">
+          <img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Lichte visgraatvloer in een open keuken" loading="lazy">
+          <span class="hb-card-foot"><span>Vloeren</span><span class="hb-card-nr">01</span></span>
+        </a>
+        <a class="hb-card" href="/interieur/index.html">
+          <img src="/assets/img/real/kasten-garderobe-900.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
+          <span class="hb-card-foot"><span>Interieur op maat</span><span class="hb-card-nr">02</span></span>
+        </a>
+        <a class="hb-card" href="/interieur/behang.html">
+          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen behang" loading="lazy">
+          <span class="hb-card-foot"><span>Behang</span><span class="hb-card-nr">03</span></span>
+        </a>
+        <a class="hb-card" href="/interieur/raamdecoratie.html">
+          <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijnen in een woonkamer" loading="lazy">
+          <span class="hb-card-foot"><span>Raamdecoratie</span><span class="hb-card-nr">04</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ===== Einde ontwerp B ===== -->
+
+  <!-- 1 · Hero: filmpje op een beige vlak, met een verticale regel ernaast -->
+  <section class="h-hero only-a" data-review-id="hero" data-review-label="Hero">
+    <div class="h-hero-panel" aria-hidden="true"></div>
+    <div class="wrap h-hero-inner">
+      <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
       <div class="h-hero-media is-video">
         <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
         <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
-               poster="https://images.pexels.com/videos/7404961/pexels-photo-7404961.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
-               aria-label="Sfeerfilm: lichte woonkamer met bank, houten salontafel en haard">
-          <source src="https://videos.pexels.com/video-files/7404961/7404961-sd_960_506_25fps.mp4" type="video/mp4" media="(max-width: 700px)">
-          <source src="https://videos.pexels.com/video-files/7404961/7404961-hd_2048_1080_25fps.mp4" type="video/mp4">
+               poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
+               aria-label="Sfeerfilm: moderne, lichte woonkamer met witte hoekbank, natuurstenen haard en lange vitrages">
+          <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="https://videos.pexels.com/video-files/7533207/7533207-hd_1920_1080_30fps.mp4" type="video/mp4">
         </video>
         <p class="h-concept" role="note"><strong>Concept</strong> Hier komt een filmpje van jullie eigen showroom.</p>
         <button class="h-video-toggle" type="button" aria-label="Pauzeer filmpje" data-video-toggle>
           <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
           <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
         </button>
-        <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
       </div>
       <a class="h-scroll" href="#welkom">Scroll om te ontdekken <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
   </section>
 
   <!-- 2 · Welkom: beeld links, kop + korte tekst + één knop rechts -->
-  <section class="h-section h-welcome" id="welkom" data-review-id="welkom" data-review-label="Welkom">
+  <section class="h-section h-welcome only-a" id="welkom" data-review-id="welkom" data-review-label="Welkom">
     <div class="wrap h-welcome-grid">
       <div class="h-welcome-media">
         <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy">
@@ -125,7 +198,7 @@
   </section>
 
   <!-- 4 · Wand en raam: de andere drie vakgebieden -->
-  <section class="h-section" id="interieur" data-review-id="interieur" data-review-label="Interieur, behang en raamdecoratie">
+  <section class="h-section only-a" id="interieur" data-review-id="interieur" data-review-label="Interieur, behang en raamdecoratie">
     <div class="wrap">
       <div class="h-head">
         <div>
