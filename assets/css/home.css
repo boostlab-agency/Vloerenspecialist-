@@ -26,6 +26,43 @@
 }
 .h-hero-vertical strong { color: #fff; font-weight: 700; }
 .h-hero-status { position: absolute; right: 24px; bottom: 24px; }
+
+/* Hero als filmpje (concept) */
+.h-hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Conceptmelding: verschijnt bij hover (muis); op touch klein en altijd zichtbaar. */
+.h-concept {
+  position: absolute; left: 50%; top: 50%; z-index: 3; margin: 0;
+  transform: translate(-50%, calc(-50% + 8px)); max-width: min(440px, 80%);
+  padding: 16px 22px; background: rgba(255,255,255,.95); color: var(--ink);
+  font-size: 15px; line-height: 1.5; text-align: center; box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+}
+.h-concept strong {
+  display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+}
+.h-hero-media.is-video:hover .h-concept { opacity: 1; transform: translate(-50%, -50%); }
+@media (hover: none) {
+  .h-concept {
+    opacity: 1; left: 12px; top: 12px; transform: none; max-width: calc(100% - 80px);
+    padding: 7px 11px; font-size: 12px; text-align: left; box-shadow: none;
+  }
+  .h-concept strong { display: inline; margin: 0 6px 0 0; font-size: 10px; }
+  .h-hero-media.is-video:hover .h-concept { transform: none; }
+}
+/* Pauzeknop (toegankelijkheid: bewegend beeld kunnen stoppen). */
+.h-video-toggle {
+  position: absolute; left: 24px; top: 24px; z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.9); color: var(--ink);
+}
+.h-video-toggle:hover { background: #fff; }
+.h-video-toggle .i-play { display: none; }
+.h-video-toggle.is-paused .i-play { display: block; }
+.h-video-toggle.is-paused .i-pause { display: none; }
+/* Touch: conceptlabel staat linksboven, dus de knop rechtsboven. */
+@media (hover: none) { .h-video-toggle { left: auto; right: 12px; top: 12px; } }
 .h-scroll {
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
   margin: 18px 0 0; font-size: 14px; color: var(--ink);

@@ -29,6 +29,7 @@
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
+<script src="/assets/js/modules/hero-video.js" defer></script>
 </head>
 <body data-page="home">
 
@@ -40,8 +41,19 @@
   <!-- 1 · Hero: in één oogopslag wat, waar en hoe -->
   <section class="h-hero" data-review-id="hero" data-review-label="Hero">
     <div class="wrap">
-      <div class="h-hero-media">
-        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=2200" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="eager">
+      <div class="h-hero-media is-video">
+        <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
+        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="https://images.pexels.com/videos/7505118/pexels-photo-7505118.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
+               aria-label="Sfeerfilm: bezoeker bekijkt materiaalstalen in de showroom">
+          <source src="https://videos.pexels.com/video-files/7505118/7505118-sd_960_506_25fps.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="https://videos.pexels.com/video-files/7505118/7505118-hd_1366_720_25fps.mp4" type="video/mp4">
+        </video>
+        <p class="h-concept" role="note"><strong>Concept</strong> Hier komt een filmpje van jullie eigen showroom.</p>
+        <button class="h-video-toggle" type="button" aria-label="Pauzeer filmpje" data-video-toggle>
+          <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+        </button>
         <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
         <span class="h-hero-status" data-open-status></span>
       </div>
