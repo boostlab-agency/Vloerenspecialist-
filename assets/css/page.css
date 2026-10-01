@@ -44,7 +44,7 @@ html.reduced-motion .reveal { opacity: 1; }
 }
 
 /* ---- Generieke sectie ---- */
-.page-section { padding: 96px 0; }
+.page-section { padding: clamp(64px, 6.5vw, 96px) 0; }
 .page-section.is-tight { padding: 64px 0; }
 .page-section.is-alt { background: var(--surface); }
 /* Secties waar het menu naartoe linkt (bv. #kasten): niet onder de vaste header laten vallen. */

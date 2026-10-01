@@ -12,7 +12,7 @@
   transition: box-shadow .25s var(--ease);
 }
 .site-header.is-scrolled { box-shadow: 0 6px 24px -18px rgba(29,27,25,.35); }
-.header-bar { height: var(--header-h); display: flex; align-items: center; gap: 28px; transition: height .25s var(--ease); }
+.header-bar { height: var(--header-h); display: flex; align-items: center; gap: clamp(14px, 1.5vw, 28px); transition: height .25s var(--ease); }
 /* Bij scrollen: compacter, zodat de balk niet te veel ruimte inneemt. */
 .brand-logo { transition: height .25s var(--ease); }
 @media (min-width: 641px) {
@@ -21,18 +21,18 @@
 }
 
 .brand { display: flex; align-items: center; flex: none; min-width: 0; }
-.brand-logo { display: block; height: 48px; width: auto; }
+.brand-logo { display: block; height: clamp(36px, 2.5vw, 48px); width: auto; }
 
 /* ---- Hoofdnavigatie ---- */
 /* De navigatie vult de volle hoogte van de balk, zodat een uitklapmenu
    precies onder de header begint (ook als de balk bij scrollen krimpt). */
-.main-nav { flex: 1; display: flex; justify-content: center; align-self: stretch; }
-.main-nav > ul { display: flex; align-items: stretch; gap: 4px; }
+.main-nav { flex: 1; min-width: 0; display: flex; justify-content: center; align-self: stretch; }
+.main-nav > ul { display: flex; align-items: stretch; gap: clamp(0px, .25vw, 4px); }
 .nav-item { display: flex; align-items: center; }
 .nav-link {
   position: relative; display: inline-flex; align-items: center; gap: 7px;
-  padding: 10px 12px; border: 0; background: none; cursor: pointer;
-  font: inherit; font-size: 14.5px; font-weight: 500; color: var(--ink); white-space: nowrap;
+  padding: 10px clamp(6px, .62vw, 12px); border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: clamp(13.5px, .78vw, 15px); font-weight: 500; color: var(--ink); white-space: nowrap;
   transition: color .15s ease;
 }
 .nav-link:hover, .nav-item.is-open > .nav-link { color: var(--ink-soft); }
@@ -75,24 +75,28 @@
 .menu-toggle .bars { display: flex; flex-direction: column; gap: 4px; width: 18px; }
 .menu-toggle .bars span { display: block; height: 2px; border-radius: 2px; background: currentColor; }
 
-/* Iets smallere computerschermen: telefoonnummer alleen als icoon. */
-@media (max-width: 1499px) {
+/* Vloeiend over alle schermbreedtes: logo, menutekst en tussenruimtes
+   schalen mee (zie de clamp-waarden hierboven), zodat de balk ook op een
+   laptop met vergroting (bijv. 1536px breed) netjes past. De balk zelf is
+   op lagere/smallere schermen iets minder hoog. */
+@media (min-width: 1280px) {
+  :root { --header-h: clamp(80px, 5.6vw, 108px); }
+}
+@media (min-width: 1280px) and (max-height: 820px) {
+  :root { --header-h: 80px; }
+}
+/* Telefoonnummer voluit alleen op brede schermen; anders een rond belicoon. */
+@media (max-width: 1799px) {
   .header-phone-nr { display: none; }
-  .brand-logo { height: 40px; }
   .header-phone { width: 40px; height: 40px; justify-content: center; border: 1px solid var(--line); border-radius: 999px; }
-  .header-bar { gap: 16px; }
-  .main-nav > ul { gap: 2px; }
-  .nav-link { padding: 10px 7px; gap: 5px; }
+}
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .header-cta { padding: 10px 16px; }
 }
 
-/* Krappe laptops (1360–1439px): belknop even weg zodat het menu past. */
-@media (min-width: 1360px) and (max-width: 1439px) {
-  .header-phone { display: none; }
-}
-
-/* ---- Onder 1360px: menupaneel i.p.v. navigatiebalk ---- */
-@media (max-width: 1359px) {
-  :root { --header-h: 88px; }
+/* ---- Onder 1280px: menupaneel i.p.v. navigatiebalk ---- */
+@media (max-width: 1279px) {
+  :root { --header-h: 80px; }
   .main-nav { display: none; }
   .header-bar { justify-content: space-between; }
   .menu-toggle { display: inline-flex; }

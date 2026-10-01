@@ -4,7 +4,7 @@
    vloersoorten, overige vakgebieden, showroom, reviews.
    ========================================================================== */
 
-.h-section { padding: 110px 0; }
+.h-section { padding: clamp(72px, 7vw, 110px) 0; }
 .h-section.is-surface { background: var(--surface); }
 
 /* Kop van een blok: grote kop, daaronder het cursieve label met lijntje. */
@@ -17,7 +17,7 @@
    Het vlak begint links tegen de rand, loopt tot ruim voorbij het midden en
    stopt halverwege het filmpje; het filmpje ligt er iets verschoven op.
    Links naast het filmpje, op het vlak, een verticale regel. */
-.h-hero { position: relative; padding: 76px 0 12px; }
+.h-hero { position: relative; padding: clamp(44px, 4.5vw, 76px) 0 12px; }
 .h-hero-panel { position: absolute; left: 0; top: 0; width: 68%; bottom: 34%; background: var(--surface); }
 .h-hero-inner { position: relative; display: grid; grid-template-columns: 80px minmax(0, 1fr); }
 .h-hero-media { grid-column: 2; position: relative; aspect-ratio: 2.3 / 1; overflow: hidden; background: var(--surface-2); }
@@ -160,4 +160,10 @@
   .h-card h3 { font-size: 15px; margin-top: 16px; }
   .h-card p { font-size: 13px; }
   #reviews .h-grid { grid-template-columns: 1fr; }
+}
+
+/* Lage schermen (laptops): het filmpje niet hoger dan het scherm, zodat
+   "Scroll om te ontdekken" nog in beeld valt. */
+@media (min-width: 901px) {
+  .h-hero-media { max-height: max(360px, calc(100vh - var(--header-h) - 150px)); width: 100%; }
 }

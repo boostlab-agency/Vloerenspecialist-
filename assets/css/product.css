@@ -7,7 +7,7 @@
    in de hero van de homepage.
    ========================================================================== */
 
-.pr-section { padding: 110px 0; }
+.pr-section { padding: clamp(72px, 7vw, 110px) 0; }
 .pr-section.is-surface { background: var(--surface); }
 .pr-section + .pr-section:not(.is-surface):not(.pr-feature) { padding-top: 0; }
 .pr-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 60px; align-items: end; margin-bottom: 56px; }
@@ -54,7 +54,7 @@
 .pr-type:target h3 { text-decoration: underline; text-underline-offset: 6px; }
 
 /* ---- 4 · Uitgelicht: grote foto die over een beige vlak valt ---- */
-.pr-feature { position: relative; padding: 110px 0; }
+.pr-feature { position: relative; padding: clamp(72px, 7vw, 110px) 0; }
 .pr-feature::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 46%; background: var(--surface); }
 .pr-feature-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 80px; align-items: center; }
 .pr-feature-media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-2); }
@@ -82,7 +82,7 @@
 .pr-brand:hover { border-color: var(--ink); }
 
 /* ---- 8 · Afsluiter: kom langs, weer met het vlak achter de foto ---- */
-.pr-cta { position: relative; padding: 0 0 110px; }
+.pr-cta { position: relative; padding: 0 0 clamp(72px, 7vw, 110px); }
 .pr-cta-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 0; align-items: stretch; }
 .pr-cta-copy { background: var(--surface); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
 .pr-cta-copy h2 { margin: 0 0 20px; font-size: clamp(24px, 2.4vw, 34px); }
@@ -132,4 +132,9 @@
   .pr-benefits { grid-template-columns: 1fr; }
   .pr-cta-copy { padding: 40px 24px; }
   .pr-related { grid-template-columns: 1fr; }
+}
+
+/* Lage schermen (laptops): de grote foto bovenaan niet hoger dan nodig. */
+@media (min-width: 901px) {
+  .pr-hero-media { max-height: max(340px, calc(100vh - var(--header-h) - 120px)); width: 100%; }
 }
