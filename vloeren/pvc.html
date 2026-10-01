@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PVC vloeren — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Waterbestendige, onderhoudsarme PVC-vloeren in houtlook, betonlook of visgraatmotief. Bekijk het assortiment in onze showroom in Tilburg.">
+<meta name="description" content="PVC vloeren in houtlook, steenlook, visgraat en Hongaarse punt. Waterbestendig, stil en geschikt voor vloerverwarming. Bekijk ze in onze showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -28,100 +29,247 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/pvc.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>
-      <span aria-current="page">PVC vloeren</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="PVC vloer in een moderne woonkamer" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Vloeren — PVC</p>
-        <h1>Waterbestendig, onderhoudsarm en toch écht mooi</h1>
-        <p class="lead">PVC-vloeren gaan tegenwoordig zo op hout of natuursteen lijken dat het verschil pas voelbaar is. Ideaal voor gezinnen, huisdieren en ruimtes waar vocht een rol speelt — zonder concessies aan uitstraling.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Bekijk stalen in de showroom</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span><span aria-current="page">PVC vloeren</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Vloeren</p>
+          <h1>PVC vloeren</h1>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="page-section">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Voordelen</p>
-        <h2>Praktisch zonder in te leveren op sfeer</h2>
-      </div>
-      <div class="spec-grid">
-        <div class="spec-item reveal">
-          <h3>Waterbestendig</h3>
-          <p>Geschikt voor keuken, badkamer en hal — morsen of vocht is geen probleem.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Onderhoudsarm</h3>
-          <p>Simpel schoon te houden, bestand tegen krassen van huisdieren en speelgoed.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Warm onder de voeten</h3>
-          <p>Zachter en warmer aanvoelend dan tegels, en geschikt voor vloerverwarming.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Houtlook, betonlook, visgraat</h3>
-          <p>Realistische structuren en afwerkingen — nauwelijks te onderscheiden van het origineel.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section is-alt">
-    <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Lichte visgraatvloer in houtlook in een open keuken" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Ook verkrijgbaar in visgraatmotief</h2>
-          <p>Wilt u de uitstraling van een visgraatvloer, maar met het onderhoudsgemak van PVC? Dat kan: onze PVC-collecties zijn ook leverbaar in visgraat- en chevronpatroon.</p>
-          <div class="tag-row">
-            <span class="tag">Houtlook</span>
-            <span class="tag">Betonlook</span>
-            <span class="tag">Visgraatmotief</span>
+        <div>
+          <p class="pr-hero-lead">Een PVC vloer combineert de uitstraling van hout of natuursteen met het gemak van een moderne vloer: waterbestendig, stil, warm aan de voeten en eenvoudig schoon te houden. In onze showroom vindt u collecties van de bekendste merken, van brede planken tot visgraat.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
           </div>
-          <a class="btn-text" href="/vloeren/hout.html">Bekijk ook houten vloeren <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pr-hero-vertical" aria-hidden="true">PVC vloeren <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="PVC vloer in houtlook in een moderne woonkamer" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over PVC vloeren">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Hoe een PVC vloer is opgebouwd</h2>
+        <p class="eyebrow">Over de PVC vloer</p>
+      </div>
+      <div class="pr-about-text">
+          <p>PVC staat voor polyvinylchloride: een sterk en veelzijdig materiaal dat in dunne lagen tot een vloer wordt opgebouwd. Het resultaat oogt als hout of steen, maar gedraagt zich als een echte gebruiksvloer.</p>
+          <p>Onderin zit een stabiele drager, daarboven een designlaag met de print van hout, beton of natuursteen. Daarop ligt een transparante slijtlaag die de vloer beschermt tegen krassen, vocht en vuil. Hoe dikker die slijtlaag, hoe langer de vloer mooi blijft: voor een woonkamer adviseren we minimaal 0,3 mm, voor drukbelopen ruimtes of een gezin met huisdieren liever 0,55 mm.</p>
+          <p>Moderne PVC collecties hebben een reliëf dat meeloopt met de nerf van het hout (in register). Daardoor ziet u het verschil met echt hout pas als u de vloer aanraakt. Wij laten u graag de verschillende kwaliteiten naast elkaar zien.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Van plakvloer tot rigid core</h2>
+          <p class="eyebrow">Soorten PVC</p>
+        </div>
+        <p class="pr-head-text">Welke uitvoering het beste past, hangt af van uw ondervloer, de ruimte en het gebruik. Wij kijken graag met u mee.</p>
+      </div>
+      <div class="pr-types" style="--cols: 4">
+        <article class="pr-type">
+          <span class="pr-type-nr">01</span>
+          
+          <h3>Plak PVC</h3>
+          <p>Dunne stroken die volledig op een egale ondervloer worden verlijmd. Heel stil, zeer stabiel en de beste keuze in combinatie met vloerverwarming.</p>
+          <div class="tag-row"><span class="tag">Stil</span><span class="tag">Vloerverwarming</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">02</span>
+          
+          <h3>Klik PVC</h3>
+          <p>Planken met een kliksysteem die zwevend of verlijmd gelegd kunnen worden. Snel geplaatst en later ook weer eenvoudig te vervangen.</p>
+          <div class="tag-row"><span class="tag">Snel gelegd</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">03</span>
+          
+          <h3>Rigid core</h3>
+          <p>PVC met een stijve, massieve kern. Vergevingsgezind bij kleine oneffenheden in de ondervloer en extra stabiel bij temperatuurverschillen.</p>
+          <div class="tag-row"><span class="tag">Extra stabiel</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">04</span>
+          
+          <h3>Tegels in steenlook</h3>
+          <p>Grote PVC tegels met de uitstraling van beton, leisteen of marmer. De rust van steen, maar warmer en zachter onder de voeten.</p>
+          <div class="tag-row"><span class="tag">Betonlook</span><span class="tag">Marmerlook</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Lichte visgraatvloer in houtlook in een open keuken" loading="lazy">
+      </div>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Inspiratie</p>
+        <h2>Ook in visgraat en Hongaarse punt</h2>
+        <p>Een legpatroon maakt van een vloer een blikvanger. PVC is verkrijgbaar in visgraat en Hongaarse punt, met dezelfde onderhoudsvriendelijkheid als een gewone plank. In de showroom ziet u de patronen op ware grootte in complete woonopstellingen.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Waarom kiezen voor PVC</h2>
+          <p class="eyebrow">Voordelen</p>
+        </div>
+      </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Waterbestendig</h3><p>Geschikt voor keuken, hal en badkamer. Gemorst water veegt u gewoon weg.</p></div>
+        <div class="pr-benefit"><h3>Stil en warm</h3><p>PVC dempt contactgeluid en voelt warmer aan dan tegels of steen.</p></div>
+        <div class="pr-benefit"><h3>Ideaal met vloerverwarming</h3><p>De dunne vloer geeft warmte snel en gelijkmatig door.</p></div>
+        <div class="pr-benefit"><h3>Kras- en slijtvast</h3><p>De slijtlaag beschermt tegen dagelijks gebruik, kinderen en huisdieren.</p></div>
+        <div class="pr-benefit"><h3>Onderhoudsarm</h3><p>Stofzuigen en af en toe vochtig dweilen is genoeg.</p></div>
+        <div class="pr-benefit"><h3>Realistische looks</h3><p>Van eiken plank tot betonlook, met structuur die u echt voelt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Alles over uw PVC vloer</h2>
+          <p class="eyebrow">Goed om te weten</p>
+        </div>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Legpatronen: plank, visgraat en Hongaarse punt</h3>
+          <div>
+          <p>De klassieke plank geeft rust en laat een ruimte groter lijken, zeker bij brede en lange planken. Visgraat brengt beweging en karakter; de Hongaarse punt, met schuin afgezaagde uiteinden, oogt nog iets strakker en eleganter.</p>
+          <p>Een patroon vraagt meer legwerk en vakmanschap, maar het resultaat is een vloer met een eigen signatuur. Onze eigen vloerleggers plaatsen alle patronen, inclusief de afwerking langs wanden en plinten.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>PVC en vloerverwarming</h3>
+          <div>
+          <p>PVC is een van de beste vloeren om te combineren met vloerverwarming. De vloer is dun en heeft een lage warmteweerstand, waardoor de warmte snel de ruimte in komt en u zuinig stookt.</p>
+          <p>Voor de beste prestaties adviseren we een verlijmde vloer. Ook met vloerkoeling is PVC goed te combineren; wij vertellen u welke collecties daarvoor geschikt zijn.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Gezond wonen en keurmerken</h3>
+          <div>
+          <p>Kwaliteits-PVC wordt gemaakt volgens strenge Europese normen voor emissie en veiligheid. Let bij uw keuze op keurmerken en op PVC zonder schadelijke ftalaat-weekmakers.</p>
+          <p>Onze adviseurs vertellen u per collectie welke keurmerken hij draagt, zodat u met een gerust hart kiest, ook voor een kinderkamer.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Onderhoud</h3>
+          <div>
+          <p>Een PVC vloer is dankbaar in het onderhoud: regelmatig stofzuigen of vegen en af en toe nat dweilen met een pH-neutraal reinigingsmiddel. Gebruik vilt onder stoel- en tafelpoten en een geschikte mat bij de voordeur.</p>
+          <p>Bij de oplevering krijgt u van ons een onderhoudsadvies dat past bij de collectie die u kiest.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Wat kost een PVC vloer?</h3>
+          <div>
+          <p>De prijs hangt af van de collectie, de dikte van de slijtlaag, klik of plak, het legpatroon en de staat van de ondervloer. Een visgraatpatroon vraagt bijvoorbeeld meer legwerk dan een rechte plank, en een ondervloer moet soms eerst worden geëgaliseerd.</p>
+          <p>Na een bezoek aan de showroom en het inmeten van uw ruimte maken wij een offerte op maat, inclusief plaatsing door ons eigen team. Zo weet u vooraf precies waar u aan toe bent.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Een PVC vloer voor elke ruimte</h3>
+          <div>
+          <p>In de woonkamer zorgt PVC voor warmte en rust, in de keuken en hal voor gemak en in de slaapkamer voor stilte. Omdat PVC waterbestendig is, kunt u dezelfde vloer ook doorleggen in de badkamer (buiten de douchezone), voor een rustig geheel door het hele huis.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="" loading="lazy">
-    </div>
+  <!-- 7 · Merken -->
+  <section class="pr-section" data-review-id="merken" data-review-label="Merken">
     <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Stalen vergelijken</p>
-        <h2>Leg de structuren naast elkaar</h2>
-        <p>Pas in de showroom voelt u écht het verschil tussen de PVC-collecties — kom langs voor persoonlijk advies.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+      <div class="pr-head">
+        <div>
+          <h2>PVC merken in onze showroom</h2>
+          <p class="eyebrow">Merken</p>
+        </div>
+        <p class="pr-head-text">We werken met merken die we kennen en vertrouwen. Bekijk per merk de collecties of kom ze in het echt vergelijken.</p>
+      </div>
+      <div class="pr-brands">
+        <a class="pr-brand" href="/merken/moduleo.html">Moduleo</a>
+        <a class="pr-brand" href="/merken/coretec.html">COREtec</a>
+        <a class="pr-brand" href="/merken/floor-life.html">Floor Life</a>
+        <a class="pr-brand" href="/merken/belakos.html">Belakos</a>
+        <a class="pr-brand" href="/merken/ambiant.html">Ambiant</a>
+        <a class="pr-brand" href="/merken/index.html">Alle merken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
+        <h2>Nieuwsgierig naar onze PVC vloeren? Kom langs</h2>
+        <p>Leg de structuren naast elkaar, voel het verschil in slijtlaag en bekijk de legpatronen op ware grootte. Loop gewoon binnen of plan een afspraak voor uitgebreid advies.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met vloeren en complete woonopstellingen" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook de andere vloersoorten</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
+        <a href="/vloeren/hout.html">Houten vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/laminaat.html">Laminaat <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/tegelvloer.html">Tegelvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/vloerbedekking.html">Vloerbedekking <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

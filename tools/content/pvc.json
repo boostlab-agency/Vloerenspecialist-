@@ -1,0 +1,97 @@
+{
+  "file": "vloeren/pvc.html",
+  "group": "vloeren",
+  "name": "PVC vloeren",
+  "title": "PVC vloeren",
+  "metaDesc": "PVC vloeren in houtlook, steenlook, visgraat en Hongaarse punt. Waterbestendig, stil en geschikt voor vloerverwarming. Bekijk ze in onze showroom in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "PVC vloeren",
+  "vertical": "PVC vloeren",
+  "lead": "Een PVC vloer combineert de uitstraling van hout of natuursteen met het gemak van een moderne vloer: waterbestendig, stil, warm aan de voeten en eenvoudig schoon te houden. In onze showroom vindt u collecties van de bekendste merken, van brede planken tot visgraat.",
+  "heroImg": "https://images.unsplash.com/photo-1716315325541-776e39f9725f",
+  "heroAlt": "PVC vloer in houtlook in een moderne woonkamer",
+  "about": {
+    "eyebrow": "Over de PVC vloer",
+    "h2": "Hoe een PVC vloer is opgebouwd",
+    "paras": [
+      "PVC staat voor polyvinylchloride: een sterk en veelzijdig materiaal dat in dunne lagen tot een vloer wordt opgebouwd. Het resultaat oogt als hout of steen, maar gedraagt zich als een echte gebruiksvloer.",
+      "Onderin zit een stabiele drager, daarboven een designlaag met de print van hout, beton of natuursteen. Daarop ligt een transparante slijtlaag die de vloer beschermt tegen krassen, vocht en vuil. Hoe dikker die slijtlaag, hoe langer de vloer mooi blijft: voor een woonkamer adviseren we minimaal 0,3 mm, voor drukbelopen ruimtes of een gezin met huisdieren liever 0,55 mm.",
+      "Moderne PVC collecties hebben een reliëf dat meeloopt met de nerf van het hout (in register). Daardoor ziet u het verschil met echt hout pas als u de vloer aanraakt. Wij laten u graag de verschillende kwaliteiten naast elkaar zien."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten PVC",
+    "h2": "Van plakvloer tot rigid core",
+    "text": "Welke uitvoering het beste past, hangt af van uw ondervloer, de ruimte en het gebruik. Wij kijken graag met u mee.",
+    "items": [
+      { "title": "Plak PVC", "text": "Dunne stroken die volledig op een egale ondervloer worden verlijmd. Heel stil, zeer stabiel en de beste keuze in combinatie met vloerverwarming.", "tags": ["Stil", "Vloerverwarming"] },
+      { "title": "Klik PVC", "text": "Planken met een kliksysteem die zwevend of verlijmd gelegd kunnen worden. Snel geplaatst en later ook weer eenvoudig te vervangen.", "tags": ["Snel gelegd"] },
+      { "title": "Rigid core", "text": "PVC met een stijve, massieve kern. Vergevingsgezind bij kleine oneffenheden in de ondervloer en extra stabiel bij temperatuurverschillen.", "tags": ["Extra stabiel"] },
+      { "title": "Tegels in steenlook", "text": "Grote PVC tegels met de uitstraling van beton, leisteen of marmer. De rust van steen, maar warmer en zachter onder de voeten.", "tags": ["Betonlook", "Marmerlook"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Inspiratie",
+    "h2": "Ook in visgraat en Hongaarse punt",
+    "text": "Een legpatroon maakt van een vloer een blikvanger. PVC is verkrijgbaar in visgraat en Hongaarse punt, met dezelfde onderhoudsvriendelijkheid als een gewone plank. In de showroom ziet u de patronen op ware grootte in complete woonopstellingen.",
+    "img": "/assets/img/real/visgraat-keuken-900.jpg",
+    "alt": "Lichte visgraatvloer in houtlook in een open keuken"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor PVC",
+    "items": [
+      { "title": "Waterbestendig", "text": "Geschikt voor keuken, hal en badkamer. Gemorst water veegt u gewoon weg." },
+      { "title": "Stil en warm", "text": "PVC dempt contactgeluid en voelt warmer aan dan tegels of steen." },
+      { "title": "Ideaal met vloerverwarming", "text": "De dunne vloer geeft warmte snel en gelijkmatig door." },
+      { "title": "Kras- en slijtvast", "text": "De slijtlaag beschermt tegen dagelijks gebruik, kinderen en huisdieren." },
+      { "title": "Onderhoudsarm", "text": "Stofzuigen en af en toe vochtig dweilen is genoeg." },
+      { "title": "Realistische looks", "text": "Van eiken plank tot betonlook, met structuur die u echt voelt." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over uw PVC vloer",
+    "rows": [
+      { "title": "Legpatronen: plank, visgraat en Hongaarse punt", "paras": [
+        "De klassieke plank geeft rust en laat een ruimte groter lijken, zeker bij brede en lange planken. Visgraat brengt beweging en karakter; de Hongaarse punt, met schuin afgezaagde uiteinden, oogt nog iets strakker en eleganter.",
+        "Een patroon vraagt meer legwerk en vakmanschap, maar het resultaat is een vloer met een eigen signatuur. Onze eigen vloerleggers plaatsen alle patronen, inclusief de afwerking langs wanden en plinten."
+      ]},
+      { "title": "PVC en vloerverwarming", "paras": [
+        "PVC is een van de beste vloeren om te combineren met vloerverwarming. De vloer is dun en heeft een lage warmteweerstand, waardoor de warmte snel de ruimte in komt en u zuinig stookt.",
+        "Voor de beste prestaties adviseren we een verlijmde vloer. Ook met vloerkoeling is PVC goed te combineren; wij vertellen u welke collecties daarvoor geschikt zijn."
+      ]},
+      { "title": "Gezond wonen en keurmerken", "paras": [
+        "Kwaliteits-PVC wordt gemaakt volgens strenge Europese normen voor emissie en veiligheid. Let bij uw keuze op keurmerken en op PVC zonder schadelijke ftalaat-weekmakers.",
+        "Onze adviseurs vertellen u per collectie welke keurmerken hij draagt, zodat u met een gerust hart kiest, ook voor een kinderkamer."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Een PVC vloer is dankbaar in het onderhoud: regelmatig stofzuigen of vegen en af en toe nat dweilen met een pH-neutraal reinigingsmiddel. Gebruik vilt onder stoel- en tafelpoten en een geschikte mat bij de voordeur.",
+        "Bij de oplevering krijgt u van ons een onderhoudsadvies dat past bij de collectie die u kiest."
+      ]},
+      { "title": "Wat kost een PVC vloer?", "paras": [
+        "De prijs hangt af van de collectie, de dikte van de slijtlaag, klik of plak, het legpatroon en de staat van de ondervloer. Een visgraatpatroon vraagt bijvoorbeeld meer legwerk dan een rechte plank, en een ondervloer moet soms eerst worden geëgaliseerd.",
+        "Na een bezoek aan de showroom en het inmeten van uw ruimte maken wij een offerte op maat, inclusief plaatsing door ons eigen team. Zo weet u vooraf precies waar u aan toe bent."
+      ]},
+      { "title": "Een PVC vloer voor elke ruimte", "paras": [
+        "In de woonkamer zorgt PVC voor warmte en rust, in de keuken en hal voor gemak en in de slaapkamer voor stilte. Omdat PVC waterbestendig is, kunt u dezelfde vloer ook doorleggen in de badkamer (buiten de douchezone), voor een rustig geheel door het hele huis."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "PVC merken in onze showroom",
+    "text": "We werken met merken die we kennen en vertrouwen. Bekijk per merk de collecties of kom ze in het echt vergelijken.",
+    "items": [
+      { "label": "Moduleo", "href": "/merken/moduleo.html" },
+      { "label": "COREtec", "href": "/merken/coretec.html" },
+      { "label": "Floor Life", "href": "/merken/floor-life.html" },
+      { "label": "Belakos", "href": "/merken/belakos.html" },
+      { "label": "Ambiant", "href": "/merken/ambiant.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Nieuwsgierig naar onze PVC vloeren? Kom langs",
+    "text": "Leg de structuren naast elkaar, voel het verschil in slijtlaag en bekijk de legpatronen op ware grootte. Loop gewoon binnen of plan een afspraak voor uitgebreid advies.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met vloeren en complete woonopstellingen"
+  }
+}

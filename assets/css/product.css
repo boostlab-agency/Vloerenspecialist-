@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Productpagina's — één vaste indeling voor alle vloersoorten (PVC t/m
+   gietvloer) en voor interieur op maat, behang en raamdecoratie. Alleen
+   tekst en beeld verschillen per pagina (gegenereerd met
+   tools/build-pages.ps1 uit tools/content/*.json).
+   Terugkerend motief: een beige vlak dat half achter de foto ligt, net als
+   in de hero van de homepage.
+   ========================================================================== */
+
+.pr-section { padding: 110px 0; }
+.pr-section.is-surface { background: var(--surface); }
+.pr-section + .pr-section:not(.is-surface):not(.pr-feature) { padding-top: 0; }
+.pr-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 60px; align-items: end; margin-bottom: 56px; }
+.pr-head h2 { margin: 0 0 16px; }
+.pr-head .eyebrow { margin: 0; }
+.pr-head-text { margin: 0; font-size: 16px; line-height: 1.8; color: var(--ink-soft); max-width: 560px; }
+
+/* ---- 1 · Hero: kop + intro, daaronder een grote foto op een beige vlak ---- */
+.pr-hero { position: relative; padding: 0 0 12px; }
+.pr-hero-panel { position: absolute; left: 0; top: 0; width: 70%; bottom: 30%; background: var(--surface); }
+.pr-hero-inner { position: relative; display: grid; grid-template-columns: 80px minmax(0, 1fr); }
+.pr-hero .crumb { grid-column: 2; padding: 26px 0 0; }
+.pr-hero-head { grid-column: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: end; padding: 40px 0 56px; }
+.pr-hero-head h1 { margin: 0; font-size: clamp(34px, 4.4vw, 64px); line-height: 1.08; }
+.pr-hero-head .eyebrow { margin-bottom: 18px; }
+.pr-hero-lead { margin: 0 0 28px; font-size: 17px; line-height: 1.75; color: var(--ink); max-width: 540px; }
+.pr-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+.pr-hero-vertical {
+  grid-column: 1; grid-row: 3; align-self: end; justify-self: start; margin: 0 0 4px;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 13px; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+}
+.pr-hero-vertical strong { color: var(--ink); font-weight: 600; }
+.pr-hero-media { grid-column: 2; grid-row: 3; aspect-ratio: 2.25 / 1; overflow: hidden; background: var(--surface-2); }
+.pr-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- 2 · Over: kop links, lopende tekst rechts ---- */
+.pr-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 60px; }
+.pr-about-grid h2 { margin: 0 0 16px; }
+.pr-about-text p { margin: 0 0 20px; font-size: 16px; line-height: 1.85; color: var(--ink); max-width: 640px; }
+.pr-about-text p:first-child { font-size: 19px; line-height: 1.7; }
+
+/* ---- 3 · Soorten: genummerde kaarten met dunne lijnen ---- */
+.pr-types { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); margin: 0 -24px; border-top: 1px solid var(--line); }
+/* Gelijke binnenruimte per vak (dus gelijke fotomaat); het raster loopt links en rechts evenveel uit. */
+.pr-type { padding: 34px 24px 40px; border-right: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 24px); }
+.pr-type:last-child { border-right: 0; }
+.pr-type-nr { display: block; margin-bottom: 26px; font-size: 13px; color: var(--ink-faint); }
+.pr-type img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; margin-bottom: 24px; background: var(--surface-2); }
+.pr-type h3 { margin: 0 0 10px; font-size: 18px; font-weight: 500; }
+.pr-type p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.pr-type .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.pr-type .tag { font-size: 12px; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
+.pr-type:target h3 { text-decoration: underline; text-underline-offset: 6px; }
+
+/* ---- 4 · Uitgelicht: grote foto die over een beige vlak valt ---- */
+.pr-feature { position: relative; padding: 110px 0; }
+.pr-feature::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 46%; background: var(--surface); }
+.pr-feature-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 80px; align-items: center; }
+.pr-feature-media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-2); }
+.pr-feature-media img { width: 100%; height: 100%; object-fit: cover; }
+.pr-feature-copy h2 { margin: 0 0 24px; font-size: clamp(24px, 2.4vw, 34px); }
+.pr-feature-copy p { margin: 0 0 30px; font-size: 16px; line-height: 1.8; }
+
+/* ---- 5 · Voordelen: raster met lijnen ---- */
+.pr-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 60px; }
+.pr-benefit { padding: 30px 0 34px; border-top: 1px solid var(--line); }
+.pr-benefit h3 { display: flex; gap: 14px; margin: 0 0 10px; font-size: 17px; font-weight: 500; }
+.pr-benefit h3::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .5em; border-radius: 50%; background: var(--ink); }
+.pr-benefit p { margin: 0 0 0 22px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+
+/* ---- 6 · Meer weten: onderwerpen onder elkaar (kop links, tekst rechts) ---- */
+.pr-info { border-bottom: 1px solid var(--line); }
+.pr-info-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 60px; padding: 44px 0; border-top: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 24px); }
+.pr-info-row h3 { margin: 0; font-size: clamp(18px, 1.5vw, 21px); font-weight: 500; max-width: 22ch; }
+.pr-info-row p { margin: 0 0 16px; font-size: 16px; line-height: 1.85; max-width: 640px; }
+.pr-info-row p:last-child { margin-bottom: 0; }
+
+/* ---- 7 · Merken ---- */
+.pr-brands { display: flex; flex-wrap: wrap; gap: 12px; }
+.pr-brand { padding: 12px 22px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--ink); background: var(--bg); transition: border-color .2s; }
+.pr-brand:hover { border-color: var(--ink); }
+
+/* ---- 8 · Afsluiter: kom langs, weer met het vlak achter de foto ---- */
+.pr-cta { position: relative; padding: 0 0 110px; }
+.pr-cta-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 0; align-items: stretch; }
+.pr-cta-copy { background: var(--surface); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.pr-cta-copy h2 { margin: 0 0 20px; font-size: clamp(24px, 2.4vw, 34px); }
+.pr-cta-copy p { margin: 0 0 22px; font-size: 16px; line-height: 1.8; }
+.pr-cta-copy .open-pill { align-self: flex-start; margin-bottom: 26px; }
+.pr-cta-media { min-height: 420px; overflow: hidden; background: var(--surface-2); }
+.pr-cta-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- 9 · Verder kijken: eenvoudige lijst met de andere soorten ---- */
+.pr-related { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 60px; }
+.pr-related a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); font-size: 17px; color: var(--ink); }
+.pr-related a span { transition: transform .2s var(--ease); }
+.pr-related a:hover span { transform: translateX(4px); }
+
+/* ---- Responsief ---- */
+@media (max-width: 1100px) {
+  .pr-types { --cols: 2 !important; }
+  .pr-type { border-right: 0; padding: 32px 24px 36px; }
+  .pr-type:nth-child(odd) { border-right: 1px solid var(--line); }
+  .pr-type:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .pr-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pr-feature-grid { gap: 48px; }
+  .pr-cta-copy { padding: 56px 44px; }
+}
+@media (max-width: 900px) {
+  .pr-section, .pr-feature { padding: 72px 0; }
+  .pr-cta { padding-bottom: 72px; }
+  .pr-head, .pr-about-grid, .pr-info-row, .pr-hero-head { grid-template-columns: 1fr; gap: 20px; }
+  .pr-head { margin-bottom: 36px; }
+  .pr-info-row { padding: 32px 0; }
+  .pr-feature::before { width: 100%; top: 38%; }
+  .pr-feature-grid, .pr-cta-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pr-cta-grid { gap: 0; }
+  .pr-cta-media { min-height: 0; aspect-ratio: 16 / 10; order: -1; }
+  .pr-related { grid-template-columns: 1fr 1fr; gap: 0 32px; }
+}
+@media (max-width: 640px) {
+  .pr-hero-panel { width: 88%; bottom: 36%; }
+  .pr-hero-inner { grid-template-columns: 34px minmax(0, 1fr); }
+  .pr-hero-head { padding: 28px 0 36px; gap: 16px; }
+  .pr-hero-lead { font-size: 16px; }
+  .pr-hero-media { aspect-ratio: 4 / 3.4; }
+  .pr-hero-vertical { font-size: 10.5px; letter-spacing: .1em; }
+  .pr-types { --cols: 1 !important; margin: 0; }
+  .pr-type, .pr-type:nth-child(odd), .pr-type:nth-child(even) { padding: 28px 0 30px; border-right: 0; }
+  .pr-type + .pr-type { border-top: 1px solid var(--line); }
+  .pr-benefits { grid-template-columns: 1fr; }
+  .pr-cta-copy { padding: 40px 24px; }
+  .pr-related { grid-template-columns: 1fr; }
+}

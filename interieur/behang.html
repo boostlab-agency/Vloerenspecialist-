@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Behang — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Foto-, papier-, vinyl- en vliesbehang en Renostuc, met stalen om mee naar huis te nemen. Persoonlijk advies in onze showroom in Tilburg.">
+<meta name="description" content="Fotobehang, papierbehang, vinylbehang, vliesbehang en Renostuc. Bekijk de stalen in onze showroom in Tilburg en neem ze mee naar huis.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
-<link rel="stylesheet" href="/assets/css/behang.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -29,119 +29,230 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/behang.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <span aria-current="page">Behang</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met sfeervol groen behang" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Behang</p>
-        <h1>Karakter voor elke wand</h1>
-        <p class="lead">Van foto- en papierbehang tot vinyl, vlies en Renostuc. Bekijk de stalen in onze showroom en neem ze gewoon mee naar huis — onze adviseurs helpen u kiezen.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Bekijk stalen in de showroom</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><span aria-current="page">Behang</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Interieur</p>
+          <h1>Behang</h1>
+        </div>
+        <div>
+          <p class="pr-hero-lead">Behang geeft een wand karakter, diepte en sfeer. Van een fotobehang als statement tot een rustig vliesbehang of het strakke Renostuc: bekijk de stalen in onze showroom en neem ze gewoon mee naar huis om ze in uw eigen licht te zien.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
+          </div>
         </div>
       </div>
-    </section>
-  </div>
-
-  <!-- Soorten behang: rustig kaartoverzicht -->
-  <section class="page-section">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Keuze uit behang</p>
-        <h2>Vijf soorten, elk met een eigen kracht</h2>
+      <p class="pr-hero-vertical" aria-hidden="true">Behang <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="/assets/img/real/behang-woonkamer-1800.jpg" alt="Woonkamer met sfeervol groen behang" loading="eager">
       </div>
-      <div class="type-grid">
-        <article class="type-card" id="fotobehang">
-          <img src="https://images.unsplash.com/photo-1759774313806-7c564f3bd592?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Salon met een wandvullend geschilderd landschap als fotobehang" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over Behang">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Karakter voor elke wand</h2>
+        <p class="eyebrow">Over behang</p>
+      </div>
+      <div class="pr-about-text">
+          <p>Met behang verandert u de sfeer van een ruimte in één keer. Een warm dessin maakt een slaapkamer knus, een grafisch patroon geeft een werkplek energie en een subtiele structuur brengt rust in de woonkamer.</p>
+          <p>Elke soort behang heeft zijn eigen eigenschappen: het ene is sterker, het andere ademender of makkelijker aan te brengen. Onze adviseurs helpen u de soort te kiezen die past bij de ruimte en bij de staat van uw muren.</p>
+          <p>Omdat vloeren, raamdecoratie en behang bij ons onder één dak zitten, stemmen we kleuren en materialen direct op elkaar af.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Vijf soorten, elk met een eigen kracht</h2>
+          <p class="eyebrow">Soorten behang</p>
+        </div>
+        <p class="pr-head-text">Twijfelt u welke soort past bij uw wand? Onze adviseurs denken graag met u mee.</p>
+      </div>
+      <div class="pr-types" style="--cols: 5">
+        <article class="pr-type" id="fotobehang">
+          <span class="pr-type-nr">01</span>
+          <img src="https://images.unsplash.com/photo-1759774313806-7c564f3bd592?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Salon met een wandvullend landschap als fotobehang" loading="lazy">
           <h3>Fotobehang</h3>
-          <p>Van stadsgezicht tot natuurpanorama of kunstwerk: één muur als statement. Eenvoudig aan te brengen en te onderhouden.</p>
-          <p class="type-fit"><strong>Ideaal voor:</strong> accentwand, woonkamer, kinderkamer</p>
+          <p>Van stadsgezicht tot natuurpanorama of kunstwerk: één wand als statement.</p>
+          
         </article>
-        <article class="type-card" id="papierbehang">
+        <article class="pr-type" id="papierbehang">
+          <span class="pr-type-nr">02</span>
           <img src="https://images.unsplash.com/photo-1783403716758-27e30a7976ca?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Klassiek papierbehang met blauw boom- en hertenpatroon" loading="lazy">
           <h3>Papierbehang</h3>
-          <p>Tijdloos, ademend en milieuvriendelijk, met een natuurlijke uitstraling. In patronen van klassiek tot modern.</p>
-          <p class="type-fit"><strong>Ideaal voor:</strong> slaapkamer, werkkamer, klassiek interieur</p>
+          <p>Tijdloos, ademend en met een natuurlijke uitstraling, van klassiek tot modern.</p>
+          
         </article>
-        <article class="type-card" id="vinylbehang">
-          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen vinylbehang in hexagonpatroon" loading="lazy">
+        <article class="pr-type" id="vinylbehang">
+          <span class="pr-type-nr">03</span>
+          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen vinylbehang" loading="lazy">
           <h3>Vinylbehang</h3>
-          <p>Duurzaam en waterbestendig dankzij de vinyllaag, en makkelijk schoon te maken.</p>
-          <p class="type-fit"><strong>Ideaal voor:</strong> keuken, badkamer, hal</p>
+          <p>Sterk en afwasbaar dankzij de vinyllaag. Ideaal voor hal, keuken en kinderkamer.</p>
+          
         </article>
-        <article class="type-card" id="vliesbehang">
-          <img src="https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Vliesbehang met grafisch driehoekpatroon achter een bank" loading="lazy">
+        <article class="pr-type" id="vliesbehang">
+          <span class="pr-type-nr">04</span>
+          <img src="https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Vliesbehang met grafisch patroon achter een bank" loading="lazy">
           <h3>Vliesbehang</h3>
-          <p>Sterk en scheurvast. De lijm gaat op de muur: sneller aangebracht en later net zo makkelijk weer verwijderd.</p>
-          <p class="type-fit"><strong>Ideaal voor:</strong> elke kamer, nieuwbouw</p>
+          <p>Scheurvast en snel aangebracht: de lijm gaat op de muur. Later ook weer makkelijk te verwijderen.</p>
+          
         </article>
-        <article class="type-card" id="renostuc">
+        <article class="pr-type" id="renostuc">
+          <span class="pr-type-nr">05</span>
           <img src="/assets/img/real/renostuc-bedroom-sage-1600.jpg" alt="Slaapkamer met strakke, naadloze Renostuc-wanden" loading="lazy">
           <h3>Renostuc</h3>
-          <p>Renovatievlies dat beschadigde muren weer strak en glad maakt — zonder eerst te stucen. Daarna overschilderbaar in elke kleur.</p>
-          <p class="type-fit"><strong>Ideaal voor:</strong> renovatie, oude of oneffen muren</p>
+          <p>Renovatievlies dat beschadigde muren weer strak maakt, zonder stucwerk. Daarna overschilderbaar.</p>
+          
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Keuzehulp -->
-  <section class="page-section is-alt">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Keuzehulp</p>
-        <h2>Welke soort past bij uw wand?</h2>
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="/assets/img/real/renostuc-paneelwand-1800.jpg" alt="Strakke wand met Renostuc in een woonkamer" loading="lazy">
       </div>
-      <div class="bh-matrix-wrap reveal">
-        <table class="bh-matrix">
-          <thead>
-            <tr><th scope="col">Wat vindt u belangrijk?</th><th scope="col">Foto</th><th scope="col">Papier</th><th scope="col">Vinyl</th><th scope="col">Vlies</th><th scope="col">Renostuc</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row">Een opvallend statement</th><td class="yes">●</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td>—</td></tr>
-            <tr><th scope="row">Vochtige ruimte</th><td>—</td><td>—</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td></tr>
-            <tr><th scope="row">Makkelijk aanbrengen &amp; verwijderen</th><td class="mid">◐</td><td>—</td><td class="mid">◐</td><td class="yes">●</td><td>—</td></tr>
-            <tr><th scope="row">Oneffen of beschadigde muur</th><td>—</td><td>—</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td></tr>
-            <tr><th scope="row">Later overschilderen</th><td>—</td><td>—</td><td>—</td><td class="mid">◐</td><td class="yes">●</td></tr>
-          </tbody>
-        </table>
-        <p class="bh-matrix-legend"><span class="yes">●</span> zeer geschikt <span class="mid">◐</span> geschikt <span>—</span> minder geschikt</p>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Renostuc</p>
+        <h2>Strakke wanden zonder te stucen</h2>
+        <p>Heeft u muren met scheurtjes, oude lijmresten of een onrustige ondergrond? Renostuc is een sterk renovatievlies dat de wand in één keer glad en strak maakt. Daarna schildert u de muur in elke kleur die u wilt.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="" loading="lazy">
-    </div>
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
     <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Stalen mee naar huis</p>
-        <h2>Bekijk het behang in uw eigen licht</h2>
-        <p>Kies in de showroom uw favorieten en neem de stalen mee — onze adviseurs denken graag mee.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+      <div class="pr-head">
+        <div>
+          <h2>Waarom behang</h2>
+          <p class="eyebrow">Voordelen</p>
         </div>
       </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Direct sfeer</h3><p>Eén wand kan de uitstraling van een hele ruimte veranderen.</p></div>
+        <div class="pr-benefit"><h3>Stalen mee naar huis</h3><p>Bekijk het behang in uw eigen licht voordat u kiest.</p></div>
+        <div class="pr-benefit"><h3>Voor elke muur een soort</h3><p>Van ademend papier tot sterk vinyl en renovatievlies.</p></div>
+        <div class="pr-benefit"><h3>Maskeert oneffenheden</h3><p>Structuur en Renostuc verbergen kleine imperfecties.</p></div>
+        <div class="pr-benefit"><h3>Afgestemd op uw interieur</h3><p>Samen gekozen met uw vloer en raamdecoratie.</p></div>
+        <div class="pr-benefit"><h3>Bekende merken</h3><p>Collecties van gerenommeerde merken zoals Eijffinger.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Welk behang past bij uw wand?</h2>
+          <p class="eyebrow">Goed om te weten</p>
+        </div>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Woonkamer en slaapkamer</h3>
+          <div>
+          <p>Hier draait het vooral om sfeer. Papierbehang en vliesbehang geven een warme, natuurlijke uitstraling; een fotobehang maakt van één wand een blikvanger.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Hal, keuken en kinderkamer</h3>
+          <div>
+          <p>Kies voor een sterk en afwasbaar behang, zoals vinylbehang. Vlekken en vingerafdrukken veegt u er eenvoudig af.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Muren in slechte staat</h3>
+          <div>
+          <p>Heeft de muur scheurtjes of oneffenheden? Dan is Renostuc de oplossing: een renovatievlies dat de wand strak maakt zonder te stucen, en daarna overschilderbaar is.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Zelf behangen of laten doen</h3>
+          <div>
+          <p>Vliesbehang is het eenvoudigst om zelf aan te brengen, omdat de lijm op de muur gaat. Wilt u het liever laten doen, dan adviseren wij u graag over de mogelijkheden.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Merken -->
+  <section class="pr-section" data-review-id="merken" data-review-label="Merken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Behangmerken in onze showroom</h2>
+          <p class="eyebrow">Merken</p>
+        </div>
+        <p class="pr-head-text">Sfeervolle dessins en stoffen van merken die we kennen en vertrouwen.</p>
+      </div>
+      <div class="pr-brands">
+        <a class="pr-brand" href="/merken/eijffinger.html">Eijffinger</a>
+        <a class="pr-brand" href="/merken/index.html">Alle merken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
+        <h2>Bekijk het behang in uw eigen licht</h2>
+        <p>Kies in de showroom uw favorieten en neem de stalen mee naar huis. Onze adviseurs denken graag met u mee.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met complete woonopstellingen" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook">
+        <a href="/interieur/index.html">Interieur op maat <span aria-hidden="true">&rarr;</span></a>
+        <a href="/interieur/raamdecoratie.html">Raamdecoratie <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/index.html">Alle vloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

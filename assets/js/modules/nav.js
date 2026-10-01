@@ -21,7 +21,13 @@
     var items = document.querySelectorAll(".main-nav .has-drop");
     if (!items.length) return;
 
+    var header = document.querySelector(".site-header");
     function setOpen(li, open) {
+      if (open && header) {
+        // Lijst laten beginnen recht onder de tekst van het menu-item.
+        var x = li.querySelector(".nav-trigger").getBoundingClientRect().left - header.getBoundingClientRect().left + 12;
+        li.querySelector(".nav-drop").style.setProperty("--drop-x", Math.round(x) + "px");
+      }
       li.classList.toggle("is-open", open);
       li.querySelector(".nav-trigger").setAttribute("aria-expanded", open ? "true" : "false");
     }

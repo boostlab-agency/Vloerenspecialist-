@@ -1,0 +1,76 @@
+{
+  "file": "vloeren/gietvloer.html",
+  "group": "vloeren",
+  "name": "Gietvloeren",
+  "title": "Gietvloeren",
+  "metaDesc": "Naadloze gietvloeren in vrijwel elke kleur, van warm zand tot antraciet. Strak, slijtvast en ideaal met vloerverwarming. Advies en plaatsing door ons eigen team in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "Gietvloeren",
+  "vertical": "Gietvloeren",
+  "lead": "Een gietvloer geeft uw interieur een rustige, moderne uitstraling zonder naden of voegen. Strak in een nieuwbouwwoning, stoer in een loft en in vrijwel elke kleur verkrijgbaar. Van ondergrond tot eindlaag verzorgd door ons eigen team.",
+  "heroImg": "https://images.unsplash.com/photo-1765728614529-4749706523d9",
+  "heroAlt": "Lichte, naadloze gietvloer in een loft met grote ramen",
+  "about": {
+    "eyebrow": "Over de gietvloer",
+    "h2": "Eén naadloos oppervlak, van wand tot wand",
+    "paras": [
+      "Een gietvloer wordt vloeibaar op de ondergrond aangebracht en hardt daarna uit tot één doorlopend oppervlak. Zo ontstaat een vloer zonder naden, voegen of overgangen: rustig voor het oog en heel prettig schoon te houden.",
+      "Er zijn verschillende soorten. Een polyurethaan (PU) gietvloer is licht elastisch, voelt comfortabel aan en dempt geluid. Een cementgebonden gietvloer heeft een levendige, wolkerige betonlook met een natuurlijk karakter.",
+      "Het geheim van een mooie gietvloer zit in de voorbereiding: de ondergrond moet droog, sterk en vlak zijn. Daarom verzorgen onze vakmensen het hele traject, van egaliseren tot de beschermende toplaag."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten gietvloeren",
+    "h2": "Strak, levendig of met een betonlook",
+    "text": "Welke gietvloer past bij u? Dat hangt af van de gewenste uitstraling, het gebruik en de ondergrond.",
+    "items": [
+      { "title": "PU gietvloer", "text": "Egaal en strak, met een zachte, iets verende laag. Stil en warm aanvoelend, in vrijwel elke kleur.", "tags": ["Egaal", "Comfortabel"] },
+      { "title": "Cementgebonden gietvloer", "text": "Een levendige, wolkerige uitstraling met de natuurlijke look van beton. Sterk en karaktervol.", "tags": ["Betonlook"] },
+      { "title": "Mat of zijdeglans", "text": "De toplaag bepaalt de glans en beschermt de vloer. Mat oogt natuurlijk, zijdeglans iets luxer.", "tags": ["Afwerking"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Kleur",
+    "h2": "Elke kleur is mogelijk",
+    "text": "Van warm zand en greige tot koel lichtgrijs of diep antraciet: een gietvloer kan in vrijwel elke kleur worden gemaakt. Bekijk de kleurstalen in de showroom en bespreek met onze adviseurs wat bij uw ruimte en licht past.",
+    "img": "https://images.unsplash.com/photo-1784638889238-feb6277ca95f",
+    "alt": "Minimalistische ruimte met een donkere gietvloer en grijze fauteuil"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor een gietvloer",
+    "items": [
+      { "title": "Naadloos", "text": "Geen naden of voegen, dus een rustig beeld en geen vuilranden." },
+      { "title": "Slijtvast", "text": "Bestand tegen dagelijks gebruik, ook met kinderen en huisdieren." },
+      { "title": "Ideaal met vloerverwarming", "text": "De dunne, dichte laag geeft warmte snel en gelijkmatig door." },
+      { "title": "Elke kleur", "text": "Precies afgestemd op uw interieur, mat of zijdeglans." },
+      { "title": "Hygiënisch", "text": "Eén gesloten oppervlak dat eenvoudig schoon te houden is." },
+      { "title": "Ruimtelijk", "text": "Door het ontbreken van naden oogt een ruimte groter." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over uw gietvloer",
+    "rows": [
+      { "title": "De ondergrond", "paras": [
+        "Een gietvloer volgt de ondergrond precies. Die moet daarom droog, draagkrachtig en vlak zijn. Wij meten het vochtgehalte, herstellen scheuren en egaliseren waar nodig, zodat de gietvloer een strak en duurzaam resultaat geeft."
+      ]},
+      { "title": "Hoe verloopt het aanbrengen?", "paras": [
+        "Na de voorbereiding brengen we de gietvloer in lagen aan, afgesloten met een beschermende toplaag. Tussen de lagen heeft de vloer tijd nodig om uit te harden; de ruimte is daardoor enkele dagen niet te gebruiken. Wij stemmen de planning vooraf met u af."
+      ]},
+      { "title": "Gietvloer en vloerverwarming", "paras": [
+        "Een gietvloer is een uitstekende combinatie met vloerverwarming: de dunne, dichte vloer geeft de warmte snel en gelijkmatig door. Ook bestaande vloerverwarming kan vaak prima worden overgoten."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Stofzuig of veeg de vloer regelmatig en dweil met een mild, pH-neutraal middel. Met vilt onder meubels en af en toe een onderhoudsmiddel blijft de toplaag jarenlang mooi."
+      ]},
+      { "title": "Wat kost een gietvloer?", "paras": [
+        "De prijs hangt af van het type gietvloer, de oppervlakte, de afwerking en vooral de staat van de ondergrond. Na een bezoek aan huis maken wij een offerte op maat, inclusief voorbereiding en plaatsing door ons eigen team."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Kies uw kleur en afwerking samen met ons",
+    "text": "Bekijk de kleurstalen in de showroom en bespreek met onze adviseurs wat bij uw ruimte past. Loop gewoon binnen of plan een afspraak.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

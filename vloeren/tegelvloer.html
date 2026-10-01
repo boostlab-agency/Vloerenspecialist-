@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tegelvloer — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Keramische tegelvloeren in natuursteen-, beton- en houtlook. Slijtvast, onderhoudsvriendelijk en ideaal met vloerverwarming. Bekijk ze in onze showroom in Tilburg.">
+<title>Tegelvloeren — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="Tegelvloeren in groot formaat, betonlook, marmerlook en houtlook. Extreem slijtvast en ideaal met vloerverwarming. Bekijk de tegels op ware grootte in onze showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -28,100 +29,232 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/tegelvloer.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>
-      <span aria-current="page">Tegelvloer</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Woonkamer met grote tegelvloer in marmerlook" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Vloeren — Tegelvloer</p>
-        <h1>Tijdloos, slijtvast en eindeloos veelzijdig</h1>
-        <p class="lead">Een tegelvloer gaat generaties mee. Van grote formaten in marmer- of betonlook tot warme tegels met een houtstructuur: we hebben tegels voor woonkamer, keuken, badkamer en hal.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Bekijk tegels in de showroom</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span><span aria-current="page">Tegelvloeren</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Vloeren</p>
+          <h1>Tegelvloeren</h1>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="page-section">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Voordelen</p>
-        <h2>Sterk, stijlvol en makkelijk schoon te houden</h2>
-      </div>
-      <div class="spec-grid">
-        <div class="spec-item reveal">
-          <h3>Extreem slijtvast</h3>
-          <p>Bestand tegen krassen, vlekken en intensief gebruik — jarenlang als nieuw.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Ideaal met vloerverwarming</h3>
-          <p>Tegels geleiden warmte uitstekend en houden die lang vast.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Onderhoudsvriendelijk</h3>
-          <p>Vochtbestendig en hygiënisch, dus perfect voor keuken en badkamer.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Natuursteen, beton, hout</h3>
-          <p>Realistische looks in elk formaat, van klassiek tot groot en naadloos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section is-alt">
-    <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1684928364941-2158e071cdd6?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Eetkamer met lichte tegelvloer in groot formaat" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Tegels met een betonlook — of juist met een houtlook</h2>
-          <p>Houdt u van de rust van beton, of van de warmte van hout, maar wilt u de sterkte van keramiek? Onze tegelcollecties combineren beide. Onze vakmensen leggen de vloer strak en vlak, ook in grote formaten.</p>
-          <div class="tag-row">
-            <span class="tag">Betonlook</span>
-            <span class="tag">Houtlook</span>
-            <span class="tag">Marmerlook</span>
+        <div>
+          <p class="pr-hero-lead">Een tegelvloer gaat generaties mee. Keramische tegels zijn hard, vlekbestendig en ideaal in combinatie met vloerverwarming. Van grote formaten in marmer- of betonlook tot warme tegels met een houtstructuur: wij hebben tegels voor woonkamer, keuken, badkamer en hal.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
           </div>
-          <a class="btn-text" href="/merken/cerdomus.html">Bekijk tegelmerk Cerdomus <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pr-hero-vertical" aria-hidden="true">Tegelvloeren <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Woonkamer met een grote tegelvloer in marmerlook" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over Tegelvloeren">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Sterk, stijlvol en makkelijk schoon te houden</h2>
+        <p class="eyebrow">Over de tegelvloer</p>
+      </div>
+      <div class="pr-about-text">
+          <p>De meeste vloertegels die wij leveren zijn van keramiek of porcelanato: een zeer dicht gebakken materiaal dat nauwelijks water opneemt. Daardoor is een tegelvloer extreem slijtvast, kleurvast en hygiënisch.</p>
+          <p>Tegels zijn er in talloze formaten, kleuren en structuren. Grote formaten met smalle voegen geven een rustig, bijna naadloos beeld en laten een ruimte groter lijken. Tegels in houtlook combineren de warmte van hout met de sterkte van keramiek.</p>
+          <p>Omdat keramiek warmte goed geleidt en vasthoudt, is een tegelvloer een van de beste partners voor vloerverwarming.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Van marmerlook tot houtlook</h2>
+          <p class="eyebrow">Soorten tegels</p>
+        </div>
+        <p class="pr-head-text">Een grote tegel oogt in het echt heel anders dan op een foto. In de showroom liggen ze op ware grootte.</p>
+      </div>
+      <div class="pr-types" style="--cols: 4">
+        <article class="pr-type">
+          <span class="pr-type-nr">01</span>
+          
+          <h3>Groot formaat</h3>
+          <p>Tegels tot wel 120 cm of groter, met smalle voegen voor een rustig, strak vloerbeeld.</p>
+          <div class="tag-row"><span class="tag">Rustig</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">02</span>
+          
+          <h3>Betonlook</h3>
+          <p>De stoere, industriële uitstraling van beton, maar zonder scheuren en met veel minder onderhoud.</p>
+          <div class="tag-row"><span class="tag">Industrieel</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">03</span>
+          
+          <h3>Marmer- en natuursteenlook</h3>
+          <p>De luxe tekening van marmer of natuursteen, vlekbestendig en betaalbaar.</p>
+          <div class="tag-row"><span class="tag">Luxe</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">04</span>
+          
+          <h3>Houtlook</h3>
+          <p>Lange tegels met een realistische houtnerf. Warm van uitstraling en waterbestendig tot in de badkamer.</p>
+          <div class="tag-row"><span class="tag">Warm</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="https://images.unsplash.com/photo-1684928364941-2158e071cdd6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Eetkamer met een lichte tegelvloer in groot formaat" loading="lazy">
+      </div>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Inspiratie</p>
+        <h2>Eén vloer van binnen naar buiten</h2>
+        <p>Veel tegelcollecties bestaan ook in een dikkere, vorstbestendige buitenvariant met extra grip. Zo loopt uw vloer in dezelfde kleur door van de woonkamer naar het terras, voor een ruimtelijk en rustig geheel.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Waarom kiezen voor tegels</h2>
+          <p class="eyebrow">Voordelen</p>
+        </div>
+      </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Extreem slijtvast</h3><p>Bestand tegen krassen, vlekken en intensief gebruik.</p></div>
+        <div class="pr-benefit"><h3>Ideaal met vloerverwarming</h3><p>Keramiek geleidt warmte uitstekend en houdt die lang vast.</p></div>
+        <div class="pr-benefit"><h3>Waterbestendig</h3><p>Perfect voor keuken, badkamer, hal en bijkeuken.</p></div>
+        <div class="pr-benefit"><h3>Hygiënisch</h3><p>Dicht oppervlak waarin vuil en bacteriën geen kans krijgen.</p></div>
+        <div class="pr-benefit"><h3>Kleurvast</h3><p>Verkleurt niet, ook niet in de volle zon.</p></div>
+        <div class="pr-benefit"><h3>Binnen en buiten</h3><p>Dezelfde look in huis en op het terras.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Alles over uw tegelvloer</h2>
+          <p class="eyebrow">Goed om te weten</p>
+        </div>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Formaat en voegen</h3>
+          <div>
+          <p>Hoe groter de tegel, hoe minder voegen en hoe rustiger het beeld. Grote formaten vragen wel om een zeer vlakke ondergrond en vakkundig legwerk. De kleur van de voeg bepaalt mee hoe de vloer oogt: een voeg in de kleur van de tegel geeft een bijna naadloos resultaat.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Tegels en vloerverwarming</h3>
+          <div>
+          <p>Tegels zijn de ideale partner voor vloerverwarming: de warmte komt snel en gelijkmatig de ruimte in en blijft lang behouden. Ook met vloerkoeling werkt een tegelvloer uitstekend.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Stroefheid en veiligheid</h3>
+          <div>
+          <p>Voor badkamers, hallen en buitenruimtes kiest u een tegel met voldoende stroefheid. Wij adviseren u welke antislipwaarde past bij de ruimte, zodat u veilig loopt, ook als de vloer nat is.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Onderhoud</h3>
+          <div>
+          <p>Een tegelvloer is eenvoudig schoon te houden met water en een milde reiniger. De voegen blijven mooi als u ze af en toe extra aandacht geeft; wij adviseren u over het juiste product.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Wat kost een tegelvloer?</h3>
+          <div>
+          <p>De prijs hangt af van de tegel, het formaat, het legpatroon en de voorbereiding van de ondergrond, zoals egaliseren. Grote formaten vragen meer vakmanschap bij het leggen. Na het inmeten maken wij een offerte op maat, inclusief plaatsing door ons eigen team.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="" loading="lazy">
-    </div>
+  <!-- 7 · Merken -->
+  <section class="pr-section" data-review-id="merken" data-review-label="Merken">
     <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Tegels vergelijken</p>
+      <div class="pr-head">
+        <div>
+          <h2>Tegelmerken in onze showroom</h2>
+          <p class="eyebrow">Merken</p>
+        </div>
+        <p class="pr-head-text">Keramische tegels met karakter, voor vloer en wand.</p>
+      </div>
+      <div class="pr-brands">
+        <a class="pr-brand" href="/merken/cerdomus.html">Cerdomus</a>
+        <a class="pr-brand" href="/merken/index.html">Alle merken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
         <h2>Zie de formaten op ware grootte</h2>
-        <p>Een grote tegel oogt in het echt heel anders dan op een foto — kom langs en leg ze naast elkaar.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        <p>Een grote tegel oogt in het echt heel anders dan op een foto. Kom langs, leg de tegels naast elkaar en bekijk ze in daglicht.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warm verlichte woonopstelling in de showroom" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook de andere vloersoorten</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
+        <a href="/vloeren/pvc.html">PVC vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hout.html">Houten vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/laminaat.html">Laminaat <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/vloerbedekking.html">Vloerbedekking <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

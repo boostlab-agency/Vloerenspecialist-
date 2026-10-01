@@ -45,16 +45,6 @@
             { label: "Gietvloer", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1765728614529-4749706523d9", 160) },
             { label: "Hybride houtenvloer", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef", 160) }
           ]
-        },
-        {
-          title: "Merken",
-          links: [
-            { label: "Floer", href: "/merken/floer.html" },
-            { label: "Belakos", href: "/merken/belakos.html" },
-            { label: "Moduleo", href: "/merken/moduleo.html" },
-            { label: "COREtec", href: "/merken/coretec.html" },
-            { label: "Alle merken", href: "/merken/index.html", more: true }
-          ]
         }
       ]
     },
@@ -97,15 +87,6 @@
             { label: "Plisségordijnen", href: "/interieur/raamdecoratie.html#plissegordijnen", img: img("https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", 160) },
             { label: "Vouwgordijnen", href: "/interieur/raamdecoratie.html#vouwgordijnen", img: img("https://images.unsplash.com/photo-1779078652928-6d941878d32e", 160) }
           ]
-        },
-        {
-          title: "Merken",
-          links: [
-            { label: "KeJe", href: "/merken/keje.html" },
-            { label: "Lifestyle gordijnen", href: "/merken/lifestyle-gordijnen.html" },
-            { label: "Mart Visser", href: "/merken/mart-visser.html" },
-            { label: "Eijffinger", href: "/merken/eijffinger.html" }
-          ]
         }
       ]
     },
@@ -129,25 +110,19 @@
       if (!item.groups) {
         return '<li class="' + cls + '"><a class="nav-link" href="' + item.href + '">' + item.label + "</a></li>";
       }
-      /* Eenvoudige tekstlijst: soorten in (maximaal) twee kolommen, merken
-         als aparte kolom met een klein kopje. Geen foto's. */
-      var cols = item.groups.map(function (g) {
-        var brands = isBrandGroup(g);
-        var links = g.links.map(function (l) {
-          return '<a class="drop-link' + (l.more ? " is-more" : "") + '" href="' + l.href + '">' + l.label + "</a>";
-        }).join("");
-        return '<div class="drop-col' + (brands ? " is-brands" : "") + '">' +
-          (brands ? '<p class="drop-title">' + g.title + "</p>" : "") +
-          '<div class="drop-list' + (!brands && g.links.length > 4 ? " is-two-col" : "") + '">' + links + "</div>" +
-        "</div>";
+      /* Eenvoudige tekstlijst over de volle breedte onder de header, in
+         kolommen van maximaal vier regels. Geen foto's, geen merken. */
+      var links = [];
+      item.groups.forEach(function (g) { links = links.concat(g.links); });
+      var list = links.map(function (l) {
+        return '<a class="drop-link" href="' + l.href + '">' + l.label + "</a>";
       }).join("");
       var id = "drop-" + item.key;
       return (
         '<li class="' + cls + '">' +
           '<button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' + item.label + ICONS.caret + "</button>" +
           '<div class="nav-drop" id="' + id + '">' +
-            '<div class="drop-inner">' + cols + "</div>" +
-            '<a class="drop-all" href="' + item.href + '">' + item.all + " " + ICONS.arrow + "</a>" +
+            '<div class="drop-list">' + list + "</div>" +
           "</div>" +
         "</li>"
       );

@@ -1,0 +1,90 @@
+{
+  "file": "vloeren/laminaat.html",
+  "group": "vloeren",
+  "name": "Laminaat",
+  "title": "Laminaat",
+  "metaDesc": "Laminaat met een realistische houtlook, ook in visgraat en waterbestendige uitvoering. Slijtvast, snel gelegd en voor elk budget. Bekijk het in onze showroom in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "Laminaat",
+  "vertical": "Laminaat",
+  "lead": "Laminaat geeft u de uitstraling van een houten vloer tegen een slimme prijs. Het is slijtvast, snel gelegd en bestand tegen het dagelijks leven met kinderen en huisdieren. Moderne collecties zijn nauwelijks van echt hout te onderscheiden.",
+  "heroImg": "https://images.unsplash.com/photo-1560184897-1ee3713708ee",
+  "heroAlt": "Laminaatvloer in houtlook bij een open haard",
+  "about": {
+    "eyebrow": "Over laminaat",
+    "h2": "Een mooie vloer hoeft niet duur te zijn",
+    "paras": [
+      "Laminaat bestaat uit een kern van hogedichtheid vezelplaat (HDF) met daarop een decorlaag en een sterke, transparante toplaag. Die toplaag maakt laminaat bijzonder hard en krasbestendig.",
+      "Hoe sterk een laminaatvloer is, leest u af aan de slijtklasse. Voor een woning is AC3 of AC4 een goede keuze; AC5 is geschikt voor zeer intensief gebruik. Dankzij de kliksluiting wordt laminaat snel en netjes zwevend gelegd.",
+      "De nieuwste collecties hebben een diepe structuur die meeloopt met de houtnerf, afgeschuinde randen en een matte afwerking. Het resultaat is een vloer die er natuurlijk uitziet en ook zo aanvoelt."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten laminaat",
+    "h2": "Voor elke stijl en elk budget",
+    "text": "Van de klassieke eiken plank tot waterbestendig laminaat voor de keuken: wij laten u de verschillen zien.",
+    "items": [
+      { "title": "Plank", "text": "De klassieke houtlook in allerlei kleuren, van licht eiken tot donker gerookt. Ook als extra brede landhuisplank.", "tags": ["Houtlook"] },
+      { "title": "Visgraat", "text": "Het populaire visgraatpatroon met het gemak en de prijs van laminaat. Leverbaar met kliksluiting.", "tags": ["Patroon"] },
+      { "title": "Waterbestendig laminaat", "text": "Laminaat met een afgedichte kern en naden, waardoor het langer bestand is tegen vocht. Geschikt voor keuken en hal.", "tags": ["Keuken", "Hal"] },
+      { "title": "Steenlook", "text": "Laminaat met de uitstraling van tegels of beton, warmer en stiller onder de voeten dan steen.", "tags": ["Betonlook"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Inspiratie",
+    "h2": "Visgraat, zonder de prijs van hout",
+    "text": "Met laminaat in visgraat haalt u een klassieke, luxe uitstraling in huis tegen een toegankelijke prijs. In onze showroom liggen de patronen in complete woonopstellingen, zodat u ziet hoe ze uitpakken in een echte ruimte.",
+    "img": "/assets/img/real/visgraat-kastenwand-1800.jpg",
+    "alt": "Visgraatvloer bij een kastenwand op maat"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor laminaat",
+    "items": [
+      { "title": "Slimme prijs", "text": "De uitstraling van hout voor een fractie van de prijs." },
+      { "title": "Slijtvast", "text": "Een harde toplaag die krassen en dagelijks gebruik aankan." },
+      { "title": "Snel gelegd", "text": "Dankzij de kliksluiting ligt uw vloer vaak binnen een dag." },
+      { "title": "Kleurvast", "text": "Verkleurt niet in de zon, ook niet voor grote ramen." },
+      { "title": "Onderhoudsvriendelijk", "text": "Stofzuigen en nevelvochtig dweilen is voldoende." },
+      { "title": "Realistische designs", "text": "Diepe structuren en matte afwerkingen, net als echt hout." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over uw laminaatvloer",
+    "rows": [
+      { "title": "Slijtklassen", "paras": [
+        "De AC-klasse geeft aan hoe slijtvast een laminaatvloer is. AC3 is geschikt voor normaal gebruik in de woning, AC4 voor intensief gebruik zoals een woonkamer met kinderen, en AC5 voor zeer drukbelopen ruimtes. Wij adviseren u welke klasse past bij uw situatie."
+      ]},
+      { "title": "De juiste ondervloer", "paras": [
+        "Onder laminaat hoort een goede ondervloer. Die vlakt kleine oneffenheden uit, dempt het loopgeluid in de ruimte en beperkt contactgeluid naar de buren. In een appartement gelden vaak eisen van de VvE; wij kiezen een ondervloer die daaraan voldoet."
+      ]},
+      { "title": "Laminaat en vloerverwarming", "paras": [
+        "Laminaat is goed te combineren met vloerverwarming, mits de vloer en de ondervloer samen een lage warmteweerstand hebben. We kiezen dan een geschikte collectie en een speciale ondervloer die de warmte goed doorlaat."
+      ]},
+      { "title": "Laminaat en vocht", "paras": [
+        "Gewoon laminaat is niet bestand tegen staand water. Voor keuken en hal kiest u daarom een waterbestendige collectie met afgedichte naden. In de badkamer adviseren we liever PVC of tegels."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Stofzuig of veeg de vloer regelmatig en dweil nevelvochtig met een reiniger voor laminaat. Gebruik niet te veel water en leg vilt onder stoelen en tafels."
+      ]},
+      { "title": "Wat kost een laminaatvloer?", "paras": [
+        "De prijs hangt af van de collectie, de slijtklasse, de plankmaat, het legpatroon en de ondervloer. Na het inmeten maken wij een offerte op maat, inclusief plaatsing, plinten en afwerking door ons eigen team."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "Laminaatmerken in onze showroom",
+    "text": "Laminaat van merken die bekendstaan om kwaliteit, stevige kliksystemen en realistische houtstructuren.",
+    "items": [
+      { "label": "Meister", "href": "/merken/meister.html" },
+      { "label": "Belakos", "href": "/merken/belakos.html" },
+      { "label": "Ambiant", "href": "/merken/ambiant.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Vind de juiste laminaatvloer voor uw budget",
+    "text": "Onze adviseurs helpen u kosteloos de beste keuze te maken, zonder verkooppraatjes. Kom langs en vergelijk de collecties in het echt.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met vloeren en complete woonopstellingen"
+  }
+}

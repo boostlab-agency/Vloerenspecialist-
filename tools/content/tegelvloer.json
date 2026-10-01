@@ -1,0 +1,85 @@
+{
+  "file": "vloeren/tegelvloer.html",
+  "group": "vloeren",
+  "name": "Tegelvloeren",
+  "title": "Tegelvloeren",
+  "metaDesc": "Tegelvloeren in groot formaat, betonlook, marmerlook en houtlook. Extreem slijtvast en ideaal met vloerverwarming. Bekijk de tegels op ware grootte in onze showroom in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "Tegelvloeren",
+  "vertical": "Tegelvloeren",
+  "lead": "Een tegelvloer gaat generaties mee. Keramische tegels zijn hard, vlekbestendig en ideaal in combinatie met vloerverwarming. Van grote formaten in marmer- of betonlook tot warme tegels met een houtstructuur: wij hebben tegels voor woonkamer, keuken, badkamer en hal.",
+  "heroImg": "https://images.unsplash.com/photo-1708540084677-dc5838b37627",
+  "heroAlt": "Woonkamer met een grote tegelvloer in marmerlook",
+  "about": {
+    "eyebrow": "Over de tegelvloer",
+    "h2": "Sterk, stijlvol en makkelijk schoon te houden",
+    "paras": [
+      "De meeste vloertegels die wij leveren zijn van keramiek of porcelanato: een zeer dicht gebakken materiaal dat nauwelijks water opneemt. Daardoor is een tegelvloer extreem slijtvast, kleurvast en hygiënisch.",
+      "Tegels zijn er in talloze formaten, kleuren en structuren. Grote formaten met smalle voegen geven een rustig, bijna naadloos beeld en laten een ruimte groter lijken. Tegels in houtlook combineren de warmte van hout met de sterkte van keramiek.",
+      "Omdat keramiek warmte goed geleidt en vasthoudt, is een tegelvloer een van de beste partners voor vloerverwarming."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten tegels",
+    "h2": "Van marmerlook tot houtlook",
+    "text": "Een grote tegel oogt in het echt heel anders dan op een foto. In de showroom liggen ze op ware grootte.",
+    "items": [
+      { "title": "Groot formaat", "text": "Tegels tot wel 120 cm of groter, met smalle voegen voor een rustig, strak vloerbeeld.", "tags": ["Rustig"] },
+      { "title": "Betonlook", "text": "De stoere, industriële uitstraling van beton, maar zonder scheuren en met veel minder onderhoud.", "tags": ["Industrieel"] },
+      { "title": "Marmer- en natuursteenlook", "text": "De luxe tekening van marmer of natuursteen, vlekbestendig en betaalbaar.", "tags": ["Luxe"] },
+      { "title": "Houtlook", "text": "Lange tegels met een realistische houtnerf. Warm van uitstraling en waterbestendig tot in de badkamer.", "tags": ["Warm"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Inspiratie",
+    "h2": "Eén vloer van binnen naar buiten",
+    "text": "Veel tegelcollecties bestaan ook in een dikkere, vorstbestendige buitenvariant met extra grip. Zo loopt uw vloer in dezelfde kleur door van de woonkamer naar het terras, voor een ruimtelijk en rustig geheel.",
+    "img": "https://images.unsplash.com/photo-1684928364941-2158e071cdd6",
+    "alt": "Eetkamer met een lichte tegelvloer in groot formaat"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor tegels",
+    "items": [
+      { "title": "Extreem slijtvast", "text": "Bestand tegen krassen, vlekken en intensief gebruik." },
+      { "title": "Ideaal met vloerverwarming", "text": "Keramiek geleidt warmte uitstekend en houdt die lang vast." },
+      { "title": "Waterbestendig", "text": "Perfect voor keuken, badkamer, hal en bijkeuken." },
+      { "title": "Hygiënisch", "text": "Dicht oppervlak waarin vuil en bacteriën geen kans krijgen." },
+      { "title": "Kleurvast", "text": "Verkleurt niet, ook niet in de volle zon." },
+      { "title": "Binnen en buiten", "text": "Dezelfde look in huis en op het terras." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over uw tegelvloer",
+    "rows": [
+      { "title": "Formaat en voegen", "paras": [
+        "Hoe groter de tegel, hoe minder voegen en hoe rustiger het beeld. Grote formaten vragen wel om een zeer vlakke ondergrond en vakkundig legwerk. De kleur van de voeg bepaalt mee hoe de vloer oogt: een voeg in de kleur van de tegel geeft een bijna naadloos resultaat."
+      ]},
+      { "title": "Tegels en vloerverwarming", "paras": [
+        "Tegels zijn de ideale partner voor vloerverwarming: de warmte komt snel en gelijkmatig de ruimte in en blijft lang behouden. Ook met vloerkoeling werkt een tegelvloer uitstekend."
+      ]},
+      { "title": "Stroefheid en veiligheid", "paras": [
+        "Voor badkamers, hallen en buitenruimtes kiest u een tegel met voldoende stroefheid. Wij adviseren u welke antislipwaarde past bij de ruimte, zodat u veilig loopt, ook als de vloer nat is."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Een tegelvloer is eenvoudig schoon te houden met water en een milde reiniger. De voegen blijven mooi als u ze af en toe extra aandacht geeft; wij adviseren u over het juiste product."
+      ]},
+      { "title": "Wat kost een tegelvloer?", "paras": [
+        "De prijs hangt af van de tegel, het formaat, het legpatroon en de voorbereiding van de ondergrond, zoals egaliseren. Grote formaten vragen meer vakmanschap bij het leggen. Na het inmeten maken wij een offerte op maat, inclusief plaatsing door ons eigen team."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "Tegelmerken in onze showroom",
+    "text": "Keramische tegels met karakter, voor vloer en wand.",
+    "items": [
+      { "label": "Cerdomus", "href": "/merken/cerdomus.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Zie de formaten op ware grootte",
+    "text": "Een grote tegel oogt in het echt heel anders dan op een foto. Kom langs, leg de tegels naast elkaar en bekijk ze in daglicht.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

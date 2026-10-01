@@ -1,0 +1,85 @@
+{
+  "file": "interieur/raamdecoratie.html",
+  "group": "interieur",
+  "name": "Raamdecoratie",
+  "title": "Raamdecoratie",
+  "metaDesc": "Jaloezieën, rolgordijnen, plissé- en vouwgordijnen op maat. Gratis inmeten aan huis en montage door ons eigen team. Voel de stoffen in onze showroom in Tilburg.",
+  "eyebrow": "Interieur",
+  "h1": "Raamdecoratie",
+  "vertical": "Raamdecoratie",
+  "lead": "Met de juiste raamdecoratie bepaalt u zelf hoeveel licht en privacy u binnenlaat. Jaloezieën, rolgordijnen, plissé- en vouwgordijnen: op maat gemaakt en opgehangen door ons eigen team. Inmeten aan huis is gratis.",
+  "heroImg": "/assets/img/real/gordijn-linnen-stoel-1800.jpg",
+  "heroAlt": "Linnen gordijnen in een lichte woonkamer",
+  "about": {
+    "eyebrow": "Over raamdecoratie",
+    "h2": "Licht en privacy, precies naar uw wens",
+    "paras": [
+      "Raamdecoratie maakt een ruimte af. Het regelt het licht, beschermt tegen inkijk, houdt de warmte binnen en geeft uw ramen een verzorgde uitstraling.",
+      "Welke soort het beste past, hangt af van het raam, de ruimte en wat u belangrijk vindt: veel licht, volledige verduistering, bediengemak of juist de zachtheid van stof.",
+      "Onze adviseur komt gratis bij u thuis inmeten en bekijkt meteen hoe het licht binnenvalt. Zo kiest u met vertrouwen, en wordt alles tot op de millimeter voor uw ramen gemaakt."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten raamdecoratie",
+    "h2": "Vier manieren om het licht te regelen",
+    "text": "Voel de stoffen en probeer de bediening in de showroom, of bekijk de stalen bij u thuis.",
+    "items": [
+      { "id": "jaloezieen", "title": "Jaloezieën", "text": "Kantel de lamellen en bepaal precies hoeveel licht en inkijk u toelaat. In hout, kunststof of aluminium.", "img": "https://images.unsplash.com/photo-1609534117141-ff9f20450902", "alt": "Houten jaloezie voor een raam met een plant" },
+      { "id": "rolgordijnen", "title": "Rolgordijnen", "text": "Strak en praktisch: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend.", "img": "https://images.unsplash.com/photo-1776261293170-66fd3b09273e", "alt": "Grijs rolgordijn voor een modern raam" },
+      { "id": "plissegordijnen", "title": "Plisségordijnen", "text": "Van boven en van onderen te bedienen en passend in lastige raamvormen. Isoleert bovendien uitstekend.", "img": "https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", "alt": "Plisségordijn boven een raam in een lichte woonkamer" },
+      { "id": "vouwgordijnen", "title": "Vouwgordijnen", "text": "Zachte plooien van stof die het raam warm afmaken, van luchtig linnen tot verduisterend.", "img": "https://images.unsplash.com/photo-1779078652928-6d941878d32e", "alt": "Vouwgordijn boven een raam in een slaapkamer" }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Stoffen",
+    "h2": "Kom de stoffen zelf voelen",
+    "text": "Foto's doen een stof nooit helemaal recht. In de showroom voelt u het verschil tussen linnen, velours en verduisterende stoffen, en ziet u hoe het licht erdoor valt.",
+    "img": "/assets/img/real/gordijn-caramel-tapijt-1800.jpg",
+    "alt": "Karamelkleurige gordijnstof bij een zacht tapijt"
+  },
+  "benefits": {
+    "h2": "Zo regelen wij het voor u",
+    "items": [
+      { "title": "Gratis inmeten", "text": "Onze adviseur meet uw ramen thuis op en bekijkt de lichtinval." },
+      { "title": "Advies en stalen", "text": "Voel de stoffen in de showroom of thuis en kies de bediening." },
+      { "title": "Op maat gemaakt", "text": "Alles tot op de millimeter voor uw ramen geproduceerd." },
+      { "title": "Montage", "text": "Ons eigen team hangt alles strak op." },
+      { "title": "Handmatig of elektrisch", "text": "Bediening met koord, ketting of motor." },
+      { "title": "Afgestemd op uw interieur", "text": "Samen gekozen met uw vloer en behang." }
+    ]
+  },
+  "info": {
+    "h2": "Welke raamdecoratie past bij u?",
+    "rows": [
+      { "title": "Woonkamer", "paras": [
+        "Hier wilt u vaak veel daglicht met wat privacy. Jaloezieën en plisségordijnen geven u daar precies de controle over; vouwgordijnen maken het raam extra sfeervol."
+      ]},
+      { "title": "Slaapkamer", "paras": [
+        "Voor een goede nachtrust kiest u een verduisterend rolgordijn of plissé, eventueel gecombineerd met een vouwgordijn voor een zachte uitstraling."
+      ]},
+      { "title": "Keuken en badkamer", "paras": [
+        "Kies materialen die tegen vocht kunnen en makkelijk schoon te houden zijn, zoals aluminium jaloezieën of een afwasbaar rolgordijn."
+      ]},
+      { "title": "Dakramen en lastige vormen", "paras": [
+        "Plisségordijnen zijn er ook voor dakramen, schuine ramen en andere bijzondere vormen. Onze adviseur bekijkt bij het inmeten wat mogelijk is."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "Merken in onze showroom",
+    "text": "Raamdecoratie en gordijnstoffen van merken met oog voor kwaliteit en ontwerp.",
+    "items": [
+      { "label": "KeJe", "href": "/merken/keje.html" },
+      { "label": "Lifestyle gordijnen", "href": "/merken/lifestyle-gordijnen.html" },
+      { "label": "Mart Visser", "href": "/merken/mart-visser.html" },
+      { "label": "Eijffinger", "href": "/merken/eijffinger.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Plan een afspraak of laat ons gratis inmeten",
+    "text": "Kom langs om de stoffen te voelen en de bediening te proberen, of laat onze adviseur bij u thuis inmeten.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

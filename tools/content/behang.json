@@ -1,0 +1,83 @@
+{
+  "file": "interieur/behang.html",
+  "group": "interieur",
+  "name": "Behang",
+  "title": "Behang",
+  "metaDesc": "Fotobehang, papierbehang, vinylbehang, vliesbehang en Renostuc. Bekijk de stalen in onze showroom in Tilburg en neem ze mee naar huis.",
+  "eyebrow": "Interieur",
+  "h1": "Behang",
+  "vertical": "Behang",
+  "lead": "Behang geeft een wand karakter, diepte en sfeer. Van een fotobehang als statement tot een rustig vliesbehang of het strakke Renostuc: bekijk de stalen in onze showroom en neem ze gewoon mee naar huis om ze in uw eigen licht te zien.",
+  "heroImg": "/assets/img/real/behang-woonkamer-1800.jpg",
+  "heroAlt": "Woonkamer met sfeervol groen behang",
+  "about": {
+    "eyebrow": "Over behang",
+    "h2": "Karakter voor elke wand",
+    "paras": [
+      "Met behang verandert u de sfeer van een ruimte in één keer. Een warm dessin maakt een slaapkamer knus, een grafisch patroon geeft een werkplek energie en een subtiele structuur brengt rust in de woonkamer.",
+      "Elke soort behang heeft zijn eigen eigenschappen: het ene is sterker, het andere ademender of makkelijker aan te brengen. Onze adviseurs helpen u de soort te kiezen die past bij de ruimte en bij de staat van uw muren.",
+      "Omdat vloeren, raamdecoratie en behang bij ons onder één dak zitten, stemmen we kleuren en materialen direct op elkaar af."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten behang",
+    "h2": "Vijf soorten, elk met een eigen kracht",
+    "text": "Twijfelt u welke soort past bij uw wand? Onze adviseurs denken graag met u mee.",
+    "items": [
+      { "id": "fotobehang", "title": "Fotobehang", "text": "Van stadsgezicht tot natuurpanorama of kunstwerk: één wand als statement.", "img": "https://images.unsplash.com/photo-1759774313806-7c564f3bd592", "alt": "Salon met een wandvullend landschap als fotobehang" },
+      { "id": "papierbehang", "title": "Papierbehang", "text": "Tijdloos, ademend en met een natuurlijke uitstraling, van klassiek tot modern.", "img": "https://images.unsplash.com/photo-1783403716758-27e30a7976ca", "alt": "Klassiek papierbehang met blauw boom- en hertenpatroon" },
+      { "id": "vinylbehang", "title": "Vinylbehang", "text": "Sterk en afwasbaar dankzij de vinyllaag. Ideaal voor hal, keuken en kinderkamer.", "img": "/assets/img/real/behang-woonkamer-900.jpg", "alt": "Woonkamer met groen vinylbehang" },
+      { "id": "vliesbehang", "title": "Vliesbehang", "text": "Scheurvast en snel aangebracht: de lijm gaat op de muur. Later ook weer makkelijk te verwijderen.", "img": "https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", "alt": "Vliesbehang met grafisch patroon achter een bank" },
+      { "id": "renostuc", "title": "Renostuc", "text": "Renovatievlies dat beschadigde muren weer strak maakt, zonder stucwerk. Daarna overschilderbaar.", "img": "/assets/img/real/renostuc-bedroom-sage-1600.jpg", "alt": "Slaapkamer met strakke, naadloze Renostuc-wanden" }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Renostuc",
+    "h2": "Strakke wanden zonder te stucen",
+    "text": "Heeft u muren met scheurtjes, oude lijmresten of een onrustige ondergrond? Renostuc is een sterk renovatievlies dat de wand in één keer glad en strak maakt. Daarna schildert u de muur in elke kleur die u wilt.",
+    "img": "/assets/img/real/renostuc-paneelwand-1800.jpg",
+    "alt": "Strakke wand met Renostuc in een woonkamer"
+  },
+  "benefits": {
+    "h2": "Waarom behang",
+    "items": [
+      { "title": "Direct sfeer", "text": "Eén wand kan de uitstraling van een hele ruimte veranderen." },
+      { "title": "Stalen mee naar huis", "text": "Bekijk het behang in uw eigen licht voordat u kiest." },
+      { "title": "Voor elke muur een soort", "text": "Van ademend papier tot sterk vinyl en renovatievlies." },
+      { "title": "Maskeert oneffenheden", "text": "Structuur en Renostuc verbergen kleine imperfecties." },
+      { "title": "Afgestemd op uw interieur", "text": "Samen gekozen met uw vloer en raamdecoratie." },
+      { "title": "Bekende merken", "text": "Collecties van gerenommeerde merken zoals Eijffinger." }
+    ]
+  },
+  "info": {
+    "h2": "Welk behang past bij uw wand?",
+    "rows": [
+      { "title": "Woonkamer en slaapkamer", "paras": [
+        "Hier draait het vooral om sfeer. Papierbehang en vliesbehang geven een warme, natuurlijke uitstraling; een fotobehang maakt van één wand een blikvanger."
+      ]},
+      { "title": "Hal, keuken en kinderkamer", "paras": [
+        "Kies voor een sterk en afwasbaar behang, zoals vinylbehang. Vlekken en vingerafdrukken veegt u er eenvoudig af."
+      ]},
+      { "title": "Muren in slechte staat", "paras": [
+        "Heeft de muur scheurtjes of oneffenheden? Dan is Renostuc de oplossing: een renovatievlies dat de wand strak maakt zonder te stucen, en daarna overschilderbaar is."
+      ]},
+      { "title": "Zelf behangen of laten doen", "paras": [
+        "Vliesbehang is het eenvoudigst om zelf aan te brengen, omdat de lijm op de muur gaat. Wilt u het liever laten doen, dan adviseren wij u graag over de mogelijkheden."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "Behangmerken in onze showroom",
+    "text": "Sfeervolle dessins en stoffen van merken die we kennen en vertrouwen.",
+    "items": [
+      { "label": "Eijffinger", "href": "/merken/eijffinger.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Bekijk het behang in uw eigen licht",
+    "text": "Kies in de showroom uw favorieten en neem de stalen mee naar huis. Onze adviseurs denken graag met u mee.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met complete woonopstellingen"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "file": "interieur/index.html",
+  "group": "interieur",
+  "name": "Interieur op maat",
+  "title": "Interieur op maat",
+  "metaDesc": "Kasten, deuren, wanden en meubels op maat. Van 3D-ontwerp tot montage door ons eigen team, met 20 jaar garantie. Bekijk materialen en afwerkingen in onze showroom in Tilburg.",
+  "eyebrow": "Interieur",
+  "h1": "Interieur op maat",
+  "vertical": "Interieur op maat",
+  "lead": "Een kast, deur of meubel dat precies past: tot in de hoek, onder de schuine wand en rond de lage balk. Wij ontwerpen, maken en plaatsen interieur op maat dat aansluit bij uw woning en uw stijl, met 20 jaar garantie op onze producten.",
+  "heroImg": "https://images.unsplash.com/photo-1717429541792-5c59021d6ceb",
+  "heroAlt": "Interieur met een kast op maat en warme materialen",
+  "about": {
+    "eyebrow": "Over interieur op maat",
+    "h2": "Maatwerk dat precies past bij uw woning",
+    "paras": [
+      "Bij ons staat mooi wonen centraal. Of het nu gaat om een inloopkast, een stalen deur of een tv-meubel: we stemmen alles af op uw ruimte, uw manier van leven en uw budget.",
+      "U ziet vooraf in een 3D-ontwerp precies hoe het eindresultaat wordt. Daarna maken we alles tot op de millimeter op maat en plaatst ons eigen team het strak en waterpas.",
+      "Omdat vloeren, behang en raamdecoratie ook bij ons onder één dak zitten, stemmen we uw maatwerk daar direct op af. Zo krijgt u een interieur dat klopt, tot in het detail."
+    ]
+  },
+  "types": {
+    "eyebrow": "Keuze uit interieur op maat",
+    "h2": "Kasten, deuren en meubels",
+    "text": "Drie soorten maatwerk, allemaal ontworpen voor uw ruimte en geplaatst door ons eigen team.",
+    "items": [
+      { "id": "kasten", "title": "Kasten op maat", "text": "Van inloopkast tot garderobewand: kasten die verschillende stijlen en materialen combineren tot een eigentijds geheel. Elke nis, schuine wand of lage balk wordt precies opgemeten en benut.", "img": "/assets/img/real/kasten-garderobe-900.jpg", "alt": "Inloopkast op maat met eigen verlichting", "tags": ["Inloopkasten", "Garderobes", "Schuine wanden"] },
+      { "id": "deuren-wanden", "title": "Deuren en wanden op maat", "text": "Metalen deuren en wanden met glas geven uw interieur een stijlvolle, industriële uitstraling en laten het licht vrij door de ruimte stromen. Op maat gemaakt in zwart, wit of brons.", "img": "https://images.unsplash.com/photo-1721742151032-e0c159fe5097", "alt": "Zwarte stalen deur met glas naar de woonkamer", "tags": ["Stalen deuren", "Glazen wanden"] },
+      { "id": "meubels", "title": "Meubels op maat", "text": "Van tv-meubel tot wandkast of bureau: elk meubel wordt afgestemd op uw wensen en uw ruimte, gemaakt van duurzame materialen en met oog voor detail.", "img": "/assets/img/real/meubels-op-maat-900.jpg", "alt": "Zithoek met meubels op maat in warm licht", "tags": ["Tv-meubels", "Wandkasten"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vooraf zien",
+    "h2": "Eerst een 3D-ontwerp, dan pas maken",
+    "text": "Voordat er iets wordt gemaakt, ziet u uw kast of meubel in 3D in uw eigen ruimte. Zo kiest u met vertrouwen de indeling, materialen, grepen en verlichting, en weet u precies wat u krijgt.",
+    "img": "/assets/img/real/meubels-op-maat-1600.jpg",
+    "alt": "Lichte woonkamer met meubels op maat en ronde salontafels"
+  },
+  "benefits": {
+    "h2": "Waarom interieur op maat",
+    "items": [
+      { "title": "Persoonlijk advies", "text": "We denken mee over materialen, indeling en budget." },
+      { "title": "3D-ontwerp vooraf", "text": "U ziet het eindresultaat voordat er iets wordt gemaakt." },
+      { "title": "Tot op de millimeter", "text": "Elke nis, schuine wand en hoek optimaal benut." },
+      { "title": "Eigen montage", "text": "Onze vakmensen leveren en plaatsen alles strak en waterpas." },
+      { "title": "20 jaar garantie", "text": "Maatwerk dat jarenlang meegaat, met garantie op onze producten." },
+      { "title": "Alles onder één dak", "text": "Afgestemd op uw vloer, behang en raamdecoratie." }
+    ]
+  },
+  "info": {
+    "h2": "Zo werken wij",
+    "rows": [
+      { "title": "1. Kennismaking en advies", "paras": [
+        "In de showroom of bij u thuis bespreken we uw wensen, uw stijl en uw budget. U bekijkt en voelt materialen, kleuren en grepen, zodat u een goed beeld krijgt van de mogelijkheden."
+      ]},
+      { "title": "2. Inmeten en ontwerp", "paras": [
+        "We meten uw ruimte nauwkeurig op en maken een 3D-ontwerp. Samen stemmen we de indeling en details af tot alles klopt."
+      ]},
+      { "title": "3. Productie op maat", "paras": [
+        "Na uw akkoord wordt alles tot op de millimeter op maat gemaakt, van duurzame materialen en met oog voor detail."
+      ]},
+      { "title": "4. Levering en montage", "paras": [
+        "Ons eigen team levert en plaatst uw maatwerk en werkt alles netjes af. U heeft van begin tot eind één vast aanspreekpunt."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Bespreek uw maatwerk in de showroom",
+    "text": "Kom langs voor persoonlijk advies en bekijk materialen, grepen en afwerkingen in het echt.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Laminaat — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Slijtvast, betaalbaar en snel gelegd — laminaatvloeren in houtlook voor elk budget. Bekijk het assortiment in onze showroom in Tilburg.">
+<meta name="description" content="Laminaat met een realistische houtlook, ook in visgraat en waterbestendige uitvoering. Slijtvast, snel gelegd en voor elk budget. Bekijk het in onze showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -28,80 +29,240 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/laminaat.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>
-      <span aria-current="page">Laminaat</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Laminaatvloer bij een open haard" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Vloeren — Laminaat</p>
-        <h1>Een mooie vloer hoeft niet duur te zijn</h1>
-        <p class="lead">Laminaat biedt de uitstraling van hout tegen een slimme prijs — slijtvast, snel gelegd en geschikt voor gezinnen met kinderen en huisdieren. Voor iedereen die op zoek is naar een goede prijs-kwaliteitverhouding.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Bekijk het assortiment</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span><span aria-current="page">Laminaat</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Vloeren</p>
+          <h1>Laminaat</h1>
+        </div>
+        <div>
+          <p class="pr-hero-lead">Laminaat geeft u de uitstraling van een houten vloer tegen een slimme prijs. Het is slijtvast, snel gelegd en bestand tegen het dagelijks leven met kinderen en huisdieren. Moderne collecties zijn nauwelijks van echt hout te onderscheiden.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
+          </div>
         </div>
       </div>
-    </section>
-  </div>
+      <p class="pr-hero-vertical" aria-hidden="true">Laminaat <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Laminaatvloer in houtlook bij een open haard" loading="eager">
+      </div>
+    </div>
+  </section>
 
-  <section class="page-section">
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over Laminaat">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Een mooie vloer hoeft niet duur te zijn</h2>
+        <p class="eyebrow">Over laminaat</p>
+      </div>
+      <div class="pr-about-text">
+          <p>Laminaat bestaat uit een kern van hogedichtheid vezelplaat (HDF) met daarop een decorlaag en een sterke, transparante toplaag. Die toplaag maakt laminaat bijzonder hard en krasbestendig.</p>
+          <p>Hoe sterk een laminaatvloer is, leest u af aan de slijtklasse. Voor een woning is AC3 of AC4 een goede keuze; AC5 is geschikt voor zeer intensief gebruik. Dankzij de kliksluiting wordt laminaat snel en netjes zwevend gelegd.</p>
+          <p>De nieuwste collecties hebben een diepe structuur die meeloopt met de houtnerf, afgeschuinde randen en een matte afwerking. Het resultaat is een vloer die er natuurlijk uitziet en ook zo aanvoelt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
     <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Voordelen</p>
-        <h2>Slim geprijsd, zonder concessies</h2>
+      <div class="pr-head">
+        <div>
+          <h2>Voor elke stijl en elk budget</h2>
+          <p class="eyebrow">Soorten laminaat</p>
+        </div>
+        <p class="pr-head-text">Van de klassieke eiken plank tot waterbestendig laminaat voor de keuken: wij laten u de verschillen zien.</p>
       </div>
-      <div class="spec-grid">
-        <div class="spec-item reveal">
-          <h3>Slijtvast</h3>
-          <p>Bestand tegen dagelijks gebruik, kinderen en huisdieren, in verschillende slijtklassen.</p>
+      <div class="pr-types" style="--cols: 4">
+        <article class="pr-type">
+          <span class="pr-type-nr">01</span>
+          
+          <h3>Plank</h3>
+          <p>De klassieke houtlook in allerlei kleuren, van licht eiken tot donker gerookt. Ook als extra brede landhuisplank.</p>
+          <div class="tag-row"><span class="tag">Houtlook</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">02</span>
+          
+          <h3>Visgraat</h3>
+          <p>Het populaire visgraatpatroon met het gemak en de prijs van laminaat. Leverbaar met kliksluiting.</p>
+          <div class="tag-row"><span class="tag">Patroon</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">03</span>
+          
+          <h3>Waterbestendig laminaat</h3>
+          <p>Laminaat met een afgedichte kern en naden, waardoor het langer bestand is tegen vocht. Geschikt voor keuken en hal.</p>
+          <div class="tag-row"><span class="tag">Keuken</span><span class="tag">Hal</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">04</span>
+          
+          <h3>Steenlook</h3>
+          <p>Laminaat met de uitstraling van tegels of beton, warmer en stiller onder de voeten dan steen.</p>
+          <div class="tag-row"><span class="tag">Betonlook</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="/assets/img/real/visgraat-kastenwand-1800.jpg" alt="Visgraatvloer bij een kastenwand op maat" loading="lazy">
+      </div>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Inspiratie</p>
+        <h2>Visgraat, zonder de prijs van hout</h2>
+        <p>Met laminaat in visgraat haalt u een klassieke, luxe uitstraling in huis tegen een toegankelijke prijs. In onze showroom liggen de patronen in complete woonopstellingen, zodat u ziet hoe ze uitpakken in een echte ruimte.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Waarom kiezen voor laminaat</h2>
+          <p class="eyebrow">Voordelen</p>
         </div>
-        <div class="spec-item reveal">
-          <h3>Snel gelegd</h3>
-          <p>Klik-systeem zorgt voor een snelle, nette plaatsing door ons eigen team.</p>
+      </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Slimme prijs</h3><p>De uitstraling van hout voor een fractie van de prijs.</p></div>
+        <div class="pr-benefit"><h3>Slijtvast</h3><p>Een harde toplaag die krassen en dagelijks gebruik aankan.</p></div>
+        <div class="pr-benefit"><h3>Snel gelegd</h3><p>Dankzij de kliksluiting ligt uw vloer vaak binnen een dag.</p></div>
+        <div class="pr-benefit"><h3>Kleurvast</h3><p>Verkleurt niet in de zon, ook niet voor grote ramen.</p></div>
+        <div class="pr-benefit"><h3>Onderhoudsvriendelijk</h3><p>Stofzuigen en nevelvochtig dweilen is voldoende.</p></div>
+        <div class="pr-benefit"><h3>Realistische designs</h3><p>Diepe structuren en matte afwerkingen, net als echt hout.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Alles over uw laminaatvloer</h2>
+          <p class="eyebrow">Goed om te weten</p>
         </div>
-        <div class="spec-item reveal">
-          <h3>Realistische houtlook</h3>
-          <p>Moderne decorlagen die nauwelijks van echt hout te onderscheiden zijn.</p>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Slijtklassen</h3>
+          <div>
+          <p>De AC-klasse geeft aan hoe slijtvast een laminaatvloer is. AC3 is geschikt voor normaal gebruik in de woning, AC4 voor intensief gebruik zoals een woonkamer met kinderen, en AC5 voor zeer drukbelopen ruimtes. Wij adviseren u welke klasse past bij uw situatie.</p>
+          </div>
         </div>
-        <div class="spec-item reveal">
-          <h3>Voor elk budget</h3>
-          <p>Ruime keuze in prijsklassen, van instapmodel tot premium uitvoering.</p>
+        <div class="pr-info-row">
+          <h3>De juiste ondervloer</h3>
+          <div>
+          <p>Onder laminaat hoort een goede ondervloer. Die vlakt kleine oneffenheden uit, dempt het loopgeluid in de ruimte en beperkt contactgeluid naar de buren. In een appartement gelden vaak eisen van de VvE; wij kiezen een ondervloer die daaraan voldoet.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Laminaat en vloerverwarming</h3>
+          <div>
+          <p>Laminaat is goed te combineren met vloerverwarming, mits de vloer en de ondervloer samen een lage warmteweerstand hebben. We kiezen dan een geschikte collectie en een speciale ondervloer die de warmte goed doorlaat.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Laminaat en vocht</h3>
+          <div>
+          <p>Gewoon laminaat is niet bestand tegen staand water. Voor keuken en hal kiest u daarom een waterbestendige collectie met afgedichte naden. In de badkamer adviseren we liever PVC of tegels.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Onderhoud</h3>
+          <div>
+          <p>Stofzuig of veeg de vloer regelmatig en dweil nevelvochtig met een reiniger voor laminaat. Gebruik niet te veel water en leg vilt onder stoelen en tafels.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Wat kost een laminaatvloer?</h3>
+          <div>
+          <p>De prijs hangt af van de collectie, de slijtklasse, de plankmaat, het legpatroon en de ondervloer. Na het inmeten maken wij een offerte op maat, inclusief plaatsing, plinten en afwerking door ons eigen team.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="" loading="lazy">
-    </div>
+  <!-- 7 · Merken -->
+  <section class="pr-section" data-review-id="merken" data-review-label="Merken">
     <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Assortiment bekijken</p>
+      <div class="pr-head">
+        <div>
+          <h2>Laminaatmerken in onze showroom</h2>
+          <p class="eyebrow">Merken</p>
+        </div>
+        <p class="pr-head-text">Laminaat van merken die bekendstaan om kwaliteit, stevige kliksystemen en realistische houtstructuren.</p>
+      </div>
+      <div class="pr-brands">
+        <a class="pr-brand" href="/merken/meister.html">Meister</a>
+        <a class="pr-brand" href="/merken/belakos.html">Belakos</a>
+        <a class="pr-brand" href="/merken/ambiant.html">Ambiant</a>
+        <a class="pr-brand" href="/merken/index.html">Alle merken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
         <h2>Vind de juiste laminaatvloer voor uw budget</h2>
-        <p>Onze adviseurs helpen u kosteloos de beste keuze te maken, zonder verkooppraatjes.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        <p>Onze adviseurs helpen u kosteloos de beste keuze te maken, zonder verkooppraatjes. Kom langs en vergelijk de collecties in het echt.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met vloeren en complete woonopstellingen" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook de andere vloersoorten</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
+        <a href="/vloeren/pvc.html">PVC vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hout.html">Houten vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/tegelvloer.html">Tegelvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/vloerbedekking.html">Vloerbedekking <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

@@ -1,0 +1,74 @@
+{
+  "file": "vloeren/hybride-houtenvloer.html",
+  "group": "vloeren",
+  "name": "Hybride houtenvloeren",
+  "title": "Hybride houtenvloeren",
+  "metaDesc": "Hybride houtenvloeren: een toplaag van echt hout op een stabiele, waterbestendige kern. Krasbestendig, geschikt voor vloerverwarming en snel gelegd. Showroom in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "Hybride houtenvloeren",
+  "vertical": "Hybride houtenvloeren",
+  "lead": "Een hybride houtenvloer heeft een toplaag van echt hout op een stabiele, waterbestendige kern. U krijgt de natuurlijke uitstraling en warmte van hout, maar de vloer is beter bestand tegen vocht, krassen en temperatuurverschillen.",
+  "heroImg": "https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef",
+  "heroAlt": "Lichte eikenhouten vloer in een zonnige kamer",
+  "about": {
+    "eyebrow": "Over de hybride houtenvloer",
+    "h2": "Het beste van hout en een moderne vloer",
+    "paras": [
+      "Een hybride houtenvloer combineert twee werelden. Bovenop ligt een laag echt hout, met de nerf, kleur en warmte die u van hout verwacht. Daaronder zit een stabiele kern die nauwelijks reageert op vocht en temperatuur.",
+      "Doordat de vloer zo stabiel is, kan hij in grotere ruimtes zonder dilatatieprofielen worden gelegd en werkt hij uitstekend met vloerverwarming. De planken hebben een kliksluiting en liggen daardoor snel.",
+      "Twijfelt u tussen hout en hybride? In de showroom leggen we beide soorten graag naast elkaar, zodat u het verschil ziet en voelt."
+    ]
+  },
+  "types": {
+    "eyebrow": "Uitvoeringen",
+    "h2": "Plank, visgraat en afwerking",
+    "text": "Hybride houtenvloeren zijn er in dezelfde vormen en kleuren als traditionele houten vloeren.",
+    "items": [
+      { "title": "Plank", "text": "Rechte planken in verschillende breedtes, van klassiek tot extra breed en lang.", "tags": ["Rustig"] },
+      { "title": "Visgraat", "text": "Het klassieke patroon met een stabiele kern: karakter zonder zorgen.", "tags": ["Patroon"] },
+      { "title": "Geolied of gelakt", "text": "Een natuurlijke, matte uitstraling of een extra beschermende lak voor intensief gebruik.", "tags": ["Afwerking"] },
+      { "title": "Licht tot gerookt", "text": "Van Scandinavisch licht eiken tot een diepe, warme gerookte tint.", "tags": ["Kleur"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vergelijken",
+    "h2": "Leg hout en hybride naast elkaar",
+    "text": "Wij leggen beide soorten graag naast elkaar in de showroom. Zo ziet en voelt u het verschil, en adviseren we wat het beste past bij uw ruimte, uw ondervloer en uw gezin.",
+    "img": "https://images.unsplash.com/photo-1649083048381-520a5b3d91ff",
+    "alt": "Lichte woonkamer met een houten vloer"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor hybride hout",
+    "items": [
+      { "title": "Echt hout", "text": "Een toplaag van echt hout, met de nerf en warmte van een natuurproduct." },
+      { "title": "Waterbestendig", "text": "De stabiele kern werkt nauwelijks, ook niet in keuken of hal." },
+      { "title": "Krasbestendig", "text": "Beter bestand tegen dagelijks gebruik, kinderen en huisdieren." },
+      { "title": "Vloerverwarming", "text": "Geeft warmte goed door zonder dat de vloer gaat werken." },
+      { "title": "Snel gelegd", "text": "Dankzij de kliksluiting ligt uw vloer snel en netjes." },
+      { "title": "Grote ruimtes", "text": "Door de stabiliteit vaak zonder onderbreking door te leggen." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over de hybride houtenvloer",
+    "rows": [
+      { "title": "Het verschil met massief hout en PVC", "paras": [
+        "Massief hout is puur natuur en kan vaak worden geschuurd, maar reageert op vocht en temperatuur. PVC is zeer praktisch, maar geen echt hout. Een hybride houtenvloer zit daartussen: de uitstraling van echt hout met de stabiliteit en het gemak van een moderne vloer."
+      ]},
+      { "title": "Hybride hout en vloerverwarming", "paras": [
+        "Door de stabiele kern is een hybride houtenvloer zeer geschikt voor vloerverwarming. De vloer krimpt en zet nauwelijks uit, waardoor er geen kieren ontstaan in het stookseizoen."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Stofzuig regelmatig en dweil vochtig met een reiniger die past bij de afwerking. Vilt onder meubels en een goede deurmat houden de toplaag extra lang mooi."
+      ]},
+      { "title": "Wat kost een hybride houtenvloer?", "paras": [
+        "De prijs hangt af van de collectie, de dikte van de houten toplaag, de plankmaat en het legpatroon. Na het inmeten maken wij een offerte op maat, inclusief plaatsing door ons eigen team."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Twijfelt u tussen hout en hybride? Kom langs",
+    "text": "Bekijk de collecties in complete woonopstellingen en krijg persoonlijk advies van onze vloerspecialisten.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met vloeren en complete woonopstellingen"
+  }
+}

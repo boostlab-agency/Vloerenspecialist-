@@ -41,70 +41,99 @@
 <main id="main">
 
   <!-- ===== Ontwerp B (concept) — alleen zichtbaar als met de schakelaar links ontwerp B gekozen is ===== -->
-  <!-- B1 · Hero: grote kop, korte intro met knop, kleine foto van de showroom, daaronder breed beeld -->
+  <!-- B1 · Hero: gecentreerde grote kop, twee acties, daaronder het filmpje met ronde hoeken -->
   <section class="hb-hero only-b" data-review-id="hero-b" data-review-label="Hero (ontwerp B)">
-    <div class="wrap hb-hero-top">
-      <h1 class="hb-title">Vloeren &amp;<br>interieur</h1>
-      <div class="hb-hero-intro">
-        <p>Alle vloeren, interieur op maat, behang en raamdecoratie onder één dak. Bekijk en voel alles in onze showroom van 1.800 m² in Tilburg.</p>
+    <div class="wrap">
+      <p class="hb-kicker">De Vloerenspecialist Tilburg</p>
+      <h1 class="hb-title">Vloeren. Interieur.<br>Onder één dak.</h1>
+      <p class="hb-sub">Alle vloeren, maatwerk, behang en raamdecoratie in een showroom van 1.800&nbsp;m².</p>
+      <div class="hb-actions">
         <a class="btn btn-primary" href="/showroom.html">Plan uw bezoek</a>
+        <a class="hb-link" href="/vloeren/index.html">Bekijk alle vloeren</a>
       </div>
-      <a class="hb-hero-thumb" href="/showroom.html">
-        <img src="/assets/img/real/showroom-gevel-900.jpg" alt="De showroom aan de Jules Verneweg in Tilburg" loading="lazy">
-        <span>+ Onze showroom</span>
+      <div class="hb-hero-media">
+        <video muted loop playsinline preload="none" data-design-video="b"
+               poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
+               aria-label="Sfeerfilm: moderne, lichte woonkamer">
+          <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="https://videos.pexels.com/video-files/7533207/7533207-hd_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2 · Tegels: één grote donkere tegel voor vloeren, daaronder vier lichte tegels -->
+  <section class="hb-tiles only-b" data-review-id="tegels-b" data-review-label="Vakgebieden (ontwerp B)">
+    <div class="wrap">
+      <a class="hb-tile is-dark is-wide" href="/vloeren/index.html">
+        <span class="hb-tile-copy">
+          <span class="hb-tile-title">Vloeren</span>
+          <span class="hb-tile-sub">Zeven soorten. Eén showroom.</span>
+          <span class="hb-link is-light">Meer informatie</span>
+        </span>
+        <img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Woonkamer met een warme houten vloer" loading="lazy">
       </a>
-    </div>
-    <div class="hb-hero-media">
-      <img src="/assets/img/real/meubels-op-maat-1600.jpg" alt="Lichte woonkamer met meubels op maat, ronde salontafels en zonlicht" loading="lazy">
+      <div class="hb-tile-grid">
+        <a class="hb-tile" href="/interieur/index.html">
+          <span class="hb-tile-copy">
+            <span class="hb-tile-title">Interieur op maat</span>
+            <span class="hb-tile-sub">Kasten, deuren en meubels die precies passen.</span>
+            <span class="hb-link">Meer informatie</span>
+          </span>
+          <img src="/assets/img/real/kasten-garderobe-1800.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
+        </a>
+        <a class="hb-tile" href="/interieur/behang.html">
+          <span class="hb-tile-copy">
+            <span class="hb-tile-title">Behang</span>
+            <span class="hb-tile-sub">Karakter voor elke wand.</span>
+            <span class="hb-link">Meer informatie</span>
+          </span>
+          <img src="/assets/img/real/behang-woonkamer-1800.jpg" alt="Woonkamer met groen behang" loading="lazy">
+        </a>
+        <a class="hb-tile" href="/interieur/raamdecoratie.html">
+          <span class="hb-tile-copy">
+            <span class="hb-tile-title">Raamdecoratie</span>
+            <span class="hb-tile-sub">Licht en privacy, precies op maat.</span>
+            <span class="hb-link">Meer informatie</span>
+          </span>
+          <img src="/assets/img/real/raamdecoratie-woonkamer-1800.jpg" alt="Woonkamer met raamdecoratie op maat" loading="lazy">
+        </a>
+        <a class="hb-tile" href="/showroom.html">
+          <span class="hb-tile-copy">
+            <span class="hb-tile-title">De showroom</span>
+            <span class="hb-tile-sub">Jules Verneweg 7a, Tilburg.</span>
+            <span class="hb-link">Plan uw bezoek</span>
+          </span>
+          <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met vloeren en woonopstellingen" loading="lazy">
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- B2 · Over ons: klein label + foto links, grote tekst en kerncijfers rechts -->
-  <section class="hb-about only-b" data-review-id="over-b" data-review-label="Over ons (ontwerp B)">
-    <div class="wrap hb-about-grid">
-      <div class="hb-about-side">
-        <p class="hb-label">Over ons</p>
-        <a class="hb-about-thumb" href="/inspiratie/projecten.html">
-          <img src="/assets/img/real/visgraat-kastenwand-900.jpg" alt="Visgraatvloer met kastenwand op maat" loading="lazy">
-          <span>+ Onze projecten</span>
-        </a>
-      </div>
-      <div class="hb-about-main">
-        <p class="hb-statement">Een nieuwe vloer, een kast op maat, het juiste behang en de gordijnen die erbij passen: bij De Vloerenspecialist komt het samen onder één dak. Met een eigen team dat alles plaatst, van eerste advies tot oplevering.</p>
-        <div class="hb-stats">
-          <div><strong>1.800<sup>m²</sup></strong><span>Showroom</span></div>
-          <div><strong>62<sup>+</sup></strong><span>Topmerken</span></div>
-          <div><strong>9<sup>+</sup></strong><span>Klantwaardering</span></div>
-        </div>
+  <!-- B3 · Vloersoorten naast elkaar (horizontaal scrollen) -->
+  <section class="hb-lineup only-b" data-review-id="vloersoorten-b" data-review-label="Vloersoorten (ontwerp B)">
+    <div class="wrap">
+      <h2 class="hb-h2">Vind de vloer die bij u past.</h2>
+      <div class="hb-scroller">
+        <a class="hb-card" href="/vloeren/pvc.html"><img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="PVC vloer in een woonkamer" loading="lazy"><strong>PVC vloeren</strong><span>Waterbestendig en onderhoudsarm.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/hout.html"><img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Houten vloer" loading="lazy"><strong>Houten vloeren</strong><span>Tijdloos en ambachtelijk.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/laminaat.html"><img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Laminaatvloer" loading="lazy"><strong>Laminaat</strong><span>Slim geprijsd, snel gelegd.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/tegelvloer.html"><img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Tegelvloer in marmerlook" loading="lazy"><strong>Tegelvloeren</strong><span>Duurzaam en slijtvast.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/vloerbedekking.html"><img src="https://images.unsplash.com/photo-1772563214602-3c6434766700?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Slaapkamer met vloerbedekking" loading="lazy"><strong>Vloerbedekking</strong><span>Warm en geluiddempend.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/gietvloer.html"><img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Lichte gietvloer" loading="lazy"><strong>Gietvloeren</strong><span>Naadloos en modern.</span><em class="hb-link">Meer informatie</em></a>
+        <a class="hb-card" href="/vloeren/hybride-houtenvloer.html"><img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=72&amp;auto=format&amp;fit=crop&amp;w=700" alt="Lichte eikenhouten vloer" loading="lazy"><strong>Hybride houtenvloeren</strong><span>Echt hout, waterbestendig.</span><em class="hb-link">Meer informatie</em></a>
       </div>
     </div>
   </section>
 
-  <!-- B3 · Sfeerbeeld met grote kop en de vier vakgebieden als genummerde kaarten -->
-  <section class="hb-style only-b" data-review-id="vakgebieden-b" data-review-label="Vakgebieden (ontwerp B)">
-    <img class="hb-style-bg" src="/assets/img/real/renostuc-bedroom-brown-1600.jpg" alt="" loading="lazy">
-    <div class="wrap hb-style-inner">
-      <div class="hb-style-copy">
-        <h2>Waar stijl en vakmanschap samenkomen</h2>
-        <a class="btn hb-btn-light" href="/showroom.html">Kom kijken</a>
-      </div>
-      <div class="hb-cards">
-        <a class="hb-card" href="/vloeren/index.html">
-          <img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Lichte visgraatvloer in een open keuken" loading="lazy">
-          <span class="hb-card-foot"><span>Vloeren</span><span class="hb-card-nr">01</span></span>
-        </a>
-        <a class="hb-card" href="/interieur/index.html">
-          <img src="/assets/img/real/kasten-garderobe-900.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
-          <span class="hb-card-foot"><span>Interieur op maat</span><span class="hb-card-nr">02</span></span>
-        </a>
-        <a class="hb-card" href="/interieur/behang.html">
-          <img src="/assets/img/real/behang-woonkamer-900.jpg" alt="Woonkamer met groen behang" loading="lazy">
-          <span class="hb-card-foot"><span>Behang</span><span class="hb-card-nr">03</span></span>
-        </a>
-        <a class="hb-card" href="/interieur/raamdecoratie.html">
-          <img src="/assets/img/real/gordijn-linnen-blauw-tapijt-900.jpg" alt="Linnen gordijnen in een woonkamer" loading="lazy">
-          <span class="hb-card-foot"><span>Raamdecoratie</span><span class="hb-card-nr">04</span></span>
-        </a>
+  <!-- B4 · Kerncijfers, gecentreerd -->
+  <section class="hb-stats only-b" data-review-id="cijfers-b" data-review-label="Kerncijfers (ontwerp B)">
+    <div class="wrap">
+      <h2 class="hb-h2">Waarom De Vloerenspecialist.</h2>
+      <div class="hb-stat-row">
+        <div><strong>1.800 m²</strong><span>showroom met complete woonopstellingen</span></div>
+        <div><strong>62+</strong><span>topmerken onder één dak</span></div>
+        <div><strong>9+</strong><span>waardering van onze klanten</span></div>
       </div>
     </div>
   </section>
@@ -117,7 +146,7 @@
       <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
       <div class="h-hero-media is-video">
         <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
-        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
+        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata" data-design-video="a"
                poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
                aria-label="Sfeerfilm: moderne, lichte woonkamer met witte hoekbank, natuurstenen haard en lange vitrages">
           <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
@@ -148,7 +177,7 @@
   </section>
 
   <!-- 3 · Vloersoorten: het hart van het bedrijf, direct zichtbaar -->
-  <section class="h-section is-surface" id="vloeren" data-review-id="vloeren" data-review-label="Onze vloeren">
+  <section class="h-section is-surface only-a" id="vloeren" data-review-id="vloeren" data-review-label="Onze vloeren">
     <div class="wrap">
       <div class="h-head">
         <div>
@@ -224,7 +253,7 @@
   </section>
 
   <!-- 5 · Showroom: rustig, één uitnodiging -->
-  <section class="h-section is-surface" id="showroom" data-review-id="showroom" data-review-label="De showroom">
+  <section class="h-section is-surface only-a" id="showroom" data-review-id="showroom" data-review-label="De showroom">
     <div class="wrap h-welcome-grid is-reverse">
       <div class="h-welcome-media">
         <img src="https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warm verlichte woonopstelling in de showroom" loading="lazy">

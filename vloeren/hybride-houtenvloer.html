@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hybride houtenvloer — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Hybride houtenvloeren: de uitstraling van echt hout, met de kras- en waterbestendigheid van een moderne toplaag. Bekijk ze in onze showroom in Tilburg.">
+<title>Hybride houtenvloeren — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="Hybride houtenvloeren: een toplaag van echt hout op een stabiele, waterbestendige kern. Krasbestendig, geschikt voor vloerverwarming en snel gelegd. Showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -28,100 +29,210 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/hybride-houtenvloer.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>
-      <span aria-current="page">Hybride houtenvloer</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Lichte eikenhouten vloer in een zonnige, lege kamer" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Vloeren — Hybride houtenvloer</p>
-        <h1>De warmte van hout, zonder zorgen</h1>
-        <p class="lead">Een hybride houtenvloer heeft een toplaag van echt hout op een stabiele, waterbestendige kern. U krijgt de natuurlijke uitstraling van hout, maar de vloer is beter bestand tegen krassen, vocht en temperatuurverschillen.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Bekijk stalen in de showroom</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span><span aria-current="page">Hybride houtenvloeren</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Vloeren</p>
+          <h1>Hybride houtenvloeren</h1>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="page-section">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Voordelen</p>
-        <h2>Het beste van hout en een moderne vloer</h2>
-      </div>
-      <div class="spec-grid">
-        <div class="spec-item reveal">
-          <h3>Echt hout</h3>
-          <p>Een toplaag van echt hout, met de nerf en warmte die u van hout verwacht.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Waterbestendig</h3>
-          <p>De stabiele kern werkt nauwelijks, ook niet in keuken of hal.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Krasbestendig</h3>
-          <p>Beter bestand tegen dagelijks gebruik, kinderen en huisdieren.</p>
-        </div>
-        <div class="spec-item reveal">
-          <h3>Geschikt voor vloerverwarming</h3>
-          <p>Warmte wordt goed doorgegeven zonder dat de vloer gaat werken.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section is-alt">
-    <div class="wrap">
-      <div class="split-block">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1649083048381-520a5b3d91ff?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Lichte woonkamer met houten vloer" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Twijfelt u tussen hout en hybride?</h2>
-          <p>Wij leggen beide soorten graag naast elkaar in de showroom. Zo ziet en voelt u het verschil, en adviseren we wat het beste past bij uw ruimte en gebruik.</p>
-          <div class="tag-row">
-            <span class="tag">Echt hout</span>
-            <span class="tag">Waterbestendig</span>
-            <span class="tag">Eigen plaatsing</span>
+        <div>
+          <p class="pr-hero-lead">Een hybride houtenvloer heeft een toplaag van echt hout op een stabiele, waterbestendige kern. U krijgt de natuurlijke uitstraling en warmte van hout, maar de vloer is beter bestand tegen vocht, krassen en temperatuurverschillen.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
           </div>
-          <a class="btn-text" href="/vloeren/hout.html">Bekijk ook houten vloeren <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pr-hero-vertical" aria-hidden="true">Hybride houtenvloeren <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Lichte eikenhouten vloer in een zonnige kamer" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over Hybride houtenvloeren">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Het beste van hout en een moderne vloer</h2>
+        <p class="eyebrow">Over de hybride houtenvloer</p>
+      </div>
+      <div class="pr-about-text">
+          <p>Een hybride houtenvloer combineert twee werelden. Bovenop ligt een laag echt hout, met de nerf, kleur en warmte die u van hout verwacht. Daaronder zit een stabiele kern die nauwelijks reageert op vocht en temperatuur.</p>
+          <p>Doordat de vloer zo stabiel is, kan hij in grotere ruimtes zonder dilatatieprofielen worden gelegd en werkt hij uitstekend met vloerverwarming. De planken hebben een kliksluiting en liggen daardoor snel.</p>
+          <p>Twijfelt u tussen hout en hybride? In de showroom leggen we beide soorten graag naast elkaar, zodat u het verschil ziet en voelt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Plank, visgraat en afwerking</h2>
+          <p class="eyebrow">Uitvoeringen</p>
+        </div>
+        <p class="pr-head-text">Hybride houtenvloeren zijn er in dezelfde vormen en kleuren als traditionele houten vloeren.</p>
+      </div>
+      <div class="pr-types" style="--cols: 4">
+        <article class="pr-type">
+          <span class="pr-type-nr">01</span>
+          
+          <h3>Plank</h3>
+          <p>Rechte planken in verschillende breedtes, van klassiek tot extra breed en lang.</p>
+          <div class="tag-row"><span class="tag">Rustig</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">02</span>
+          
+          <h3>Visgraat</h3>
+          <p>Het klassieke patroon met een stabiele kern: karakter zonder zorgen.</p>
+          <div class="tag-row"><span class="tag">Patroon</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">03</span>
+          
+          <h3>Geolied of gelakt</h3>
+          <p>Een natuurlijke, matte uitstraling of een extra beschermende lak voor intensief gebruik.</p>
+          <div class="tag-row"><span class="tag">Afwerking</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">04</span>
+          
+          <h3>Licht tot gerookt</h3>
+          <p>Van Scandinavisch licht eiken tot een diepe, warme gerookte tint.</p>
+          <div class="tag-row"><span class="tag">Kleur</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="https://images.unsplash.com/photo-1649083048381-520a5b3d91ff?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Lichte woonkamer met een houten vloer" loading="lazy">
+      </div>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Vergelijken</p>
+        <h2>Leg hout en hybride naast elkaar</h2>
+        <p>Wij leggen beide soorten graag naast elkaar in de showroom. Zo ziet en voelt u het verschil, en adviseren we wat het beste past bij uw ruimte, uw ondervloer en uw gezin.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Waarom kiezen voor hybride hout</h2>
+          <p class="eyebrow">Voordelen</p>
+        </div>
+      </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Echt hout</h3><p>Een toplaag van echt hout, met de nerf en warmte van een natuurproduct.</p></div>
+        <div class="pr-benefit"><h3>Waterbestendig</h3><p>De stabiele kern werkt nauwelijks, ook niet in keuken of hal.</p></div>
+        <div class="pr-benefit"><h3>Krasbestendig</h3><p>Beter bestand tegen dagelijks gebruik, kinderen en huisdieren.</p></div>
+        <div class="pr-benefit"><h3>Vloerverwarming</h3><p>Geeft warmte goed door zonder dat de vloer gaat werken.</p></div>
+        <div class="pr-benefit"><h3>Snel gelegd</h3><p>Dankzij de kliksluiting ligt uw vloer snel en netjes.</p></div>
+        <div class="pr-benefit"><h3>Grote ruimtes</h3><p>Door de stabiliteit vaak zonder onderbreking door te leggen.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Alles over de hybride houtenvloer</h2>
+          <p class="eyebrow">Goed om te weten</p>
+        </div>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Het verschil met massief hout en PVC</h3>
+          <div>
+          <p>Massief hout is puur natuur en kan vaak worden geschuurd, maar reageert op vocht en temperatuur. PVC is zeer praktisch, maar geen echt hout. Een hybride houtenvloer zit daartussen: de uitstraling van echt hout met de stabiliteit en het gemak van een moderne vloer.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Hybride hout en vloerverwarming</h3>
+          <div>
+          <p>Door de stabiele kern is een hybride houtenvloer zeer geschikt voor vloerverwarming. De vloer krimpt en zet nauwelijks uit, waardoor er geen kieren ontstaan in het stookseizoen.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Onderhoud</h3>
+          <div>
+          <p>Stofzuig regelmatig en dweil vochtig met een reiniger die past bij de afwerking. Vilt onder meubels en een goede deurmat houden de toplaag extra lang mooi.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Wat kost een hybride houtenvloer?</h3>
+          <div>
+          <p>De prijs hangt af van de collectie, de dikte van de houten toplaag, de plankmaat en het legpatroon. Na het inmeten maken wij een offerte op maat, inclusief plaatsing door ons eigen team.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="" loading="lazy">
-    </div>
-    <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Voel het verschil</p>
-        <h2>Leg hout en hybride naast elkaar</h2>
-        <p>Kom langs voor persoonlijk advies en bekijk de collecties in complete woonopstellingen.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
+        <h2>Twijfelt u tussen hout en hybride? Kom langs</h2>
+        <p>Bekijk de collecties in complete woonopstellingen en krijg persoonlijk advies van onze vloerspecialisten.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met vloeren en complete woonopstellingen" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook de andere vloersoorten</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
+        <a href="/vloeren/pvc.html">PVC vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hout.html">Houten vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/laminaat.html">Laminaat <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/tegelvloer.html">Tegelvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/vloerbedekking.html">Vloerbedekking <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

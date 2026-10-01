@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Houten vloeren — De Vloerenspecialist Tilburg</title>
-<meta name="description" content="Massief houten vloeren, geolied of gelakt, geplaatst door ons eigen team. Bekijk de houtsoorten en afwerkingen in de showroom in Tilburg.">
+<meta name="description" content="Houten vloeren in eiken en andere houtsoorten: massief of multiplank, als plank, visgraat of Hongaarse punt. Geplaatst door ons eigen team. Showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/product.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -28,100 +29,242 @@
 <script src="/assets/js/modules/review-mode.js" defer></script>
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
-<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
 <link rel="stylesheet" href="/assets/css/design-b.css">
 <script src="/assets/js/modules/design-switch.js"></script>
 </head>
 <body data-page="sub">
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/hout.json — pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>
-      <span aria-current="page">Houten vloeren</span>
-    </nav>
 
-    <section class="page-hero">
-      <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Woonkamer met een rijke houten plankenvloer" loading="eager">
-      </div>
-      <div class="page-hero-copy">
-        <p class="eyebrow">Vloeren — Hout</p>
-        <h1>Tijdloos, ambachtelijk, en mooier met de jaren</h1>
-        <p class="lead">Een houten vloer is een investering die meegroeit met uw interieur. Wij werken met massief hout in diverse houtsoorten en afwerkingen, geplaatst door ons eigen team van vakmensen.</p>
-        <div class="page-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Voel de houtsoorten in de showroom</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-panel" aria-hidden="true"></div>
+    <div class="wrap pr-hero-inner">
+      <nav class="crumb" aria-label="Kruimelpad"><a href="/index.html">Home</a><span class="sep">/</span><a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span><span aria-current="page">Houten vloeren</span></nav>
+      <div class="pr-hero-head">
+        <div>
+          <p class="eyebrow">Vloeren</p>
+          <h1>Houten vloeren</h1>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="page-section">
-    <div class="wrap">
-      <div class="page-section-head">
-        <p class="eyebrow">Houtsoorten &amp; afwerking</p>
-        <h2>Elke houtsoort heeft zijn eigen karakter</h2>
-      </div>
-      <div class="texture-strip">
-        <div class="texture-card reveal">
-          <img src="https://images.unsplash.com/photo-1611072337226-1140ab367200?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=700" alt="Macro-opname van eikenhouten planken" loading="lazy">
-          <span>Eikenhout</span>
-        </div>
-        <div class="texture-card reveal">
-          <img src="https://images.unsplash.com/photo-1487266659293-c4762f375955?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=700" alt="Macro-opname van houtnerf" loading="lazy">
-          <span>Robuuste look</span>
-        </div>
-        <div class="texture-card reveal">
-          <img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=700" alt="Geoliede houten vloer" loading="lazy">
-          <span>Geolied</span>
-        </div>
-        <div class="texture-card reveal">
-          <img src="/assets/img/real/visgraat-keuken-900.jpg" alt="Lichte houten visgraatvloer in een open keuken" loading="lazy">
-          <span>Visgraat</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section is-alt">
-    <div class="wrap">
-      <div class="split-block is-reverse">
-        <div class="split-media reveal">
-          <img src="https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?fm=jpg&amp;q=78&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warme woonkamer met eikenhouten vloer" loading="lazy">
-        </div>
-        <div class="split-copy reveal">
-          <h2>Geplaatst door dezelfde handen die u in de showroom spreekt</h2>
-          <p>Onze eigen parketteurs plaatsen elke houten vloer met oog voor detail — van de juiste acclimatisering tot een strakke afwerking langs de plint.</p>
-          <p>De uitstraling van hout, maar dan krasbestendig en waterbestendig? Bekijk dan ook onze hybride houtenvloeren.</p>
-          <div class="tag-row">
-            <span class="tag">Massief hout</span>
-            <span class="tag">Eigen plaatsing</span>
+        <div>
+          <p class="pr-hero-lead">Een houten vloer is een natuurproduct dat mooier wordt met de jaren. Elke plank heeft een eigen tekening, kleur en karakter. Van brede eiken landhuisdelen tot een ambachtelijke visgraat: onze eigen vakmensen leggen uw vloer met oog voor elk detail.</p>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
           </div>
-          <a class="btn-text" href="/vloeren/hybride-houtenvloer.html">Bekijk hybride houtenvloer <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pr-hero-vertical" aria-hidden="true">Houten vloeren <strong>in Tilburg</strong></p>
+      <div class="pr-hero-media">
+        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Woonkamer met een warme houten plankenvloer" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Over -->
+  <section class="pr-section" data-review-id="over" data-review-label="Over Houten vloeren">
+    <div class="wrap pr-about-grid">
+      <div>
+        <h2>Echt hout, gemaakt om generaties mee te gaan</h2>
+        <p class="eyebrow">Over de houten vloer</p>
+      </div>
+      <div class="pr-about-text">
+          <p>Niets voelt zo warm en natuurlijk als echt hout onder uw voeten. Een houten vloer geeft een ruimte rust en karakter, en past bij zowel een landelijk als een strak modern interieur.</p>
+          <p>Er zijn twee hoofdsoorten. Een massief houten vloer bestaat van boven tot onder uit hetzelfde hout en kan vele malen worden geschuurd. Een multiplank (ook wel duoplank of lamelparket genoemd) heeft een toplaag van echt hout op een stabiele onderlaag. Die opbouw maakt de vloer minder gevoelig voor krimpen en uitzetten, en daardoor zeer geschikt voor vloerverwarming.</p>
+          <p>Eiken is de meest gekozen houtsoort: sterk, hard en prachtig getekend. Met de juiste sortering, kleur en afwerking maakt u er een vloer van die helemaal bij uw huis past.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Massief, multiplank of een patroon</h2>
+          <p class="eyebrow">Soorten houten vloeren</p>
+        </div>
+        <p class="pr-head-text">Wij helpen u kiezen op basis van uw ondervloer, verwarming en de uitstraling die u zoekt.</p>
+      </div>
+      <div class="pr-types" style="--cols: 4">
+        <article class="pr-type">
+          <span class="pr-type-nr">01</span>
+          
+          <h3>Massief hout</h3>
+          <p>Planken van volledig massief hout. Een vloer voor het leven, die meerdere keren kan worden geschuurd en opnieuw afgewerkt.</p>
+          <div class="tag-row"><span class="tag">Tijdloos</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">02</span>
+          
+          <h3>Multiplank</h3>
+          <p>Een toplaag van echt hout op een stabiele drager. Minder werking, snel te plaatsen en de beste keuze bij vloerverwarming.</p>
+          <div class="tag-row"><span class="tag">Vloerverwarming</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">03</span>
+          
+          <h3>Visgraat en Hongaarse punt</h3>
+          <p>Kleine delen in een klassiek patroon. Geeft een ruimte beweging en een verfijnde, ambachtelijke uitstraling.</p>
+          <div class="tag-row"><span class="tag">Patroon</span></div>
+        </article>
+        <article class="pr-type">
+          <span class="pr-type-nr">04</span>
+          
+          <h3>Brede landhuisdelen</h3>
+          <p>Extra brede en lange planken die een ruimte rust en grootte geven. Mooi met een natuurlijke, geoliede afwerking.</p>
+          <div class="tag-row"><span class="tag">Extra breed</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
+    <div class="wrap pr-feature-grid">
+      <div class="pr-feature-media">
+        <img src="https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1600" alt="Warme woonkamer met een eikenhouten vloer" loading="lazy">
+      </div>
+      <div class="pr-feature-copy">
+        <p class="eyebrow">Vakmanschap</p>
+        <h2>Gelegd door dezelfde mensen die u in de showroom spreekt</h2>
+        <p>Onze eigen parketteurs plaatsen elke houten vloer met aandacht: van het laten acclimatiseren van het hout tot een strakke aansluiting langs de plint. U heeft één aanspreekpunt, van eerste advies tot oplevering.</p>
+        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Voordelen -->
+  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Waarom kiezen voor hout</h2>
+          <p class="eyebrow">Voordelen</p>
+        </div>
+      </div>
+      <div class="pr-benefits">
+        <div class="pr-benefit"><h3>Natuurlijk en uniek</h3><p>Geen plank is hetzelfde: elke vloer heeft een eigen tekening.</p></div>
+        <div class="pr-benefit"><h3>Gaat generaties mee</h3><p>Een houten vloer kan worden geschuurd en opnieuw afgewerkt.</p></div>
+        <div class="pr-benefit"><h3>Warm en behaaglijk</h3><p>Hout voelt warm aan en geeft een ruimte sfeer en rust.</p></div>
+        <div class="pr-benefit"><h3>Verhoogt de woningwaarde</h3><p>Een goede houten vloer is een investering in uw huis.</p></div>
+        <div class="pr-benefit"><h3>Veel afwerkingen</h3><p>Geolied, gelakt, geborsteld, gerookt of juist extra licht.</p></div>
+        <div class="pr-benefit"><h3>Gezond binnenklimaat</h3><p>Een natuurlijk materiaal dat stof niet vasthoudt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Meer weten -->
+  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Alles over uw houten vloer</h2>
+          <p class="eyebrow">Goed om te weten</p>
+        </div>
+      </div>
+      <div class="pr-info">
+        <div class="pr-info-row">
+          <h3>Houtsoort en sortering</h3>
+          <div>
+          <p>Eiken is sterk, slijtvast en prachtig getekend, en daarom de meest gekozen houtsoort voor vloeren. Binnen eiken maakt de sortering een groot verschil: een rustieke sortering heeft meer noesten en kleurverschil, een select sortering oogt juist rustig en egaal.</p>
+          <p>In de showroom ziet u de sorteringen naast elkaar, zodat u kunt kiezen wat bij uw interieur past.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Kleur en afwerking</h3>
+          <div>
+          <p>Een olie-afwerking benadrukt de natuurlijke uitstraling en is plaatselijk goed bij te werken. Een lak geeft een extra beschermende laag en vraagt weinig onderhoud. Daarnaast kan het hout worden geborsteld voor meer structuur, gerookt voor een diepe, warme tint of juist licht worden gemaakt voor een Scandinavische look.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Legpatronen</h3>
+          <div>
+          <p>Rechte planken geven rust en ruimte. Visgraat en Hongaarse punt zijn klassieke patronen met veel karakter; ze vragen meer vakmanschap bij het leggen, maar geven een vloer met een eigen signatuur. Onze parketteurs leggen alle patronen, inclusief bijpassende randen en biezen.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Houten vloer en vloerverwarming</h3>
+          <div>
+          <p>Hout en vloerverwarming gaan goed samen, mits u de juiste vloer kiest. Een multiplank met een stabiele onderlaag werkt minder dan massief hout en is daarom de beste keuze. De vloer wordt bij voorkeur volledig verlijmd, zodat de warmte goed wordt doorgegeven.</p>
+          <p>Wij adviseren u ook over de juiste watertemperatuur en een gezonde luchtvochtigheid, zodat uw vloer mooi blijft.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Onderhoud</h3>
+          <div>
+          <p>Regelmatig stofzuigen en af en toe vochtig dweilen met een zeep die past bij de afwerking houdt uw vloer mooi. Een geoliede vloer kunt u van tijd tot tijd opfrissen met een onderhoudsolie. Leg vilt onder meubels en zorg voor een goede mat bij de deur.</p>
+          </div>
+        </div>
+        <div class="pr-info-row">
+          <h3>Wat kost een houten vloer?</h3>
+          <div>
+          <p>De prijs hangt af van de houtsoort, de sortering, de afmetingen van de planken, massief of multiplank, de afwerking en het legpatroon. Ook de staat van de ondervloer speelt mee.</p>
+          <p>Na een bezoek aan de showroom en het inmeten van uw ruimte maken wij een heldere offerte op maat, inclusief plaatsing door ons eigen team.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="page-cta">
-    <div class="page-cta-media">
-      <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="" loading="lazy">
-    </div>
+  <!-- 7 · Merken -->
+  <section class="pr-section" data-review-id="merken" data-review-label="Merken">
     <div class="wrap">
-      <div class="page-cta-inner">
-        <p class="eyebrow" style="color:#fff"><span style="color:var(--accent)">—</span> Hout voelen</p>
+      <div class="pr-head">
+        <div>
+          <h2>Merken in onze showroom</h2>
+          <p class="eyebrow">Merken</p>
+        </div>
+        <p class="pr-head-text">Houten vloeren van merken die bekendstaan om hun precisie en natuurlijke houtstructuren.</p>
+      </div>
+      <div class="pr-brands">
+        <a class="pr-brand" href="/merken/meister.html">Meister</a>
+        <a class="pr-brand" href="/merken/hebeta.html">Hebeta</a>
+        <a class="pr-brand" href="/merken/index.html">Alle merken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Kom langs -->
+  <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
+    <div class="wrap pr-cta-grid">
+      <div class="pr-cta-copy">
+        <span class="open-pill" data-open-status></span>
         <h2>Loop over de houtsoorten in de showroom</h2>
-        <p>Niets vervangt het gevoel van echt hout onder uw voeten — kom langs en ervaar het verschil.</p>
-        <div class="hero-cta-row">
-          <a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">→</span></a>
+        <p>Niets vervangt het gevoel van echt hout onder uw voeten. Kom langs, vergelijk sorteringen en afwerkingen en krijg persoonlijk advies.</p>
+        <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>
+      <div class="pr-cta-media">
+        <img src="https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warm verlichte woonopstelling in de showroom" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Verder kijken -->
+  <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Bekijk ook de andere vloersoorten</h2>
+        </div>
+      </div>
+      <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
+        <a href="/vloeren/pvc.html">PVC vloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/laminaat.html">Laminaat <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/tegelvloer.html">Tegelvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/vloerbedekking.html">Vloerbedekking <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloeren <span aria-hidden="true">&rarr;</span></a>
+      </nav>
     </div>
   </section>
 </main>

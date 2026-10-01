@@ -30,8 +30,21 @@
     sync();
   }
 
+  /* Alleen het filmpje van het zichtbare ontwerp afspelen (en laden). */
+  function syncVideos() {
+    document.querySelectorAll("video[data-design-video]").forEach(function (v) {
+      if (v.getAttribute("data-design-video") === current) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        v.pause();
+      }
+    });
+  }
+
   var el;
   function sync() {
+    syncVideos();
     if (!el) return;
     el.classList.toggle("is-b", current === "b");
     el.querySelectorAll(".ds-opt").forEach(function (b) {
@@ -49,10 +62,10 @@
       '<div class="ds-track">' +
         '<span class="ds-knob" aria-hidden="true"></span>' +
         '<button class="ds-opt" type="button" data-set="a" aria-label="Ontwerp A: rustig en licht">A</button>' +
-        '<button class="ds-opt" type="button" data-set="b" aria-label="Ontwerp B: uitgesproken, in een kader">B</button>' +
+        '<button class="ds-opt" type="button" data-set="b" aria-label="Ontwerp B: strak en helder">B</button>' +
       "</div>" +
       '<span class="ds-name ds-name-a">Rustig &amp; licht</span>' +
-      '<span class="ds-name ds-name-b">Uitgesproken</span>';
+      '<span class="ds-name ds-name-b">Strak &amp; helder</span>';
     el.addEventListener("click", function (e) {
       var opt = e.target.closest(".ds-opt");
       if (opt) { set(opt.getAttribute("data-set")); return; }

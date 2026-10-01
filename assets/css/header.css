@@ -28,7 +28,7 @@
    precies onder de header begint (ook als de balk bij scrollen krimpt). */
 .main-nav { flex: 1; display: flex; justify-content: center; align-self: stretch; }
 .main-nav > ul { display: flex; align-items: stretch; gap: 4px; }
-.nav-item { position: relative; display: flex; align-items: center; }
+.nav-item { display: flex; align-items: center; }
 .nav-link {
   position: relative; display: inline-flex; align-items: center; gap: 7px;
   padding: 10px 12px; border: 0; background: none; cursor: pointer;
@@ -42,33 +42,22 @@
 .nav-caret { flex: none; width: 10px; height: 10px; color: var(--ink); transition: transform .2s var(--ease); }
 .nav-item.is-open .nav-caret { transform: rotate(180deg); }
 
-/* ---- Uitklapmenu: eenvoudige tekstlijst die onder de header openklapt ---- */
+/* ---- Uitklapmenu: de header klapt over de volle breedte uit ----
+   Wit vlak direct onder de balk; de links beginnen recht onder het
+   aangeklikte menu-item (--drop-x wordt door nav.js gezet) en staan in
+   kolommen van maximaal vier regels, zoals een eenvoudig lijstje. */
 .nav-drop {
-  position: absolute; top: calc(100% + 1px); left: 0;
-  padding: 26px 34px 24px 24px;
-  background: #fff; border: 1px solid var(--line); border-top: 0;
-  box-shadow: 0 24px 40px -30px rgba(29,27,25,.3);
-  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px);
-  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+  position: absolute; left: 0; right: 0; top: 100%;
+  padding: 30px 0 44px var(--drop-x, 40px);
+  background: #fff; border-bottom: 1px solid var(--line);
+  box-shadow: 0 30px 40px -34px rgba(29,27,25,.25);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .2s ease, visibility .2s;
 }
-.nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-.drop-inner { display: flex; gap: 40px; }
-.drop-col.is-brands { padding-left: 32px; border-left: 1px solid var(--line); }
-.drop-title { margin: 0 0 8px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
-.drop-list { display: flex; flex-direction: column; }
-/* Twee kolommen, van boven naar beneden gevuld (zoals een lijstje). */
-.drop-list.is-two-col { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); column-gap: 48px; }
-.drop-link { display: block; padding: 7px 0; font-size: 15px; color: var(--ink); white-space: nowrap; transition: color .15s ease; }
-.drop-link:hover { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 4px; }
-.drop-col.is-brands .drop-link { color: var(--ink-soft); }
-.drop-col.is-brands .drop-link:hover { color: var(--ink); }
-.drop-link.is-more { font-weight: 500; color: var(--ink); }
-.drop-all {
-  display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px;
-  border-top: 1px solid var(--line); font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink);
-}
-.drop-all svg { transition: transform .2s var(--ease); }
-.drop-all:hover svg { transform: translateX(3px); }
+.nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; }
+.drop-list { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(220px, max-content); column-gap: 90px; }
+.drop-link { display: block; padding: 9px 0; font-size: 15px; color: var(--ink); white-space: nowrap; transition: color .15s ease; }
+.drop-link:hover { text-decoration: underline; text-underline-offset: 5px; }
 
 /* ---- Rechts: telefoon + knop + menuknop ---- */
 .header-actions { display: flex; align-items: center; gap: 16px; flex: none; }

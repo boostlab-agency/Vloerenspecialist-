@@ -1,0 +1,92 @@
+{
+  "file": "vloeren/hout.html",
+  "group": "vloeren",
+  "name": "Houten vloeren",
+  "title": "Houten vloeren",
+  "metaDesc": "Houten vloeren in eiken en andere houtsoorten: massief of multiplank, als plank, visgraat of Hongaarse punt. Geplaatst door ons eigen team. Showroom in Tilburg.",
+  "eyebrow": "Vloeren",
+  "h1": "Houten vloeren",
+  "vertical": "Houten vloeren",
+  "lead": "Een houten vloer is een natuurproduct dat mooier wordt met de jaren. Elke plank heeft een eigen tekening, kleur en karakter. Van brede eiken landhuisdelen tot een ambachtelijke visgraat: onze eigen vakmensen leggen uw vloer met oog voor elk detail.",
+  "heroImg": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1",
+  "heroAlt": "Woonkamer met een warme houten plankenvloer",
+  "about": {
+    "eyebrow": "Over de houten vloer",
+    "h2": "Echt hout, gemaakt om generaties mee te gaan",
+    "paras": [
+      "Niets voelt zo warm en natuurlijk als echt hout onder uw voeten. Een houten vloer geeft een ruimte rust en karakter, en past bij zowel een landelijk als een strak modern interieur.",
+      "Er zijn twee hoofdsoorten. Een massief houten vloer bestaat van boven tot onder uit hetzelfde hout en kan vele malen worden geschuurd. Een multiplank (ook wel duoplank of lamelparket genoemd) heeft een toplaag van echt hout op een stabiele onderlaag. Die opbouw maakt de vloer minder gevoelig voor krimpen en uitzetten, en daardoor zeer geschikt voor vloerverwarming.",
+      "Eiken is de meest gekozen houtsoort: sterk, hard en prachtig getekend. Met de juiste sortering, kleur en afwerking maakt u er een vloer van die helemaal bij uw huis past."
+    ]
+  },
+  "types": {
+    "eyebrow": "Soorten houten vloeren",
+    "h2": "Massief, multiplank of een patroon",
+    "text": "Wij helpen u kiezen op basis van uw ondervloer, verwarming en de uitstraling die u zoekt.",
+    "items": [
+      { "title": "Massief hout", "text": "Planken van volledig massief hout. Een vloer voor het leven, die meerdere keren kan worden geschuurd en opnieuw afgewerkt.", "tags": ["Tijdloos"] },
+      { "title": "Multiplank", "text": "Een toplaag van echt hout op een stabiele drager. Minder werking, snel te plaatsen en de beste keuze bij vloerverwarming.", "tags": ["Vloerverwarming"] },
+      { "title": "Visgraat en Hongaarse punt", "text": "Kleine delen in een klassiek patroon. Geeft een ruimte beweging en een verfijnde, ambachtelijke uitstraling.", "tags": ["Patroon"] },
+      { "title": "Brede landhuisdelen", "text": "Extra brede en lange planken die een ruimte rust en grootte geven. Mooi met een natuurlijke, geoliede afwerking.", "tags": ["Extra breed"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vakmanschap",
+    "h2": "Gelegd door dezelfde mensen die u in de showroom spreekt",
+    "text": "Onze eigen parketteurs plaatsen elke houten vloer met aandacht: van het laten acclimatiseren van het hout tot een strakke aansluiting langs de plint. U heeft één aanspreekpunt, van eerste advies tot oplevering.",
+    "img": "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace",
+    "alt": "Warme woonkamer met een eikenhouten vloer"
+  },
+  "benefits": {
+    "h2": "Waarom kiezen voor hout",
+    "items": [
+      { "title": "Natuurlijk en uniek", "text": "Geen plank is hetzelfde: elke vloer heeft een eigen tekening." },
+      { "title": "Gaat generaties mee", "text": "Een houten vloer kan worden geschuurd en opnieuw afgewerkt." },
+      { "title": "Warm en behaaglijk", "text": "Hout voelt warm aan en geeft een ruimte sfeer en rust." },
+      { "title": "Verhoogt de woningwaarde", "text": "Een goede houten vloer is een investering in uw huis." },
+      { "title": "Veel afwerkingen", "text": "Geolied, gelakt, geborsteld, gerookt of juist extra licht." },
+      { "title": "Gezond binnenklimaat", "text": "Een natuurlijk materiaal dat stof niet vasthoudt." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over uw houten vloer",
+    "rows": [
+      { "title": "Houtsoort en sortering", "paras": [
+        "Eiken is sterk, slijtvast en prachtig getekend, en daarom de meest gekozen houtsoort voor vloeren. Binnen eiken maakt de sortering een groot verschil: een rustieke sortering heeft meer noesten en kleurverschil, een select sortering oogt juist rustig en egaal.",
+        "In de showroom ziet u de sorteringen naast elkaar, zodat u kunt kiezen wat bij uw interieur past."
+      ]},
+      { "title": "Kleur en afwerking", "paras": [
+        "Een olie-afwerking benadrukt de natuurlijke uitstraling en is plaatselijk goed bij te werken. Een lak geeft een extra beschermende laag en vraagt weinig onderhoud. Daarnaast kan het hout worden geborsteld voor meer structuur, gerookt voor een diepe, warme tint of juist licht worden gemaakt voor een Scandinavische look."
+      ]},
+      { "title": "Legpatronen", "paras": [
+        "Rechte planken geven rust en ruimte. Visgraat en Hongaarse punt zijn klassieke patronen met veel karakter; ze vragen meer vakmanschap bij het leggen, maar geven een vloer met een eigen signatuur. Onze parketteurs leggen alle patronen, inclusief bijpassende randen en biezen."
+      ]},
+      { "title": "Houten vloer en vloerverwarming", "paras": [
+        "Hout en vloerverwarming gaan goed samen, mits u de juiste vloer kiest. Een multiplank met een stabiele onderlaag werkt minder dan massief hout en is daarom de beste keuze. De vloer wordt bij voorkeur volledig verlijmd, zodat de warmte goed wordt doorgegeven.",
+        "Wij adviseren u ook over de juiste watertemperatuur en een gezonde luchtvochtigheid, zodat uw vloer mooi blijft."
+      ]},
+      { "title": "Onderhoud", "paras": [
+        "Regelmatig stofzuigen en af en toe vochtig dweilen met een zeep die past bij de afwerking houdt uw vloer mooi. Een geoliede vloer kunt u van tijd tot tijd opfrissen met een onderhoudsolie. Leg vilt onder meubels en zorg voor een goede mat bij de deur."
+      ]},
+      { "title": "Wat kost een houten vloer?", "paras": [
+        "De prijs hangt af van de houtsoort, de sortering, de afmetingen van de planken, massief of multiplank, de afwerking en het legpatroon. Ook de staat van de ondervloer speelt mee.",
+        "Na een bezoek aan de showroom en het inmeten van uw ruimte maken wij een heldere offerte op maat, inclusief plaatsing door ons eigen team."
+      ]}
+    ]
+  },
+  "brands": {
+    "h2": "Merken in onze showroom",
+    "text": "Houten vloeren van merken die bekendstaan om hun precisie en natuurlijke houtstructuren.",
+    "items": [
+      { "label": "Meister", "href": "/merken/meister.html" },
+      { "label": "Hebeta", "href": "/merken/hebeta.html" },
+      { "label": "Alle merken", "href": "/merken/index.html" }
+    ]
+  },
+  "cta": {
+    "h2": "Loop over de houtsoorten in de showroom",
+    "text": "Niets vervangt het gevoel van echt hout onder uw voeten. Kom langs, vergelijk sorteringen en afwerkingen en krijg persoonlijk advies.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}
