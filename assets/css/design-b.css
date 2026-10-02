@@ -4,7 +4,7 @@
    zodra <html data-design="b"> staat (zie design-switch.js).
    Ontwerp B: minimalistisch op de manier van een grote techwebsite —
    gecentreerde, grote koppen in een strakke schreefloze letter (Inter),
-   lichtgrijze afgeronde tegels, blauwe tekstlinks met een pijltje en veel
+   lichtgrijze afgeronde tegels, grafietkleurige knoppen en tekstlinks met een pijltje en veel
    witruimte. Op de homepage eigen B-blokken (.only-b).
    ========================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
@@ -67,8 +67,8 @@ html[data-design="b"] {
   --ink-soft: #6e6e73;
   --ink-faint: #86868b;
   --line: #d2d2d7;
-  --b-blue: #0071e3;
-  --b-link: #0066cc;
+  --b-accent: #1d1d1f;        /* knoppen: strak grafiet, geen kleur */
+  --b-link: #1d1d1f;          /* tekstlinks: zelfde grafiet, onderstreept bij aanwijzen */
   --header-h: 76px;
 }
 @media (max-width: 1359px) { html[data-design="b"] { --header-h: 68px; } }
@@ -81,13 +81,13 @@ html[data-design="b"] h3 { letter-spacing: -.01em; font-weight: 600; }
 html[data-design="b"] .eyebrow { font-style: normal; font-weight: 600; font-size: 15px; color: var(--ink-soft); }
 html[data-design="b"] .eyebrow::after { display: none; }
 
-/* Knoppen en links: blauwe pil, tekstlinks met een pijltje. */
+/* Knoppen en links: grafietkleurige pil, tekstlinks met een pijltje. */
 html[data-design="b"] .btn { text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 400; padding: 12px 24px; }
 html[data-design="b"] .btn-sm { font-size: 13px; padding: 8px 16px; }
-html[data-design="b"] .btn-primary { background: var(--b-blue); color: #fff; }
-html[data-design="b"] .btn-primary:hover { background: #0077ed; }
-html[data-design="b"] .btn-outline { border-color: var(--b-blue); color: var(--b-blue); }
-html[data-design="b"] .btn-outline:hover { background: var(--b-blue); color: #fff; }
+html[data-design="b"] .btn-primary { background: var(--b-accent); color: #fff; }
+html[data-design="b"] .btn-primary:hover { background: #424245; }
+html[data-design="b"] .btn-outline { border-color: var(--b-accent); color: var(--b-accent); }
+html[data-design="b"] .btn-outline:hover { background: var(--b-accent); color: #fff; }
 html[data-design="b"] .btn-text { text-transform: none; letter-spacing: 0; font-size: 16px; color: var(--b-link); border: 0; padding: 0; gap: 4px; }
 html[data-design="b"] .btn-text:hover { text-decoration: underline; color: var(--b-link); }
 html[data-design="b"] .btn-text .arrow { display: none; }
@@ -121,10 +121,10 @@ html[data-design="b"] .h-head h2 { max-width: none; font-size: clamp(32px, 4vw, 
 /* ==========================================================================
    Ontwerp B — homepage
    ========================================================================== */
-.hb-link { color: var(--b-link, #0066cc); font-size: 17px; font-style: normal; }
+.hb-link { color: var(--b-link, #1d1d1f); font-weight: 500; font-size: 17px; font-style: normal; }
 .hb-link::after { content: " \203A"; }
 a:hover .hb-link, .hb-link:hover { text-decoration: underline; }
-.hb-link.is-light { color: #2997ff; }
+.hb-link.is-light { color: #f5f5f7; }
 
 /* B1 · Hero */
 .hb-hero { padding: 80px 0 12px; text-align: center; }
@@ -145,7 +145,7 @@ a:hover .hb-link, .hb-link:hover { text-decoration: underline; }
 .hb-chapters img { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; transition: transform .25s var(--ease); }
 .hb-chapters span { font-size: 13px; line-height: 1.3; }
 .hb-chapters a:hover img { transform: translateY(-3px); }
-.hb-chapters a:hover span { color: var(--b-link); }
+.hb-chapters a:hover span { text-decoration: underline; text-underline-offset: 3px; }
 
 /* B3 · Vier compacte kaarten: foto boven, korte tekst eronder */
 .hb-tiles { padding: clamp(40px, 4vw, 64px) 0 0; }
