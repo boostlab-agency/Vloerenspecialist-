@@ -65,11 +65,13 @@
       nav.classList.add("is-open");
       toggle.setAttribute("aria-expanded", "true");
       document.documentElement.style.overflow = "hidden";
+      document.documentElement.classList.add("menu-open");
     }
     function close() {
       nav.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
       document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("menu-open");
     }
     toggle.addEventListener("click", function () { nav.classList.contains("is-open") ? close() : open(); });
     if (closeBtn) closeBtn.addEventListener("click", close);
