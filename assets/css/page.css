@@ -4,10 +4,10 @@
    duidelijke koppen en kaarten met foto + titel + korte omschrijving.
    ========================================================================== */
 
-/* Heel subtiel intro-effect (alleen een korte fade), geen beweging. */
-.reveal { opacity: 0; transition: opacity .5s ease; }
+/* Intro-effect: korte fade met een kleine optilling. */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .8s var(--ease); }
 .reveal.is-visible,
-html.reduced-motion .reveal { opacity: 1; }
+html.reduced-motion .reveal { opacity: 1; transform: none; }
 
 /* ---- Breadcrumb ---- */
 .crumb {
