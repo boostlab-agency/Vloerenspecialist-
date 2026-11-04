@@ -9,7 +9,14 @@
   position: sticky; top: 0; z-index: 100;
   background: rgba(255,255,255,.97);
   border-bottom: 1px solid var(--line);
-  transition: box-shadow .25s var(--ease);
+  transition: box-shadow .25s var(--ease), transform .45s var(--ease);
+}
+/* Naar beneden scrollen: header schuift weg; omhoog: komt direct terug. */
+.site-header.is-hidden { transform: translateY(-100%); }
+/* Dun rood lijntje onderaan dat meegroeit met hoe ver je gescrold hebt. */
+.site-header::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--brand);
+  transform: scaleX(var(--progress, 0)); transform-origin: left; pointer-events: none;
 }
 .site-header.is-scrolled { box-shadow: 0 6px 24px -18px rgba(29,27,25,.35); }
 .header-bar { height: var(--header-h); display: flex; align-items: center; gap: clamp(14px, 1.5vw, 28px); transition: height .25s var(--ease); }
@@ -35,10 +42,18 @@
   font: inherit; font-size: clamp(13.5px, .78vw, 15px); font-weight: 500; color: var(--ink); white-space: nowrap;
   transition: color .15s ease;
 }
-.nav-link:hover, .nav-item.is-open > .nav-link { color: var(--ink-soft); }
-.nav-item.is-current > .nav-link::after {
-  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 1px; background: var(--ink);
+/* Aanwijzen: rood lijntje groeit van links onder het woord; het huidige
+   menu-item houdt een dun zwart lijntje. */
+.nav-label { position: relative; display: inline-block; }
+.nav-label::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--brand);
+  transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease);
 }
+.nav-link:hover .nav-label::after, .nav-item.is-open > .nav-link .nav-label::after { transform: scaleX(1); transform-origin: left; }
+.nav-item.is-current > .nav-link .nav-label::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--ink);
+}
+.nav-link:hover .nav-caret, .nav-item.is-open .nav-caret { color: var(--brand); }
 .nav-caret { flex: none; width: 10px; height: 10px; color: var(--ink); transition: transform .2s var(--ease); }
 .nav-item.is-open .nav-caret { transform: rotate(180deg); }
 
@@ -54,10 +69,32 @@
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity .2s ease, visibility .2s;
 }
-.nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; }
+.nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+.nav-drop { display: flex; align-items: flex-start; gap: 60px; transform: translateY(-8px); transition: opacity .25s ease, transform .4s var(--ease), visibility .25s; }
+.drop-main { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
 .drop-list { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(220px, max-content); column-gap: 90px; }
-.drop-link { display: block; padding: 9px 0; font-size: 15px; color: var(--ink); white-space: nowrap; transition: color .15s ease; }
-.drop-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+/* Links komen na elkaar binnen; bij aanwijzen schuift de tekst opzij en
+   verschijnt er een rood tegeltje (uit het logo) voor. */
+.drop-link, .drop-all { opacity: 0; transform: translateX(-12px); transition: opacity .3s ease, transform .4s var(--ease); }
+.nav-item.is-open .drop-link, .nav-item.is-open .drop-all { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 40ms + 60ms); }
+.drop-link { position: relative; display: block; padding: 9px 0; font-size: 15px; color: var(--ink); white-space: nowrap; }
+.drop-link span { display: inline-block; transition: transform .3s var(--ease); }
+.drop-link::before {
+  content: ""; position: absolute; left: -2px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; background: var(--brand);
+  transform: rotate(45deg) scale(0); transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.drop-link:hover span { transform: translateX(16px); }
+.drop-link:hover::before { transform: rotate(45deg) scale(1); }
+.drop-all { margin-top: 4px; }
+/* Uitnodiging rechts in het uitklapmenu. */
+.drop-promo {
+  margin-left: auto; margin-right: var(--gutter); max-width: 300px; padding: 22px 26px; background: var(--surface);
+  border-left: 2px solid var(--brand);
+  opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .45s var(--ease);
+}
+.nav-item.is-open .drop-promo { opacity: 1; transform: none; transition-delay: .12s; }
+.drop-promo-kicker { margin: 0 0 6px; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 17px; }
+.drop-promo-text { margin: 0 0 14px; font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
 
 /* ---- Rechts: telefoon + knop + menuknop ---- */
 .header-actions { display: flex; align-items: center; gap: 16px; flex: none; }
@@ -65,7 +102,14 @@
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 14.5px; font-weight: 600; color: var(--ink); white-space: nowrap;
 }
-.header-phone:hover { color: var(--accent); }
+.header-phone { transition: color .2s, border-color .2s; }
+.header-phone:hover { color: var(--brand); border-color: rgba(var(--brand-rgb), .45); }
+.header-phone:hover svg { animation: phone-ring .6s ease; }
+@keyframes phone-ring { 0%, 100% { transform: none; } 20% { transform: rotate(-14deg); } 40% { transform: rotate(12deg); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(5deg); } }
+
+/* Logo: bij aanwijzen huppen de rode tegeltjes even één voor één op. */
+.brand:hover .logo-inline .logo-tile { animation: tile-hop .55s calc(var(--i) * 60ms) cubic-bezier(.34,1.56,.64,1); }
+@keyframes tile-hop { 0%, 100% { transform: none; } 45% { transform: translateY(-14%) rotate(-6deg); } }
 .header-cta { padding: 11px 20px; }
 
 .menu-toggle {
@@ -146,7 +190,7 @@
 .overlay-close { flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 999px; color: var(--ink); }
 .overlay-close:hover { background: var(--surface); }
 /* Feedbackknop en ontwerpschakelaar niet over het open menu heen. */
-html.menu-open .fb-header-controls, html.menu-open .ds-switch { display: none; }
+html.menu-open .fb-header-controls { display: none; }
 
 .m-nav { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px var(--gutter) 28px; display: flex; flex-direction: column; }
 .m-cat { border-bottom: 1px solid var(--line); }
@@ -170,3 +214,13 @@ html.menu-open .fb-header-controls, html.menu-open .ds-switch { display: none; }
 .m-quick a:hover span { text-decoration: underline; text-underline-offset: 4px; }
 .m-status { align-self: center; }
 .m-address { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-faint); text-align: center; }
+
+/* Menupaneel: rijen schuiven na elkaar in bij openen. */
+.overlay-nav.is-open .m-cat { animation: m-in .45s calc(var(--i, 0) * 45ms + 120ms) var(--ease) both; }
+@keyframes m-in { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.m-cat > summary:hover, .m-cat-link:hover { color: var(--brand); }
+.m-cat[open] .nav-caret { color: var(--brand); }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header.is-hidden { transform: none; }
+}

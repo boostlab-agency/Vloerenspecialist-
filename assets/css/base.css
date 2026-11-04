@@ -84,7 +84,7 @@ main { display: block; }
   letter-spacing: 0; text-transform: none; color: var(--ink);
   margin: 0 0 14px; display: flex; align-items: center; gap: 18px; max-width: 460px;
 }
-.eyebrow::after { content: ""; flex: 1; min-width: 40px; height: 1px; background: var(--line); }
+.eyebrow::after { content: ""; flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, var(--brand) 0 26px, var(--line) 26px); }
 
 /* ---------- Knoppen: zwarte pil, klein en in hoofdletters ---------- */
 .btn {
@@ -95,17 +95,15 @@ main { display: block; }
   border: 1px solid transparent;
 }
 
-.btn-primary { background: var(--ink); color: #fff; }
-.btn-primary:hover { background: #474642; }
-
-.btn-dark { background: var(--ink); color: #fff; }
-.btn-dark:hover { background: #474642; }
+/* Hover: de knop wordt wit met een lichte zwarte rand. */
+.btn-primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn-dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn-primary:hover, .btn-dark:hover, .btn-outline:hover { background: #fff; color: var(--ink); border-color: rgba(var(--accent-rgb), .28); }
 
 .btn-ghost-light { border-color: rgba(255,255,255,.7); color: #fff; }
 .btn-ghost-light:hover { background: rgba(255,255,255,.14); border-color: #fff; }
 
 .btn-outline { border-color: var(--ink); color: var(--ink); background: transparent; }
-.btn-outline:hover { background: var(--ink); color: #fff; }
 
 /* Tekstlink met pijl: klein, in hoofdletters, onderstreept. */
 .btn-text {
@@ -115,7 +113,9 @@ main { display: block; }
 }
 .btn-text:hover { color: var(--ink-soft); border-color: var(--ink-soft); }
 .btn-text .arrow { transition: transform .2s var(--ease); }
-.btn-text:hover .arrow { transform: translateX(3px); }
+.btn-text:hover .arrow { transform: translateX(3px); color: var(--brand); }
+
+::selection { background: rgba(var(--brand-rgb), .9); color: #fff; }
 
 .btn-sm { padding: 12px 22px; font-size: 11.5px; }
 
@@ -138,7 +138,7 @@ main { display: block; }
 .open-pill .open-sub { color: var(--ink-soft); }
 .open-pill.is-on-dark { background: rgba(20,16,14,.5); border-color: rgba(255,255,255,.2); color: #fff; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .open-pill.is-on-dark .open-sub { color: rgba(255,255,255,.78); }
-.open-dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+.open-dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--brand); flex: none; }
 .open-pill.is-open .open-dot { background: #1fa855; }
 .open-pill.is-open .open-dot::after {
   content: ""; position: absolute; inset: -5px; border-radius: 50%;
@@ -201,3 +201,54 @@ main { display: block; }
 }
 .showroom-cta-band h3 { color: var(--ink); margin: 0; font-size: clamp(21px, 2.4vw, 28px); }
 .showroom-cta-band p { color: var(--ink-soft); margin: 6px 0 0; }
+
+/* ==========================================================================
+   Inline logo (header + laadanimatie) — kleuren hier, want de eigen
+   <style> van het svg-bestand wordt bij het inline zetten verwijderd.
+   ========================================================================== */
+.logo-inline { display: block; width: auto; aspect-ratio: 2953.7 / 442.2; overflow: visible; }
+.logo-inline path { fill: var(--ink); fill-rule: evenodd; }
+.logo-inline .logo-red { fill: var(--brand); }
+.logo-inline .logo-tile { fill: var(--brand); transform-box: fill-box; transform-origin: center; }
+
+/* ==========================================================================
+   Laadanimatie (intro-loader.js)
+   ========================================================================== */
+html.is-intro, html.is-intro body { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 10000; pointer-events: auto; cursor: pointer; }
+.intro-edge, .intro-panel { position: absolute; inset: 0; }
+.intro-edge { background: var(--brand); }
+.intro-panel {
+  background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+}
+.intro-logo { width: min(520px, 74vw); aspect-ratio: 2953.7 / 442.2; }
+.intro-logo svg { width: 100%; height: 100%; }
+
+/* Tegels: één voor één "gelegd" — vallen licht gedraaid in en veren na. */
+.intro .logo-tile { opacity: 0; transform: translateY(-60%) rotate(-18deg) scale(.4); }
+.intro.is-ready .logo-tile { animation: intro-tile .7s calc(var(--i) * 110ms) cubic-bezier(.34,1.56,.64,1) forwards; }
+@keyframes intro-tile { to { opacity: 1; transform: none; } }
+/* Woordmerk: schuift van links in beeld zodra de tegels liggen. */
+.intro .logo-word { clip-path: inset(0 100% 0 0); }
+.intro.is-ready .logo-word { animation: intro-word .8s .72s cubic-bezier(.77,0,.18,1) forwards; }
+@keyframes intro-word { to { clip-path: inset(0 0 0 0); } }
+
+/* Dunne voortgangslijn in huisstijlrood. */
+.intro-bar { width: min(220px, 50vw); height: 2px; background: var(--line); overflow: hidden; }
+.intro-bar span { display: block; width: 0; height: 100%; background: var(--brand); }
+.intro.is-ready .intro-bar span { animation: intro-bar 1.9s .1s cubic-bezier(.65,0,.35,1) forwards; }
+@keyframes intro-bar { to { width: 100%; } }
+
+/* Knipoog-regel: eerst "Even de vloer leggen…", dan "Welkom!". */
+.intro-line { position: relative; height: 1.4em; margin: 0; min-width: 16ch; text-align: center; font-family: var(--script); font-style: italic; font-weight: 500; font-size: 17px; color: var(--ink-soft); }
+.intro-line span { position: absolute; inset: 0; white-space: nowrap; opacity: 0; transform: translateY(8px); }
+.intro.is-ready .intro-line .a { animation: intro-line-a 1.3s .35s var(--ease) forwards; }
+.intro.is-ready .intro-line .b { animation: intro-line-b .5s 1.65s var(--ease) forwards; color: var(--ink); }
+@keyframes intro-line-a { 0% { opacity: 0; transform: translateY(8px); } 25%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
+@keyframes intro-line-b { to { opacity: 1; transform: none; } }
+
+/* Afsluiten: wit vlak schuift omhoog, het rode randje volgt net iets later. */
+.intro.is-leaving { pointer-events: none; }
+.intro.is-leaving .intro-panel { transition: transform .85s cubic-bezier(.77,0,.18,1); transform: translateY(-100%); }
+.intro.is-leaving .intro-edge { transition: transform .85s .12s cubic-bezier(.77,0,.18,1); transform: translateY(-100%); }
+.intro.is-leaving .intro-logo, .intro.is-leaving .intro-bar, .intro.is-leaving .intro-line { transition: opacity .3s; opacity: 0; }

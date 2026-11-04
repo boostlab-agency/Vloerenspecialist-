@@ -27,7 +27,7 @@
   writing-mode: vertical-rl; transform: rotate(180deg);
   font-size: 13px; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
 }
-.h-hero-vertical strong { color: var(--ink); font-weight: 600; }
+.h-hero-vertical strong { color: var(--brand); font-weight: 600; }
 .h-scroll {
   grid-column: 2;
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
@@ -175,8 +175,8 @@
    · blokken schuiven zacht in beeld bij scrollen (home-motion.js)
    · foto's zoomen langzaam in bij aanwijzen, kaarten krijgen een pijltje
    · beige vlak verschoven achter de foto's (echo van het hero-vlak)
-   · kerncijfers die optellen, donkere merkenband en donkere reviews
-   Alleen ontwerp A; ontwerp B blijft ongewijzigd.
+   · kerncijfers die optellen, donkere reviews
+   Merken staan rustig als strook vlak boven de footer.
    ========================================================================== */
 
 /* ---- Hero: vlak schuift in, filmpje opent als een gordijn ---- */
@@ -209,7 +209,7 @@ html.js-motion .m-reveal.is-in { opacity: 1; transform: none; }
 /* Kaarttitel met pijltje dat bij aanwijzen inschuift. */
 .h-card:not(.h-card-cta) h3 { position: relative; display: inline-block; }
 .h-card:not(.h-card-cta) h3::after {
-  content: "→"; position: absolute; left: 100%; top: 0; margin-left: 8px;
+  content: "→"; position: absolute; left: 100%; top: 0; margin-left: 8px; color: var(--brand);
   opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .3s var(--ease);
 }
 .h-card:hover h3::after { opacity: 1; transform: none; }
@@ -224,41 +224,79 @@ html.js-motion .m-reveal.is-in { opacity: 1; transform: none; }
 .h-stats dt { font-size: clamp(30px, 2.8vw, 42px); font-weight: 600; line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
 .h-stats dd { margin: 8px 0 0; font-family: var(--script); font-style: italic; font-weight: 500; font-size: 15px; color: var(--ink-soft); }
 
-/* ---- Donkere merkenband ---- */
-.h-marquee { background: var(--ink); color: #fff; overflow: hidden; }
-.h-marquee-track { display: flex; width: max-content; padding: clamp(26px, 3vw, 40px) 0; }
-.h-marquee-row { display: flex; flex: none; animation: h-marquee 48s linear infinite; }
-.h-marquee-track:hover .h-marquee-row { animation-play-state: paused; }
-.h-marquee-row span {
-  display: flex; align-items: center; white-space: nowrap;
-  font-size: clamp(26px, 3.6vw, 52px); font-weight: 600; text-transform: uppercase; line-height: 1;
+/* ---- Merken: rustige, lichte strook vlak boven de footer ---- */
+.h-brands { border-top: 1px solid var(--line); background: var(--bg); }
+.h-brands-inner { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); padding-top: 26px; padding-bottom: 26px; }
+.h-brands-label {
+  flex: none; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--script); font-style: italic; font-weight: 600; font-size: 16px; color: var(--ink);
 }
-.h-marquee-row span::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.35); margin: 0 clamp(24px, 3vw, 48px); }
-.h-marquee-row span:nth-child(even) { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.75); }
+.h-brands-label .arrow { color: var(--brand); transition: transform .2s var(--ease); }
+.h-brands-label:hover .arrow { transform: translateX(3px); }
+.h-brands-viewport {
+  flex: 1; min-width: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.h-brands-track { display: flex; width: max-content; }
+.h-brands-row { display: flex; flex: none; animation: h-marquee 60s linear infinite; }
+.h-brands-viewport:hover .h-brands-row { animation-play-state: paused; }
+.h-brands-row span {
+  display: flex; align-items: center; white-space: nowrap;
+  font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint);
+}
+.h-brands-row span::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--brand); opacity: .55; margin: 0 26px; }
 @keyframes h-marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-@media (prefers-reduced-motion: reduce) { .h-marquee-row { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .h-brands-row { animation: none !important; } }
+@media (max-width: 640px) { .h-brands-inner { flex-direction: column; align-items: flex-start; gap: 14px; } .h-brands-viewport { width: 100%; } }
 
-/* ---- Reviews op donker vlak (alleen ontwerp A) ---- */
-html:not([data-design="b"]) #reviews { background: var(--ink); color: #fff; }
-html:not([data-design="b"]) #reviews h2,
-html:not([data-design="b"]) #reviews .eyebrow,
-html:not([data-design="b"]) #reviews .h-score,
-html:not([data-design="b"]) #reviews .h-stars { color: #fff; }
-html:not([data-design="b"]) #reviews .eyebrow::after { background: rgba(255,255,255,.25); }
-html:not([data-design="b"]) #reviews .h-review {
+/* ---- Binnenkijken: galerij met één groot beeld en vier kleinere ---- */
+.h-inspire-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 16px; aspect-ratio: 2.3 / 1; }
+.h-inspire-item { position: relative; display: block; overflow: hidden; background: var(--surface-2); }
+.h-inspire-item.is-large { grid-row: 1 / 3; }
+.h-inspire-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.h-inspire-item:hover img { transform: scale(1.05); }
+.h-inspire-item span {
+  position: absolute; left: 14px; bottom: 14px; padding: 7px 13px; background: rgba(255,255,255,.94);
+  font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
+  transform: translateY(6px); opacity: .92; transition: transform .3s var(--ease), opacity .3s;
+}
+.h-inspire-item span::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; background: var(--brand); transform: rotate(45deg) translateY(-1px); }
+.h-inspire-item:hover span { transform: none; opacity: 1; }
+@media (max-width: 900px) {
+  .h-inspire-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; aspect-ratio: auto; }
+  .h-inspire-item { aspect-ratio: 4 / 3; }
+  .h-inspire-item.is-large { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
+}
+
+/* ---- Reviews op donker vlak ---- */
+#reviews { background: var(--ink); color: #fff; }
+#reviews h2,
+#reviews .eyebrow,
+#reviews .h-score,
+#reviews .h-stars { color: #fff; }
+#reviews .eyebrow::after { background: rgba(255,255,255,.25); }
+#reviews .h-review {
   position: relative; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
   padding-top: 64px; transition: background .3s;
 }
-html:not([data-design="b"]) #reviews .h-review:hover { background: rgba(255,255,255,.09); }
-html:not([data-design="b"]) #reviews .h-review::before {
+#reviews .h-review:hover { background: rgba(255,255,255,.09); }
+#reviews .h-review::before {
   content: "\201C"; position: absolute; left: 24px; top: 14px;
-  font-family: var(--script); font-style: italic; font-size: 72px; line-height: 1; color: rgba(255,255,255,.35);
+  font-family: var(--script); font-style: italic; font-size: 72px; line-height: 1; color: var(--brand);
 }
-html:not([data-design="b"]) #reviews blockquote { color: #fff; }
-html:not([data-design="b"]) #reviews figcaption { color: rgba(255,255,255,.6); }
+#reviews blockquote { color: #fff; }
+#reviews figcaption { color: rgba(255,255,255,.6); }
 
 @media (max-width: 640px) {
   #welkom .h-welcome-media { box-shadow: -14px 14px 0 var(--surface); }
   #showroom .h-welcome-media { box-shadow: 14px 14px 0 var(--bg); }
   .h-stats { gap: 16px 28px; margin-bottom: 28px; }
 }
+
+/* Kerncijfers: klein rood tegeltje (uit het logo) voor elk label. */
+.h-stats dd::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; background: var(--brand); transform: rotate(45deg) translateY(-2px); }
+
+/* Tijdens de laadanimatie wacht de hero met opbouwen. */
+html.is-intro .h-hero-panel, html.is-intro .h-hero-media, html.is-intro .h-hero-video,
+html.is-intro .h-hero-vertical, html.is-intro .h-scroll { animation-play-state: paused; }

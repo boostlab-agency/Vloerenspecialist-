@@ -31,8 +31,7 @@
 <script src="/assets/js/modules/open-status.js" defer></script>
 <script src="/assets/js/modules/hero-video.js" defer></script>
 <script src="/assets/js/modules/home-motion.js" defer></script>
-<link rel="stylesheet" href="/assets/css/design-b.css">
-<script src="/assets/js/modules/design-switch.js"></script>
+<script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="home">
 
@@ -41,112 +40,14 @@
 
 <main id="main">
 
-  <!-- ===== Ontwerp B (concept) — alleen zichtbaar als met de schakelaar links ontwerp B gekozen is ===== -->
-  <!-- B1 · Hero: gecentreerde grote kop, twee acties, daaronder het filmpje met ronde hoeken -->
-  <section class="hb-hero only-b" data-review-id="hero-b" data-review-label="Hero (ontwerp B)">
-    <div class="wrap">
-      <p class="hb-kicker">De Vloerenspecialist Tilburg</p>
-      <h1 class="hb-title">Vloeren. Interieur.<br>Onder één dak.</h1>
-      <p class="hb-sub">Alle vloeren, maatwerk, behang en raamdecoratie in een showroom van 1.800&nbsp;m².</p>
-      <div class="hb-actions">
-        <a class="btn btn-primary" href="/showroom.html">Plan uw bezoek</a>
-        <a class="hb-link" href="/vloeren/index.html">Bekijk alle vloeren</a>
-      </div>
-      <div class="hb-hero-media">
-        <video muted loop playsinline preload="none" data-design-video="b"
-               poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
-               aria-label="Sfeerfilm: moderne, lichte woonkamer">
-          <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
-          <source src="https://videos.pexels.com/video-files/7533207/7533207-hd_1920_1080_30fps.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-  </section>
-
-  <!-- B2 · Onze vloeren: kop links, rustige lijst met de zeven vloersoorten rechts -->
-  <section class="hb-floors only-b" data-review-id="vloeren-b" data-review-label="Onze vloeren (ontwerp B)">
-    <div class="wrap hb-floors-grid">
-      <div class="hb-floors-intro">
-        <h2>Onze vloeren</h2>
-        <p>Zeven soorten, één showroom. Leg ze naast elkaar en voel het verschil.</p>
-        <a class="hb-link" href="/vloeren/index.html">Alle vloeren</a>
-      </div>
-      <ul class="hb-floor-list">
-        <li><a href="/vloeren/pvc.html"><img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">PVC vloeren</span><span class="hb-floor-note">Waterbestendig en onderhoudsarm</span></a></li>
-        <li><a href="/vloeren/hout.html"><img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Houten vloeren</span><span class="hb-floor-note">Tijdloos en ambachtelijk</span></a></li>
-        <li><a href="/vloeren/laminaat.html"><img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Laminaat</span><span class="hb-floor-note">Slim geprijsd, snel gelegd</span></a></li>
-        <li><a href="/vloeren/tegelvloer.html"><img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Tegelvloeren</span><span class="hb-floor-note">Duurzaam en slijtvast</span></a></li>
-        <li><a href="/vloeren/vloerbedekking.html"><img src="https://images.unsplash.com/photo-1772563214602-3c6434766700?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Vloerbedekking</span><span class="hb-floor-note">Warm en geluiddempend</span></a></li>
-        <li><a href="/vloeren/gietvloer.html"><img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Gietvloeren</span><span class="hb-floor-note">Naadloos en modern</span></a></li>
-        <li><a href="/vloeren/hybride-houtenvloer.html"><img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=70&amp;auto=format&amp;fit=crop&amp;w=200&amp;h=200" alt="" loading="lazy"><span class="hb-floor-name">Hybride houtenvloeren</span><span class="hb-floor-note">Echt hout, waterbestendig</span></a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- B3 · Vier compacte kaarten voor de andere vakgebieden en de showroom -->
-  <section class="hb-tiles only-b" data-review-id="tegels-b" data-review-label="Vakgebieden (ontwerp B)">
-    <div class="wrap">
-      <div class="hb-floors-head">
-        <h2>Meer dan vloeren</h2>
-      </div>
-      <div class="hb-tile-grid">
-        <a class="hb-tile" href="/interieur/index.html">
-          <span class="hb-tile-copy">
-            <span class="hb-tile-title">Interieur op maat</span>
-            <span class="hb-tile-sub">Kasten, deuren en meubels die precies passen.</span>
-            <span class="hb-link">Meer informatie</span>
-          </span>
-          <img src="/assets/img/real/kasten-garderobe-1800.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
-        </a>
-        <a class="hb-tile" href="/interieur/behang.html">
-          <span class="hb-tile-copy">
-            <span class="hb-tile-title">Behang</span>
-            <span class="hb-tile-sub">Karakter voor elke wand.</span>
-            <span class="hb-link">Meer informatie</span>
-          </span>
-          <img src="/assets/img/real/behang-woonkamer-1800.jpg" alt="Woonkamer met groen behang" loading="lazy">
-        </a>
-        <a class="hb-tile" href="/interieur/raamdecoratie.html">
-          <span class="hb-tile-copy">
-            <span class="hb-tile-title">Raamdecoratie</span>
-            <span class="hb-tile-sub">Licht en privacy, precies op maat.</span>
-            <span class="hb-link">Meer informatie</span>
-          </span>
-          <img src="/assets/img/real/raamdecoratie-woonkamer-1800.jpg" alt="Woonkamer met raamdecoratie op maat" loading="lazy">
-        </a>
-        <a class="hb-tile" href="/showroom.html">
-          <span class="hb-tile-copy">
-            <span class="hb-tile-title">De showroom</span>
-            <span class="hb-tile-sub">Jules Verneweg 7a, Tilburg.</span>
-            <span class="hb-link">Plan uw bezoek</span>
-          </span>
-          <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met vloeren en woonopstellingen" loading="lazy">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- B4 · Kerncijfers, gecentreerd -->
-  <section class="hb-stats only-b" data-review-id="cijfers-b" data-review-label="Kerncijfers (ontwerp B)">
-    <div class="wrap">
-      <h2 class="hb-h2">Waarom De Vloerenspecialist.</h2>
-      <div class="hb-stat-row">
-        <div><strong>1.800 m²</strong><span>showroom met complete woonopstellingen</span></div>
-        <div><strong>62+</strong><span>topmerken onder één dak</span></div>
-        <div><strong>9+</strong><span>waardering van onze klanten</span></div>
-      </div>
-    </div>
-  </section>
-  <!-- ===== Einde ontwerp B ===== -->
-
   <!-- 1 · Hero: filmpje op een beige vlak, met een verticale regel ernaast -->
-  <section class="h-hero only-a" data-review-id="hero" data-review-label="Hero">
+  <section class="h-hero" data-review-id="hero" data-review-label="Hero">
     <div class="h-hero-panel" aria-hidden="true"></div>
     <div class="wrap h-hero-inner">
       <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
       <div class="h-hero-media is-video">
         <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
-        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata" data-design-video="a"
+        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
                poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
                aria-label="Sfeerfilm: moderne, lichte woonkamer met witte hoekbank, natuurstenen haard en lange vitrages">
           <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
@@ -163,7 +64,7 @@
   </section>
 
   <!-- 2 · Welkom: beeld links, kop + korte tekst + één knop rechts -->
-  <section class="h-section h-welcome only-a" id="welkom" data-review-id="welkom" data-review-label="Welkom">
+  <section class="h-section h-welcome" id="welkom" data-review-id="welkom" data-review-label="Welkom">
     <div class="wrap h-welcome-grid">
       <div class="h-welcome-media">
         <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy">
@@ -182,7 +83,7 @@
   </section>
 
   <!-- 3 · Vloersoorten: het hart van het bedrijf, direct zichtbaar -->
-  <section class="h-section is-surface only-a" id="vloeren" data-review-id="vloeren" data-review-label="Onze vloeren">
+  <section class="h-section is-surface" id="vloeren" data-review-id="vloeren" data-review-label="Onze vloeren">
     <div class="wrap">
       <div class="h-head">
         <div>
@@ -232,7 +133,7 @@
   </section>
 
   <!-- 4 · Wand en raam: de andere drie vakgebieden -->
-  <section class="h-section only-a" id="interieur" data-review-id="interieur" data-review-label="Interieur, behang en raamdecoratie">
+  <section class="h-section" id="interieur" data-review-id="interieur" data-review-label="Interieur, behang en raamdecoratie">
     <div class="wrap">
       <div class="h-head">
         <div>
@@ -257,20 +158,8 @@
     </div>
   </section>
 
-  <!-- Merkenband: donkere strook met langzaam doorlopende merknamen -->
-  <section class="h-marquee only-a" aria-label="Onze merken" data-review-id="merken-band" data-review-label="Merkenband">
-    <a class="h-marquee-track" href="/merken/index.html" aria-label="Bekijk al onze merken">
-      <span class="h-marquee-row">
-        <span>Floer</span><span>Moduleo</span><span>COREtec</span><span>Meister</span><span>Mart Visser</span><span>Eijffinger</span><span>Cerdomus</span><span>Gelasta</span><span>KeJe</span><span>Belakos</span><span>Ambiant</span><span>Floor Life</span><span>Hebeta</span>
-      </span>
-      <span class="h-marquee-row" aria-hidden="true">
-        <span>Floer</span><span>Moduleo</span><span>COREtec</span><span>Meister</span><span>Mart Visser</span><span>Eijffinger</span><span>Cerdomus</span><span>Gelasta</span><span>KeJe</span><span>Belakos</span><span>Ambiant</span><span>Floor Life</span><span>Hebeta</span>
-      </span>
-    </a>
-  </section>
-
   <!-- 5 · Showroom: rustig, één uitnodiging -->
-  <section class="h-section is-surface only-a" id="showroom" data-review-id="showroom" data-review-label="De showroom">
+  <section class="h-section is-surface" id="showroom" data-review-id="showroom" data-review-label="De showroom">
     <div class="wrap h-welcome-grid is-reverse">
       <div class="h-welcome-media">
         <img src="https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warm verlichte woonopstelling in de showroom" loading="lazy">
@@ -314,6 +203,39 @@
       </div>
     </div>
   </section>
+  <!-- 7 · Binnenkijken: projecten (zoals de inspiratiegalerij van knulst.nl) -->
+  <section class="h-section h-inspire" id="binnenkijken" data-review-id="binnenkijken" data-review-label="Binnenkijken">
+    <div class="wrap">
+      <div class="h-head">
+        <div>
+          <h2>Binnenkijken bij onze klanten</h2>
+          <p class="eyebrow">Projecten</p>
+        </div>
+        <a class="btn-text" href="/inspiratie/projecten.html">Alle projecten <span class="arrow">→</span></a>
+      </div>
+      <div class="h-inspire-grid">
+        <a class="h-inspire-item is-large" href="/inspiratie/projecten.html"><img src="/assets/img/real/visgraat-kastenwand-1800.jpg" alt="Eetkamer met visgraatvloer en kastenwand" loading="lazy"><span>Eetkamer, Tilburg</span></a>
+        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Warme woonkamer met houtkachel en eikenvloer" loading="lazy"><span>Totaalinterieur, Tilburg</span></a>
+        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="https://images.unsplash.com/photo-1787145879056-d02365c5b911?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Terracotta Renostuc-wand" loading="lazy"><span>Slaapkamer, Goirle</span></a>
+        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="/assets/img/real/gordijn-velvet-zwart-900.jpg" alt="Zwarte velvet gordijnstof" loading="lazy"><span>Werkkamer, Tilburg</span></a>
+        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="/assets/img/real/tapijt-pouf-1-900.jpg" alt="Tapijt en poef" loading="lazy"><span>Studio, Tilburg</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Merken: rustige strook vlak boven de footer -->
+  <section class="h-brands" aria-label="Onze merken" data-review-id="merken-band" data-review-label="Merken">
+    <div class="wrap h-brands-inner">
+      <a class="h-brands-label" href="/merken/index.html">Onze merken <span class="arrow">→</span></a>
+      <div class="h-brands-viewport">
+        <div class="h-brands-track">
+          <span class="h-brands-row"><span>Floer</span><span>Moduleo</span><span>COREtec</span><span>Meister</span><span>Mart Visser</span><span>Eijffinger</span><span>Cerdomus</span><span>Gelasta</span><span>KeJe</span><span>Belakos</span><span>Ambiant</span><span>Floor Life</span><span>Hebeta</span></span>
+          <span class="h-brands-row" aria-hidden="true"><span>Floer</span><span>Moduleo</span><span>COREtec</span><span>Meister</span><span>Mart Visser</span><span>Eijffinger</span><span>Cerdomus</span><span>Gelasta</span><span>KeJe</span><span>Belakos</span><span>Ambiant</span><span>Floor Life</span><span>Hebeta</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <div id="site-footer"></div>

@@ -111,15 +111,25 @@
          kolommen van maximaal vier regels. Geen foto's, geen merken. */
       var links = [];
       item.groups.forEach(function (g) { links = links.concat(g.links); });
-      var list = links.map(function (l) {
-        return '<a class="drop-link" href="' + l.href + '">' + l.label + "</a>";
+      var list = links.map(function (l, i) {
+        return '<a class="drop-link" href="' + l.href + '" style="--i:' + i + '"><span>' + l.label + "</span></a>";
       }).join("");
       var id = "drop-" + item.key;
+      /* Uitklapmenu klapt open bij aanwijzen (nav.js). Rechts een kleine
+         uitnodiging, zoals het "Nieuwsgierig?"-blokje in het menu van knulst.nl. */
       return (
         '<li class="' + cls + '">' +
-          '<button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' + item.label + ICONS.caret + "</button>" +
+          '<button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="' + id + '" data-href="' + item.href + '"><span class="nav-label">' + item.label + "</span>" + ICONS.caret + "</button>" +
           '<div class="nav-drop" id="' + id + '">' +
-            '<div class="drop-list">' + list + "</div>" +
+            '<div class="drop-main">' +
+              '<div class="drop-list">' + list + "</div>" +
+              '<a class="btn-text drop-all" href="' + item.href + '" style="--i:' + links.length + '">' + item.all + ' <span class="arrow">→</span></a>' +
+            "</div>" +
+            '<div class="drop-promo">' +
+              '<p class="drop-promo-kicker">Nieuwsgierig?</p>' +
+              '<p class="drop-promo-text">Bekijk en voel alles in onze showroom van 1.800&nbsp;m² in Tilburg.</p>' +
+              '<a class="btn-text" href="/showroom.html">Plan uw bezoek <span class="arrow">→</span></a>' +
+            "</div>" +
           "</div>" +
         "</li>"
       );
@@ -132,10 +142,10 @@
      tekstlijst — geen foto's, geen merken. Showroom/Over ons/Contact linken
      direct. Onderaan: plannen, bellen, WhatsApp, route. */
   function renderMobileNav() {
-    var cats = NAV.map(function (item) {
+    var cats = NAV.map(function (item, i) {
       var current = isCurrent(item);
       if (!item.groups) {
-        return '<a class="m-cat m-cat-link' + (current ? " is-current" : "") + '" href="' + item.href + '"><span>' + item.label + "</span></a>";
+        return '<a class="m-cat m-cat-link' + (current ? " is-current" : "") + '" href="' + item.href + '" style="--i:' + i + '"><span>' + item.label + "</span></a>";
       }
       var links = [];
       item.groups.forEach(function (g) { links = links.concat(g.links); });
@@ -143,7 +153,7 @@
         return '<a class="m-sub-link" href="' + l.href + '">' + l.label + "</a>";
       }).join("");
       return (
-        '<details class="m-cat m-cat-acc' + (current ? " is-current" : "") + '">' +
+        '<details class="m-cat m-cat-acc' + (current ? " is-current" : "") + '" style="--i:' + i + '">' +
           "<summary><span>" + item.label + "</span>" + ICONS.caret + "</summary>" +
           '<div class="m-sub">' + list + "</div>" +
         "</details>"
@@ -201,6 +211,24 @@
   }
 
   mount();
+
+  /* Logo in de header inline zetten (zelfde bestand als de img), zodat de
+     rode tegeltjes bij aanwijzen kunnen bewegen. Lukt het niet, dan blijft
+     gewoon de afbeelding staan. */
+  function inlineLogo() {
+    var imgEl = document.querySelector(".site-header .brand-logo");
+    if (!imgEl || !window.fetch) return;
+    var p = (window.DVS && DVS.logoSvg) || fetch("/assets/img/logo-dark.svg").then(function (r) { return r.text(); });
+    p.then(function (txt) {
+      var svg = DVS.toInlineLogo ? DVS.toInlineLogo(txt) : null;
+      if (!svg) return;
+      svg.setAttribute("class", "brand-logo logo-inline");
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", imgEl.getAttribute("alt"));
+      imgEl.replaceWith(svg);
+    }).catch(function () {});
+  }
+  inlineLogo();
 
   /* Feedbacktool overal beschikbaar: elke pagina laadt deze header, dus
      hier zorgen we dat ook de feedbackmodus (en de Supabase-client waar die
