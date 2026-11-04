@@ -19,9 +19,11 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/home.css">
+<link rel="stylesheet" href="/assets/css/hero.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
+<script src="/assets/js/components/mega-icons.js" defer></script>
 <script src="/assets/js/components/header.js" defer></script>
 <script src="/assets/js/components/footer.js" defer></script>
 <script src="/assets/js/modules/wishlist.js" defer></script>
@@ -29,7 +31,7 @@
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
-<script src="/assets/js/modules/hero-video.js" defer></script>
+<script src="/assets/js/modules/hero-x.js" defer></script>
 <script src="/assets/js/modules/home-motion.js" defer></script>
 <script src="/assets/js/modules/intro-loader.js"></script>
 </head>
@@ -40,26 +42,57 @@
 
 <main id="main">
 
-  <!-- 1 · Hero: filmpje op een beige vlak, met een verticale regel ernaast -->
-  <section class="h-hero" data-review-id="hero" data-review-label="Hero">
-    <div class="h-hero-panel" aria-hidden="true"></div>
-    <div class="wrap h-hero-inner">
-      <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
-      <div class="h-hero-media is-video">
-        <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
-        <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
-               poster="https://images.pexels.com/videos/7533207/apartment-architecture-chair-comfort-7533207.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
-               aria-label="Sfeerfilm: moderne, lichte woonkamer met witte hoekbank, natuurstenen haard en lange vitrages">
-          <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
-          <source src="https://videos.pexels.com/video-files/7533207/7533207-hd_1920_1080_30fps.mp4" type="video/mp4">
-        </video>
-        <p class="h-concept" role="note"><strong>Concept</strong> Hier komt een filmpje van jullie eigen showroom.</p>
-        <button class="h-video-toggle" type="button" aria-label="Pauzeer filmpje" data-video-toggle>
-          <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-          <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
-        </button>
+  <!-- 1 · Hero (proef, naar het voorbeeld van 2manydots): donker afgerond vlak
+       met grote kop waarin het rode woord wisselt, rechts een foto in een
+       boogvorm met zwevende labels, een rode lijn die zichzelf tekent en
+       zwevende tegeltjes uit het logo. Drie dia's met stipjes; onderin een
+       strook met de vier vakgebieden. Script: hero-x.js -->
+  <section class="hx" data-review-id="hero" data-review-label="Hero" data-hx>
+    <div class="hx-panel">
+      <span class="hx-tile t1" aria-hidden="true"></span>
+      <span class="hx-tile t2" aria-hidden="true"></span>
+      <span class="hx-tile t3" aria-hidden="true"></span>
+
+      <div class="hx-grid">
+        <div class="hx-copy">
+          <p class="hx-kicker"><span class="hx-kicker-dot" aria-hidden="true"></span>Vloerenspecialist Tilburg · showroom van 1.800&nbsp;m²</p>
+          <h1 class="hx-title">De mooiste <span class="hx-word" aria-live="polite"><em class="is-on">vloeren</em><em>raamdecoratie</em><em>interieurs</em></span><br>onder één dak.</h1>
+          <p class="hx-sub">Alle soorten vloeren, interieur op maat, behang en raamdecoratie — met meer dan 62 topmerken en een eigen team dat alles plaatst.</p>
+          <div class="hx-actions">
+            <a class="hx-cta" href="/showroom.html"><span>Plan uw showroombezoek</span><span class="hx-cta-go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a class="hx-link" href="/vloeren/index.html">Bekijk alle vloeren</a>
+          </div>
+        </div>
+
+        <div class="hx-visual">
+          <svg class="hx-curve" viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M70 640 C 20 470, 40 230, 190 120 S 500 20, 560 230 S 520 540, 400 660" />
+          </svg>
+          <div class="hx-arch-ring" aria-hidden="true"></div>
+          <div class="hx-arch">
+            <img class="is-on" src="/assets/img/real/visgraat-kastenwand-1800.jpg" alt="Eetkamer met eiken visgraatvloer en kastenwand op maat">
+            <img src="/assets/img/real/raamdecoratie-woonkamer-1800.jpg" alt="Woonkamer met raamdecoratie op maat" loading="lazy">
+            <img src="/assets/img/real/kasten-garderobe-1800.jpg" alt="Inloopkast op maat met eigen verlichting" loading="lazy">
+          </div>
+
+          <div class="hx-float hx-chip" aria-hidden="true"><span class="hx-chip-ico"></span><span class="hx-swap"><b class="is-on">Visgraatvloer</b><b>Raamdecoratie</b><b>Kasten op maat</b></span></div>
+          <div class="hx-float hx-stat" aria-hidden="true"><small>Meer dan</small><strong>62</strong><small>topmerken</small></div>
+          <div class="hx-float hx-tag" aria-hidden="true"><span class="hx-swap"><b class="is-on">Leg ze naast elkaar in de showroom</b><b>Licht en privacy, precies op maat</b><b>Ontworpen voor uw woning</b></span></div>
+
+          <div class="hx-dots" role="tablist" aria-label="Kies een dia">
+            <button type="button" class="is-on" role="tab" aria-selected="true" aria-label="Vloeren"></button>
+            <button type="button" role="tab" aria-selected="false" aria-label="Raamdecoratie"></button>
+            <button type="button" role="tab" aria-selected="false" aria-label="Interieur op maat"></button>
+          </div>
+        </div>
       </div>
-      <a class="h-scroll" href="#welkom">Scroll om te ontdekken <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+
+      <nav class="hx-strip" aria-label="Vakgebieden">
+        <a href="/vloeren/index.html">Vloeren</a>
+        <a href="/interieur/index.html">Interieur op maat</a>
+        <a href="/interieur/behang.html">Behang</a>
+        <a href="/interieur/raamdecoratie.html">Raamdecoratie</a>
+      </nav>
     </div>
   </section>
 
@@ -70,7 +103,7 @@
         <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Ruime showroom met houten vloeren, gordijnen en complete woonopstellingen" loading="lazy">
       </div>
       <div class="h-welcome-copy">
-        <h1>Vloeren en interieur op maat, onder één dak</h1>
+        <h2>Vloeren en interieur op maat, onder één dak</h2>
         <p>Welkom bij De Vloerenspecialist in Tilburg. In onze showroom van 1.800 m² vindt u alle soorten vloeren — van PVC en laminaat tot hout, tegels en gietvloer — en daarnaast interieur op maat, behang en raamdecoratie. Met meer dan 62 topmerken en een eigen team dat alles plaatst, bent u van keuze tot oplevering bij ons aan het juiste adres. Onze klanten waarderen ons met een 9+.</p>
         <dl class="h-stats">
           <div><dt><span data-count="1800" data-format="nl">1.800</span> m²</dt><dd>showroom</dd></div>
@@ -161,9 +194,11 @@
   <!-- 5 · Showroom: rustig, één uitnodiging -->
   <section class="h-section is-surface" id="showroom" data-review-id="showroom" data-review-label="De showroom">
     <div class="wrap h-welcome-grid is-reverse">
-      <div class="h-welcome-media">
-        <img src="https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Warm verlichte woonopstelling in de showroom" loading="lazy">
-      </div>
+      <!-- Kaart i.p.v. foto: de hele kaart linkt naar de routeplanner -->
+      <a class="map-embed h-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
+        <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=15&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
+        <span class="map-cap"><span class="map-pin" aria-hidden="true"></span>Jules Verneweg 7a, Tilburg · Plan route <span class="arrow">→</span></span>
+      </a>
       <div class="h-welcome-copy">
         <h2>Kom langs in onze showroom</h2>
         <p>Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen — de koffie staat klaar — of plan een afspraak voor uitgebreid advies.</p>
@@ -173,11 +208,6 @@
           <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
           <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">→</span></a>
         </div>
-        <!-- Klein kaartje: de hele kaart linkt naar de routeplanner -->
-        <a class="map-embed h-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
-          <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=15&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
-          <span class="map-cap"><span class="map-pin" aria-hidden="true"></span>Jules Verneweg 7a · Plan route <span class="arrow">→</span></span>
-        </a>
       </div>
     </div>
   </section>

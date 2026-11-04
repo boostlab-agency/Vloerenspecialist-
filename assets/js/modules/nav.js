@@ -126,7 +126,34 @@
     });
   }
 
+  /* Rood stipje onder de menubalk dat naar het aangewezen menu-item
+     springt (speels, naar het voorbeeld van 2manydots). */
+  function initNavDot() {
+    var ul = document.querySelector(".main-nav > ul");
+    if (!ul) return;
+    var dot = document.createElement("span");
+    dot.className = "nav-dot";
+    dot.setAttribute("aria-hidden", "true");
+    ul.appendChild(dot);
+    var header = document.querySelector(".site-header");
+    function moveTo(link) {
+      /* Stipje staat t.o.v. de header (die is gepositioneerd), net onder de pil. */
+      var a = link.getBoundingClientRect(), h = header.getBoundingClientRect(), u = ul.getBoundingClientRect();
+      ul.style.setProperty("--dot-x", Math.round(a.left - h.left + a.width / 2) + "px");
+      ul.style.setProperty("--dot-y", Math.round(u.bottom - h.top + 10) + "px");
+      ul.classList.add("has-dot");
+    }
+    ul.querySelectorAll(".nav-link").forEach(function (link) {
+      link.addEventListener("mouseenter", function () { moveTo(link); });
+      link.addEventListener("focus", function () { moveTo(link); });
+    });
+    ul.addEventListener("mouseleave", function () {
+      setTimeout(function () { if (!ul.querySelector(".nav-item.is-open")) ul.classList.remove("has-dot"); }, 180);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    initNavDot();
     initHeaderScrollState();
     initDropdowns();
     initMenuPanel();

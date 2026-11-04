@@ -14,6 +14,7 @@
   "use strict";
   var DVS = (window.DVS = window.DVS || {});
   var root = document.documentElement;
+  root.classList.add("js"); /* voor animaties die met JS starten (o.a. de hero) */
 
   /* Logo-svg één keer ophalen; de header gebruikt dezelfde tekst. */
   DVS.logoSvg = window.fetch

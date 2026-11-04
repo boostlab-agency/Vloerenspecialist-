@@ -301,10 +301,11 @@ html.js-motion .m-reveal.is-in { opacity: 1; transform: none; }
 html.is-intro .h-hero-panel, html.is-intro .h-hero-media, html.is-intro .h-hero-video,
 html.is-intro .h-hero-vertical, html.is-intro .h-scroll { animation-play-state: paused; }
 
-/* ---- Klein Google Maps-kaartje in het showroomblok ---- */
-.h-map { margin-top: 32px; height: 200px; min-height: 0; max-width: 520px; border-color: var(--line); }
+/* ---- Google Maps-kaart rechts in het showroomblok (i.p.v. een foto) ---- */
+.h-map { order: 2; aspect-ratio: 3 / 2; min-height: 320px; border-color: var(--line); box-shadow: 32px 32px 0 var(--bg); }
 .h-map .map-cap { gap: 9px; }
 .map-pin { width: 8px; height: 8px; background: var(--brand); transform: rotate(45deg); flex: none; }
 .h-map:hover .map-cap { color: var(--ink); }
 .h-map:hover .map-cap .arrow { color: var(--brand); }
-@media (max-width: 640px) { .h-map { height: 170px; margin-top: 24px; } }
+@media (max-width: 900px) { .h-map { order: 0; min-height: 260px; } }
+@media (max-width: 640px) { .h-map { box-shadow: 14px 14px 0 var(--bg); } }

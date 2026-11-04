@@ -9,7 +9,7 @@
   if (typeof IntersectionObserver === "undefined") return;
 
   var targets = document.querySelectorAll(
-    ".h-section .h-head, .h-welcome-media, .h-welcome-copy, .h-card, .h-review, .h-inspire-item"
+    ".h-section .h-head, .h-welcome-media, .h-map, .h-welcome-copy, .h-card, .h-review, .h-inspire-item"
   );
 
   /* Wat al in beeld staat bij het laden niet eerst verbergen. */

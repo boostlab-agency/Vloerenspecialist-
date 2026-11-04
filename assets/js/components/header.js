@@ -108,32 +108,28 @@
       if (!item.groups) {
         return '<li class="' + cls + '"><a class="nav-link" href="' + item.href + '">' + item.label + "</a></li>";
       }
-      /* Megamenu (klapt open bij aanwijzen, zie nav.js): over de volle breedte
-         een rij kaarten met foto, naam, korte omschrijving en een klein rood
-         pijlrondje in de hoek. Links de categorie met een link naar het
-         overzicht. Max. vier kaarten per rij; is er dan een gat, dan vult een
-         "alles bekijken"-kaart de rij. */
+      /* Megamenu (klapt open bij aanwijzen, zie nav.js), naar het voorbeeld
+         van 2manydots: ruime kaarten met een lijnillustratie, naam en korte
+         uitleg; een rood pijlrondje zit in een uitsparing in de hoek. Max.
+         vier kaarten per rij; is er een gat, dan vult een "alle …"-kaart de
+         rij. Onderaan een link naar het overzicht. */
       var links = [];
       item.groups.forEach(function (g) { links = links.concat(g.links); });
-      var cards = links.map(function (l, i) {
+      var icon = function (href) { return window.DVS && DVS.megaIconFor ? DVS.megaIconFor(href) : ""; };
+      var card = function (href, name, desc, i, extra) {
         return (
-          '<a class="mega-card" href="' + l.href + '" style="--i:' + i + '">' +
-            '<span class="mega-thumb"><img src="' + l.img + '" alt="" loading="lazy"></span>' +
-            '<span class="mega-name">' + l.label + "</span>" +
-            (l.desc ? '<span class="mega-desc">' + l.desc + "</span>" : "") +
+          '<a class="mega-card' + (extra || "") + '" href="' + href + '" style="--i:' + i + '">' +
+            '<span class="mega-art">' + icon(href) + "</span>" +
+            '<span class="mega-name">' + name + "</span>" +
+            (desc ? '<span class="mega-desc">' + desc + "</span>" : "") +
             '<span class="mega-go" aria-hidden="true">' + ICONS.arrow + "</span>" +
           "</a>"
         );
-      });
+      };
+      var cards = links.map(function (l, i) { return card(l.href, l.label, l.desc, i); });
       var cols = links.length <= 5 ? links.length : 4;
       if (links.length > 5 && links.length % 4) {
-        cards.push(
-          '<a class="mega-card is-all" href="' + item.href + '" style="--i:' + links.length + '">' +
-            '<span class="mega-name">' + item.all + "</span>" +
-            '<span class="mega-desc">Bekijk het complete overzicht</span>' +
-            '<span class="mega-go" aria-hidden="true">' + ICONS.arrow + "</span>" +
-          "</a>"
-        );
+        cards.push(card(item.href, item.all, "Bekijk het complete overzicht", links.length, " is-all"));
       }
       var id = "drop-" + item.key;
       return (
@@ -141,11 +137,8 @@
           '<button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="' + id + '" data-href="' + item.href + '"><span class="nav-label">' + item.label + "</span>" + ICONS.caret + "</button>" +
           '<div class="nav-drop" id="' + id + '">' +
             '<div class="mega-inner">' +
-              '<div class="mega-head">' +
-                '<p class="mega-title">' + item.label + "</p>" +
-                '<a class="btn-text" href="' + item.href + '">Bekijk alles <span class="arrow">→</span></a>' +
-              "</div>" +
               '<div class="mega-grid" style="--cols:' + cols + '">' + cards.join("") + "</div>" +
+              '<div class="mega-foot"><a class="btn-text" href="' + item.href + '">' + item.all + ' <span class="arrow">→</span></a></div>' +
             "</div>" +
           "</div>" +
         "</li>"

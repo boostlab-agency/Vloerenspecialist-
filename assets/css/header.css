@@ -57,11 +57,10 @@
 .nav-caret { flex: none; width: 10px; height: 10px; color: var(--ink); transition: transform .2s var(--ease); }
 .nav-item.is-open .nav-caret { transform: rotate(180deg); }
 
-/* ---- Megamenu: klapt bij aanwijzen over de volle breedte uit ----
-   Licht beige vlak onder de balk met een rij witte kaarten: kleine foto,
-   naam, één regel uitleg en een klein rood pijlrondje dat over de hoek van
-   de kaart valt. Kaarten komen na elkaar binnen; bij aanwijzen komt de
-   kaart iets omhoog en schuift het pijltje mee. */
+/* ---- Megamenu (naar het voorbeeld van 2manydots) ----
+   Beige vlak onder de balk met ruime kaarten: wit verloop dat naar onderen
+   wegvloeit in het beige, lijnillustratie, naam en uitleg. Rechtsboven een
+   rood pijlrondje in een ronde uitsparing van de kaart. */
 .nav-drop {
   position: absolute; left: 0; right: 0; top: 100%;
   background: var(--surface); border-bottom: 1px solid var(--line);
@@ -70,44 +69,65 @@
   transition: opacity .25s ease, transform .4s var(--ease), visibility .25s;
 }
 .nav-item.is-open > .nav-drop { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-.mega-inner {
-  max-width: var(--container); margin: 0 auto; padding: 34px var(--gutter) 40px;
-  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; align-items: start;
-}
-.mega-head { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 6px; }
-.mega-title { margin: 0; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 20px; color: var(--ink); }
-.mega-title::after { content: ""; display: block; width: 26px; height: 2px; margin-top: 12px; background: var(--brand); }
-.mega-grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 18px; max-width: calc(var(--cols, 4) * 290px); }
+.mega-inner { max-width: var(--container); margin: 0 auto; padding: 36px var(--gutter) 30px; }
+.mega-grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 28px; }
+.mega-foot { display: flex; justify-content: flex-end; margin-top: 22px; }
 
 .mega-card {
-  position: relative; display: flex; flex-direction: column; gap: 4px; min-height: 100%;
-  padding: 18px 20px 20px; background: #fff; color: var(--ink);
-  box-shadow: 0 1px 2px rgba(39,37,33,.05);
-  opacity: 0; transform: translateY(10px);
-  transition: opacity .35s ease, transform .45s var(--ease), box-shadow .3s;
+  --notch: 25px;
+  position: relative; display: flex; flex-direction: column; min-height: 100%;
+  padding: 30px 30px 28px; color: var(--ink); isolation: isolate;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .35s ease, transform .45s var(--ease);
 }
-.nav-item.is-open .mega-card { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 45ms + 60ms), calc(var(--i, 0) * 45ms + 60ms), 0s; }
-.nav-item.is-open .mega-card:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -22px rgba(39,37,33,.4); transition-delay: 0s; }
-.mega-thumb { display: block; width: 56px; height: 56px; margin-bottom: 14px; overflow: hidden; background: var(--surface-2); }
-.mega-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
-.mega-card:hover .mega-thumb img { transform: scale(1.1); }
-.mega-name { font-size: 15.5px; font-weight: 600; line-height: 1.3; }
-.mega-desc { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+/* Achtergrond op een eigen laag, met een ronde uitsparing rechtsboven voor
+   het pijlrondje (zo valt het rondje zelf niet weg in het masker). */
+.mega-card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 18px;
+  background: linear-gradient(160deg, #fff 0%, #fff 45%, rgba(255,255,255,.35) 100%);
+  -webkit-mask: radial-gradient(circle var(--notch) at calc(100% - 18px) 18px, transparent 97%, #000 100%);
+          mask: radial-gradient(circle var(--notch) at calc(100% - 18px) 18px, transparent 97%, #000 100%);
+  transition: background .3s;
+}
+.nav-item.is-open .mega-card { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 50ms + 60ms), calc(var(--i, 0) * 50ms + 60ms); }
+.nav-item.is-open .mega-card:hover { transform: translateY(-4px); transition-delay: 0s; }
+.mega-card:hover::before { background: #fff; }
+.mega-art { display: block; height: 64px; margin-bottom: 20px; color: var(--ink); }
+.mega-ico { width: 64px; height: 64px; overflow: visible; }
+.mega-ico .r { stroke: var(--brand); color: var(--brand); }
+.mega-ico > * { transition: transform .5s cubic-bezier(.34,1.56,.64,1); transform-box: fill-box; transform-origin: center; }
+.mega-card:hover .mega-ico .r { transform: translateY(-3px) rotate(-6deg); }
+.mega-name { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -.005em; margin-bottom: 12px; }
+.mega-desc { font-size: 14.5px; font-weight: 300; line-height: 1.6; color: var(--ink-soft); }
+
+/* Pijlrondje in de uitsparing. */
 .mega-go {
-  position: absolute; top: -10px; right: -10px; width: 30px; height: 30px; border-radius: 50%;
+  position: absolute; top: 0; right: 0; width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; background: var(--brand); color: #fff;
-  box-shadow: 0 4px 10px -4px rgba(var(--brand-rgb), .6);
-  transform: scale(.85); transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
 }
 .mega-go svg { transition: transform .3s var(--ease); }
-.mega-card:hover .mega-go { transform: scale(1); }
-.mega-card:hover .mega-go svg { transform: translateX(2px); }
-/* "Alles bekijken"-kaart: zonder foto, rustig omlijnd. */
-.mega-card.is-all { background: transparent; box-shadow: none; border: 1px solid var(--line); justify-content: flex-end; }
-.mega-card.is-all .mega-go { background: var(--ink); box-shadow: none; }
-.mega-card.is-all:hover { background: #fff; }
-@media (max-width: 1439px) { .mega-inner { grid-template-columns: 160px minmax(0, 1fr); gap: 28px; } }
+.mega-card:hover .mega-go { transform: rotate(-45deg); }
+
+/* "Alle …"-kaart: zonder vulling, rustig omlijnd. */
+.mega-card.is-all::before { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
+.mega-card.is-all:hover::before { background: rgba(255,255,255,.6); }
+.mega-card.is-all .mega-go { background: var(--ink); }
+
+@media (max-width: 1439px) { .mega-card { padding: 24px 22px 22px; } .mega-grid { gap: 20px; } .mega-name { font-size: 17px; } }
 @media (prefers-reduced-motion: reduce) { .mega-card { opacity: 1; transform: none; } }
+
+/* Menubalk: lichte "pil" achter de menu-items, met een rood stipje dat de
+   muis volgt (nav.js) en het rode lijntje onder het open item. */
+.main-nav > ul { align-self: center; padding: 0 10px; border-radius: 999px; background: var(--surface); height: 52px; }
+.nav-dot {
+  position: absolute; left: 0; top: var(--dot-y, 0); width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; z-index: 2;
+  background: var(--brand); opacity: 0; transform: translateX(var(--dot-x, 0)) scale(.4);
+  transition: opacity .25s, transform .45s cubic-bezier(.34,1.56,.64,1); pointer-events: none;
+}
+.main-nav > ul.has-dot .nav-dot { opacity: 1; transform: translateX(var(--dot-x, 0)) scale(1); }
+.nav-label::after { bottom: -15px; }
+@media (max-height: 820px) { .main-nav > ul { height: 46px; } .nav-label::after { bottom: -12px; } }
 
 /* ---- Rechts: telefoon + knop + menuknop ---- */
 .header-actions { display: flex; align-items: center; gap: 16px; flex: none; }
