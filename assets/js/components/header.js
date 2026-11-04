@@ -53,9 +53,9 @@
         {
           title: "Interieur op maat",
           links: [
-            { label: "Kasten op maat", desc: "Van inloopkast tot garderobewand", href: "/interieur/index.html#kasten", img: "/assets/img/real/kasten-garderobe-900.jpg" },
-            { label: "Deuren en wanden op maat", desc: "Metaal en glas, licht en stijlvol", href: "/interieur/index.html#deuren-wanden", img: img("https://images.unsplash.com/photo-1721742151032-e0c159fe5097", 160) },
-            { label: "Meubels op maat", desc: "Van tv-meubel tot bureau", href: "/interieur/index.html#meubels", img: "/assets/img/real/meubels-op-maat-900.jpg" }
+            { label: "Kasten op maat", desc: "Van inloopkast tot garderobewand", href: "/interieur/kasten-op-maat.html", img: "/assets/img/real/kasten-garderobe-900.jpg" },
+            { label: "Deuren en wanden op maat", desc: "Metaal en glas, licht en stijlvol", href: "/interieur/deuren-en-wanden-op-maat.html", img: img("https://images.unsplash.com/photo-1721742151032-e0c159fe5097", 160) },
+            { label: "Meubels op maat", desc: "Van tv-meubel tot bureau", href: "/interieur/meubels-op-maat.html", img: "/assets/img/real/meubels-op-maat-900.jpg" }
           ]
         }
       ]
@@ -98,6 +98,7 @@
   function isCurrent(item) {
     if (here === item.href) return true;
     if (item.key === "vloeren") return here.indexOf("/vloeren/") === 0 || here.indexOf("/merken/") === 0;
+    if (item.key === "interieur") return /^\/interieur\/(index|kasten-op-maat|deuren-en-wanden-op-maat|meubels-op-maat)\.html$/.test(here);
     return false;
   }
 

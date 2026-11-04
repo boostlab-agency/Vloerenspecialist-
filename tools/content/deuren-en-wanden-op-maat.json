@@ -1,0 +1,63 @@
+{
+  "file": "interieur/deuren-en-wanden-op-maat.html",
+  "group": "maatwerk",
+  "name": "Deuren en wanden op maat",
+  "title": "Deuren en wanden op maat",
+  "metaDesc": "Metalen deuren en wanden met glas, op maat gemaakt in zwart, wit of brons. Stijlvol, industrieel en met optimale lichtinval. Bekijk de mogelijkheden in onze showroom in Tilburg.",
+  "eyebrow": "Interieur op maat",
+  "h1": "Deuren en wanden op maat",
+  "vertical": "Deuren en wanden",
+  "lead": "Metalen deuren en wanden met glas geven uw interieur een stijlvolle, industriële uitstraling en laten het licht vrij door de ruimte stromen. Op maat gemaakt in zwart, wit of brons.",
+  "heroImg": "https://images.unsplash.com/photo-1721742151032-e0c159fe5097",
+  "heroAlt": "Zwarte stalen deur met glas naar de woonkamer",
+  "about": {
+    "eyebrow": "Over deuren en wanden op maat",
+    "h2": "Industrieel, licht en elegant",
+    "paras": [
+      "Metalen deuren of wanden geven uw interieur een stijlvolle, industriële uitstraling en zorgen voor optimale lichtinval. Ze voegen een vleugje elegantie toe aan elk interieur, of het nu modern of klassiek is.",
+      "Deze deuren worden door ons tot op de millimeter op maat gemaakt, zodat ze perfect passen in uw ruimte. U kunt kiezen uit drie stijlvolle kleuren: zwart, wit of brons.",
+      "Bezoek onze showroom voor persoonlijk advies, ontdek de mogelijkheden in het echt en krijg de perfecte inspiratie voor uw ruimte."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vooraf zien",
+    "h2": "Eerst een 3D-ontwerp, dan pas maken",
+    "text": "Voordat er iets wordt gemaakt, ziet u uw deur of wand in 3D in uw eigen ruimte. Zo kiest u met vertrouwen de indeling, de kleur en de afwerking, en weet u precies wat u krijgt.",
+    "img": "https://images.unsplash.com/photo-1717429541792-5c59021d6ceb",
+    "alt": "Interieur op maat met warme materialen"
+  },
+  "benefits": {
+    "h2": "Waarom deuren en wanden op maat",
+    "items": [
+      { "title": "Optimale lichtinval", "text": "Glas en een slank metalen frame laten het licht vrij door de ruimte stromen." },
+      { "title": "Zwart, wit of brons", "text": "Drie stijlvolle kleuren die passen bij modern en klassiek." },
+      { "title": "Tot op de millimeter", "text": "Op maat gemaakt, zodat alles perfect past in uw ruimte." },
+      { "title": "Eigen montage", "text": "Onze vakmensen leveren en plaatsen alles strak en waterpas." },
+      { "title": "20 jaar garantie", "text": "Maatwerk dat jarenlang meegaat, met garantie op onze producten." },
+      { "title": "Alles onder één dak", "text": "Afgestemd op uw vloer, behang en raamdecoratie." }
+    ]
+  },
+  "info": {
+    "h2": "Zo werken wij",
+    "rows": [
+      { "title": "1. Kennismaking en advies", "paras": [
+        "In de showroom of bij u thuis bespreken we uw wensen, uw stijl en uw budget. U bekijkt kleuren en afwerkingen, zodat u een goed beeld krijgt van de mogelijkheden."
+      ]},
+      { "title": "2. Inmeten en ontwerp", "paras": [
+        "We meten uw ruimte nauwkeurig op en maken een 3D-ontwerp. Samen stemmen we de indeling en details af tot alles klopt."
+      ]},
+      { "title": "3. Productie op maat", "paras": [
+        "Na uw akkoord wordt alles tot op de millimeter op maat gemaakt, van duurzame materialen en met oog voor detail."
+      ]},
+      { "title": "4. Levering en montage", "paras": [
+        "Ons eigen team levert en plaatst uw maatwerk en werkt alles netjes af. U heeft van begin tot eind één vast aanspreekpunt."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Bespreek uw deur of wand in de showroom",
+    "text": "Kom langs voor persoonlijk advies en bekijk kleuren en afwerkingen in het echt.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

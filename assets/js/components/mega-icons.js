@@ -127,7 +127,7 @@
     var map = [
       ["/vloeren/pvc", "pvc"], ["/vloeren/hout", "hout"], ["/vloeren/laminaat", "laminaat"],
       ["/vloeren/tegel", "tegel"], ["/vloeren/vloerbedekking", "vloerbedekking"], ["/vloeren/giet", "giet"],
-      ["/vloeren/hybride", "hybride"], ["#kasten", "kasten"], ["#deuren", "deuren"], ["#meubels", "meubels"],
+      ["/vloeren/hybride", "hybride"], ["kasten-op-maat", "kasten"], ["deuren-en-wanden", "deuren"], ["meubels-op-maat", "meubels"],
       ["#fotobehang", "fotobehang"], ["#papierbehang", "papierbehang"], ["#vinylbehang", "vinylbehang"],
       ["#vliesbehang", "vliesbehang"], ["#renostuc", "renostuc"], ["#jaloezieen", "jaloezieen"],
       ["#rolgordijnen", "rol"], ["#plissegordijnen", "plisse"], ["#vouwgordijnen", "vouw"],

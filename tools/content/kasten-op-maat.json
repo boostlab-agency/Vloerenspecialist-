@@ -1,0 +1,63 @@
+{
+  "file": "interieur/kasten-op-maat.html",
+  "group": "maatwerk",
+  "name": "Kasten op maat",
+  "title": "Kasten op maat",
+  "metaDesc": "Kasten op maat, van inloopkast tot garderobewand en kasten onder een schuine wand. Ontworpen in 3D, op maat gemaakt en geplaatst door ons eigen team, met 20 jaar garantie.",
+  "eyebrow": "Interieur op maat",
+  "h1": "Kasten op maat",
+  "vertical": "Kasten op maat",
+  "lead": "Van inloopkast tot garderobewand: kasten die verschillende stijlen en materialen combineren tot een eigentijds geheel. Elke nis, schuine wand of lage balk wordt precies opgemeten en benut.",
+  "heroImg": "/assets/img/real/kasten-garderobe-1800.jpg",
+  "heroAlt": "Inloopkast op maat met eigen verlichting",
+  "about": {
+    "eyebrow": "Over kasten op maat",
+    "h2": "Een maatwerkkast met een eigen karakter",
+    "paras": [
+      "Bij De Vloerenspecialist Tilburg hebben we op verfijnde wijze verschillende stijlen en trends samengebracht in ons kastontwerp. De spannende contrasten tussen de materialen geven de kasten een eigentijds en uniek karakter.",
+      "Het resultaat is een stijlvolle maatwerkkast met een geweldige uitstraling, die perfect aansluit bij de laatste trends en designs. Of het nu gaat om een inloopkast, een garderobe of een kast onder een schuine wand: elke nis wordt optimaal benut.",
+      "Bezoek onze showroom voor persoonlijk advies, ontdek de mogelijkheden in het echt en krijg de perfecte inspiratie voor uw ruimte."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vooraf zien",
+    "h2": "Eerst een 3D-ontwerp, dan pas maken",
+    "text": "Voordat er iets wordt gemaakt, ziet u uw kast in 3D in uw eigen ruimte. Zo kiest u met vertrouwen de indeling, materialen, grepen en verlichting, en weet u precies wat u krijgt.",
+    "img": "/assets/img/real/visgraat-kastenwand-1800.jpg",
+    "alt": "Kastenwand op maat bij een eiken visgraatvloer"
+  },
+  "benefits": {
+    "h2": "Waarom een kast op maat",
+    "items": [
+      { "title": "Persoonlijk advies", "text": "We denken mee over materialen, indeling en budget." },
+      { "title": "3D-ontwerp vooraf", "text": "U ziet het eindresultaat voordat er iets wordt gemaakt." },
+      { "title": "Tot op de millimeter", "text": "Elke nis, schuine wand en hoek optimaal benut." },
+      { "title": "Eigen montage", "text": "Onze vakmensen leveren en plaatsen alles strak en waterpas." },
+      { "title": "20 jaar garantie", "text": "Maatwerk dat jarenlang meegaat, met garantie op onze producten." },
+      { "title": "Alles onder één dak", "text": "Afgestemd op uw vloer, behang en raamdecoratie." }
+    ]
+  },
+  "info": {
+    "h2": "Zo werken wij",
+    "rows": [
+      { "title": "1. Kennismaking en advies", "paras": [
+        "In de showroom of bij u thuis bespreken we uw wensen, uw stijl en uw budget. U bekijkt en voelt materialen, kleuren en grepen, zodat u een goed beeld krijgt van de mogelijkheden."
+      ]},
+      { "title": "2. Inmeten en ontwerp", "paras": [
+        "We meten uw ruimte nauwkeurig op en maken een 3D-ontwerp. Samen stemmen we de indeling en details af tot alles klopt."
+      ]},
+      { "title": "3. Productie op maat", "paras": [
+        "Na uw akkoord wordt alles tot op de millimeter op maat gemaakt, van duurzame materialen en met oog voor detail."
+      ]},
+      { "title": "4. Levering en montage", "paras": [
+        "Ons eigen team levert en plaatst uw maatwerk en werkt alles netjes af. U heeft van begin tot eind één vast aanspreekpunt."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Bespreek uw kast op maat in de showroom",
+    "text": "Kom langs voor persoonlijk advies en bekijk materialen, grepen en afwerkingen in het echt.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}

@@ -24,6 +24,13 @@ $INTERIOR = @(
   @{ label = "Raamdecoratie"; href = "/interieur/raamdecoratie.html" },
   @{ label = "Alle vloeren"; href = "/vloeren/index.html" }
 )
+# Onderdelen van Interieur op maat (group "maatwerk"), elk een eigen pagina.
+$MAATWERK = @(
+  @{ label = "Kasten op maat"; href = "/interieur/kasten-op-maat.html" },
+  @{ label = "Deuren en wanden op maat"; href = "/interieur/deuren-en-wanden-op-maat.html" },
+  @{ label = "Meubels op maat"; href = "/interieur/meubels-op-maat.html" },
+  @{ label = "Alles over interieur op maat"; href = "/interieur/index.html" }
+)
 
 function Img([string]$src, [int]$w) {
   if ($src -like "*images.unsplash.com*") { return "$src" + "?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=$w" }
@@ -36,31 +43,55 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
   $d =Get-Content $file.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
   $out = Join-Path $Root $d.file
   $isFloor = $d.group -eq "vloeren"
+  $isMaatwerk = $d.group -eq "maatwerk"
 
   # Kruimelpad
   $crumb = '<a href="/index.html">Home</a><span class="sep">/</span>'
   if ($isFloor) { $crumb += '<a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>' }
+  if ($isMaatwerk) { $crumb += '<a href="/interieur/index.html">Interieur op maat</a><span class="sep">/</span>' }
   $crumb += "<span aria-current=""page"">$($d.name)</span>"
 
-  # Soorten
+  # Soorten (optioneel; een item met "href" krijgt een link naar zijn eigen pagina)
+  $typesSection = ""
+  if ($d.types -and $d.types.items.Count -gt 0) {
   $n = 0
   $types = ($d.types.items | ForEach-Object {
     $n++
     $id = if ($_.id) { " id=""$($_.id)""" } else { "" }
     $img = if ($_.img) { "<img src=""$(Img $_.img 900)"" alt=""$($_.alt)"" loading=""lazy"">" } else { "" }
     $tags = if ($_.tags) { '<div class="tag-row">' + (($_.tags | ForEach-Object { "<span class=""tag"">$_</span>" }) -join "") + '</div>' } else { "" }
+    $more = if ($_.href) { "<a class=""btn-text pr-type-more"" href=""$($_.href)"">Meer over $($_.title.ToLower()) <span class=""arrow"">&rarr;</span></a>" } else { "" }
     @"
         <article class="pr-type"$id>
           <span class="pr-type-nr">$('{0:00}' -f $n)</span>
           $img
           <h3>$($_.title)</h3>
           <p>$($_.text)</p>
-          $tags
+          $tags$more
         </article>
 "@
   }) -join "`n"
   $cols = [Math]::Min($d.types.items.Count, 4)
   if ($d.types.items.Count -eq 5) { $cols = 5 }
+  $typesSection = @"
+
+  <!-- 3 · Soorten -->
+  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>$($d.types.h2)</h2>
+          <p class="eyebrow">$($d.types.eyebrow)</p>
+        </div>
+        <p class="pr-head-text">$($d.types.text)</p>
+      </div>
+      <div class="pr-types" style="--cols: $cols">
+$types
+      </div>
+    </div>
+  </section>
+"@
+  }
 
   # Voordelen
   $benefits = ($d.benefits.items | ForEach-Object {
@@ -105,7 +136,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
   }
 
   # Verder kijken
-  $relSet = if ($isFloor) { $FLOORS } else { $INTERIOR }
+  $relSet = if ($isFloor) { $FLOORS } elseif ($isMaatwerk) { $MAATWERK } else { $INTERIOR }
   $related = ($relSet | Where-Object { $_.href -ne "/$($d.file)" } | ForEach-Object {
     "        <a href=""$($_.href)"">$($_.label) <span aria-hidden=""true"">&rarr;</span></a>"
   }) -join "`n"
@@ -137,6 +168,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
+<script src="/assets/js/components/mega-icons.js" defer></script>
 <script src="/assets/js/components/header.js" defer></script>
 <script src="/assets/js/components/footer.js" defer></script>
 <script src="/assets/js/modules/wishlist.js" defer></script>
@@ -144,8 +176,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
-<link rel="stylesheet" href="/assets/css/design-b.css">
-<script src="/assets/js/modules/design-switch.js"></script>
+<script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="sub">
 <!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/$($file.Name) — pas de inhoud daar aan. -->
@@ -192,22 +223,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
       </div>
     </div>
   </section>
-
-  <!-- 3 · Soorten -->
-  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
-    <div class="wrap">
-      <div class="pr-head">
-        <div>
-          <h2>$($d.types.h2)</h2>
-          <p class="eyebrow">$($d.types.eyebrow)</p>
-        </div>
-        <p class="pr-head-text">$($d.types.text)</p>
-      </div>
-      <div class="pr-types" style="--cols: $cols">
-$types
-      </div>
-    </div>
-  </section>
+$typesSection
 
   <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
   <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">

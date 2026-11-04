@@ -138,3 +138,6 @@
 @media (min-width: 901px) {
   .pr-hero-media { max-height: max(340px, calc(100vh - var(--header-h) - 120px)); width: 100%; }
 }
+
+/* Link van een soort naar zijn eigen pagina (o.a. interieur op maat). */
+.pr-type-more { align-self: flex-start; margin-top: 18px; }

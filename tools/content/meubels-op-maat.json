@@ -1,0 +1,63 @@
+{
+  "file": "interieur/meubels-op-maat.html",
+  "group": "maatwerk",
+  "name": "Meubels op maat",
+  "title": "Meubels op maat",
+  "metaDesc": "Meubels op maat, van tv-meubel tot wandkast of bureau. Volledig afgestemd op uw wensen, ambachtelijk gemaakt van de beste materialen en geplaatst door ons eigen team.",
+  "eyebrow": "Interieur op maat",
+  "h1": "Meubels op maat",
+  "vertical": "Meubels op maat",
+  "lead": "Van tv-meubel tot wandkast of bureau: elk meubel wordt afgestemd op uw wensen en uw ruimte, gemaakt van duurzame materialen en met oog voor detail.",
+  "heroImg": "/assets/img/real/meubels-op-maat-1600.jpg",
+  "heroAlt": "Lichte woonkamer met meubels op maat en ronde salontafels",
+  "about": {
+    "eyebrow": "Over meubels op maat",
+    "h2": "Vakmanschap, klasse en topkwaliteit",
+    "paras": [
+      "Een meubel op maat van De Vloerenspecialist Tilburg staat voor vakmanschap, klasse en topkwaliteit. Elk meubel wordt volledig afgestemd op uw persoonlijke wensen, zodat het perfect past bij uw interieur.",
+      "Bij de productie combineren we onze passie voor hout met ambachtelijk vakmanschap. Samen creëren we een uniek meubel, vervaardigd uit de allerbeste materialen.",
+      "Bezoek onze showroom voor persoonlijk advies, ontdek de mogelijkheden in het echt en krijg de perfecte inspiratie voor uw ruimte."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Vooraf zien",
+    "h2": "Eerst een 3D-ontwerp, dan pas maken",
+    "text": "Voordat er iets wordt gemaakt, ziet u uw meubel in 3D in uw eigen ruimte. Zo kiest u met vertrouwen de indeling, materialen, grepen en verlichting, en weet u precies wat u krijgt.",
+    "img": "https://images.unsplash.com/photo-1717429541792-5c59021d6ceb",
+    "alt": "Interieur op maat met warme materialen"
+  },
+  "benefits": {
+    "h2": "Waarom een meubel op maat",
+    "items": [
+      { "title": "Persoonlijk advies", "text": "We denken mee over materialen, indeling en budget." },
+      { "title": "3D-ontwerp vooraf", "text": "U ziet het eindresultaat voordat er iets wordt gemaakt." },
+      { "title": "Ambachtelijk gemaakt", "text": "Onze passie voor hout, gecombineerd met vakmanschap." },
+      { "title": "Eigen montage", "text": "Onze vakmensen leveren en plaatsen alles strak en waterpas." },
+      { "title": "20 jaar garantie", "text": "Maatwerk dat jarenlang meegaat, met garantie op onze producten." },
+      { "title": "Alles onder één dak", "text": "Afgestemd op uw vloer, behang en raamdecoratie." }
+    ]
+  },
+  "info": {
+    "h2": "Zo werken wij",
+    "rows": [
+      { "title": "1. Kennismaking en advies", "paras": [
+        "In de showroom of bij u thuis bespreken we uw wensen, uw stijl en uw budget. U bekijkt en voelt materialen, kleuren en grepen, zodat u een goed beeld krijgt van de mogelijkheden."
+      ]},
+      { "title": "2. Inmeten en ontwerp", "paras": [
+        "We meten uw ruimte nauwkeurig op en maken een 3D-ontwerp. Samen stemmen we de indeling en details af tot alles klopt."
+      ]},
+      { "title": "3. Productie op maat", "paras": [
+        "Na uw akkoord wordt alles tot op de millimeter op maat gemaakt, van duurzame materialen en met oog voor detail."
+      ]},
+      { "title": "4. Levering en montage", "paras": [
+        "Ons eigen team levert en plaatst uw maatwerk en werkt alles netjes af. U heeft van begin tot eind één vast aanspreekpunt."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Bespreek uw meubel op maat in de showroom",
+    "text": "Kom langs voor persoonlijk advies en bekijk materialen, grepen en afwerkingen in het echt.",
+    "img": "https://images.unsplash.com/photo-1768332572728-2fff6ecbd6b6",
+    "alt": "Warm verlichte woonopstelling in de showroom"
+  }
+}
