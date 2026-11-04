@@ -300,3 +300,11 @@ html.js-motion .m-reveal.is-in { opacity: 1; transform: none; }
 /* Tijdens de laadanimatie wacht de hero met opbouwen. */
 html.is-intro .h-hero-panel, html.is-intro .h-hero-media, html.is-intro .h-hero-video,
 html.is-intro .h-hero-vertical, html.is-intro .h-scroll { animation-play-state: paused; }
+
+/* ---- Klein Google Maps-kaartje in het showroomblok ---- */
+.h-map { margin-top: 32px; height: 200px; min-height: 0; max-width: 520px; border-color: var(--line); }
+.h-map .map-cap { gap: 9px; }
+.map-pin { width: 8px; height: 8px; background: var(--brand); transform: rotate(45deg); flex: none; }
+.h-map:hover .map-cap { color: var(--ink); }
+.h-map:hover .map-cap .arrow { color: var(--brand); }
+@media (max-width: 640px) { .h-map { height: 170px; margin-top: 24px; } }

@@ -252,3 +252,18 @@ html.is-intro, html.is-intro body { overflow: hidden; }
 .intro.is-leaving .intro-panel { transition: transform .85s cubic-bezier(.77,0,.18,1); transform: translateY(-100%); }
 .intro.is-leaving .intro-edge { transition: transform .85s .12s cubic-bezier(.77,0,.18,1); transform: translateY(-100%); }
 .intro.is-leaving .intro-logo, .intro.is-leaving .intro-bar, .intro.is-leaving .intro-line { transition: opacity .3s; opacity: 0; }
+
+/* Rustige versie bij "minder beweging": tegels en tekst vervagen alleen in,
+   het scherm vervaagt weg. Overschrijft bewust de algemene reduce-regel. */
+@keyframes intro-fade { from { opacity: 0; } to { opacity: 1; } }
+html.intro-calm .intro .logo-tile { transform: none !important; }
+html.intro-calm .intro.is-ready .logo-tile { animation: intro-fade .45s calc(var(--i) * 140ms) ease forwards !important; }
+html.intro-calm .intro .logo-word { clip-path: none !important; opacity: 0; }
+html.intro-calm .intro.is-ready .logo-word { animation: intro-fade .6s .75s ease forwards !important; }
+html.intro-calm .intro.is-ready .intro-bar span { animation: intro-bar 1.9s .1s linear forwards !important; }
+html.intro-calm .intro .intro-line span { transform: none !important; }
+html.intro-calm .intro.is-ready .intro-line .a { animation: intro-line-calm 1.3s .35s ease forwards !important; }
+html.intro-calm .intro.is-ready .intro-line .b { animation: intro-fade .5s 1.65s ease forwards !important; }
+@keyframes intro-line-calm { 0% { opacity: 0; } 25%, 75% { opacity: 1; } 100% { opacity: 0; } }
+html.intro-calm .intro.is-leaving .intro-panel,
+html.intro-calm .intro.is-leaving .intro-edge { transform: none !important; opacity: 0; transition: opacity .6s ease !important; }

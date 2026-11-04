@@ -5,7 +5,8 @@
    Verloop: de vijf rode tegels uit het logo worden één voor één "gelegd",
    daarna schuift de woordmerktekst in beeld met een knipoog-regel eronder.
    Tot slot schuift het scherm omhoog, met een dun rood randje erachter.
-   Klik of Escape slaat de animatie over; bij "minder beweging" komt hij niet.
+   Klik of Escape slaat de animatie over. Bij "minder beweging" (Windows:
+   animatie-effecten uit) een rustige versie: alleen vervagen, geen beweging.
    Staat in <head> zonder defer, zodat het scherm er meteen ligt (geen flits).
    Zet ook DVS.logoSvg / DVS.toInlineLogo klaar voor het logo in de header.
    ========================================================================== */
@@ -61,7 +62,8 @@
   var seen = false;
   try { seen = sessionStorage.getItem("dvs-intro") === "1"; } catch (e) {}
   var forced = /[?&]intro\b/.test(location.search);
-  if (reduce || (!forced && seen && !isReload)) return;
+  if (!forced && seen && !isReload) return;
+  if (reduce) root.classList.add("intro-calm");
   try { sessionStorage.setItem("dvs-intro", "1"); } catch (e) {}
 
   var el = document.createElement("div");
