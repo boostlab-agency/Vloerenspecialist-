@@ -44,13 +44,8 @@
   <!-- 1 · Hero: filmpje op een beige vlak, met een verticale regel ernaast -->
   <section class="h-hero" data-review-id="hero" data-review-label="Hero">
     <div class="h-hero-panel" aria-hidden="true"></div>
-    <!-- Subtiele accenten: twee kleine zwevende tegeltjes uit het logo -->
-    <span class="h-hero-tile t1" aria-hidden="true"></span>
-    <span class="h-hero-tile t2" aria-hidden="true"></span>
     <div class="wrap h-hero-inner">
       <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur <strong>in Tilburg</strong></p>
-      <!-- Dunne rode lijn die zich bij binnenkomst één keer tekent, om de hoek van het filmpje -->
-      <svg class="h-hero-line" viewBox="0 0 300 200" aria-hidden="true"><path d="M2 40 C 10 150, 90 196, 298 190"/></svg>
       <div class="h-hero-media is-video">
         <!-- CONCEPT: tijdelijk stockfilmpje (Pexels). Vervangen door een filmpje van de eigen showroom. -->
         <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
@@ -59,7 +54,8 @@
           <source src="https://videos.pexels.com/video-files/7533207/7533207-sd_960_540_30fps.mp4" type="video/mp4" media="(max-width: 700px)">
           <source src="https://videos.pexels.com/video-files/7533207/7533207-hd_1920_1080_30fps.mp4" type="video/mp4">
         </video>
-        <p class="h-hero-label" aria-hidden="true"><span class="h-hero-label-dot"></span>Showroom van 1.800&nbsp;m² in Tilburg</p>
+        <!-- Label dat rustig wisselt tussen drie feiten (hero-video.js); het lijntje eronder loopt mee tot het volgende -->
+        <p class="h-hero-label" aria-hidden="true" data-hero-facts><span class="h-hero-label-dot"></span><span class="h-hero-facts"><span class="is-on">Showroom van 1.800&nbsp;m² in Tilburg</span><span>Meer dan 62 topmerken</span><span>Eigen team plaatst alles</span></span><span class="h-hero-label-bar"></span></p>
         <p class="h-concept" role="note"><strong>Concept</strong> Hier komt een filmpje van jullie eigen showroom.</p>
         <button class="h-video-toggle" type="button" aria-label="Pauzeer filmpje" data-video-toggle>
           <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>

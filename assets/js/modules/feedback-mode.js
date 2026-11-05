@@ -36,9 +36,9 @@
 
   var ACTIVE_KEY = "dvsFeedbackModeOn";
   var ONBOARDED_KEY = "dvsFeedbackOnboarded";
-  /* Sessie-status leeft bewust in sessionStorage (niet localStorage): dat
-     verloopt vanzelf zodra het tabblad dicht gaat, precies zoals "per
-     sessie" bedoeld is voor de eenmalige e-mailnotificatie. */
+  /* Sessie-status leeft in localStorage: de klant kan de feedbackmodus (of
+     de browser) sluiten en later verder gaan — alles wat is verzameld blijft
+     bij dezelfde sessie horen tot er op "Versturen naar Jip" is geklikt. */
   var SESSION_KEY = "dvsFeedbackSessionId";
   var EMAIL_SENT_KEY = "dvsFeedbackEmailSent";
   /* Kolommen die pas ná feedback_items zijn toegevoegd (zie
@@ -142,6 +142,11 @@
     };
   }
 
+  /* Belofte die pas klaar is als alle lopende opslagverzoeken klaar zijn —
+     "Versturen naar Jip" wacht hierop, zodat de e-mail nooit een net
+     toegevoegd punt mist. */
+  var lastWrite = Promise.resolve();
+
   function addEntry(entry) {
     upsertCache(entry);
     refreshAll();
@@ -154,15 +159,16 @@
       // Is het aanmaken van de sessie zelf mislukt, dan valt session_id
       // hier terug op null (nog steeds een geldige, niet-verwijzende
       // waarde) in plaats van de hele feedback-opslag te laten mislukken.
-      Promise.resolve(sessionCreatePromise).then(function (sessionRes) {
+      var write = Promise.resolve(sessionCreatePromise).then(function (sessionRes) {
         if (sessionRes && sessionRes.error) row.session_id = null;
-        insertFeedbackRow(row);
+        return insertFeedbackRow(row);
       });
+      lastWrite = Promise.all([lastWrite, write.catch(function () {})]);
     }
     return true;
 
     function insertFeedbackRow(row) {
-      sb.from(TABLE).insert(row).then(function (res) {
+      return sb.from(TABLE).insert(row).then(function (res) {
         if (!res.error) return;
 
         if (isMissingSchemaError(res.error)) {
@@ -179,12 +185,12 @@
             "Val terug op opslaan zonder die velden.",
             res.error
           );
-          sb.from(TABLE).insert(fallbackRow).then(function (fallbackRes) {
+          return sb.from(TABLE).insert(fallbackRow).then(function (fallbackRes) {
             if (fallbackRes.error) {
               var reason = logSupabaseError("Feedback opslaan (fallback zonder optionele velden)", fallbackRes.error);
               window.alert("Deze feedback kon niet worden opgeslagen: " + reason + ". Probeer het opnieuw.");
               removeFromCache(entry.id);
-              if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
+              if (isLiveText(entry)) revertLiveText(entry);
               refreshAll();
             }
           });
@@ -196,7 +202,7 @@
         removeFromCache(entry.id);
         // Bij mislukte opslag ook de live tekstwijziging terugdraaien —
         // anders oogt de pagina bijgewerkt terwijl er niets is vastgelegd.
-        if (entry.actionType === "tekst-wijziging") revertLiveText(entry);
+        if (isLiveText(entry)) revertLiveText(entry);
         refreshAll();
       });
     }
@@ -217,7 +223,7 @@
   function removeEntry(id) {
     var entry = cache.filter(function (i) { return i.id === id; })[0];
     removeFromCache(id);
-    if (entry && entry.actionType === "tekst-wijziging") revertLiveText(entry);
+    if (entry && isLiveText(entry)) revertLiveText(entry);
     refreshAll();
     if (sb) {
       sb.from(TABLE).delete().eq("id", id).then(function (res) {
@@ -267,7 +273,7 @@
         var old = payload.old && payload.old.id ? rowToEntry(payload.old) : null;
         if (old) {
           removeFromCache(old.id);
-          if (old.actionType === "tekst-wijziging") revertLiveText(old);
+          if (isLiveText(old)) revertLiveText(old);
         }
         refreshAll();
       })
@@ -303,8 +309,8 @@
      onnodig vertragen. */
   var sessionCreatePromise = null;
   try {
-    currentSessionId = window.sessionStorage.getItem(SESSION_KEY) || null;
-    emailSentThisSession = window.sessionStorage.getItem(EMAIL_SENT_KEY) === "1";
+    currentSessionId = window.localStorage.getItem(SESSION_KEY) || null;
+    emailSentThisSession = window.localStorage.getItem(EMAIL_SENT_KEY) === "1";
   } catch (e) {}
 
   /* Genereert zo nodig meteen een sessie-id (geen wachttijd voor de
@@ -315,8 +321,8 @@
     currentSessionId = uid();
     emailSentThisSession = false;
     try {
-      window.sessionStorage.setItem(SESSION_KEY, currentSessionId);
-      window.sessionStorage.setItem(EMAIL_SENT_KEY, "0");
+      window.localStorage.setItem(SESSION_KEY, currentSessionId);
+      window.localStorage.setItem(EMAIL_SENT_KEY, "0");
     } catch (e) {}
     if (sb) {
       sessionCreatePromise = sb.from(SESSIONS_TABLE).insert({ id: currentSessionId, started_at: new Date().toISOString() }).then(function (res) {
@@ -332,8 +338,8 @@
     currentSessionId = null;
     emailSentThisSession = false;
     try {
-      window.sessionStorage.removeItem(SESSION_KEY);
-      window.sessionStorage.removeItem(EMAIL_SENT_KEY);
+      window.localStorage.removeItem(SESSION_KEY);
+      window.localStorage.removeItem(EMAIL_SENT_KEY);
     } catch (e) {}
   }
 
@@ -343,26 +349,35 @@
     inactivityTimer = window.setTimeout(function () { notifyFeedback("inactivity"); }, INACTIVITY_MS);
   }
 
-  /* Stuurt de serverfunctie op pad; markeert daarna (ongeacht het resultaat)
-     deze sessie als "al gemeld" zodat er nooit twee keer wordt gemaild. */
+  /* Stuurt de serverfunctie op pad, nadat alle lopende opslag klaar is.
+     Geeft een belofte terug met { ok: true/false }, zodat de verstuur-
+     dialoog kan laten zien of het gelukt is. Mislukt het, dan blijft de
+     sessie gewoon staan: de feedback is bewaard en kan later opnieuw
+     worden verstuurd (de server mailt een sessie nooit dubbel). */
+  var notifyInFlight = null;
   function notifyFeedback(reason) {
-    if (!currentSessionId || emailSentThisSession) return;
-    emailSentThisSession = true;
-    try { window.sessionStorage.setItem(EMAIL_SENT_KEY, "1"); } catch (e) {}
-    window.fetch(NOTIFY_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: currentSessionId, reason: reason })
+    if (!currentSessionId) return Promise.resolve({ ok: false, reason: "no-session" });
+    if (emailSentThisSession) return Promise.resolve({ ok: true });
+    if (notifyInFlight) return notifyInFlight;
+    var sid = currentSessionId;
+    notifyInFlight = lastWrite.then(function () {
+      return window.fetch(NOTIFY_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId: sid, reason: reason })
+      });
     }).then(function (r) {
-      if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ("HTTP " + r.status)); });
       return r.json();
     }).then(function (data) {
       if (data && data.skipped) console.warn("Feedbackmelding overgeslagen:", data.skipped);
       endLocalSession();
+      return { ok: true };
     }).catch(function (err) {
       console.error("Feedbackmelding versturen mislukt:", err);
-      endLocalSession();
-    });
+      return { ok: false, error: err };
+    }).then(function (result) { notifyInFlight = null; return result; });
+    return notifyInFlight;
   }
 
   /* ---------------- Tekst lezen/bewerken zonder geneste iconen te breken ----------------
@@ -384,10 +399,13 @@
   }
   /* Vindt (bij dezelfde paginaweergave) het element terug via sectie + huidige
      tekst, zodat een verwijderde tekstfeedback de pagina weer terug kan zetten. */
+  function isLiveText(entry) {
+    return !!entry && (entry.actionType === "tekst-wijziging" || entry.actionType === "knop-suggestie");
+  }
   function revertLiveText(entry) {
     var section = document.querySelector('[data-review-id="' + entry.sectionId + '"]');
     if (!section) return;
-    var candidates = section.querySelectorAll("h1,h2,h3,h4,h5,p,span,li,blockquote,figcaption");
+    var candidates = section.querySelectorAll("h1,h2,h3,h4,h5,h6,p,span,li,a,button,blockquote,figcaption,dt,dd,strong,em,small,label");
     for (var i = 0; i < candidates.length; i++) {
       var el = candidates[i];
       if (getEditableText(el) === entry.newText) {
@@ -546,6 +564,29 @@
   toggle.innerHTML = '<span class="fb-toggle-icon">💬</span><span class="fb-toggle-text">Feedback geven</span>';
   headerControls.appendChild(toggle);
 
+  /* ---- Feedbackbalk bovenin (alleen zichtbaar als de modus aan staat) ----
+     Eén duidelijke plek voor alles: wat je kunt doen, uitleg, je overzicht,
+     versturen naar Jip en een kruisje om te stoppen. Stoppen bewaart alles:
+     de feedback staat al direct in de database. */
+  var modebar = document.createElement("div");
+  modebar.className = "fb-modebar";
+  modebar.setAttribute("role", "toolbar");
+  modebar.setAttribute("aria-label", "Feedbackmodus");
+  modebar.innerHTML =
+    '<span class="fb-modebar-live" aria-hidden="true"></span>' +
+    '<span class="fb-modebar-text"><strong>Feedbackmodus</strong><span class="fb-modebar-sub"> · Klik op een tekst of foto om hem aan te passen</span></span>' +
+    '<button type="button" class="fb-mb-btn" id="fb-mb-help">❓<span class="fb-mb-label"> Uitleg</span></button>' +
+    '<button type="button" class="fb-mb-btn" id="fb-mb-list">📋<span class="fb-mb-label"> Mijn feedback</span> <span class="fb-count" id="fb-mb-count">0</span></button>' +
+    '<button type="button" class="fb-mb-btn fb-mb-send" id="fb-mb-send">Versturen naar Jip <span class="fb-count" id="fb-mb-send-count">0</span></button>' +
+    '<button type="button" class="fb-mb-close" id="fb-mb-close" aria-label="Feedbackmodus sluiten (je feedback blijft bewaard)" title="Sluiten — je feedback blijft bewaard">✕</button>';
+  document.body.appendChild(modebar);
+
+  /* Aantal punten dat in de huidige (nog niet verstuurde) sessie zit. */
+  function sessionItems() {
+    if (!currentSessionId) return [];
+    return readAll().filter(function (i) { return i.sessionId === currentSessionId; });
+  }
+
   /* ---- Subtiele overlay over de hele site ---- */
   var overlay = document.createElement("div");
   overlay.className = "fb-overlay";
@@ -568,6 +609,17 @@
   hint.className = "fb-hint";
   document.body.appendChild(hint);
 
+  /* De hint zegt wat er gebeurt als je klikt, niet alleen wat het is. */
+  function hintFor(t) {
+    if (t.kind === "tekst") return canInlineEdit(t.el) ? "✎ Klik om de tekst aan te passen" : "✎ Klik om deze tekst te verbeteren";
+    if (t.kind === "knop" || t.kind === "navigatie") return "✎ Klik om de knoptekst aan te passen";
+    if (t.kind === "afbeelding") return "🖼 Klik om de foto te vervangen";
+    if (t.kind === "video") return "🎞 Klik voor een opmerking over de video";
+    if (t.kind === "embed") return "💬 Klik voor een opmerking over de kaart";
+    if (t.kind === "kaart" || t.kind === "blok") return "💬 Klik voor een opmerking";
+    return "Klik voor opties voor dit blok";
+  }
+
   var lastHoverEl = null;
   function clearHover() {
     if (lastHoverEl) lastHoverEl.classList.remove("fb-target-hover", "fb-hover-soft");
@@ -576,7 +628,8 @@
   }
   document.addEventListener("mouseover", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-header-controls, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
+    if (editing) { clearHover(); return; }
+    if (e.target.closest(".fb-header-controls, .fb-modebar, .fb-edit-bar, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim")) { clearHover(); return; }
     var section = e.target.closest("[data-review-id]");
     if (!section) { clearHover(); return; }
     var t = describeTarget(e.target, section);
@@ -586,13 +639,14 @@
     lastHoverEl.classList.add("fb-target-hover");
     // Hele secties krijgen een zachtere markering dan losse onderdelen.
     if (t.kind === "sectie") lastHoverEl.classList.add("fb-hover-soft");
-    hint.textContent = t.kindLabel;
+    hint.textContent = hintFor(t);
     hint.classList.add("is-visible");
   });
   document.addEventListener("mousemove", function (e) {
     if (!isActive || !hint.classList.contains("is-visible")) return;
     var x = e.clientX + 16, y = e.clientY + 18;
-    if (x + 90 > window.innerWidth) x = window.innerWidth - 90;
+    var w = hint.offsetWidth || 220;
+    if (x + w + 12 > window.innerWidth) x = window.innerWidth - w - 12;
     hint.style.left = x + "px";
     hint.style.top = y + "px";
   });
@@ -769,38 +823,52 @@
     window.setTimeout(function () { var f = document.getElementById("fb-new-text"); if (f) f.focus(); }, 150);
   }
 
+  /* Foto's: eerst de eenvoudigste route — "Kies een andere foto" uploaden.
+     Na opslaan staat de nieuwe foto meteen op de pagina (als voorbeeld), met
+     een label "Nieuwe foto voorgesteld". Een opmerking erbij kan altijd. */
   function renderImageForm(target) {
-    var what = target.kind === "video" ? "video" : target.kind === "embed" ? "kaart" : "afbeelding";
+    var what = target.kind === "video" ? "video" : target.kind === "embed" ? "kaart" : "foto";
+    var isPhoto = target.kind === "afbeelding";
+    var src = isPhoto ? (target.el.currentSrc || target.el.src || "") : "";
     formBody.innerHTML =
-      "<h3>Voorstel voor deze " + what + "</h3>" +
+      "<h3>" + (isPhoto ? "Deze foto aanpassen" : "Opmerking over deze " + what) + "</h3>" +
       '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong></p>" +
-      '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de ' + what + " zelf verandert niet.</p>" +
-      '<div class="fb-field"><label for="fb-img-note">Opmerking</label><textarea id="fb-img-note" placeholder="Bijvoorbeeld: gebruik liever een andere foto"></textarea></div>' +
-      '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Andere ' + what + " voorstellen</span></label>" +
-      attachmentFieldHtml() +
-      '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Feedback opslaan</button></div>';
+      (isPhoto && src ? '<div class="fb-img-current"><img src="' + src + '" alt=""><span>Huidige foto</span></div>' : "") +
+      (isPhoto
+        ? '<div class="fb-field"><label class="fb-upload-big" for="fb-attach-input"><span class="fb-upload-icon">⬆</span><span><strong>Kies een andere foto</strong><small>Van uw computer of telefoon — we tonen hem direct op de pagina</small></span></label>' +
+            '<input type="file" id="fb-attach-input" accept="image/*" hidden><div class="fb-attach-preview" id="fb-attach-preview" hidden></div></div>'
+        : attachmentFieldHtml()) +
+      '<div class="fb-field"><label for="fb-img-note">Opmerking <span class="fb-optional">(optioneel)</span></label><textarea id="fb-img-note" placeholder="' +
+        (isPhoto ? "Bijvoorbeeld: liever een foto van onze eigen showroom" : "Wat wilt u anders zien?") + '"></textarea></div>' +
+      (isPhoto ? '<label class="fb-checkbox"><input type="checkbox" id="fb-img-replace"><span>Ik heb geen foto, maar wil wel graag een andere</span></label>' : "") +
+      '<div class="fb-actions"><button type="button" class="fb-btn-ghost" id="fb-cancel">Annuleren</button><button type="button" class="fb-btn-save" id="fb-save">Opslaan</button></div>';
     wireAttachmentField();
 
     currentSaveHandler = function () {
       var note = document.getElementById("fb-img-note").value.trim();
-      var replace = document.getElementById("fb-img-replace").checked;
+      var replaceBox = document.getElementById("fb-img-replace");
+      var replace = !!(replaceBox && replaceBox.checked) || !!(isPhoto && pendingAttachment);
       if (!note && !replace && !pendingAttachment) { document.getElementById("fb-img-note").focus(); return; }
-      var msg = note ? "Voorstel: " + note : "Voorstel: andere " + what + " gewenst";
+      var msg = note ? "Voorstel: " + note : (pendingAttachment ? "Voorstel: gebruik de bijgevoegde foto" : "Voorstel: andere " + what + " gewenst");
+      var att = pendingAttachment;
       var saved = addEntry(baseEntry(target, { actionType: replace ? "afbeelding-vervangen" : "afbeelding-opmerking", message: msg, imageReplace: replace }));
       if (saved) {
-        if (replace || pendingAttachment) (target.el.closest(".media") || target.el).classList.add("fb-image-flagged");
-        showToast("Voorstel opgeslagen.");
+        if (isPhoto && att && att.type.indexOf("image/") === 0) {
+          target.el.removeAttribute("srcset");
+          target.el.src = att.dataUrl;
+        }
+        if (replace || att) (target.el.closest(".media") || target.el.parentElement || target.el).classList.add("fb-image-flagged");
+        showToast(isPhoto && att ? "✓ Nieuwe foto voorgesteld — u ziet hem nu op de pagina." : "✓ Opgeslagen.");
         closePopover();
       }
     };
-    window.setTimeout(function () { var f = document.getElementById("fb-img-note"); if (f) f.focus(); }, 150);
   }
 
   /* Kaarten (klikbare tegels) en contentblokken: één vrije opmerking,
      met optionele bijlage. */
   function renderCommentForm(target) {
     formBody.innerHTML =
-      "<h3>Opmerking over dit" + (target.kind === "kaart" ? "e kaart" : " blok") + "</h3>" +
+      "<h3>Opmerking over dit" + (target.kind === "kaart" ? "e kaart" : target.kind === "blok" ? " blok" : " onderdeel") + "</h3>" +
       '<p class="fb-target">In <strong>' + (target.section.getAttribute("data-review-label") || "") + "</strong>" +
         (target.detail ? " · " + target.detail.replace(/</g, "&lt;") : "") + "</p>" +
       '<p class="fb-hint-copy">Dit wordt als voorstel opgeslagen — de pagina verandert niet.</p>' +
@@ -875,10 +943,124 @@
     scrim.classList.add("is-open");
   }
 
+  /* ================================================================
+     Direct op de pagina bewerken
+     Klik op een titel, tekst of knop: de tekst wordt meteen bewerkbaar op
+     z'n eigen plek, met een klein balkje eronder (Opslaan / Annuleren /
+     Opmerking). Enter = opslaan, Esc = annuleren, ergens anders klikken =
+     opslaan als er iets veranderd is. Teksten met opmaak of iconen erin
+     (bijv. een link met pijltje) gaan via het venster, zodat er niets stukgaat.
+     ================================================================ */
+  var editing = null; // { el, target, oldText, oldEditable }
+
+  function canInlineEdit(el) {
+    if (!el || el.closest(".fb-modebar, .fb-sidebar, .fb-scrim")) return false;
+    for (var i = 0; i < el.children.length; i++) {
+      if (el.children[i].tagName !== "BR") return false;
+    }
+    return !!el.textContent.trim();
+  }
+
+  var editBar = document.createElement("div");
+  editBar.className = "fb-edit-bar";
+  editBar.innerHTML =
+    '<button type="button" class="fb-eb-save" id="fb-eb-save">✓ Opslaan</button>' +
+    '<button type="button" class="fb-eb-btn" id="fb-eb-cancel">Annuleren</button>' +
+    '<button type="button" class="fb-eb-btn" id="fb-eb-note">💬 Opmerking</button>' +
+    '<span class="fb-eb-hint">Enter = opslaan · Esc = annuleren</span>';
+  document.body.appendChild(editBar);
+
+  function placeEditBar() {
+    if (!editing) return;
+    var r = editing.el.getBoundingClientRect();
+    var top = r.bottom + 10;
+    if (top + 54 > window.innerHeight) top = Math.max(8, r.top - 54);
+    var left = Math.max(8, Math.min(r.left, window.innerWidth - editBar.offsetWidth - 8));
+    editBar.style.top = top + "px";
+    editBar.style.left = left + "px";
+  }
+  window.addEventListener("scroll", placeEditBar, { passive: true });
+  window.addEventListener("resize", placeEditBar);
+
+  function startInlineEdit(target) {
+    var el = target.el;
+    editing = { el: el, target: target, oldText: el.innerText.trim(), oldEditable: el.getAttribute("contenteditable") };
+    el.setAttribute("contenteditable", "plaintext-only");
+    if (el.contentEditable !== "plaintext-only") el.setAttribute("contenteditable", "true");
+    el.setAttribute("spellcheck", "true");
+    el.classList.add("fb-editing");
+    el.focus();
+    try {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } catch (err) {}
+    editBar.classList.add("is-open");
+    placeEditBar();
+  }
+
+  function stopInlineEdit() {
+    if (!editing) return;
+    var el = editing.el;
+    if (editing.oldEditable === null) el.removeAttribute("contenteditable");
+    else el.setAttribute("contenteditable", editing.oldEditable);
+    el.removeAttribute("spellcheck");
+    el.classList.remove("fb-editing");
+    editBar.classList.remove("is-open");
+    editing = null;
+    try { window.getSelection().removeAllRanges(); } catch (err) {}
+  }
+
+  function cancelInlineEdit() {
+    if (!editing) return;
+    editing.el.textContent = editing.oldText;
+    stopInlineEdit();
+  }
+
+  function saveInlineEdit() {
+    if (!editing) return;
+    var ed = editing;
+    var newText = ed.el.innerText.replace(/ /g, " ").replace(/[ \t]+\n/g, "\n").trim();
+    if (!newText || newText === ed.oldText) { cancelInlineEdit(); return; }
+    var isText = ed.target.kind === "tekst";
+    stopInlineEdit();
+    var saved = addEntry(baseEntry(ed.target, {
+      actionType: isText ? "tekst-wijziging" : "knop-suggestie",
+      oldText: ed.oldText, newText: newText,
+      message: isText ? ed.oldText + " → " + newText : "Voorstel: \"" + ed.oldText + "\" → \"" + newText + "\""
+    }));
+    if (saved) {
+      ed.el.classList.add("fb-edited");
+      showToast("✓ Opgeslagen — u kunt gewoon verder klikken.");
+    }
+  }
+
+  editBar.addEventListener("mousedown", function (e) { e.preventDefault(); }); // focus in de tekst houden
+  editBar.addEventListener("click", function (e) {
+    if (e.target.closest("#fb-eb-save")) saveInlineEdit();
+    else if (e.target.closest("#fb-eb-cancel")) cancelInlineEdit();
+    else if (e.target.closest("#fb-eb-note")) {
+      var t = editing && editing.target;
+      cancelInlineEdit();
+      if (t) { activeTarget = t; document.getElementById("fb-form-kind").textContent = t.kindLabel; renderCommentForm(t); scrim.classList.add("is-open"); }
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!editing) return;
+    if (e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); cancelInlineEdit(); }
+    else if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); saveInlineEdit(); }
+  }, true);
+
   /* ---- Klik op sectie, afbeelding, tekst of knop ---- */
   document.addEventListener("click", function (e) {
     if (!isActive) return;
-    if (e.target.closest(".fb-header-controls, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim, .fb-intro-scrim")) return;
+    if (e.target.closest(".fb-header-controls, .fb-modebar, .fb-edit-bar, .fb-tour, .fb-sidebar, .fb-sidebar-scrim, .fb-scrim, .fb-intro-scrim")) return;
+    // Klikken binnen de tekst die je aan het bewerken bent: gewoon de cursor plaatsen.
+    if (editing && editing.el.contains(e.target)) { e.preventDefault(); return; }
+    // Ergens anders klikken rondt de lopende bewerking af.
+    if (editing) { e.preventDefault(); e.stopPropagation(); saveInlineEdit(); return; }
     var section = e.target.closest("[data-review-id]");
     if (!section) return;
     e.preventDefault();
@@ -886,6 +1068,10 @@
     clearHover();
     var target = describeTarget(e.target, section);
     target.section = section;
+    if ((target.kind === "tekst" || target.kind === "knop" || target.kind === "navigatie") && canInlineEdit(target.el)) {
+      startInlineEdit(target);
+      return;
+    }
     openPopover(target);
   }, true);
 
@@ -1000,7 +1186,7 @@
   sidebar.innerHTML =
     '<div class="fb-sidebar-head">' +
       '<div><h3>Mijn feedback</h3><p>Al je opmerkingen, overzichtelijk bij elkaar.</p>' +
-        '<button type="button" class="fb-help-link" id="fb-help-link">❓ Hoe werkt dit? / mijn algemene indruk</button>' +
+        '<button type="button" class="fb-help-link" id="fb-help-link">❓ Hoe werkt dit?</button>' +
       "</div>" +
       '<button type="button" class="fb-close" id="fb-sidebar-close" aria-label="Sluiten">✕</button>' +
     "</div>" +
@@ -1010,8 +1196,8 @@
     "</div>" +
     '<div class="fb-list" id="fb-list"></div>' +
     '<div class="fb-sidebar-foot">' +
-      '<button type="button" class="fb-done-btn" id="fb-done-btn">✅ Ik heb alle feedback gegeven</button>' +
-      '<p class="fb-done-hint">Jip krijgt hiervan automatisch een e-mail met een samenvatting.</p>' +
+      '<button type="button" class="fb-done-btn" id="fb-done-btn">📨 Versturen naar Jip</button>' +
+      '<p class="fb-done-hint">Jip krijgt al uw punten in één overzichtelijke e-mail.</p>' +
     "</div>";
   document.body.appendChild(sidebar);
 
@@ -1102,23 +1288,168 @@
   function openSidebar() { renderList(); sidebar.classList.add("is-open"); sidebarScrim.classList.add("is-open"); }
   function closeSidebar() { sidebar.classList.remove("is-open"); sidebarScrim.classList.remove("is-open"); }
   document.getElementById("fb-sidebar-close").addEventListener("click", closeSidebar);
-  document.getElementById("fb-help-link").addEventListener("click", openHowItWorks);
+  document.getElementById("fb-help-link").addEventListener("click", openTour);
   sidebarScrim.addEventListener("click", closeSidebar);
   panelBtn.addEventListener("click", openSidebar);
 
-  /* "✅ Ik heb alle feedback gegeven" — markeert de sessie als afgerond en
-     stuurt (via /api/notify-feedback) direct de samenvattings-e-mail naar
-     Jip, zonder op de inactiviteitstimer te hoeven wachten. */
-  document.getElementById("fb-done-btn").addEventListener("click", function () {
-    if (!currentSessionId) { showToast("Je hebt nog geen feedback gegeven."); return; }
-    notifyFeedback("manual");
-    showToast("Bedankt! Jip is op de hoogte gebracht.");
-    closeSidebar();
+  document.getElementById("fb-done-btn").addEventListener("click", function () { closeSidebar(); openSend(); });
+
+  /* ================================================================
+     Korte rondleiding (4 stappen) — de eerste keer automatisch, daarna
+     altijd terug te halen via "Uitleg" in de feedbackbalk.
+     ================================================================ */
+  var TOUR = [
+    { icon: "👋", title: "Welkom! Zo geeft u feedback", text: "U kunt de website nu zelf aanpassen en opmerkingen geven. Niets gaat live — Jip krijgt uw voorstellen netjes op een rij. Deze uitleg duurt 20 seconden." },
+    { icon: "✎", title: "Klik op een titel of tekst", text: "De tekst wordt meteen bewerkbaar. Typ uw verbetering en klik op <strong>Opslaan</strong> (of druk op Enter). Liever iets uitleggen? Kies <strong>Opmerking</strong>.", demo: "text" },
+    { icon: "🖼", title: "Klik op een foto", text: "Kies een andere foto van uw computer of telefoon. We laten hem direct op de pagina zien. Een opmerking erbij kan ook." , demo: "photo" },
+    { icon: "📨", title: "Klaar? Verstuur het naar Jip", text: "Met het <strong>✕</strong> in de balk bovenaan stopt u — alles blijft bewaard, ook als u de website sluit. Bent u klaar, klik dan op <strong>Versturen naar Jip</strong>.", demo: "bar" }
+  ];
+  var tourEl = document.createElement("div");
+  tourEl.className = "fb-tour";
+  tourEl.setAttribute("role", "dialog");
+  tourEl.setAttribute("aria-modal", "true");
+  tourEl.setAttribute("aria-label", "Uitleg feedbackmodus");
+  document.body.appendChild(tourEl);
+  var tourStep = 0;
+
+  function tourDemo(kind) {
+    if (kind === "text") return '<div class="fb-demo fb-demo-text"><span class="fb-demo-line">Kom langs in onze showroom<span class="fb-demo-caret"></span></span><span class="fb-demo-bar"><b>✓ Opslaan</b><i>Annuleren</i></span></div>';
+    if (kind === "photo") return '<div class="fb-demo fb-demo-photo"><span class="fb-demo-img"></span><span class="fb-demo-upload">⬆ Kies een andere foto</span></div>';
+    if (kind === "bar") return '<div class="fb-demo fb-demo-modebar"><span>Feedbackmodus</span><b>Versturen naar Jip</b><i>✕</i></div>';
+    return "";
+  }
+  function renderTour() {
+    var s = TOUR[tourStep];
+    var last = tourStep === TOUR.length - 1;
+    tourEl.innerHTML =
+      '<div class="fb-tour-card">' +
+        '<button type="button" class="fb-tour-x" data-tour="skip" aria-label="Uitleg sluiten">✕</button>' +
+        '<span class="fb-tour-icon" aria-hidden="true">' + s.icon + "</span>" +
+        "<h3>" + s.title + "</h3>" +
+        "<p>" + s.text + "</p>" +
+        tourDemo(s.demo) +
+        '<div class="fb-tour-foot">' +
+          '<span class="fb-tour-dots">' + TOUR.map(function (_, i) { return '<i class="' + (i === tourStep ? "is-on" : "") + '"></i>'; }).join("") + "</span>" +
+          (tourStep > 0 ? '<button type="button" class="fb-btn-ghost" data-tour="prev">Vorige</button>' : '<button type="button" class="fb-btn-ghost" data-tour="skip">Overslaan</button>') +
+          '<button type="button" class="fb-btn-save" data-tour="' + (last ? "done" : "next") + '">' + (last ? "Aan de slag" : "Volgende") + "</button>" +
+        "</div>" +
+      "</div>";
+    var btn = tourEl.querySelector('[data-tour="next"], [data-tour="done"]');
+    if (btn) window.setTimeout(function () { btn.focus(); }, 60);
+  }
+  function openTour() { tourStep = 0; renderTour(); tourEl.classList.add("is-open"); }
+  function closeTour() { if (tourEl.classList.contains("is-open")) markOnboarded(); tourEl.classList.remove("is-open"); }
+  tourEl.addEventListener("click", function (e) {
+    if (e.target === tourEl) { closeTour(); return; }
+    var b = e.target.closest("[data-tour]");
+    if (!b) return;
+    var a = b.getAttribute("data-tour");
+    if (a === "next") { tourStep++; renderTour(); }
+    else if (a === "prev") { tourStep--; renderTour(); }
+    else closeTour();
+  });
+
+  /* ================================================================
+     Versturen naar Jip — overzicht van wat er verzameld is, optioneel een
+     algemene indruk, en een duidelijke bevestiging (of foutmelding).
+     ================================================================ */
+  var sendScrim = document.createElement("div");
+  sendScrim.className = "fb-scrim fb-send-scrim";
+  document.body.appendChild(sendScrim);
+
+  function sendSummaryHtml(items) {
+    var shown = items.slice(0, 6).map(function (i) {
+      var what = i.actionType === "algemeen" ? "Algemene indruk"
+        : (i.oldText && i.newText) ? "“" + i.oldText.slice(0, 40) + (i.oldText.length > 40 ? "…" : "") + "” aangepast"
+        : (i.message || "").replace(/^Voorstel:\s*/, "").slice(0, 70);
+      var page = (i.pageTitle || "").split(" — ")[0];
+      return "<li><span>" + what.replace(/</g, "&lt;") + "</span>" + (page ? "<small>" + page.replace(/</g, "&lt;") + "</small>" : "") + "</li>";
+    }).join("");
+    var more = items.length > 6 ? '<li class="fb-send-more">+ ' + (items.length - 6) + " meer</li>" : "";
+    return '<ul class="fb-send-list">' + shown + more + "</ul>";
+  }
+  function openSend() {
+    var items = sessionItems();
+    sendScrim.innerHTML =
+      '<div class="fb-modal fb-send-modal" role="dialog" aria-modal="true">' +
+        '<button type="button" class="fb-tour-x" data-send="close" aria-label="Sluiten">✕</button>' +
+        "<h3>Feedback versturen naar Jip</h3>" +
+        (items.length
+          ? '<p class="fb-hint-copy">U heeft <strong>' + items.length + " punt" + (items.length === 1 ? "" : "en") + "</strong> verzameld:</p>" + sendSummaryHtml(items)
+          : '<p class="fb-hint-copy">U heeft nog geen punten op de pagina verzameld. U kunt hieronder wel uw algemene indruk sturen.</p>') +
+        '<div class="fb-field"><label for="fb-send-like">Wat vindt u goed? <span class="fb-optional">(optioneel)</span></label><textarea id="fb-send-like" placeholder="Wat spreekt u aan?"></textarea></div>' +
+        '<div class="fb-field"><label for="fb-send-change">Wat moet er nog anders? <span class="fb-optional">(optioneel)</span></label><textarea id="fb-send-change" placeholder="Bijvoorbeeld kleuren, foto’s, teksten of de indeling"></textarea></div>' +
+        '<div class="fb-actions"><button type="button" class="fb-btn-ghost" data-send="close">Nog niet, ik ga verder</button>' +
+        '<button type="button" class="fb-btn-save fb-btn-lg" data-send="go">📨 Versturen naar Jip</button></div>' +
+      "</div>";
+    sendScrim.classList.add("is-open");
+  }
+  function closeSend() { sendScrim.classList.remove("is-open"); }
+  function sendResultHtml(ok) {
+    return (
+      '<div class="fb-modal fb-send-modal fb-send-result" role="dialog" aria-modal="true">' +
+        '<span class="fb-send-icon" aria-hidden="true">' + (ok ? "✓" : "!") + "</span>" +
+        "<h3>" + (ok ? "Verstuurd — bedankt!" : "Versturen lukte niet") + "</h3>" +
+        '<p class="fb-hint-copy">' + (ok
+          ? "Jip heeft uw feedback ontvangen en gaat ermee aan de slag. U kunt later altijd nieuwe feedback geven."
+          : "Geen zorgen: uw feedback is bewaard. Probeer het straks nog eens, of laat het Jip even weten.") + "</p>" +
+        '<div class="fb-actions">' + (ok
+          ? '<button type="button" class="fb-btn-save" data-send="finish">Sluiten</button>'
+          : '<button type="button" class="fb-btn-ghost" data-send="close">Sluiten</button><button type="button" class="fb-btn-save" data-send="retry">Opnieuw proberen</button>') +
+        "</div>" +
+      "</div>"
+    );
+  }
+  function doSend() {
+    var like = (document.getElementById("fb-send-like") || {}).value || "";
+    var change = (document.getElementById("fb-send-change") || {}).value || "";
+    like = like.trim(); change = change.trim();
+    if (like || change) {
+      var parts = [];
+      if (like) parts.push("Wat spreekt aan: " + like);
+      if (change) parts.push("Wat moet worden aangepast: " + change);
+      addEntry({
+        id: uid(), path: window.location.pathname, pageTitle: document.title,
+        sessionId: ensureSessionId(),
+        sectionId: "algemeen", sectionLabel: "Algemene indruk",
+        targetKind: "algemeen", targetKindLabel: "Algemeen", targetDetail: "",
+        actionType: "algemeen", like: like, change: change, message: parts.join("\n\n"), attachment: null,
+        status: "open", createdAt: new Date().toISOString()
+      });
+    }
+    if (!currentSessionId) { closeSend(); showToast("Er is nog niets om te versturen."); return; }
+    var go = sendScrim.querySelector('[data-send="go"], [data-send="retry"]');
+    if (go) { go.disabled = true; go.textContent = "Bezig met versturen…"; }
+    notifyFeedback("manual").then(function (res) {
+      sendScrim.innerHTML = sendResultHtml(res.ok);
+      refreshAll();
+    });
+  }
+  sendScrim.addEventListener("click", function (e) {
+    if (e.target === sendScrim) { closeSend(); return; }
+    var b = e.target.closest("[data-send]");
+    if (!b) return;
+    var a = b.getAttribute("data-send");
+    if (a === "go" || a === "retry") doSend();
+    else if (a === "finish") { closeSend(); setActiveCore(false); }
+    else closeSend();
+  });
+
+  /* ---- Feedbackbalk: knoppen ---- */
+  document.getElementById("fb-mb-help").addEventListener("click", openTour);
+  document.getElementById("fb-mb-list").addEventListener("click", openSidebar);
+  document.getElementById("fb-mb-send").addEventListener("click", openSend);
+  document.getElementById("fb-mb-close").addEventListener("click", function () {
+    var n = sessionItems().length;
+    if (editing) saveInlineEdit();
     setActiveCore(false);
+    showToast(n ? "Feedbackmodus gesloten — uw " + n + " punt" + (n === 1 ? " is" : "en zijn") + " bewaard. Versturen kan later." : "Feedbackmodus gesloten.");
   });
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
+    if (tourEl.classList.contains("is-open")) closeTour();
+    if (sendScrim.classList.contains("is-open")) closeSend();
     if (scrim.classList.contains("is-open")) closePopover();
     if (introScrim.classList.contains("is-open")) closeIntro();
     if (sidebar.classList.contains("is-open")) closeSidebar();
@@ -1130,16 +1461,34 @@
   function applyState() {
     document.documentElement.classList.toggle("feedback-mode", isActive);
     toggle.classList.toggle("is-active", isActive);
-    toggle.querySelector(".fb-toggle-text").textContent = isActive ? "Feedback actief" : "Feedback geven";
-    panelBtn.hidden = !isActive;
-    if (isActive) {
-      document.getElementById("fb-toggle-count").textContent = String(readAll().length);
-    } else {
+    toggle.querySelector(".fb-toggle-text").textContent = "Feedback geven";
+    // Aan: de feedbackbalk bovenin neemt het over; uit: alleen de knop.
+    headerControls.hidden = isActive;
+    panelBtn.hidden = true;
+    modebar.classList.toggle("is-open", isActive);
+    updateCounts();
+    if (!isActive) {
+      if (editing) cancelInlineEdit();
       clearHover();
       closePopover();
       closeIntro();
       closeSidebar();
+      closeTour();
+      closeSend();
     }
+  }
+  function updateCounts() {
+    var all = readAll().length, open = sessionItems().length;
+    var mb = document.getElementById("fb-mb-count");
+    if (mb) mb.textContent = String(all);
+    var sc = document.getElementById("fb-mb-send-count");
+    if (sc) { sc.textContent = String(open); sc.hidden = !open; }
+    // Ook buiten de modus zichtbaar: "je hebt nog n onverstuurde punten".
+    var tc = toggle.querySelector(".fb-count");
+    if (!tc) { tc = document.createElement("span"); tc.className = "fb-count"; toggle.appendChild(tc); }
+    tc.textContent = String(open);
+    tc.hidden = !open;
+    toggle.title = open ? open + " punt" + (open === 1 ? "" : "en") + " nog niet verstuurd" : "";
   }
   function setActiveCore(on) {
     isActive = on;
@@ -1149,12 +1498,11 @@
   toggle.addEventListener("click", function () {
     var turningOn = !isActive;
     setActiveCore(turningOn);
-    if (turningOn && !onboarded) openOnboarding();
+    if (turningOn && !onboarded) openTour();
   });
 
   function refreshAll() {
-    var countEl = document.getElementById("fb-toggle-count");
-    if (countEl && isActive) countEl.textContent = String(readAll().length);
+    updateCounts();
     if (sidebar.classList.contains("is-open")) renderList();
   }
 
