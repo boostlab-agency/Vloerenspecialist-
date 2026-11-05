@@ -1,0 +1,38 @@
+{
+  "file": "interieur/papierbehang.html",
+  "group": "interieur",
+  "inherit": "behang.json",
+  "parent": { "label": "Behang", "href": "/interieur/behang.html" },
+  "name": "Papierbehang",
+  "title": "Papierbehang",
+  "metaDesc": "Papierbehang: tijdloos, ademend en milieuvriendelijk, met een natuurlijke uitstraling van klassiek tot modern. Bekijk de stalen in onze showroom in Tilburg.",
+  "eyebrow": "Behang",
+  "h1": "Papierbehang",
+  "vertical": "Papierbehang",
+  "lead": "Tijdloos, ademend en met een natuurlijke uitstraling, van klassiek tot modern. Papierbehang brengt sfeer en warmte in elke ruimte.",
+  "heroImg": "https://images.unsplash.com/photo-1783403716758-27e30a7976ca",
+  "heroAlt": "Klassiek papierbehang met blauw boom- en hertenpatroon",
+  "about": {
+    "eyebrow": "Over papierbehang",
+    "h2": "Tijdloos en natuurlijk",
+    "paras": [
+      "Papierbehang is een tijdloze en charmante manier om uw interieur op te frissen. Het heeft een natuurlijke uitstraling en is verkrijgbaar in een breed scala aan patronen, van klassiek tot modern.",
+      "Papierbehang is ademend, licht van gewicht en milieuvriendelijk, waardoor het een duurzame keuze is voor uw huis. Het brengt sfeer en warmte in elke ruimte, of het nu gaat om een rustige slaapkamer of een levendige woonkamer.",
+      "Bovendien is het eenvoudig aan te brengen en verandert het uw kamer in een handomdraai."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Stalen",
+    "h2": "Bekijk het behang in uw eigen licht",
+    "text": "Kies in de showroom uw favorieten en neem de stalen gewoon mee naar huis. Zo ziet u hoe het behang eruitziet in uw eigen licht en naast uw eigen meubels.",
+    "img": "/assets/img/real/behang-woonkamer-1800.jpg",
+    "alt": "Woonkamer met sfeervol groen behang"
+  },
+  "related": [
+    { "label": "Fotobehang", "href": "/interieur/fotobehang.html" },
+    { "label": "Vinylbehang", "href": "/interieur/vinylbehang.html" },
+    { "label": "Vliesbehang", "href": "/interieur/vliesbehang.html" },
+    { "label": "Renostuc", "href": "/interieur/renostuc.html" },
+    { "label": "Alles over behang", "href": "/interieur/behang.html" }
+  ]
+}

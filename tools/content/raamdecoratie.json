@@ -24,10 +24,10 @@
     "h2": "Vier manieren om het licht te regelen",
     "text": "Voel de stoffen en probeer de bediening in de showroom, of bekijk de stalen bij u thuis.",
     "items": [
-      { "id": "jaloezieen", "title": "Jaloezieën", "text": "Kantel de lamellen en bepaal precies hoeveel licht en inkijk u toelaat. In hout, kunststof of aluminium.", "img": "https://images.unsplash.com/photo-1609534117141-ff9f20450902", "alt": "Houten jaloezie voor een raam met een plant" },
-      { "id": "rolgordijnen", "title": "Rolgordijnen", "text": "Strak en praktisch: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend.", "img": "https://images.unsplash.com/photo-1776261293170-66fd3b09273e", "alt": "Grijs rolgordijn voor een modern raam" },
-      { "id": "plissegordijnen", "title": "Plisségordijnen", "text": "Van boven en van onderen te bedienen en passend in lastige raamvormen. Isoleert bovendien uitstekend.", "img": "https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", "alt": "Plisségordijn boven een raam in een lichte woonkamer" },
-      { "id": "vouwgordijnen", "title": "Vouwgordijnen", "text": "Zachte plooien van stof die het raam warm afmaken, van luchtig linnen tot verduisterend.", "img": "https://images.unsplash.com/photo-1779078652928-6d941878d32e", "alt": "Vouwgordijn boven een raam in een slaapkamer" }
+      { "id": "jaloezieen", "href": "/interieur/jaloezieen.html", "title": "Jaloezieën", "text": "Kantel de lamellen en bepaal precies hoeveel licht en inkijk u toelaat. In hout, kunststof of aluminium.", "img": "https://images.unsplash.com/photo-1609534117141-ff9f20450902", "alt": "Houten jaloezie voor een raam met een plant" },
+      { "id": "rolgordijnen", "href": "/interieur/rolgordijnen.html", "title": "Rolgordijnen", "text": "Strak en praktisch: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend.", "img": "https://images.unsplash.com/photo-1776261293170-66fd3b09273e", "alt": "Grijs rolgordijn voor een modern raam" },
+      { "id": "plissegordijnen", "href": "/interieur/plissegordijnen.html", "title": "Plisségordijnen", "text": "Van boven en van onderen te bedienen en passend in lastige raamvormen. Isoleert bovendien uitstekend.", "img": "https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", "alt": "Plisségordijn boven een raam in een lichte woonkamer" },
+      { "id": "vouwgordijnen", "href": "/interieur/vouwgordijnen.html", "title": "Vouwgordijnen", "text": "Zachte plooien van stof die het raam warm afmaken, van luchtig linnen tot verduisterend.", "img": "https://images.unsplash.com/photo-1779078652928-6d941878d32e", "alt": "Vouwgordijn boven een raam in een slaapkamer" }
     ]
   },
   "feature": {

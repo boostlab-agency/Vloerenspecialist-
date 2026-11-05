@@ -1,0 +1,30 @@
+{
+  "file": "interieur/plissegordijnen.html",
+  "group": "interieur",
+  "inherit": "raamdecoratie.json",
+  "parent": { "label": "Raamdecoratie", "href": "/interieur/raamdecoratie.html" },
+  "name": "Plisségordijnen",
+  "title": "Plisségordijnen",
+  "metaDesc": "Plisségordijnen op maat: van boven en van onderen te bedienen, passend in lastige raamvormen en uitstekend isolerend. Gratis inmeten aan huis en montage door ons eigen team.",
+  "eyebrow": "Raamdecoratie",
+  "h1": "Plisségordijnen",
+  "vertical": "Plisségordijnen",
+  "lead": "Van boven en van onderen te bedienen en passend in lastige raamvormen. Isoleert bovendien uitstekend.",
+  "heroImg": "https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9",
+  "heroAlt": "Plisségordijn boven een raam in een lichte woonkamer",
+  "about": {
+    "eyebrow": "Over plisségordijnen",
+    "h2": "Stijl, functionaliteit en veelzijdigheid",
+    "paras": [
+      "Plisségordijnen zijn de perfecte combinatie van stijl, functionaliteit en veelzijdigheid. Met hun unieke, geplooide structuur geven ze elke ruimte een moderne en elegante uitstraling.",
+      "Ze zijn verkrijgbaar in verschillende stoffen, van transparant tot verduisterend, zodat u de lichtinval en privacy precies kunt regelen. Plisségordijnen zijn bovendien zeer energie-efficiënt: hun isolerende eigenschappen zijn zowel in de zomer als in de winter prettig.",
+      "Dankzij het handige systeem kunnen ze zowel van boven als van onderen worden bediend, wat extra flexibiliteit geeft. Of u nu kiest voor een strak design of een zachte tint: plisségordijnen passen in elk interieur."
+    ]
+  },
+  "related": [
+    { "label": "Jaloezieën", "href": "/interieur/jaloezieen.html" },
+    { "label": "Rolgordijnen", "href": "/interieur/rolgordijnen.html" },
+    { "label": "Vouwgordijnen", "href": "/interieur/vouwgordijnen.html" },
+    { "label": "Alles over raamdecoratie", "href": "/interieur/raamdecoratie.html" }
+  ]
+}

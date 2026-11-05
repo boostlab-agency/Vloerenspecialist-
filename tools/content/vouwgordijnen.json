@@ -1,0 +1,30 @@
+{
+  "file": "interieur/vouwgordijnen.html",
+  "group": "interieur",
+  "inherit": "raamdecoratie.json",
+  "parent": { "label": "Raamdecoratie", "href": "/interieur/raamdecoratie.html" },
+  "name": "Vouwgordijnen",
+  "title": "Vouwgordijnen",
+  "metaDesc": "Vouwgordijnen op maat: zachte plooien van stof die het raam warm afmaken, van luchtig linnen tot verduisterend. Gratis inmeten aan huis en montage door ons eigen team.",
+  "eyebrow": "Raamdecoratie",
+  "h1": "Vouwgordijnen",
+  "vertical": "Vouwgordijnen",
+  "lead": "Zachte plooien van stof die het raam warm afmaken, van luchtig linnen tot verduisterend.",
+  "heroImg": "https://images.unsplash.com/photo-1779078652928-6d941878d32e",
+  "heroAlt": "Vouwgordijn boven een raam in een slaapkamer",
+  "about": {
+    "eyebrow": "Over vouwgordijnen",
+    "h2": "Warm, zacht en sfeervol",
+    "paras": [
+      "Vouwgordijnen zijn een stijlvolle en praktische keuze voor het aankleden van uw ramen. Hun elegante, geplooide stof zorgt voor een warme, zachte uitstraling in elke ruimte.",
+      "Ze zijn eenvoudig op te trekken, waardoor u volledige controle heeft over lichtinval en privacy. Verkrijgbaar in diverse stoffen, van licht en luchtig tot zwaar en verduisterend, passen vouwgordijnen in elk interieur, van modern tot klassiek.",
+      "Vouwgordijnen zijn ook functioneel: ze dempen geluid en hebben een isolerende werking. Zo creëert u een gezellige, sfeervolle ambiance in huis."
+    ]
+  },
+  "related": [
+    { "label": "Jaloezieën", "href": "/interieur/jaloezieen.html" },
+    { "label": "Rolgordijnen", "href": "/interieur/rolgordijnen.html" },
+    { "label": "Plisségordijnen", "href": "/interieur/plissegordijnen.html" },
+    { "label": "Alles over raamdecoratie", "href": "/interieur/raamdecoratie.html" }
+  ]
+}

@@ -128,9 +128,9 @@
       ["/vloeren/pvc", "pvc"], ["/vloeren/hout", "hout"], ["/vloeren/laminaat", "laminaat"],
       ["/vloeren/tegel", "tegel"], ["/vloeren/vloerbedekking", "vloerbedekking"], ["/vloeren/giet", "giet"],
       ["/vloeren/hybride", "hybride"], ["kasten-op-maat", "kasten"], ["deuren-en-wanden", "deuren"], ["meubels-op-maat", "meubels"],
-      ["#fotobehang", "fotobehang"], ["#papierbehang", "papierbehang"], ["#vinylbehang", "vinylbehang"],
-      ["#vliesbehang", "vliesbehang"], ["#renostuc", "renostuc"], ["#jaloezieen", "jaloezieen"],
-      ["#rolgordijnen", "rol"], ["#plissegordijnen", "plisse"], ["#vouwgordijnen", "vouw"],
+      ["/fotobehang", "fotobehang"], ["/papierbehang", "papierbehang"], ["/vinylbehang", "vinylbehang"],
+      ["/vliesbehang", "vliesbehang"], ["/renostuc", "renostuc"], ["/jaloezieen", "jaloezieen"],
+      ["/rolgordijnen", "rol"], ["/plissegordijnen", "plisse"], ["/vouwgordijnen", "vouw"],
       ["/vloeren/index", "vloeren-alle"]
     ];
     for (var i = 0; i < map.length; i++) if (href.indexOf(map[i][0]) !== -1) return DVS.megaIcons[map[i][1]];

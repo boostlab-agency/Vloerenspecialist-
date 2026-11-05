@@ -1,0 +1,38 @@
+{
+  "file": "interieur/fotobehang.html",
+  "group": "interieur",
+  "inherit": "behang.json",
+  "parent": { "label": "Behang", "href": "/interieur/behang.html" },
+  "name": "Fotobehang",
+  "title": "Fotobehang",
+  "metaDesc": "Fotobehang maakt van één wand een statement: van stadsgezicht tot natuurpanorama of kunstwerk. Bekijk de mogelijkheden in onze showroom in Tilburg.",
+  "eyebrow": "Behang",
+  "h1": "Fotobehang",
+  "vertical": "Fotobehang",
+  "lead": "Van stadsgezicht tot natuurpanorama of kunstwerk: met fotobehang maakt u van één wand een statement dat uw interieur direct karakter geeft.",
+  "heroImg": "https://images.unsplash.com/photo-1759774313806-7c564f3bd592",
+  "heroAlt": "Salon met een wandvullend landschap als fotobehang",
+  "about": {
+    "eyebrow": "Over fotobehang",
+    "h2": "Eén wand als statement",
+    "paras": [
+      "Fotobehang is de ideale manier om uw interieur te transformeren en een persoonlijke touch aan uw ruimte toe te voegen. Of u nu droomt van een stadsgezicht, een natuurpanorama of een abstract kunstwerk: fotobehang maakt van elke muur een statement.",
+      "Het biedt eindeloze mogelijkheden om uw favoriete herinneringen of visuele inspiratie op grote schaal te delen. Het is niet alleen stijlvol, maar ook eenvoudig aan te brengen en onderhoudsvriendelijk.",
+      "Fotobehang brengt karakter en sfeer in elke kamer, van de woonkamer tot de slaapkamer, en zorgt ervoor dat uw interieur altijd in het oog springt."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Stalen",
+    "h2": "Bekijk het behang in uw eigen licht",
+    "text": "Kies in de showroom uw favorieten en neem de stalen gewoon mee naar huis. Zo ziet u hoe het behang eruitziet in uw eigen licht en naast uw eigen meubels.",
+    "img": "/assets/img/real/behang-woonkamer-1800.jpg",
+    "alt": "Woonkamer met sfeervol groen behang"
+  },
+  "related": [
+    { "label": "Papierbehang", "href": "/interieur/papierbehang.html" },
+    { "label": "Vinylbehang", "href": "/interieur/vinylbehang.html" },
+    { "label": "Vliesbehang", "href": "/interieur/vliesbehang.html" },
+    { "label": "Renostuc", "href": "/interieur/renostuc.html" },
+    { "label": "Alles over behang", "href": "/interieur/behang.html" }
+  ]
+}

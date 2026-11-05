@@ -66,11 +66,11 @@
         {
           title: "Soorten behang",
           links: [
-            { label: "Fotobehang", desc: "Eén wand als statement", href: "/interieur/behang.html#fotobehang", img: img("https://images.unsplash.com/photo-1759774313806-7c564f3bd592", 160) },
-            { label: "Papierbehang", desc: "Tijdloos, ademend en natuurlijk", href: "/interieur/behang.html#papierbehang", img: img("https://images.unsplash.com/photo-1783403716758-27e30a7976ca", 160) },
-            { label: "Vinylbehang", desc: "Sterk en afwasbaar", href: "/interieur/behang.html#vinylbehang", img: "/assets/img/real/behang-woonkamer-900.jpg" },
-            { label: "Vliesbehang", desc: "Scheurvast en snel aangebracht", href: "/interieur/behang.html#vliesbehang", img: img("https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", 160) },
-            { label: "Renostuc", desc: "Strakke muren zonder stucwerk", href: "/interieur/behang.html#renostuc", img: "/assets/img/real/renostuc-bedroom-sage-1600.jpg" }
+            { label: "Fotobehang", desc: "Eén wand als statement", href: "/interieur/fotobehang.html", img: img("https://images.unsplash.com/photo-1759774313806-7c564f3bd592", 160) },
+            { label: "Papierbehang", desc: "Tijdloos, ademend en natuurlijk", href: "/interieur/papierbehang.html", img: img("https://images.unsplash.com/photo-1783403716758-27e30a7976ca", 160) },
+            { label: "Vinylbehang", desc: "Sterk en afwasbaar", href: "/interieur/vinylbehang.html", img: "/assets/img/real/behang-woonkamer-900.jpg" },
+            { label: "Vliesbehang", desc: "Scheurvast en snel aangebracht", href: "/interieur/vliesbehang.html", img: img("https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", 160) },
+            { label: "Renostuc", desc: "Strakke muren zonder stucwerk", href: "/interieur/renostuc.html", img: "/assets/img/real/renostuc-bedroom-sage-1600.jpg" }
           ]
         }
       ]
@@ -81,10 +81,10 @@
         {
           title: "Soorten raamdecoratie",
           links: [
-            { label: "Jaloezieën", desc: "Bepaal precies licht en inkijk", href: "/interieur/raamdecoratie.html#jaloezieen", img: img("https://images.unsplash.com/photo-1609534117141-ff9f20450902", 160) },
-            { label: "Rolgordijnen", desc: "Lichtdoorlatend of verduisterend", href: "/interieur/raamdecoratie.html#rolgordijnen", img: img("https://images.unsplash.com/photo-1776261293170-66fd3b09273e", 160) },
-            { label: "Plisségordijnen", desc: "Past in lastige raamvormen", href: "/interieur/raamdecoratie.html#plissegordijnen", img: img("https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", 160) },
-            { label: "Vouwgordijnen", desc: "Zachte plooien, warm afgewerkt", href: "/interieur/raamdecoratie.html#vouwgordijnen", img: img("https://images.unsplash.com/photo-1779078652928-6d941878d32e", 160) }
+            { label: "Jaloezieën", desc: "Bepaal precies licht en inkijk", href: "/interieur/jaloezieen.html", img: img("https://images.unsplash.com/photo-1609534117141-ff9f20450902", 160) },
+            { label: "Rolgordijnen", desc: "Lichtdoorlatend of verduisterend", href: "/interieur/rolgordijnen.html", img: img("https://images.unsplash.com/photo-1776261293170-66fd3b09273e", 160) },
+            { label: "Plisségordijnen", desc: "Past in lastige raamvormen", href: "/interieur/plissegordijnen.html", img: img("https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", 160) },
+            { label: "Vouwgordijnen", desc: "Zachte plooien, warm afgewerkt", href: "/interieur/vouwgordijnen.html", img: img("https://images.unsplash.com/photo-1779078652928-6d941878d32e", 160) }
           ]
         }
       ]
@@ -99,6 +99,8 @@
     if (here === item.href) return true;
     if (item.key === "vloeren") return here.indexOf("/vloeren/") === 0 || here.indexOf("/merken/") === 0;
     if (item.key === "interieur") return /^\/interieur\/(index|kasten-op-maat|deuren-en-wanden-op-maat|meubels-op-maat)\.html$/.test(here);
+    if (item.key === "behang") return /^\/interieur\/(behang|fotobehang|papierbehang|vinylbehang|vliesbehang|renostuc)\.html$/.test(here);
+    if (item.key === "raamdecoratie") return /^\/interieur\/(raamdecoratie|jaloezieen|rolgordijnen|plissegordijnen|vouwgordijnen)\.html$/.test(here);
     return false;
   }
 

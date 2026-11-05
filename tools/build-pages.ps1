@@ -41,6 +41,14 @@ function Paras($list) { ($list | ForEach-Object { "<p>$_</p>" }) -join "`n      
 Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
   $file = $_
   $d =Get-Content $file.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+  # Subpagina's kunnen gedeelde blokken (voordelen, tips, merken, kom-langs,
+  # uitgelicht) overnemen van hun hoofdpagina: "inherit": "behang.json".
+  if ($d.inherit) {
+    $p = Get-Content (Join-Path $PSScriptRoot "content\$($d.inherit)") -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($k in @("feature", "benefits", "info", "brands", "cta")) {
+      if (-not $d.$k -and $p.$k) { $d | Add-Member -NotePropertyName $k -NotePropertyValue $p.$k }
+    }
+  }
   $out = Join-Path $Root $d.file
   $isFloor = $d.group -eq "vloeren"
   $isMaatwerk = $d.group -eq "maatwerk"
@@ -49,6 +57,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
   $crumb = '<a href="/index.html">Home</a><span class="sep">/</span>'
   if ($isFloor) { $crumb += '<a href="/vloeren/index.html">Vloeren</a><span class="sep">/</span>' }
   if ($isMaatwerk) { $crumb += '<a href="/interieur/index.html">Interieur op maat</a><span class="sep">/</span>' }
+  if ($d.parent) { $crumb += "<a href=""$($d.parent.href)"">$($d.parent.label)</a><span class=""sep"">/</span>" }
   $crumb += "<span aria-current=""page"">$($d.name)</span>"
 
   # Soorten (optioneel; een item met "href" krijgt een link naar zijn eigen pagina)
@@ -60,7 +69,8 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
     $id = if ($_.id) { " id=""$($_.id)""" } else { "" }
     $img = if ($_.img) { "<img src=""$(Img $_.img 900)"" alt=""$($_.alt)"" loading=""lazy"">" } else { "" }
     $tags = if ($_.tags) { '<div class="tag-row">' + (($_.tags | ForEach-Object { "<span class=""tag"">$_</span>" }) -join "") + '</div>' } else { "" }
-    $more = if ($_.href) { "<a class=""btn-text pr-type-more"" href=""$($_.href)"">Meer over $($_.title.ToLower()) <span class=""arrow"">&rarr;</span></a>" } else { "" }
+    $moreLabel = if ($_.more) { $_.more } else { "Meer over $($_.title.ToLower())" }
+    $more = if ($_.href) { "<a class=""btn-text pr-type-more"" href=""$($_.href)"">$moreLabel <span class=""arrow"">&rarr;</span></a>" } else { "" }
     @"
         <article class="pr-type"$id>
           <span class="pr-type-nr">$('{0:00}' -f $n)</span>
@@ -136,7 +146,7 @@ $types
   }
 
   # Verder kijken
-  $relSet = if ($isFloor) { $FLOORS } elseif ($isMaatwerk) { $MAATWERK } else { $INTERIOR }
+  $relSet = if ($d.related) { $d.related } elseif ($isFloor) { $FLOORS } elseif ($isMaatwerk) { $MAATWERK } else { $INTERIOR }
   $related = ($relSet | Where-Object { $_.href -ne "/$($d.file)" } | ForEach-Object {
     "        <a href=""$($_.href)"">$($_.label) <span aria-hidden=""true"">&rarr;</span></a>"
   }) -join "`n"

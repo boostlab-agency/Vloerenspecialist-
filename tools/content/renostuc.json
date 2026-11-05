@@ -1,0 +1,31 @@
+{
+  "file": "interieur/renostuc.html",
+  "group": "interieur",
+  "inherit": "behang.json",
+  "parent": { "label": "Behang", "href": "/interieur/behang.html" },
+  "name": "Renostuc",
+  "title": "Renostuc",
+  "metaDesc": "Renostuc is een extra sterk renovatievlies dat beschadigde muren weer strak en glad maakt, zonder te stucen. Daarna overschilderbaar in elke kleur. Advies in onze showroom in Tilburg.",
+  "eyebrow": "Behang",
+  "h1": "Renostuc",
+  "vertical": "Renostuc",
+  "lead": "Renovatievlies dat beschadigde muren weer strak maakt, zonder stucwerk. Daarna overschilderbaar in elke kleur die u wilt.",
+  "heroImg": "/assets/img/real/renostuc-bedroom-sage-1600.jpg",
+  "heroAlt": "Slaapkamer met strakke, naadloze Renostuc-wanden",
+  "about": {
+    "eyebrow": "Over Renostuc",
+    "h2": "Dé oplossing voor beschadigde muren",
+    "paras": [
+      "Renostuc is dé oplossing voor muren die snel weer strak en glad moeten worden. Het bestaat uit een extra sterke renovatielaag die direct over beschadigde, gescheurde of ongelijkmatige wanden kan worden aangebracht. Hierdoor hoeft u de muur niet eerst volledig te laten stucen, wat tijd én kosten bespaart.",
+      "Het materiaal werkt kleine scheurtjes, putjes en oude verflagen eenvoudig weg en zorgt voor een egale ondergrond die klaar is voor elke afwerking.",
+      "Renostuc is duurzaam, scheurvast en overschilderbaar in iedere gewenste kleur. Een perfecte keuze voor renovaties waarbij een nette, professionele afwerking belangrijk is, zonder overlast en lange droogtijden."
+    ]
+  },
+  "related": [
+    { "label": "Fotobehang", "href": "/interieur/fotobehang.html" },
+    { "label": "Papierbehang", "href": "/interieur/papierbehang.html" },
+    { "label": "Vinylbehang", "href": "/interieur/vinylbehang.html" },
+    { "label": "Vliesbehang", "href": "/interieur/vliesbehang.html" },
+    { "label": "Alles over behang", "href": "/interieur/behang.html" }
+  ]
+}

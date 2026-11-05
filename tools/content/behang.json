@@ -24,11 +24,11 @@
     "h2": "Vijf soorten, elk met een eigen kracht",
     "text": "Twijfelt u welke soort past bij uw wand? Onze adviseurs denken graag met u mee.",
     "items": [
-      { "id": "fotobehang", "title": "Fotobehang", "text": "Van stadsgezicht tot natuurpanorama of kunstwerk: één wand als statement.", "img": "https://images.unsplash.com/photo-1759774313806-7c564f3bd592", "alt": "Salon met een wandvullend landschap als fotobehang" },
-      { "id": "papierbehang", "title": "Papierbehang", "text": "Tijdloos, ademend en met een natuurlijke uitstraling, van klassiek tot modern.", "img": "https://images.unsplash.com/photo-1783403716758-27e30a7976ca", "alt": "Klassiek papierbehang met blauw boom- en hertenpatroon" },
-      { "id": "vinylbehang", "title": "Vinylbehang", "text": "Sterk en afwasbaar dankzij de vinyllaag. Ideaal voor hal, keuken en kinderkamer.", "img": "/assets/img/real/behang-woonkamer-900.jpg", "alt": "Woonkamer met groen vinylbehang" },
-      { "id": "vliesbehang", "title": "Vliesbehang", "text": "Scheurvast en snel aangebracht: de lijm gaat op de muur. Later ook weer makkelijk te verwijderen.", "img": "https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", "alt": "Vliesbehang met grafisch patroon achter een bank" },
-      { "id": "renostuc", "title": "Renostuc", "text": "Renovatievlies dat beschadigde muren weer strak maakt, zonder stucwerk. Daarna overschilderbaar.", "img": "/assets/img/real/renostuc-bedroom-sage-1600.jpg", "alt": "Slaapkamer met strakke, naadloze Renostuc-wanden" }
+      { "id": "fotobehang", "href": "/interieur/fotobehang.html", "title": "Fotobehang", "text": "Van stadsgezicht tot natuurpanorama of kunstwerk: één wand als statement.", "img": "https://images.unsplash.com/photo-1759774313806-7c564f3bd592", "alt": "Salon met een wandvullend landschap als fotobehang" },
+      { "id": "papierbehang", "href": "/interieur/papierbehang.html", "title": "Papierbehang", "text": "Tijdloos, ademend en met een natuurlijke uitstraling, van klassiek tot modern.", "img": "https://images.unsplash.com/photo-1783403716758-27e30a7976ca", "alt": "Klassiek papierbehang met blauw boom- en hertenpatroon" },
+      { "id": "vinylbehang", "href": "/interieur/vinylbehang.html", "title": "Vinylbehang", "text": "Sterk en afwasbaar dankzij de vinyllaag. Ideaal voor hal, keuken en kinderkamer.", "img": "/assets/img/real/behang-woonkamer-900.jpg", "alt": "Woonkamer met groen vinylbehang" },
+      { "id": "vliesbehang", "href": "/interieur/vliesbehang.html", "title": "Vliesbehang", "text": "Scheurvast en snel aangebracht: de lijm gaat op de muur. Later ook weer makkelijk te verwijderen.", "img": "https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", "alt": "Vliesbehang met grafisch patroon achter een bank" },
+      { "id": "renostuc", "href": "/interieur/renostuc.html", "more": "Meer over Renostuc", "title": "Renostuc", "text": "Renovatievlies dat beschadigde muren weer strak maakt, zonder stucwerk. Daarna overschilderbaar.", "img": "/assets/img/real/renostuc-bedroom-sage-1600.jpg", "alt": "Slaapkamer met strakke, naadloze Renostuc-wanden" }
     ]
   },
   "feature": {

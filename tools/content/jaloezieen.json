@@ -1,0 +1,37 @@
+{
+  "file": "interieur/jaloezieen.html",
+  "group": "interieur",
+  "inherit": "raamdecoratie.json",
+  "parent": { "label": "Raamdecoratie", "href": "/interieur/raamdecoratie.html" },
+  "name": "Jaloezieën",
+  "title": "Jaloezieën",
+  "metaDesc": "Jaloezieën op maat in hout, kunststof of aluminium. Bepaal precies hoeveel licht en inkijk u toelaat. Gratis inmeten aan huis en montage door ons eigen team.",
+  "eyebrow": "Raamdecoratie",
+  "h1": "Jaloezieën",
+  "vertical": "Jaloezieën",
+  "lead": "Kantel de lamellen en bepaal precies hoeveel licht en inkijk u toelaat. In hout, kunststof of aluminium, op maat gemaakt voor uw ramen.",
+  "heroImg": "https://images.unsplash.com/photo-1609534117141-ff9f20450902",
+  "heroAlt": "Houten jaloezie voor een raam met een plant",
+  "about": {
+    "eyebrow": "Over jaloezieën",
+    "h2": "Volledige controle over licht en privacy",
+    "paras": [
+      "Jaloezieën zijn een uitstekende keuze voor het regelen van lichtinval en privacy in uw interieur. Ze zijn verkrijgbaar in verschillende materialen, zoals aluminium, hout en kunststof, zodat u altijd een stijl vindt die bij uw woning past.",
+      "Dankzij de verstelbare lamellen past u de hoeveelheid licht eenvoudig aan, waardoor u volledige controle heeft over uw ruimte.",
+      "Jaloezieën zijn niet alleen functioneel, maar ook mooi, en passen zowel in moderne als in klassieke interieurs. Ze zijn gemakkelijk te onderhouden, duurzaam en bieden extra isolatie."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Gratis inmeten",
+    "h2": "Wij meten gratis bij u thuis in",
+    "text": "Onze adviseur komt gratis bij u thuis inmeten en bekijkt meteen hoe het licht binnenvalt. Zo kiest u met vertrouwen, en wordt alles tot op de millimeter voor uw ramen gemaakt.",
+    "img": "/assets/img/real/raamdecoratie-woonkamer-1800.jpg",
+    "alt": "Woonkamer met raamdecoratie op maat"
+  },
+  "related": [
+    { "label": "Rolgordijnen", "href": "/interieur/rolgordijnen.html" },
+    { "label": "Plisségordijnen", "href": "/interieur/plissegordijnen.html" },
+    { "label": "Vouwgordijnen", "href": "/interieur/vouwgordijnen.html" },
+    { "label": "Alles over raamdecoratie", "href": "/interieur/raamdecoratie.html" }
+  ]
+}

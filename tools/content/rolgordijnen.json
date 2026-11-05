@@ -1,0 +1,30 @@
+{
+  "file": "interieur/rolgordijnen.html",
+  "group": "interieur",
+  "inherit": "raamdecoratie.json",
+  "parent": { "label": "Raamdecoratie", "href": "/interieur/raamdecoratie.html" },
+  "name": "Rolgordijnen",
+  "title": "Rolgordijnen",
+  "metaDesc": "Rolgordijnen op maat: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend. Gratis inmeten aan huis en montage door ons eigen team.",
+  "eyebrow": "Raamdecoratie",
+  "h1": "Rolgordijnen",
+  "vertical": "Rolgordijnen",
+  "lead": "Strak en praktisch: lichtdoorlatend of volledig verduisterend, handmatig of elektrisch bediend. Op maat gemaakt voor uw ramen.",
+  "heroImg": "https://images.unsplash.com/photo-1776261293170-66fd3b09273e",
+  "heroAlt": "Grijs rolgordijn voor een modern raam",
+  "about": {
+    "eyebrow": "Over rolgordijnen",
+    "h2": "Strak, praktisch en veelzijdig",
+    "paras": [
+      "Rolgordijnen zijn een stijlvolle en praktische oplossing voor elke ruimte in huis. Ze bieden perfecte controle over de lichtinval en privacy, en zijn verkrijgbaar in verschillende stoffen, kleuren en patronen die passen bij uw interieur.",
+      "Of u nu kiest voor een lichte, transparante stof voor zacht licht of een verduisterend rolgordijn voor volledige duisternis: de mogelijkheden zijn eindeloos. Ze zijn eenvoudig te bedienen en hun strakke uitstraling zorgt voor een moderne, opgeruimde look.",
+      "Bovendien zijn rolgordijnen onderhoudsvriendelijk, duurzaam en gemakkelijk schoon te maken."
+    ]
+  },
+  "related": [
+    { "label": "Jaloezieën", "href": "/interieur/jaloezieen.html" },
+    { "label": "Plisségordijnen", "href": "/interieur/plissegordijnen.html" },
+    { "label": "Vouwgordijnen", "href": "/interieur/vouwgordijnen.html" },
+    { "label": "Alles over raamdecoratie", "href": "/interieur/raamdecoratie.html" }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "file": "interieur/vinylbehang.html",
+  "group": "interieur",
+  "inherit": "behang.json",
+  "parent": { "label": "Behang", "href": "/interieur/behang.html" },
+  "name": "Vinylbehang",
+  "title": "Vinylbehang",
+  "metaDesc": "Vinylbehang: sterk, afwasbaar en waterbestendig dankzij de vinyllaag. Ideaal voor keuken, badkamer, hal en kinderkamer. Bekijk de stalen in onze showroom in Tilburg.",
+  "eyebrow": "Behang",
+  "h1": "Vinylbehang",
+  "vertical": "Vinylbehang",
+  "lead": "Sterk, afwasbaar en waterbestendig dankzij de vinyllaag. Ideaal voor keuken, badkamer, hal en kinderkamer.",
+  "heroImg": "/assets/img/real/behang-woonkamer-1800.jpg",
+  "heroAlt": "Woonkamer met groen vinylbehang",
+  "about": {
+    "eyebrow": "Over vinylbehang",
+    "h2": "Sterk, afwasbaar en veelzijdig",
+    "paras": [
+      "Vinylbehang is een veelzijdige en stijlvolle keuze voor elke kamer in uw huis. Het is niet alleen beschikbaar in talloze kleuren en patronen, maar ook uiterst duurzaam en onderhoudsvriendelijk.",
+      "Dankzij de vinyllaag is het waterbestendig, waardoor het perfect is voor keukens, badkamers en andere vochtige ruimtes. Bovendien is vinylbehang gemakkelijk te reinigen, zodat het er altijd fris uitziet.",
+      "Of u nu houdt van een subtiele textuur of een gedurfde print: vinylbehang biedt eindeloze mogelijkheden om uw interieur te personaliseren."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Stalen",
+    "h2": "Bekijk het behang in uw eigen licht",
+    "text": "Kies in de showroom uw favorieten en neem de stalen gewoon mee naar huis. Zo ziet u hoe het behang eruitziet in uw eigen licht en naast uw eigen meubels.",
+    "img": "https://images.unsplash.com/photo-1783403716758-27e30a7976ca",
+    "alt": "Behang met een klassiek patroon"
+  },
+  "related": [
+    { "label": "Fotobehang", "href": "/interieur/fotobehang.html" },
+    { "label": "Papierbehang", "href": "/interieur/papierbehang.html" },
+    { "label": "Vliesbehang", "href": "/interieur/vliesbehang.html" },
+    { "label": "Renostuc", "href": "/interieur/renostuc.html" },
+    { "label": "Alles over behang", "href": "/interieur/behang.html" }
+  ]
+}

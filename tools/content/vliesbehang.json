@@ -1,0 +1,38 @@
+{
+  "file": "interieur/vliesbehang.html",
+  "group": "interieur",
+  "inherit": "behang.json",
+  "parent": { "label": "Behang", "href": "/interieur/behang.html" },
+  "name": "Vliesbehang",
+  "title": "Vliesbehang",
+  "metaDesc": "Vliesbehang: scheurvast, ademend en snel aangebracht, want de lijm gaat op de muur. Later ook weer makkelijk te verwijderen. Bekijk de stalen in onze showroom in Tilburg.",
+  "eyebrow": "Behang",
+  "h1": "Vliesbehang",
+  "vertical": "Vliesbehang",
+  "lead": "Scheurvast en snel aangebracht: de lijm gaat op de muur. Later ook weer makkelijk te verwijderen.",
+  "heroImg": "https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4",
+  "heroAlt": "Vliesbehang met grafisch patroon achter een bank",
+  "about": {
+    "eyebrow": "Over vliesbehang",
+    "h2": "Sneller en schoner behangen",
+    "paras": [
+      "Vliesbehang is een populaire keuze voor moderne interieurs vanwege zijn eenvoud en duurzaamheid. Het bestaat uit een non-woven structuur, waardoor het makkelijker aan te brengen is dan traditioneel behang.",
+      "U brengt de lijm alleen op de muur aan, niet op het behang zelf. Dat maakt het behangen sneller en schoner. Vliesbehang is sterk, scheurvast en ademend, en daardoor een uitstekende keuze voor elke ruimte, van woonkamer tot keuken.",
+      "Het is verkrijgbaar in een breed scala aan stijlen, van subtiele patronen tot gedurfde designs, en kan later gemakkelijk worden verwijderd zonder de muren te beschadigen."
+    ]
+  },
+  "feature": {
+    "eyebrow": "Stalen",
+    "h2": "Bekijk het behang in uw eigen licht",
+    "text": "Kies in de showroom uw favorieten en neem de stalen gewoon mee naar huis. Zo ziet u hoe het behang eruitziet in uw eigen licht en naast uw eigen meubels.",
+    "img": "/assets/img/real/behang-woonkamer-1800.jpg",
+    "alt": "Woonkamer met sfeervol groen behang"
+  },
+  "related": [
+    { "label": "Fotobehang", "href": "/interieur/fotobehang.html" },
+    { "label": "Papierbehang", "href": "/interieur/papierbehang.html" },
+    { "label": "Vinylbehang", "href": "/interieur/vinylbehang.html" },
+    { "label": "Renostuc", "href": "/interieur/renostuc.html" },
+    { "label": "Alles over behang", "href": "/interieur/behang.html" }
+  ]
+}
