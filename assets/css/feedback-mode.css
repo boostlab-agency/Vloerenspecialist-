@@ -525,3 +525,9 @@ html.feedback-mode .fb-editing, html.feedback-mode .fb-editing * { cursor: text;
 .fb-send-result .fb-actions { justify-content: center; }
 .fb-send-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin-bottom: 14px; border-radius: 50%; background: var(--fb-done); color: #fff; font-size: 26px; font-weight: 700; animation: fb-tour-in .45s var(--fb-ease); }
 .fb-send-result h3 + .fb-hint-copy { margin-bottom: 20px; }
+
+/* Telefoon: feedbackknop als rond icoon, zodat hij de inhoud niet bedekt */
+@media (max-width: 640px) {
+  .fb-toggle { padding: 10px; }
+  .fb-toggle .fb-toggle-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

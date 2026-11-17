@@ -310,3 +310,21 @@ html.is-intro .pr-hero-media > img { animation-play-state: paused; }
   .pr-related a:nth-child(n+3) { padding-top: 24px; }
   .pr-rel-label { font-size: 15px; }
 }
+
+/* ---- Mobiel en tablet (17 nov. 2026) ---- */
+@media (max-width: 640px) {
+  /* Soorten als veegbare rij */
+  .pr-types { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scrollbar-width: none; }
+  .pr-types::-webkit-scrollbar { display: none; }
+  .pr-type { flex: 0 0 80%; scroll-snap-align: start; }
+  /* Bekijk ook: label netjes gecentreerd, pijl erachter */
+  .pr-rel-label { display: block; text-align: center; padding-top: 14px; line-height: 1.35; }
+  .pr-rel-label .arrow { margin-left: 4px; }
+  .pr-hero-wide .pr-hero-media::after { inset: 10px; }
+  .pr-hero-wide .pr-hero-vertical { left: 18px; bottom: 22px; font-size: 10.5px; }
+  .pr-quotes-score { margin-bottom: 28px; font-size: 11.5px; line-height: 1.6; }
+  .q-dots { margin-top: 36px; }
+}
+@media (min-width: 641px) and (max-width: 1100px) {
+  .pr-types { --cols: 2 !important; }
+}

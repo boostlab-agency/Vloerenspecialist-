@@ -12,7 +12,7 @@
       '<div class="showroom-cta-band" data-review-id="showroom-band" data-review-label="Showroom-CTA-band">' +
         '<div class="wrap">' +
           "<div>" +
-            "<h3>Twijfel je nog? Kom het voelen.</h3>" +
+            "<h3>Twijfelt u nog? Kom het voelen.</h3>" +
             "<p>1.800 m² complete woonopstellingen, vrijblijvend en persoonlijk advies.</p>" +
           "</div>" +
           '<a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>' +

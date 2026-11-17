@@ -76,3 +76,18 @@
 .sr-expect h3 { font-size: 17px; }
 @media (max-width: 1100px) { .sr-expect { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .sr-expect { grid-template-columns: 1fr; } }
+
+/* ---- Mobiel (17 nov. 2026) ---- */
+@media (max-width: 760px) {
+  .sr-stats-grid { grid-template-columns: 1fr 1fr; }
+  .sr-stat, .sr-stat + .sr-stat { padding: 24px 16px 24px 0; border-left: 0; }
+  .sr-stat:nth-child(2n) { padding-left: 16px; border-left: 1px solid var(--line); }
+  .sr-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .sr-stat b { font-size: 28px; }
+  .sr-stat span { font-size: 13px; }
+  /* Beloftes als veegbare rij */
+  .sr-expect { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scrollbar-width: none; }
+  .sr-expect::-webkit-scrollbar { display: none; }
+  .sr-expect li { flex: 0 0 78%; scroll-snap-align: start; }
+  .sr-visit .sr-map { outline-offset: 8px; }
+}
