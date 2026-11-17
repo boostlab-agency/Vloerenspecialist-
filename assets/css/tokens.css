@@ -10,13 +10,13 @@
 :root {
   /* Kleur */
   --bg: #ffffff;
-  --surface: #f4eee5;          /* warm beige vlak (nov. 2026 iets warmer) */
-  --surface-rgb: 244, 238, 229;
-  --surface-2: #ebe2d4;
+  --surface: #f4f3ef;          /* warm beige vlak */
+  --surface-rgb: 244, 243, 239;
+  --surface-2: #ebe9e3;
   --ink: #272521;              /* warm bijna-zwart: tekst, knoppen, accenten */
   --ink-soft: #6f6a63;
   --ink-faint: #939290;
-  --line: #ddd4c7;             /* dunne scheidingslijnen */
+  --line: #d9d6cf;             /* dunne scheidingslijnen */
   --accent: #272521;           /* accent = zelfde warm zwart (geen rood meer) */
   --accent-rgb: 39, 37, 33;
   --accent-soft: #000000;      /* hover */

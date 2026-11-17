@@ -1,6 +1,6 @@
 /* ==========================================================================
    Hero-film (homepage): een paar korte sfeerclips die in elkaar overvloeien.
-   Per clip een hoofdstuk (titel + link); onderin klikbare hoofdstukken met
+   Rechtsonder klikbare hoofdstukken met
    een lijntje dat meeloopt. Twee <video>-elementen wisselen elkaar af, zodat
    de volgende clip al laadt terwijl de huidige speelt.
    - Pauzeknop (bewegend beeld moet te stoppen zijn), pauzeert ook als het
@@ -17,10 +17,6 @@
   var CLIP_MS = 7000;
   var vids = film.querySelectorAll(".h-film-clip");
   var chapters = film.querySelectorAll("[data-chapter]");
-  var title = film.querySelector("[data-film-title]");
-  var kicker = film.querySelector("[data-film-kicker]");
-  var nameEl = film.querySelector("[data-film-name]");
-  var moreEl = film.querySelector("[data-film-more]");
   var toggle = film.querySelector("[data-film-toggle]");
   if (vids.length < 2 || !chapters.length) return;
 
@@ -29,7 +25,6 @@
   var paused = false, hidden = false;
 
   function srcOf(i) { var c = chapters[i]; return small ? c.getAttribute("data-sd") : c.getAttribute("data-hd"); }
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
 
   function load(v, i) {
     var s = srcOf(i);
@@ -38,21 +33,11 @@
   }
 
   function setChapter(i) {
-    var c = chapters[i];
     chapters.forEach(function (b, k) {
       b.classList.toggle("is-on", k === i);
       b.classList.toggle("is-done", k < i);
       b.setAttribute("aria-current", k === i ? "true" : "false");
     });
-    // Titel wisselt met een korte fade
-    title.classList.add("is-changing");
-    window.setTimeout(function () {
-      kicker.textContent = pad(i + 1) + " — " + c.querySelector(".h-film-label").textContent;
-      nameEl.textContent = c.getAttribute("data-name");
-      moreEl.textContent = c.getAttribute("data-more");
-      title.setAttribute("href", c.getAttribute("data-href"));
-      title.classList.remove("is-changing");
-    }, 350);
   }
 
   function show(i) {
