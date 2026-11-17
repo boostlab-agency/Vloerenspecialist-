@@ -22,6 +22,7 @@
   --accent-soft: #000000;      /* hover */
   --on-accent: #ffffff;
   --brand: #e20e18;            /* huisstijlrood: alleen als klein, subtiel accent */
+  --espresso: #2b221b;         /* warm donkerbruin voor donkere vlakken (i.p.v. zwart) */
   --brand-rgb: 226, 14, 24;
 
   /* Typografie */

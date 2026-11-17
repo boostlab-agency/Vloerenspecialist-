@@ -1,68 +1,117 @@
 /* ==========================================================================
-   Hero-filmpje — pauzeer-/afspeelknop (bewegend beeld moet te stoppen zijn)
-   en een vangnet voor browsers die autoplay blokkeren: dan blijft de
-   posterafbeelding staan en toont de knop "afspelen".
+   Hero-film (homepage): een paar korte sfeerclips die in elkaar overvloeien.
+   Per clip een hoofdstuk (titel + link); onderin klikbare hoofdstukken met
+   een lijntje dat meeloopt. Twee <video>-elementen wisselen elkaar af, zodat
+   de volgende clip al laadt terwijl de huidige speelt.
+   - Pauzeknop (bewegend beeld moet te stoppen zijn), pauzeert ook als het
+     tabblad niet zichtbaar is.
+   - Op kleine schermen de lichtere SD-bestanden.
+   - Lukt afspelen niet (autoplay geblokkeerd), dan blijft het eerste beeld
+     staan en kan de bezoeker zelf op afspelen drukken.
    ========================================================================== */
 (function () {
   "use strict";
-  document.querySelectorAll("[data-video-toggle]").forEach(function (btn) {
-    var video = btn.parentElement.querySelector("video");
-    if (!video) return;
-    function sync() {
-      btn.classList.toggle("is-paused", video.paused);
-      btn.setAttribute("aria-label", video.paused ? "Speel filmpje af" : "Pauzeer filmpje");
-    }
-    btn.addEventListener("click", function () {
-      if (video.paused) video.play().catch(function () {}); else video.pause();
+  var film = document.querySelector("[data-film]");
+  if (!film) return;
+
+  var CLIP_MS = 7000;
+  var vids = film.querySelectorAll(".h-film-clip");
+  var chapters = film.querySelectorAll("[data-chapter]");
+  var title = film.querySelector("[data-film-title]");
+  var kicker = film.querySelector("[data-film-kicker]");
+  var nameEl = film.querySelector("[data-film-name]");
+  var moreEl = film.querySelector("[data-film-more]");
+  var toggle = film.querySelector("[data-film-toggle]");
+  if (vids.length < 2 || !chapters.length) return;
+
+  var small = window.matchMedia("(max-width: 700px)").matches;
+  var cur = 0, front = 0, elapsed = 0, last = 0, raf = 0;
+  var paused = false, hidden = false;
+
+  function srcOf(i) { var c = chapters[i]; return small ? c.getAttribute("data-sd") : c.getAttribute("data-hd"); }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function load(v, i) {
+    var s = srcOf(i);
+    if (v.getAttribute("src") !== s) { v.setAttribute("src", s); v.preload = "auto"; v.load(); }
+    try { v.currentTime = 0; } catch (e) {}
+  }
+
+  function setChapter(i) {
+    var c = chapters[i];
+    chapters.forEach(function (b, k) {
+      b.classList.toggle("is-on", k === i);
+      b.classList.toggle("is-done", k < i);
+      b.setAttribute("aria-current", k === i ? "true" : "false");
     });
-    video.addEventListener("play", sync);
-    video.addEventListener("pause", sync);
-    var p = video.play && video.play();
-    if (p && p.catch) p.catch(sync);
-    sync();
+    // Titel wisselt met een korte fade
+    title.classList.add("is-changing");
+    window.setTimeout(function () {
+      kicker.textContent = pad(i + 1) + " — " + c.querySelector(".h-film-label").textContent;
+      nameEl.textContent = c.getAttribute("data-name");
+      moreEl.textContent = c.getAttribute("data-more");
+      title.setAttribute("href", c.getAttribute("data-href"));
+      title.classList.remove("is-changing");
+    }, 350);
+  }
+
+  function show(i) {
+    var next = 1 - front;
+    var v = vids[next];
+    load(v, i);
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+    v.classList.add("is-on");
+    vids[front].classList.remove("is-on");
+    var old = vids[front];
+    window.setTimeout(function () { if (!old.classList.contains("is-on")) old.pause(); }, 1300);
+    front = next;
+    cur = i; elapsed = 0;
+    setChapter(i);
+    // Volgende clip alvast laden in de achterste speler
+    window.setTimeout(function () { load(vids[1 - front], (cur + 1) % chapters.length); }, 1500);
+  }
+
+  function tick(t) {
+    raf = window.requestAnimationFrame(tick);
+    if (!last) last = t;
+    var dt = t - last; last = t;
+    if (paused || hidden) return;
+    var v = vids[front];
+    if (v.readyState < 3) return; // wacht tot de clip echt speelt
+    elapsed += dt;
+    var p = Math.min(elapsed / CLIP_MS, 1);
+    chapters[cur].style.setProperty("--p", p.toFixed(4));
+    if (p >= 1) { chapters[cur].style.setProperty("--p", 1); show((cur + 1) % chapters.length); }
+  }
+
+  function setPaused(on) {
+    paused = on;
+    toggle.classList.toggle("is-paused", on);
+    toggle.setAttribute("aria-label", on ? "Speel film af" : "Pauzeer film");
+    film.classList.toggle("is-paused", on);
+    var v = vids[front];
+    if (on) v.pause(); else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  }
+
+  toggle.addEventListener("click", function () { setPaused(!paused); });
+  chapters.forEach(function (b, i) {
+    b.addEventListener("click", function () {
+      chapters.forEach(function (c, k) { c.style.setProperty("--p", k < i ? 1 : 0); });
+      show(i);
+      if (paused) setPaused(false);
+    });
+  });
+  document.addEventListener("visibilitychange", function () {
+    hidden = document.hidden;
+    var v = vids[front];
+    if (hidden) v.pause(); else if (!paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
   });
 
-  /* Label op het filmpje: wisselt rustig tussen een paar feiten. Het rode
-     lijntje onderaan loopt mee tot het volgende feit. Pauzeert als het
-     filmpje gepauzeerd wordt of het tabblad niet zichtbaar is. */
-  document.querySelectorAll("[data-hero-facts]").forEach(function (label) {
-    var facts = label.querySelectorAll(".h-hero-facts > span");
-    if (facts.length < 2) return;
-    var MS = 5000, cur = 0, timer = null;
-    var video = label.closest(".h-hero-media") && label.closest(".h-hero-media").querySelector("video");
-    label.style.setProperty("--fact-ms", MS + "ms");
-
-    function restartBar() {
-      label.classList.remove("is-timing");
-      void label.offsetWidth; // herstart de transitie
-      label.classList.add("is-timing");
-    }
-    function next() {
-      var prev = facts[cur];
-      cur = (cur + 1) % facts.length;
-      prev.classList.remove("is-on");
-      prev.classList.add("is-out");
-      facts[cur].classList.remove("is-out");
-      facts[cur].classList.add("is-on");
-      label.classList.add("is-switching");
-      window.setTimeout(function () { prev.classList.remove("is-out"); label.classList.remove("is-switching"); }, 700);
-      restartBar();
-    }
-    function play() { if (timer) return; restartBar(); timer = window.setInterval(next, MS); }
-    function stop() { window.clearInterval(timer); timer = null; label.classList.remove("is-timing"); }
-
-    function start() {
-      play();
-      document.addEventListener("visibilitychange", function () { document.hidden ? stop() : play(); });
-      if (video) { video.addEventListener("pause", stop); video.addEventListener("play", play); }
-    }
-    // Pas beginnen als de laadanimatie weg is.
-    var root = document.documentElement;
-    if (root.classList.contains("is-intro") && window.MutationObserver) {
-      var mo = new MutationObserver(function () {
-        if (!root.classList.contains("is-intro")) { mo.disconnect(); window.setTimeout(start, 1200); }
-      });
-      mo.observe(root, { attributes: true, attributeFilter: ["class"] });
-    } else window.setTimeout(start, 1200);
-  });
+  // Start: eerste clip in de voorste speler
+  load(vids[0], 0);
+  var first = vids[0].play();
+  if (first && first.catch) first.catch(function () { setPaused(true); });
+  window.setTimeout(function () { load(vids[1], 1); }, 2500);
+  raf = window.requestAnimationFrame(tick);
 })();

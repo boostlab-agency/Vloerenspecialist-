@@ -230,3 +230,20 @@
 @media (min-width: 901px) {
   .pr-hero-media { max-height: max(340px, calc(100vh - var(--header-h) - 120px)); width: 100%; }
 }
+
+/* ---- Warmte en diepte (17 nov. 2026) ---- */
+/* Klantreacties op warm donkerbruin, kaarten licht doorschijnend */
+.pr-reviews-sec { background: var(--espresso); color: #fff; }
+.pr-reviews-sec h2, .pr-reviews-sec .eyebrow { color: #fff; }
+.pr-reviews-sec .eyebrow::after { background: rgba(255,255,255,.25); }
+.pr-review { position: relative; padding-top: 64px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); transition: background .3s; }
+.pr-review:hover { background: rgba(255,255,255,.09); }
+.pr-review::before { content: "\201C"; position: absolute; left: 28px; top: 14px; font-family: var(--script); font-style: italic; font-size: 72px; line-height: 1; color: var(--brand); }
+.pr-review blockquote { color: #fff; }
+.pr-review figcaption { color: rgba(255,255,255,.6); }
+/* Grote foto bovenaan: zoomt langzaam uit bij binnenkomst */
+@media (prefers-reduced-motion: no-preference) {
+  .pr-hero-media > img { animation: pr-hero-in 2.4s .1s var(--ease) both; }
+}
+@keyframes pr-hero-in { from { transform: scale(1.12); } to { transform: none; } }
+html.is-intro .pr-hero-media > img { animation-play-state: paused; }
