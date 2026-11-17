@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vloerbedekking — De Vloerenspecialist Tilburg</title>
+<title>Vloerbedekking &mdash; De Vloerenspecialist Tilburg</title>
 <meta name="description" content="Vloerbedekking en tapijt in wol en synthetisch, kamerbreed of als karpet op maat. Warm, stil en comfortabel. Voel het verschil in onze showroom in Tilburg.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
@@ -31,17 +31,18 @@
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
+<script src="/assets/js/modules/product-motion.js" defer></script>
 <script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="sub">
-<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/vloerbedekking.json — pas de inhoud daar aan. -->
+<!-- Gegenereerd door tools/build-pages.ps1 uit tools/content/vloerbedekking.json - pas de inhoud daar aan. -->
 
 <a class="skip-link" href="#main">Naar de inhoud</a>
 <div id="site-header"></div>
 
 <main id="main">
 
-  <!-- 1 · Hero: kop en intro, daaronder een grote foto op een beige vlak -->
+  <!-- 1 - Hero: kop en intro, daaronder een grote foto op een beige vlak -->
   <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
     <div class="pr-hero-panel" aria-hidden="true"></div>
     <div class="wrap pr-hero-inner">
@@ -62,27 +63,39 @@
       <p class="pr-hero-vertical" aria-hidden="true">Vloerbedekking <strong>in Tilburg</strong></p>
       <div class="pr-hero-media">
         <img src="https://images.unsplash.com/photo-1772563214602-3c6434766700?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=2000" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="eager">
+        <ul class="pr-hero-usps" aria-label="Waarom De Vloerenspecialist">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Showroom van 1.800 m&sup2;</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Eigen team plaatst alles</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Klanten geven ons een 9+</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- 2 · Over -->
-  <section class="pr-section" data-review-id="over" data-review-label="Over Vloerbedekking">
-    <div class="wrap pr-about-grid">
-      <div>
+  <!-- 2 - Intro: foto's + korte tekst -->
+  <section class="pr-section pr-intro" data-review-id="over" data-review-label="Over Vloerbedekking">
+    <div class="wrap pr-intro-grid">
+      <div class="pr-intro-media">
+        <img class="pr-intro-big" src="/assets/img/real/visgraat-detail-1400.jpg" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy">
+        <img class="pr-intro-small" src="https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="" loading="lazy">
+      </div>
+      <div class="pr-intro-copy">
         <h2>Warmte en stilte onder uw voeten</h2>
         <p class="eyebrow">Over vloerbedekking</p>
-      </div>
-      <div class="pr-about-text">
+        <div class="pr-about-text">
           <p>Tapijt is de meest comfortabele vloer die er is. Het voelt zacht en warm aan, dempt geluid en geeft een ruimte direct een huiselijke sfeer. Daarom kiezen veel mensen voor vloerbedekking in de slaapkamer, op zolder of op de trap.</p>
-          <p>De kwaliteit van tapijt wordt bepaald door het garen, de poolhoogte en de dichtheid. Wol is natuurlijk, veerkrachtig en vuilafstotend. Synthetische garens zoals polyamide zijn extra slijtvast en betaalbaar, en makkelijk schoon te houden.</p>
+          <details class="pr-more">
+            <summary><span class="pr-more-open">Lees meer</span><span class="pr-more-close">Minder lezen</span></summary>
+            <p>De kwaliteit van tapijt wordt bepaald door het garen, de poolhoogte en de dichtheid. Wol is natuurlijk, veerkrachtig en vuilafstotend. Synthetische garens zoals polyamide zijn extra slijtvast en betaalbaar, en makkelijk schoon te houden.</p>
           <p>Moderne tapijtvezels houden fijnstof vast in plaats van het te laten rondzweven. Met regelmatig stofzuigen is vloerbedekking daarom ook een prima keuze voor mensen met een stofallergie.</p>
+          </details>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 3 · Soorten -->
-  <section class="pr-section" data-review-id="soorten" data-review-label="Soorten">
+  <!-- 3 - Soorten: fotokaarten -->
+  <section class="pr-section is-surface" data-review-id="soorten" data-review-label="Soorten">
     <div class="wrap">
       <div class="pr-head">
         <div>
@@ -93,38 +106,41 @@
       </div>
       <div class="pr-types" style="--cols: 4">
         <article class="pr-type">
-          <span class="pr-type-nr">01</span>
-          
-          <h3>Wol</h3>
-          <p>Natuurlijk, veerkrachtig en vanzelf vuilafstotend. De premiumkeuze voor slaapkamer en woonkamer.</p>
-          <div class="tag-row"><span class="tag">Natuurlijk</span></div>
+          <div class="pr-type-media"><img src="/assets/img/real/visgraat-kastenwand-900.jpg" alt="Wol &mdash; Vloerbedekking" loading="lazy"></div>
+          <div class="pr-type-body">
+            <h3>Wol</h3>
+            <p>Natuurlijk, veerkrachtig en vanzelf vuilafstotend. De premiumkeuze voor slaapkamer en woonkamer.</p>
+            <div class="tag-row"><span class="tag">Natuurlijk</span></div>
+          </div>
         </article>
         <article class="pr-type">
-          <span class="pr-type-nr">02</span>
-          
-          <h3>Synthetisch</h3>
-          <p>Slijtvast, kleurvast en betaalbaar. Ideaal voor drukbelopen ruimtes, trappen en gezinnen.</p>
-          <div class="tag-row"><span class="tag">Slijtvast</span></div>
+          <div class="pr-type-media"><img src="https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Synthetisch &mdash; Vloerbedekking" loading="lazy"></div>
+          <div class="pr-type-body">
+            <h3>Synthetisch</h3>
+            <p>Slijtvast, kleurvast en betaalbaar. Ideaal voor drukbelopen ruimtes, trappen en gezinnen.</p>
+            <div class="tag-row"><span class="tag">Slijtvast</span></div>
+          </div>
         </article>
         <article class="pr-type">
-          <span class="pr-type-nr">03</span>
-          
-          <h3>Bouclé en lussen</h3>
-          <p>Tapijt met lusjes voor een grove, stoere structuur. Stevig en mooi in een modern interieur.</p>
-          <div class="tag-row"><span class="tag">Structuur</span></div>
+          <div class="pr-type-media"><img src="https://images.unsplash.com/photo-1787145879056-d02365c5b911?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Bouclé en lussen &mdash; Vloerbedekking" loading="lazy"></div>
+          <div class="pr-type-body">
+            <h3>Bouclé en lussen</h3>
+            <p>Tapijt met lusjes voor een grove, stoere structuur. Stevig en mooi in een modern interieur.</p>
+            <div class="tag-row"><span class="tag">Structuur</span></div>
+          </div>
         </article>
         <article class="pr-type">
-          <span class="pr-type-nr">04</span>
-          
-          <h3>Velours en saxony</h3>
-          <p>Opengesneden pool voor een zachte, fluweelachtige uitstraling. Heerlijk om blootsvoets op te lopen.</p>
-          <div class="tag-row"><span class="tag">Zacht</span></div>
+          <div class="pr-type-media"><img src="https://images.unsplash.com/photo-1649083048381-520a5b3d91ff?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Velours en saxony &mdash; Vloerbedekking" loading="lazy"></div>
+          <div class="pr-type-body">
+            <h3>Velours en saxony</h3>
+            <p>Opengesneden pool voor een zachte, fluweelachtige uitstraling. Heerlijk om blootsvoets op te lopen.</p>
+            <div class="tag-row"><span class="tag">Zacht</span></div>
+          </div>
         </article>
       </div>
     </div>
   </section>
-
-  <!-- 4 · Uitgelicht: grote foto op een beige vlak -->
+  <!-- 4 - Uitgelicht: grote foto op een beige vlak -->
   <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
     <div class="wrap pr-feature-grid">
       <div class="pr-feature-media">
@@ -138,66 +154,99 @@
       </div>
     </div>
   </section>
-
-  <!-- 5 · Voordelen -->
-  <section class="pr-section" data-review-id="voordelen" data-review-label="Voordelen">
-    <div class="wrap">
-      <div class="pr-head">
-        <div>
-          <h2>Waarom kiezen voor vloerbedekking</h2>
-          <p class="eyebrow">Voordelen</p>
-        </div>
+  <!-- 5 - Voordelen: foto + vinkjes -->
+  <section class="pr-section pr-split-sec" data-review-id="voordelen" data-review-label="Voordelen">
+    <div class="wrap pr-split">
+      <div class="pr-split-media">
+        <img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy">
+        <p class="pr-split-note">Liever zelf voelen en vergelijken? <a href="/showroom.html">Kom langs in de showroom</a></p>
       </div>
-      <div class="pr-benefits">
-        <div class="pr-benefit"><h3>Warm en comfortabel</h3><p>Zacht onder de voeten, ook in de winter.</p></div>
-        <div class="pr-benefit"><h3>Geluiddempend</h3><p>Minder galm en loopgeluid, prettig in gestapelde woningen.</p></div>
-        <div class="pr-benefit"><h3>Veilig</h3><p>Zacht bij een val en niet glad, fijn met kinderen en op de trap.</p></div>
-        <div class="pr-benefit"><h3>Houdt fijnstof vast</h3><p>Stof blijft liggen tot u het wegzuigt, in plaats van rond te zweven.</p></div>
-        <div class="pr-benefit"><h3>Isolerend</h3><p>Tapijt houdt warmte vast en voelt nooit koud aan.</p></div>
-        <div class="pr-benefit"><h3>Eindeloos veel kleuren</h3><p>Van rustig naturel tot een uitgesproken kleur of dessin.</p></div>
+      <div class="pr-split-copy">
+        <h2>Waarom kiezen voor vloerbedekking</h2>
+        <p class="eyebrow">Voordelen</p>
+        <ul class="pr-benefits">
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Warm en comfortabel</h3><p>Zacht onder de voeten, ook in de winter.</p></div></li>
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Geluiddempend</h3><p>Minder galm en loopgeluid, prettig in gestapelde woningen.</p></div></li>
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Veilig</h3><p>Zacht bij een val en niet glad, fijn met kinderen en op de trap.</p></div></li>
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Houdt fijnstof vast</h3><p>Stof blijft liggen tot u het wegzuigt, in plaats van rond te zweven.</p></div></li>
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Isolerend</h3><p>Tapijt houdt warmte vast en voelt nooit koud aan.</p></div></li>
+          <li class="pr-benefit"><span class="pr-benefit-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Eindeloos veel kleuren</h3><p>Van rustig naturel tot een uitgesproken kleur of dessin.</p></div></li>
+        </ul>
       </div>
     </div>
   </section>
-
-  <!-- 6 · Meer weten -->
-  <section class="pr-section" data-review-id="meer-weten" data-review-label="Meer weten">
+  <!-- 6 - Inspiratie: fotomozaiek -->
+  <section class="pr-section pr-inspire" data-review-id="inspiratie" data-review-label="Inspiratie">
     <div class="wrap">
       <div class="pr-head">
         <div>
-          <h2>Alles over uw vloerbedekking</h2>
-          <p class="eyebrow">Goed om te weten</p>
+          <h2>Laat u inspireren</h2>
+          <p class="eyebrow">Binnenkijken</p>
+        </div>
+        <p class="pr-head-text">Een greep uit wat er mogelijk is met vloerbedekking. In onze showroom ziet u alles op ware grootte, in complete woonopstellingen. <a class="btn-text" href="/inspiratie/projecten.html">Bekijk projecten <span class="arrow">&rarr;</span></a></p>
+      </div>
+      <div class="pr-mosaic">
+        <figure class="is-big"><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></figure>
+        <figure class="is-wide"><img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=1400" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+  <!-- 7 - Wat klanten zeggen -->
+  <section class="pr-section pr-reviews-sec" data-review-id="reviews" data-review-label="Reviews">
+    <div class="wrap">
+      <div class="pr-head">
+        <div>
+          <h2>Wat klanten zeggen</h2>
+          <p class="eyebrow">Gewaardeerd met een 9+</p>
         </div>
       </div>
-      <div class="pr-info">
-        <div class="pr-info-row">
-          <h3>Het juiste tapijt voor de ruimte</h3>
-          <div>
+      <div class="pr-reviews">
+        <figure class="pr-review"><blockquote>&ldquo;Van eerste advies tot plaatsing &mdash; alles klopte. De showroom gaf meteen een goed gevoel en het eindresultaat overtreft onze verwachtingen.&rdquo;</blockquote><figcaption><span class="pr-review-stars" aria-label="5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</span>Marieke Jansen</figcaption></figure>
+        <figure class="pr-review"><blockquote>&ldquo;Professioneel, deskundig en ontzettend netjes opgeleverd. Onze eiken visgraatvloer is precies zoals we 'm in de showroom hadden uitgezocht.&rdquo;</blockquote><figcaption><span class="pr-review-stars" aria-label="5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</span>Robin de Groot</figcaption></figure>
+        <figure class="pr-review"><blockquote>&ldquo;Eindelijk een zaak die vloer, raamdecoratie &eacute;n interieur in &eacute;&eacute;n keer goed regelt. Persoonlijk advies zonder verkooppraatjes.&rdquo;</blockquote><figcaption><span class="pr-review-stars" aria-label="5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</span>Sanne Bakker</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <!-- 8 - Goed om te weten: uitklapvragen -->
+  <section class="pr-section is-surface" data-review-id="meer-weten" data-review-label="Meer weten">
+    <div class="wrap pr-faq-grid">
+      <div class="pr-faq-aside">
+        <h2>Alles over uw vloerbedekking</h2>
+        <p class="eyebrow">Goed om te weten</p>
+        <div class="pr-faq-media"><img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=900" alt="Slaapkamer met zachte, kamerbrede vloerbedekking" loading="lazy"></div>
+        <p class="pr-faq-ask">Staat uw vraag er niet bij? Bel <a href="tel:+31135368598">013 - 536 85 98</a> of <a href="/contact.html">stuur ons een bericht</a>.</p>
+      </div>
+      <div class="pr-faq">
+        <details class="pr-faq-item" open>
+          <summary><h3>Het juiste tapijt voor de ruimte</h3><span class="pr-faq-plus" aria-hidden="true"></span></summary>
+          <div class="pr-faq-body">
           <p>Voor een slaapkamer kiest u vooral op comfort: een zachte velours of een luxe wol. Voor woonkamer, trap en overloop is slijtvastheid belangrijker; daar is een dicht getuft synthetisch tapijt of een stevige lus een goede keuze. Wij adviseren u op basis van het gebruik van de ruimte.</p>
           </div>
-        </div>
-        <div class="pr-info-row">
-          <h3>Vloerbedekking en vloerverwarming</h3>
-          <div>
+        </details>
+        <details class="pr-faq-item">
+          <summary><h3>Vloerbedekking en vloerverwarming</h3><span class="pr-faq-plus" aria-hidden="true"></span></summary>
+          <div class="pr-faq-body">
           <p>Tapijt isoleert, en dat remt de warmte van vloerverwarming af. Met een geschikt tapijt met een lage warmteweerstand, eventueel volledig verlijmd, werkt vloerverwarming wel goed. Onze adviseurs vertellen u welke collecties daarvoor geschikt zijn.</p>
           </div>
-        </div>
-        <div class="pr-info-row">
-          <h3>Onderhoud</h3>
-          <div>
+        </details>
+        <details class="pr-faq-item">
+          <summary><h3>Onderhoud</h3><span class="pr-faq-plus" aria-hidden="true"></span></summary>
+          <div class="pr-faq-body">
           <p>Stofzuig uw tapijt regelmatig, bij voorkeur met een borstelzuigmond. Dep vlekken direct met een schone, vochtige doek en wrijf niet. Een wollen tapijt kan af en toe professioneel worden gereinigd.</p>
           </div>
-        </div>
-        <div class="pr-info-row">
-          <h3>Wat kost vloerbedekking?</h3>
-          <div>
+        </details>
+        <details class="pr-faq-item">
+          <summary><h3>Wat kost vloerbedekking?</h3><span class="pr-faq-plus" aria-hidden="true"></span></summary>
+          <div class="pr-faq-body">
           <p>De prijs hangt af van het garen, het gewicht, de rolbreedte en de manier van leggen. Na het inmeten maken wij een offerte op maat, inclusief het leggen en afwerken door ons eigen team.</p>
           </div>
-        </div>
+        </details>
       </div>
     </div>
   </section>
-
-  <!-- 7 · Merken -->
+  <!-- 9 - Merken -->
   <section class="pr-section" data-review-id="merken" data-review-label="Merken">
     <div class="wrap">
       <div class="pr-head">
@@ -215,7 +264,7 @@
     </div>
   </section>
 
-  <!-- 8 · Kom langs -->
+  <!-- 10 - Kom langs -->
   <section class="pr-cta" data-review-id="kom-langs" data-review-label="Kom langs">
     <div class="wrap pr-cta-grid">
       <div class="pr-cta-copy">
@@ -234,7 +283,7 @@
     </div>
   </section>
 
-  <!-- 9 · Verder kijken -->
+  <!-- 11 - Verder kijken: fototegels -->
   <section class="pr-section is-surface" data-review-id="verder-kijken" data-review-label="Verder kijken">
     <div class="wrap">
       <div class="pr-head">
@@ -243,12 +292,12 @@
         </div>
       </div>
       <nav class="pr-related" aria-label="Bekijk ook de andere vloersoorten">
-        <a href="/vloeren/pvc.html">PVC vloeren <span aria-hidden="true">&rarr;</span></a>
-        <a href="/vloeren/hout.html">Houten vloeren <span aria-hidden="true">&rarr;</span></a>
-        <a href="/vloeren/laminaat.html">Laminaat <span aria-hidden="true">&rarr;</span></a>
-        <a href="/vloeren/tegelvloer.html">Tegelvloeren <span aria-hidden="true">&rarr;</span></a>
-        <a href="/vloeren/gietvloer.html">Gietvloeren <span aria-hidden="true">&rarr;</span></a>
-        <a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloeren <span aria-hidden="true">&rarr;</span></a>
+        <a href="/vloeren/pvc.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">PVC vloeren <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
+        <a href="/vloeren/hout.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">Houten vloeren <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
+        <a href="/vloeren/laminaat.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1560184897-1ee3713708ee?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">Laminaat <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
+        <a href="/vloeren/tegelvloer.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">Tegelvloeren <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
+        <a href="/vloeren/gietvloer.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1765728614529-4749706523d9?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">Gietvloeren <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
+        <a href="/vloeren/hybride-houtenvloer.html"><span class="pr-rel-img"><img src="https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=600" alt="" loading="lazy"></span><span class="pr-rel-label">Hybride houtenvloeren <span class="arrow" aria-hidden="true">&rarr;</span></span></a>
       </nav>
     </div>
   </section>
