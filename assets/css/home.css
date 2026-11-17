@@ -443,3 +443,105 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
   border: 1px solid rgba(255, 255, 255, .38);
 }
 @media (max-width: 900px) { .h-film .h-hero-media::after { inset: 10px; } }
+
+/* ==========================================================================
+   Tijdschriftlook (feedback 17 nov. 2026, ref. knulst.nl)
+   ========================================================================== */
+
+/* Brede wrap voor beeldblokken: bijna schermvullend, zoals de hero */
+.h-spread-wrap, .h-visit-wrap { padding: 0 clamp(16px, 2.4vw, 44px); }
+
+/* ---- Onze vloeren / Wand en raam: groter, zoals knulst.nl ---- */
+#vloeren .wrap, #interieur .wrap { max-width: 1720px; }
+#vloeren .h-grid.is-divided > *, #interieur .h-grid.is-divided > * { padding-left: clamp(28px, 3.6vw, 70px); padding-right: clamp(28px, 3.6vw, 70px); padding-bottom: 60px; }
+#vloeren .h-grid.is-divided, #interieur .h-grid.is-divided { margin-left: calc(-1 * clamp(28px, 3.6vw, 70px)); margin-right: calc(-1 * clamp(28px, 3.6vw, 70px)); }
+@media (min-width: 1101px) {
+  #vloeren .h-grid.is-divided.cols-4 > *:nth-child(n+5) { padding-top: 60px; }
+}
+#vloeren .h-card h3, #interieur .h-card h3 { margin-top: 30px; font-size: 19px; font-weight: 500; }
+#vloeren .h-card p, #interieur .h-card p { font-size: 15.5px; }
+#vloeren .h-card img { aspect-ratio: 5 / 3; }
+#interieur .h-card img { aspect-ratio: 16 / 10; }
+
+/* ---- Van ondervloer tot afwerking: grote foto + donker vlak ---- */
+.h-spread { padding: 0 0 clamp(72px, 7vw, 110px); }
+.h-spread-photo { position: relative; overflow: hidden; height: clamp(320px, 42vw, 640px); background: var(--surface-2); }
+.h-spread-photo img { width: 100%; height: 100%; object-fit: cover; }
+.h-spread-photo::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.38); pointer-events: none; }
+.h-spread-panel {
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr); gap: clamp(40px, 6vw, 110px); align-items: center;
+  padding: clamp(56px, 7vw, 120px) clamp(28px, 6vw, 110px); background: var(--espresso); color: #fff;
+}
+.h-spread-copy h2 { margin: 0 0 18px; color: #fff; }
+.h-spread-copy .eyebrow { color: #fff; margin-bottom: 30px; }
+.h-spread-copy .eyebrow::after { background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.3) 26px); }
+.h-spread-copy p { color: rgba(255,255,255,.82); font-size: 16px; line-height: 1.85; margin: 0 0 22px; max-width: 46ch; }
+.h-spread-copy .h-spread-also { font-size: 14px; color: rgba(255,255,255,.6); margin-bottom: 32px; }
+.h-spread-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.h-spread-card { position: relative; display: block; aspect-ratio: 2 / 3; overflow: hidden; color: #fff; background: #3a2f26; }
+.h-spread-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.h-spread-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 14, 9, .78), rgba(20, 14, 9, 0) 45%); }
+.h-spread-card span { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 1; display: flex; flex-direction: column; gap: 4px; }
+.h-spread-card small { font-size: 14px; color: rgba(255,255,255,.9); }
+.h-spread-card b { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.3; }
+.h-spread-card:hover img { transform: scale(1.06); }
+
+/* ---- Reviews: één grote, lichte quote met stipjes (ref. knulst.nl) ---- */
+.h-quotes { background: var(--bg) !important; color: var(--ink) !important; text-align: center; }
+.h-quotes-score { margin: 0 0 44px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.h-quotes-score .h-stars { color: var(--brand); margin-right: 8px; }
+.q-slider { max-width: 1240px; margin: 0 auto; }
+.q-track { position: relative; min-height: 180px; }
+.q-slide {
+  position: absolute; left: 0; right: 0; top: 0; margin: 0;
+  opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .7s ease, transform .7s var(--ease), visibility 0s .7s;
+}
+.q-slide.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity .7s ease, transform .7s var(--ease); }
+.q-slide blockquote {
+  margin: 0 auto; max-width: 30em; font-family: var(--sans); font-style: normal; font-weight: 300;
+  font-size: clamp(22px, 2.4vw, 38px); line-height: 1.35; color: var(--ink);
+}
+.q-slide figcaption { margin-top: 48px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.q-slide figcaption b { color: var(--ink); font-weight: 700; }
+.q-dots { display: flex; justify-content: center; gap: 14px; margin-top: 56px; }
+.q-dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #c9c6c0; cursor: pointer; transition: background .25s, box-shadow .25s; }
+.q-dots button.is-on { background: var(--ink); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--ink); }
+
+/* ---- Slotblok showroom: grote sfeerfoto met zwevende kaart ---- */
+.h-visit { padding: clamp(40px, 5vw, 80px) 0 clamp(72px, 7vw, 110px); }
+.h-visit-wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); }
+.h-visit-photo { position: relative; overflow: hidden; height: clamp(420px, 52vw, 760px); background: var(--surface-2); }
+.h-visit-photo img { width: 100%; height: 100%; object-fit: cover; }
+.h-visit-photo::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.38); pointer-events: none; }
+.h-visit-photo .h-hero-vertical { position: absolute; left: 30px; bottom: 34px; z-index: 1; margin: 0; color: rgba(255,255,255,.9); font-size: 13px; }
+.h-visit-photo .h-hero-vertical strong { color: #fff; }
+.h-visit-card {
+  position: relative; z-index: 2; width: min(640px, calc(100% - 48px)); margin: -260px clamp(24px, 6vw, 110px) 0 auto;
+  padding: clamp(32px, 4vw, 56px); background: var(--surface); box-shadow: 0 40px 80px -40px rgba(39, 37, 33, .45);
+}
+.h-visit-card h2 { margin: 0 0 16px; }
+.h-visit-card .eyebrow { margin-bottom: 26px; }
+.h-visit-card > p { margin: 0 0 22px; font-size: 16px; line-height: 1.8; }
+.h-visit-info { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; margin: 6px 0 30px; }
+.h-visit-info .h-hours { margin: 0; max-width: none; }
+.h-visit-map { min-height: 0; height: 100%; border-radius: 0; border-color: var(--line); }
+.h-visit-map .map-cap { font-size: 12px; padding: 7px 11px; }
+
+@media (max-width: 1100px) {
+  .h-spread-panel { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .h-visit-card { width: auto; margin: -80px 16px 0; }
+  .h-visit-info { grid-template-columns: 1fr; }
+  .h-visit-map { height: 220px; }
+  .h-spread-cards { grid-template-columns: 1fr 1fr; }
+  .h-spread-cards .h-spread-card:last-child { display: none; }
+  .q-slide figcaption { margin-top: 28px; }
+}
+/* Oude regels voor de donkere reviews uitschakelen voor de quote-slider */
+#reviews.h-quotes blockquote { color: var(--ink); }
+#reviews.h-quotes figcaption { color: var(--ink-soft); }
+#reviews.h-quotes .h-stars { color: var(--brand); }
+/* Showroomkaart iets breder, zodat de openingstijden ruimte hebben */
+.h-visit-card { width: min(800px, calc(100% - 48px)); }
+.h-visit-info { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }

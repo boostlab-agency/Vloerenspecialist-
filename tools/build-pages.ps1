@@ -275,23 +275,24 @@ $benefits
   </section>
 "@
 
-  # ---- 7 - Reacties van klanten ----
+  # ---- 7 - Reacties van klanten: een grote quote tegelijk (quotes.js) ----
+  $first = $true
   $reviewItems = ($QUOTES | ForEach-Object {
-    "        <figure class=""pr-review""><blockquote>&ldquo;$($_.q)&rdquo;</blockquote><figcaption><span class=""pr-review-stars"" aria-label=""5 sterren"">&#9733;&#9733;&#9733;&#9733;&#9733;</span>$($_.who)</figcaption></figure>"
+    $on = if ($first) { " is-on" } else { "" }
+    $first = $false
+    "          <figure class=""q-slide$on""><blockquote>$($_.q)</blockquote><figcaption><b>$($_.who)</b></figcaption></figure>"
   }) -join "`n"
   $reviews = @"
 
-  <!-- 7 - Wat klanten zeggen -->
-  <section class="pr-section pr-reviews-sec" data-review-id="reviews" data-review-label="Reviews">
+  <!-- 7 - Wat klanten zeggen (ref. knulst.nl) -->
+  <section class="pr-section pr-quotes" data-review-id="reviews" data-review-label="Reviews">
     <div class="wrap">
-      <div class="pr-head">
-        <div>
-          <h2>Wat klanten zeggen</h2>
-          <p class="eyebrow">Gewaardeerd met een 9+</p>
-        </div>
-      </div>
-      <div class="pr-reviews">
+      <p class="pr-quotes-score"><span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Klanten waarderen ons met een 9+</p>
+      <div class="q-slider" data-quotes>
+        <div class="q-track">
 $reviewItems
+        </div>
+        <div class="q-dots" role="tablist" aria-label="Kies een review"></div>
       </div>
     </div>
   </section>
@@ -403,6 +404,7 @@ $info
 <script src="/assets/js/modules/open-status.js" defer></script>
 <script src="/assets/js/modules/product-motion.js" defer></script>
 <script src="/assets/js/modules/depth.js" defer></script>
+<script src="/assets/js/modules/quotes.js" defer></script>
 <script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="sub">
@@ -413,27 +415,27 @@ $info
 
 <main id="main">
 
-  <!-- 1 - Hero: kop en intro, daaronder een grote foto op een beige vlak -->
-  <section class="pr-hero" data-review-id="hero" data-review-label="Hero">
-    <div class="pr-hero-panel" aria-hidden="true"></div>
-    <div class="wrap pr-hero-inner">
+  <!-- 1 - Hero (ref. knulst.nl): bijna schermvullende foto met lijnkader en
+       verticale regel; daaronder de titel en een korte intro -->
+  <section class="pr-hero pr-hero-wide" data-review-id="hero" data-review-label="Hero">
+    <div class="pr-hero-wrap">
       <nav class="crumb" aria-label="Kruimelpad">$crumb</nav>
-      <div class="pr-hero-head">
-        <div>
-          <p class="eyebrow">$($d.eyebrow)</p>
-          <h1>$($d.h1)</h1>
-        </div>
-        <div>
-          <p class="pr-hero-lead">$($d.lead)</p>
-          <div class="pr-hero-actions">
-            <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
-            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
-          </div>
-        </div>
-      </div>
-      <p class="pr-hero-vertical" aria-hidden="true">$($d.vertical) <strong>in Tilburg</strong></p>
       <div class="pr-hero-media">
-        <img src="$(Img $d.heroImg 2000)" alt="$($d.heroAlt)" loading="eager">
+        <img src="$(Img $d.heroImg 2200)" alt="$($d.heroAlt)" loading="eager">
+        <p class="pr-hero-vertical" aria-hidden="true">$($d.vertical) <strong>in Tilburg</strong></p>
+      </div>
+    </div>
+    <div class="wrap pr-hero-head">
+      <div>
+        <h1>$($d.h1)</h1>
+        <p class="eyebrow">$($d.eyebrow)</p>
+      </div>
+      <div>
+        <p class="pr-hero-lead">$($d.lead)</p>
+        <div class="pr-hero-actions">
+          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
+        </div>
         <ul class="pr-hero-usps" aria-label="Waarom De Vloerenspecialist">
           <li>$CHECK Showroom van 1.800 m&sup2;</li>
           <li>$CHECK Eigen team plaatst alles</li>

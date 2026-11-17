@@ -247,3 +247,66 @@
 }
 @keyframes pr-hero-in { from { transform: scale(1.12); } to { transform: none; } }
 html.is-intro .pr-hero-media > img { animation-play-state: paused; }
+
+/* ==========================================================================
+   Tijdschriftlook (feedback 17 nov. 2026, ref. knulst.nl)
+   ========================================================================== */
+
+/* Hero: bijna schermvullende foto met lijnkader, titel eronder */
+.pr-hero-wide { padding: 0; }
+.pr-hero-wrap { padding: 0 clamp(16px, 2.4vw, 44px); }
+.pr-hero-wide .crumb { padding: 18px 0 14px; }
+.pr-hero-wide .pr-hero-media {
+  position: relative; overflow: hidden; aspect-ratio: auto; max-height: none; width: 100%;
+  height: clamp(380px, calc(100vh - var(--header-h) - 120px), 820px); background: var(--surface-2);
+}
+.pr-hero-wide .pr-hero-media > img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
+.pr-hero-wide .pr-hero-media::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.4); pointer-events: none; }
+.pr-hero-wide .pr-hero-media::before { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; z-index: 1; background: linear-gradient(to top, rgba(28, 20, 13, .45), rgba(28, 20, 13, 0)); pointer-events: none; }
+.pr-hero-wide .pr-hero-vertical { position: absolute; left: 30px; bottom: 34px; z-index: 2; margin: 0; color: rgba(255,255,255,.9); }
+.pr-hero-wide .pr-hero-vertical strong { color: #fff; }
+.pr-hero-wide .pr-hero-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(40px, 6vw, 110px); align-items: start; padding: clamp(56px, 6vw, 96px) var(--gutter) clamp(24px, 3vw, 40px); }
+.pr-hero-wide h1 { margin: 0 0 18px; font-size: clamp(36px, 4.6vw, 68px); line-height: 1.05; }
+.pr-hero-wide .pr-hero-lead { font-size: clamp(18px, 1.5vw, 22px); font-weight: 300; line-height: 1.65; max-width: 34em; }
+.pr-hero-wide .pr-hero-usps { position: static; margin-top: 30px; padding: 18px 0 0; background: none; border-top: 1px solid var(--line); }
+
+/* Reviews: een grote, lichte quote met stipjes */
+.pr-quotes { text-align: center; background: var(--bg); color: var(--ink); }
+.pr-quotes-score { margin: 0 0 44px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.pr-quotes-score span { color: var(--brand); margin-right: 8px; letter-spacing: .1em; }
+.q-slider { max-width: 1240px; margin: 0 auto; }
+.q-track { position: relative; min-height: 160px; }
+.q-slide { position: absolute; left: 0; right: 0; top: 0; margin: 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .7s ease, transform .7s var(--ease), visibility 0s .7s; }
+.q-slide.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity .7s ease, transform .7s var(--ease); }
+.q-slide blockquote { margin: 0 auto; max-width: 30em; font-weight: 300; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.35; color: var(--ink); }
+.q-slide figcaption { margin-top: 44px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.q-slide figcaption b { color: var(--ink); font-weight: 700; }
+.q-dots { display: flex; justify-content: center; gap: 14px; margin-top: 52px; }
+.q-dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #c9c6c0; cursor: pointer; }
+.q-dots button.is-on { background: var(--ink); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--ink); }
+
+/* Bekijk ook: grote kaarten met lijnen ertussen, zoals "Onze vloeren" */
+.pr-related { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0 -40px; }
+.pr-related a { background: none; text-align: center; padding: 0 40px 48px; border-left: 1px solid var(--line); }
+.pr-related a:nth-child(4n+1) { border-left: 0; }
+.pr-related a:nth-child(n+5) { border-top: 1px solid var(--line); padding-top: 48px; }
+.pr-rel-img { aspect-ratio: 5 / 3; }
+.pr-rel-label { justify-content: center; padding: 26px 0 0; font-size: 18px; }
+@media (max-width: 1100px) {
+  .pr-related { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 -24px; }
+  .pr-related a { padding: 0 24px 36px; border-left: 0; border-top: 0; }
+  .pr-related a:nth-child(2n) { border-left: 1px solid var(--line); }
+  .pr-related a:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: 36px; }
+}
+@media (max-width: 900px) {
+  .pr-hero-wide .pr-hero-head { grid-template-columns: 1fr; gap: 16px; }
+  .pr-hero-wide .pr-hero-media { height: min(70vh, 520px); }
+  .pr-hero-wide .pr-hero-media { overflow: hidden; }
+  .pr-hero-wide .pr-hero-media > img { height: 100%; aspect-ratio: auto !important; }
+}
+@media (max-width: 560px) {
+  .pr-related { margin: 0 -12px; }
+  .pr-related a { padding: 0 12px 24px; }
+  .pr-related a:nth-child(n+3) { padding-top: 24px; }
+  .pr-rel-label { font-size: 15px; }
+}

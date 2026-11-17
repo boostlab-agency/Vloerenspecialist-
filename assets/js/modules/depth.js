@@ -9,7 +9,7 @@
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   var SEL = [
-    ".h-welcome-media img", ".h-inspire-item img",
+    ".h-welcome-media img", ".h-inspire-item img", ".h-spread-photo img", ".h-visit-photo img",
     ".pr-hero-media > img", ".pr-intro-big", ".pr-feature-media img",
     ".pr-split-media img", ".pr-cta-media img", ".pr-mosaic .is-big img"
   ].join(",");

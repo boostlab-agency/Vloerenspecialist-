@@ -300,3 +300,29 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .step-row-photo .step-item h3, .step-row-photo .step-item p { padding: 0 22px; }
 .step-row-photo .step-item h3 { font-size: 18px; }
 .step-row-photo .step-item p { font-size: 15px; }
+
+/* ==========================================================================
+   Tijdschriftlook (feedback 17 nov. 2026, ref. knulst.nl)
+   Pagina-hero met foto: de foto bijna schermvullend met een dun lijnkader,
+   titel en intro eronder in twee kolommen. Grote, lichte introtekst.
+   ========================================================================== */
+.page-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 0 clamp(40px, 6vw, 110px); align-items: start; margin-top: 8px; }
+.page-hero-media {
+  grid-column: 1 / -1; aspect-ratio: auto; height: clamp(360px, calc(100vh - var(--header-h) - 140px), 760px); border-radius: 0;
+  margin: 0 calc(-1 * max(var(--gutter), (100vw - var(--container)) / 2 + var(--gutter)) + clamp(16px, 2.4vw, 44px));
+}
+.page-hero-media::after { content: ""; position: absolute; inset: 18px; z-index: 1; border: 1px solid rgba(255,255,255,.4); pointer-events: none; }
+.page-hero-copy { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 0 clamp(40px, 6vw, 110px); padding: clamp(48px, 5vw, 80px) 0 clamp(16px, 2vw, 32px); }
+.page-hero-title h1 { font-size: clamp(34px, 4.4vw, 64px); line-height: 1.06; margin-bottom: 0; }
+.page-hero-title .eyebrow, .page-hero-title [data-open-status] { margin-bottom: 22px; }
+.page-hero-copy .lead { font-size: clamp(18px, 1.5vw, 22px); font-weight: 300; line-height: 1.65; color: var(--ink); max-width: 34em; }
+/* Hero zonder foto (contact, merken, projecten): grote titel, lichte intro */
+.page-hero-copy[style] { display: block; padding: 0; }
+.page-hero-copy[style] h1 { font-size: clamp(34px, 4.4vw, 64px); line-height: 1.06; }
+.page-hero-copy[style] .lead, .page-hero-copy[style] > p { font-size: clamp(18px, 1.5vw, 22px); font-weight: 300; line-height: 1.65; color: var(--ink); }
+@media (max-width: 900px) {
+  .page-hero-media { height: min(62vh, 480px); margin: 0 calc(-1 * var(--gutter) + 12px); }
+  .page-hero-copy { grid-template-columns: 1fr; }
+  .page-hero-title { margin-bottom: 20px; }
+}
+.contact-hours { margin-top: 14px; }
