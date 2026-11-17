@@ -11,8 +11,6 @@
   border-bottom: 1px solid var(--line);
   transition: box-shadow .25s var(--ease), transform .45s var(--ease);
 }
-/* Naar beneden scrollen: header schuift weg; omhoog: komt direct terug. */
-.site-header.is-hidden { transform: translateY(-100%); }
 /* Dun rood lijntje onderaan dat meegroeit met hoe ver je gescrold hebt. */
 .site-header::after {
   content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--brand);
@@ -255,5 +253,9 @@ html.menu-open .fb-header-controls { display: none; }
 .m-cat[open] .nav-caret { color: var(--brand); }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-header.is-hidden { transform: none; }
+
 }
+
+/* Mobiel menu: openingstijden per dag (feedback 17 nov. 2026) */
+.m-hours { margin-top: 10px; text-align: left; }
+.m-hours .open-week-row { padding: 6px 10px; font-size: 13.5px; }

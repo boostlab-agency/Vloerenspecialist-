@@ -22,7 +22,8 @@ $FLOORS = @(
   @{ label = "Tegelvloeren"; href = "/vloeren/tegelvloer.html" },
   @{ label = "Vloerbedekking"; href = "/vloeren/vloerbedekking.html" },
   @{ label = "Gietvloeren"; href = "/vloeren/gietvloer.html" },
-  @{ label = "Hybride houtenvloeren"; href = "/vloeren/hybride-houtenvloer.html" }
+  @{ label = "Hybride houtenvloeren"; href = "/vloeren/hybride-houtenvloer.html" },
+  @{ label = "Traprenovatie"; href = "/vloeren/traprenovatie.html" }
 )
 $INTERIOR = @(
   @{ label = "Interieur op maat"; href = "/interieur/index.html" },
@@ -80,6 +81,7 @@ $CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L1
 
 function Img([string]$src, [int]$w) {
   if ($src -like "*images.unsplash.com*") { return "$src" + "?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=$w" }
+  if ($src -like "*images.pexels.com*") { return ($src -replace "\?.*$", "") + "?auto=compress&amp;cs=tinysrgb&amp;w=$w" }
   if ($w -le 900) {
     if ($src -like "*-1800.jpg") { return $src -replace "-1800\.jpg$", "-900.jpg" }
     if ($src -like "*-1400.jpg") { return $src -replace "-1400\.jpg$", "-600.jpg" }

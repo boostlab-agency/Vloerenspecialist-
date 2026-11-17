@@ -283,3 +283,20 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .brand-kenmerken { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 32px; margin: 40px 0; }
 .brand-kenmerken .item { border-top: 2px solid var(--ink); padding-top: 14px; font-size: 14.5px; color: var(--ink-soft); }
 @media (max-width: 700px) { .brand-hero { flex-direction: column; align-items: flex-start; gap: 14px; } .brand-kenmerken { grid-template-columns: 1fr 1fr; } }
+
+/* ---- Over ons: werkwijze met foto's (feedback 17 nov. 2026: "te koud") ----
+   Elke stap een warme foto met een nummer op de rand. */
+.step-row-photo { position: relative; gap: 24px; }
+.step-row-photo .step-item::before { display: none; }
+.step-row-photo .step-item { position: relative; background: var(--bg); padding-bottom: 28px; }
+.step-photo { display: block; aspect-ratio: 4 / 3.2; overflow: hidden; background: var(--surface-2); margin-bottom: 0; }
+.step-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.step-row-photo .step-item:hover .step-photo img { transform: scale(1.05); }
+.step-nr {
+  position: relative; z-index: 1; display: inline-grid; place-items: center; width: 46px; height: 46px; margin: -23px 0 14px 22px;
+  border-radius: 50%; background: var(--espresso); color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .06em;
+  box-shadow: 0 0 0 6px var(--bg);
+}
+.step-row-photo .step-item h3, .step-row-photo .step-item p { padding: 0 22px; }
+.step-row-photo .step-item h3 { font-size: 18px; }
+.step-row-photo .step-item p { font-size: 15px; }

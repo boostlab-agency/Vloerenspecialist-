@@ -51,6 +51,10 @@
       '<path d="M40 8c-8 2-12 8-10 16 8-1 13-7 10-16z"/><path d="M30 24c2-5 5-9 9-12"/>' +
       '<path ' + R + ' d="M50 16c3 4 4.5 6.5 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2 1.5-4.5 4.5-8.5z"/>'
     ),
+    "trap": svg(
+      '<path d="M8 56h12V44h12V32h12V20h12"/><path d="M8 56h48V20"/>' +
+      '<path ' + R + ' d="M20 44h12M32 32h12"/>'
+    ),
     "vloeren-alle": svg(
       '<rect x="8" y="8" width="20" height="20"/><rect x="36" y="8" width="20" height="20"/><rect x="8" y="36" width="20" height="20"/>' +
       '<rect ' + R + ' x="36" y="36" width="20" height="20"/>'
@@ -127,7 +131,7 @@
     var map = [
       ["/vloeren/pvc", "pvc"], ["/vloeren/hout", "hout"], ["/vloeren/laminaat", "laminaat"],
       ["/vloeren/tegel", "tegel"], ["/vloeren/vloerbedekking", "vloerbedekking"], ["/vloeren/giet", "giet"],
-      ["/vloeren/hybride", "hybride"], ["kasten-op-maat", "kasten"], ["deuren-en-wanden", "deuren"], ["meubels-op-maat", "meubels"],
+      ["/vloeren/hybride", "hybride"], ["/vloeren/traprenovatie", "trap"], ["kasten-op-maat", "kasten"], ["deuren-en-wanden", "deuren"], ["meubels-op-maat", "meubels"],
       ["/fotobehang", "fotobehang"], ["/papierbehang", "papierbehang"], ["/vinylbehang", "vinylbehang"],
       ["/vliesbehang", "vliesbehang"], ["/renostuc", "renostuc"], ["/jaloezieen", "jaloezieen"],
       ["/rolgordijnen", "rol"], ["/plissegordijnen", "plisse"], ["/vouwgordijnen", "vouw"],

@@ -11,7 +11,7 @@
 }
 
 .footer-brand .brand { display: inline-flex; margin-bottom: 22px; }
-.footer-brand .brand-logo { height: 36px; width: auto; }
+.footer-brand .brand-logo { height: 64px; width: auto; }  /* groter (feedback 17 nov.) */
 .footer-brand p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; max-width: 32ch; }
 .footer-social { display: flex; gap: 10px; margin-top: 24px; }
 .footer-social a {
@@ -53,3 +53,6 @@
   .site-footer .wrap { padding: 72px var(--gutter) 32px; }
   .footer-top { grid-template-columns: 1fr; }
 }
+
+/* Openingstijden: alle dagen onder elkaar (feedback 17 nov. 2026) */
+.footer-hours { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 3px 22px; font-variant-numeric: tabular-nums; }

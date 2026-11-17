@@ -48,6 +48,7 @@
                 '<li><a href="/vloeren/vloerbedekking.html">Vloerbedekking</a></li>' +
                 '<li><a href="/vloeren/gietvloer.html">Gietvloer</a></li>' +
                 '<li><a href="/vloeren/hybride-houtenvloer.html">Hybride houtenvloer</a></li>' +
+                '<li><a href="/vloeren/traprenovatie.html">Traprenovatie</a></li>' +
                 '<li><a href="/merken/index.html">Alle merken</a></li>' +
               "</ul>" +
             "</div>" +
@@ -66,7 +67,11 @@
               "<h4>Showroom</h4>" +
               '<div class="info">' +
                 "<span><strong>Adres</strong>Jules Verneweg 7a, 5015 BD Tilburg</span>" +
-                "<span><strong>Openingstijden</strong>Ma–vr 09:00–17:00 · Za 09:00–15:00 · Zo gesloten</span>" +
+                "<span><strong>Openingstijden</strong><span class=\"footer-hours\">" +
+                  "<span>Maandag</span><span>09:00 – 17:00</span><span>Dinsdag</span><span>09:00 – 17:00</span>" +
+                  "<span>Woensdag</span><span>09:00 – 17:00</span><span>Donderdag</span><span>09:00 – 17:00</span>" +
+                  "<span>Vrijdag</span><span>09:00 – 17:00</span><span>Zaterdag</span><span>09:00 – 15:00</span>" +
+                  "<span>Zondag</span><span>Gesloten</span></span></span>" +
                 '<span><strong>Telefoon</strong><a href="tel:+31135368598">013 - 536 85 98</a></span>' +
               "</div>" +
               '<a class="btn btn-outline btn-sm" href="/showroom.html">Plan showroombezoek</a>' +

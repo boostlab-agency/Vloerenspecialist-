@@ -1,0 +1,76 @@
+{
+  "file": "vloeren/traprenovatie.html",
+  "group": "vloeren",
+  "name": "Traprenovatie",
+  "title": "Traprenovatie",
+  "metaDesc": "Traprenovatie in Tilburg: uw trap bekleed in dezelfde uitstraling als uw nieuwe vloer, met PVC, laminaat, hout of tapijt. Advies en montage door ons eigen team.",
+  "eyebrow": "Vloeren",
+  "h1": "Traprenovatie",
+  "vertical": "Traprenovatie",
+  "lead": "Een nieuwe vloer verdient een trap die erbij past. Wij bekleden uw bestaande trap met dezelfde uitstraling als uw vloer, zodat beneden en boven één geheel worden. Zonder sloopwerk en met montage door ons eigen team.",
+  "heroImg": "https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg",
+  "heroAlt": "Verlichte eikenhouten trap in een moderne woning",
+  "gallery": [
+    "https://images.pexels.com/photos/4577688/pexels-photo-4577688.jpeg",
+    "https://images.pexels.com/photos/922793/pexels-photo-922793.jpeg",
+    "https://images.pexels.com/photos/15758635/pexels-photo-15758635.jpeg",
+    "https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg",
+    "https://images.pexels.com/photos/3805102/pexels-photo-3805102.jpeg"
+  ],
+  "about": {
+    "eyebrow": "Over traprenovatie",
+    "h2": "Uw trap als verlengstuk van de vloer",
+    "paras": [
+      "Bij een traprenovatie blijft de constructie van uw trap staan. Wij bekleden de treden en stootborden met een nieuwe afwerking, zodat de trap er weer als nieuw uitziet en naadloos aansluit op uw vloer.",
+      "U kiest de uitvoering die bij uw interieur past: in dezelfde PVC- of laminaatcollectie als uw vloer, in hout, of zacht en stil met tapijt. Ook dichte en open trappen kunnen wij renoveren.",
+      "Onze adviseurs bekijken uw trap ter plaatse, nemen de maten op en vertellen u welke mogelijkheden er zijn. Zo weet u vooraf precies wat het resultaat wordt."
+    ]
+  },
+  "types": {
+    "eyebrow": "Mogelijkheden",
+    "h2": "Kies de afwerking die bij uw vloer past",
+    "text": "Dezelfde collectie als uw vloer geeft het rustigste geheel. Wij laten u in de showroom de mogelijkheden zien.",
+    "items": [
+      { "title": "PVC traprenovatie", "text": "Slijtvast, stil en eenvoudig schoon te houden. Mooi in combinatie met een PVC vloer in dezelfde kleur.", "tags": ["Stil", "Onderhoudsarm"], "img": "https://images.pexels.com/photos/15758635/pexels-photo-15758635.jpeg", "alt": "Trap met houtlook treden en witte spijlen" },
+      { "title": "Laminaat traprenovatie", "text": "Een sterke, voordelige afwerking met een houtlook die aansluit op uw laminaatvloer.", "tags": ["Voordelig"], "img": "https://images.pexels.com/photos/3805102/pexels-photo-3805102.jpeg", "alt": "Trappenhuis met houten treden van bovenaf" },
+      { "title": "Houten traptreden", "text": "De warme uitstraling van echt hout, passend bij een houten of hybride houtenvloer.", "tags": ["Echt hout"], "img": "https://images.pexels.com/photos/922793/pexels-photo-922793.jpeg", "alt": "Rechte trap met houten treden" },
+      { "title": "Trap met tapijt", "text": "Zacht onder de voeten en geluiddempend. Prettig in huizen met kinderen.", "tags": ["Zacht", "Geluiddempend"] }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Eén geheel",
+    "h2": "Vloer en trap in dezelfde uitstraling",
+    "text": "Kiest u een nieuwe vloer, dan nemen we de trap graag mee. Zo loopt de vloer van de woonkamer door tot boven aan de trap, met afwerking en neuzen die precies passen.",
+    "img": "https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg",
+    "alt": "Lichte woonruimte met houten trap en eettafel"
+  },
+  "benefits": {
+    "h2": "Waarom uw trap renoveren",
+    "items": [
+      { "title": "Geen sloopwerk", "text": "De bestaande trap blijft staan en wordt bekleed." },
+      { "title": "Passend bij uw vloer", "text": "In dezelfde collectie, kleur en structuur." },
+      { "title": "Stiller en veiliger", "text": "Met antislipneuzen en geluiddempende materialen." },
+      { "title": "Eigen montageteam", "text": "Opgemeten en geplaatst door onze eigen vakmensen." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over traprenovatie",
+    "rows": [
+      { "title": "Hoe verloopt een traprenovatie?", "paras": [
+        "Na uw bezoek aan de showroom komen wij bij u thuis de trap opmeten. Daarna maken wij een offerte op maat. Op de afgesproken dag bekleedt ons team de trap; afhankelijk van de trap is dat meestal in één tot twee dagen klaar."
+      ]},
+      { "title": "Kan elke trap gerenoveerd worden?", "paras": [
+        "Vrijwel elke stevige trap komt in aanmerking, zowel dichte als open trappen en trappen met een kwart of halve draai. Bij het opmeten bekijken wij de staat van de trap en adviseren wij de beste oplossing."
+      ]},
+      { "title": "Wat kost een traprenovatie?", "paras": [
+        "De prijs hangt af van het aantal treden, de vorm van de trap en de gekozen afwerking. Na het opmeten ontvangt u een offerte op maat, inclusief montage."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Benieuwd wat er met uw trap kan? Kom langs",
+    "text": "Bekijk de afwerkingen in onze showroom en neem een foto van uw trap mee. Wij denken graag met u mee.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met vloeren en complete woonopstellingen"
+  }
+}

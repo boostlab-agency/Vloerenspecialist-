@@ -9,17 +9,12 @@
   function initHeaderScrollState() {
     var header = document.querySelector(".site-header");
     if (!header) return;
-    var lastY = window.scrollY, ticking = false;
+    var ticking = false;
     function update() {
       ticking = false;
       var y = window.scrollY;
+      /* Het menu blijft bij scrollen altijd in beeld (feedback 17 nov. 2026). */
       header.classList.toggle("is-scrolled", y > 8);
-      /* Wegschuiven bij naar beneden scrollen, terug bij omhoog — niet als
-         er een uitklapmenu open is. */
-      var menuOpen = header.querySelector(".nav-item.is-open");
-      if (y > 320 && y > lastY + 6 && !menuOpen) header.classList.add("is-hidden");
-      else if (y < lastY - 6 || y <= 320) header.classList.remove("is-hidden");
-      lastY = y;
       /* Rood voortgangslijntje onder de header. */
       var max = document.documentElement.scrollHeight - window.innerHeight;
       header.style.setProperty("--progress", max > 0 ? Math.min(y / max, 1).toFixed(4) : 0);
@@ -28,7 +23,6 @@
     window.addEventListener("scroll", function () {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
-    header.addEventListener("focusin", function () { header.classList.remove("is-hidden"); });
   }
 
   /* Uitklapmenu's: met de muis klappen ze direct open bij aanwijzen (en

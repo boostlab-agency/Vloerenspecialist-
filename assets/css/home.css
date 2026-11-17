@@ -371,3 +371,75 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 @media (max-width: 520px) {
   .h-film-chapters .h-film-label { display: none; }
 }
+
+/* ==========================================================================
+   Feedback klant 17 nov. 2026 (feedbacktool)
+   ========================================================================== */
+
+/* Welkom: veel breder fotogebruik (ref. knulst.nl). De foto loopt tot de
+   linkerrand van het scherm; een dunne lijn eromheen als belijning. */
+#welkom .h-welcome-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 100px); }
+#welkom .h-welcome-media {
+  aspect-ratio: 4 / 3.1; box-shadow: none;
+  margin-left: calc(-1 * max(var(--gutter), (100vw - var(--container)) / 2 + var(--gutter)));
+}
+#showroom .h-map { outline: 1px solid var(--line); outline-offset: 14px; box-shadow: none; }
+
+/* Van ondervloer tot afwerking: warm donker vlak met zes fotokaarten */
+.h-services { background: var(--espresso); color: #fff; }
+.h-services .eyebrow { color: #fff; }
+.h-services .eyebrow::after { background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.22) 26px); }
+.h-services-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: end; margin-bottom: 52px; }
+.h-services-head h2 { margin: 0; color: #fff; max-width: 18ch; }
+.h-services-head p { margin: 0 0 26px; font-size: 16px; line-height: 1.8; color: rgba(255,255,255,.8); max-width: 560px; }
+.btn-light { background: #fff; color: var(--ink); border-color: #fff; }
+.btn-light:hover { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.h-services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.h-service { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; color: #fff; background: #3a2f26; }
+.h-service-media, .h-service-media img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.h-service-media img { object-fit: cover; transition: transform 1.2s var(--ease); }
+.h-service::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28, 20, 13, .82) 0%, rgba(28, 20, 13, .15) 55%, rgba(28, 20, 13, 0)); transition: opacity .4s; }
+.h-service-copy { position: absolute; left: 24px; right: 24px; bottom: 22px; z-index: 1; display: flex; flex-direction: column; gap: 4px; }
+.h-service-nr { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: rgba(255,255,255,.65); }
+.h-service-copy b { font-size: 19px; font-weight: 600; }
+.h-service-copy b::after { content: " \2192"; color: var(--brand); display: inline-block; transition: transform .25s var(--ease); }
+.h-service-copy > span:last-child { font-size: 14px; color: rgba(255,255,255,.78); }
+.h-service:hover .h-service-media img { transform: scale(1.06); }
+.h-service:hover .h-service-copy b::after { transform: translateX(4px); }
+/* Belijning: dunne lijn binnen de kaart die bij hover verschijnt */
+.h-service::before { content: ""; position: absolute; inset: 12px; z-index: 1; border: 1px solid rgba(255,255,255,.0); transition: border-color .35s; pointer-events: none; }
+.h-service:hover::before { border-color: rgba(255,255,255,.45); }
+
+/* Openingstijden: alle dagen onder elkaar */
+.h-hours { margin: 4px 0 30px; padding: 22px 24px 18px; background: var(--bg); border: 1px solid var(--line); max-width: 420px; }
+.h-hours-title { margin: 0 0 10px; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 17px; color: var(--ink); }
+.h-hours .open-week-row { padding: 7px 10px; }
+.h-hours-note { margin: 12px 0 0 !important; font-size: 13.5px !important; line-height: 1.5 !important; color: var(--ink-soft) !important; }
+.h-hours-note a { color: var(--ink); font-weight: 600; }
+
+/* Merken: duidelijk zichtbaar op een donker vlak, grotere namen */
+.h-brands { background: var(--espresso); border-top: 0; }
+.h-brands-inner { padding-top: 34px; padding-bottom: 34px; }
+.h-brands-label { color: #fff; font-size: 18px; }
+.h-brands-row span { font-size: 17px; font-weight: 600; letter-spacing: .12em; color: rgba(255,255,255,.88); }
+.h-brands-row span::after { width: 6px; height: 6px; border-radius: 0; transform: rotate(45deg); opacity: 1; margin: 0 34px; }
+
+@media (max-width: 1100px) {
+  .h-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  #welkom .h-welcome-grid { grid-template-columns: 1fr; }
+  #welkom .h-welcome-media { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); }
+  .h-services-head { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 560px) {
+  .h-services-grid { grid-template-columns: 1fr; }
+  .h-brands-row span { font-size: 14px; }
+}
+
+/* Hero: dunne lijnkader binnen de film (feedback: "meer belijningen") */
+.h-film .h-hero-media::after {
+  content: ""; position: absolute; inset: 18px; z-index: 1; pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, .38);
+}
+@media (max-width: 900px) { .h-film .h-hero-media::after { inset: 10px; } }

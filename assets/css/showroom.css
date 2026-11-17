@@ -52,3 +52,27 @@
   .sr-stat + .sr-stat { border-top: 1px solid var(--line); }
   .sr-visit-card { padding: 20px; }
 }
+
+/* ---- Feedback 17 nov. 2026 ----
+   Adres/route/openingstijden: warmer. Showroomfoto op de achtergrond onder
+   een warme, donkere laag; kaart met dunne belijning, kaart met tijden wit. */
+.page-section.sr-visit {
+  position: relative; color: #fff;
+  background:
+    linear-gradient(rgba(43, 34, 27, .88), rgba(43, 34, 27, .92)),
+    url("https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&q=70&auto=format&fit=crop&w=1800") center / cover no-repeat;
+}
+.sr-visit .page-section-head h2 { color: #fff; }
+.sr-visit .eyebrow { color: #fff; }
+.sr-visit .eyebrow::after { background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.25) 26px); }
+.sr-visit .sr-map { outline: 1px solid rgba(255,255,255,.35); outline-offset: 12px; border-color: transparent; }
+.sr-visit-card { color: var(--ink); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); border: 0; }
+
+/* Wat kunt u van ons verwachten: zeven punten in een raster van vier */
+.sr-expect { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.sr-expect li { background: var(--bg); border: 1px solid var(--line); position: relative; }
+.sr-expect li::before { content: ""; position: absolute; left: 26px; top: 0; width: 34px; height: 2px; background: var(--brand); }
+.sr-expect .sr-step-no { font-size: 15px; letter-spacing: .14em; color: var(--ink-faint); margin-bottom: 14px; }
+.sr-expect h3 { font-size: 17px; }
+@media (max-width: 1100px) { .sr-expect { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .sr-expect { grid-template-columns: 1fr; } }
