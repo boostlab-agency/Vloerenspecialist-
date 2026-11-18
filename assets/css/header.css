@@ -138,8 +138,17 @@
 .header-phone:hover svg { animation: phone-ring .6s ease; }
 @keyframes phone-ring { 0%, 100% { transform: none; } 20% { transform: rotate(-14deg); } 40% { transform: rotate(12deg); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(5deg); } }
 
-/* Logo: bij aanwijzen huppen de rode tegeltjes even één voor één op. */
-.brand:hover .logo-inline .logo-tile { animation: tile-hop .55s calc(var(--i) * 60ms) cubic-bezier(.34,1.56,.64,1); }
+/* Logo: de rode tegeltjes deinen continu rustig op en neer, als een golf
+   (elk tegeltje iets later dan het vorige). Loopt via "translate", zodat het
+   samengaat met het huppen hieronder (dat gebruikt "transform"). */
+.site-header .logo-inline .logo-tile {
+  --tile-float: tile-float 3.4s calc(var(--i) * -.5s) ease-in-out infinite;
+  animation: var(--tile-float);
+}
+@keyframes tile-float { 0%, 100% { translate: 0 6%; } 50% { translate: 0 -10%; } }
+
+/* Bij aanwijzen huppen de tegeltjes ook nog even één voor één op. */
+.brand:hover .logo-inline .logo-tile { animation: tile-hop .55s calc(var(--i) * 60ms) cubic-bezier(.34,1.56,.64,1), var(--tile-float); }
 @keyframes tile-hop { 0%, 100% { transform: none; } 45% { transform: translateY(-14%) rotate(-6deg); } }
 .header-cta { padding: 11px 20px; }
 
@@ -284,7 +293,7 @@ html.menu-open .fb-header-controls { display: none; }
 }
 
 /* Logo: tegeltjes huppen bij binnenkomst, daarna af en toe, en bij aanwijzen */
-.logo-inline.is-hop .logo-tile { animation: tile-hop .6s calc(var(--i) * 70ms) cubic-bezier(.34,1.56,.64,1); }
+.site-header .logo-inline.is-hop .logo-tile { animation: tile-hop .6s calc(var(--i) * 70ms) cubic-bezier(.34,1.56,.64,1), var(--tile-float); }
 @media (min-width: 1280px) and (max-width: 1599px) {
   .main-nav > ul { gap: 0; }
   .nav-link { font-size: 14px; padding-left: 9px; padding-right: 9px; }
