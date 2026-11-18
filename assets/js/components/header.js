@@ -21,7 +21,7 @@
   };
 
   function img(src, w) {
-    if (src.indexOf("images.unsplash.com") !== -1) return src + "?fm=jpg&q=72&auto=format&fit=crop&w=" + w;
+    if (src.indexOf("images.unsplash.com") !== -1) return src + "?q=72&auto=format&fit=crop&w=" + w;
     return src;
   }
 

@@ -60,7 +60,7 @@
   position: relative; color: #fff;
   background:
     linear-gradient(rgba(43, 34, 27, .88), rgba(43, 34, 27, .92)),
-    url("https://images.unsplash.com/photo-1680503397644-bcd216845f26?fm=jpg&q=70&auto=format&fit=crop&w=1800") center / cover no-repeat;
+    url("https://images.unsplash.com/photo-1680503397644-bcd216845f26?q=70&auto=format&fit=crop&w=1800") center / cover no-repeat;
 }
 .sr-visit .page-section-head h2 { color: #fff; }
 .sr-visit .eyebrow { color: #fff; }

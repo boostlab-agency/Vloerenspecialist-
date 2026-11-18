@@ -23,6 +23,9 @@ body {
 }
 
 img, svg, video { display: block; max-width: 100%; }
+/* Hoogte volgt de breedte; de width/height-attributen op img geven alleen de
+   beeldverhouding door, zodat de pagina niet verspringt tijdens het laden. */
+img { height: auto; }
 
 /* Grote koppen in hoofdletters (zoals een klassieke showroom-uitstraling);
    kleinere koppen gewoon, rustig en goed leesbaar. */

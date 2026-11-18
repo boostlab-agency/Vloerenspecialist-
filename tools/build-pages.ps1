@@ -80,7 +80,7 @@ $QUOTES = @(
 $CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 function Img([string]$src, [int]$w) {
-  if ($src -like "*images.unsplash.com*") { return "$src" + "?fm=jpg&amp;q=75&amp;auto=format&amp;fit=crop&amp;w=$w" }
+  if ($src -like "*images.unsplash.com*") { return "$src" + "?q=75&amp;auto=format&amp;fit=crop&amp;w=$w" }
   if ($src -like "*images.pexels.com*") { return ($src -replace "\?.*$", "") + "?auto=compress&amp;cs=tinysrgb&amp;w=$w" }
   if ($w -le 900) {
     if ($src -like "*-1800.jpg") { return $src -replace "-1800\.jpg$", "-900.jpg" }
@@ -90,6 +90,72 @@ function Img([string]$src, [int]$w) {
 }
 function Key([string]$src) { return ($src -replace "\?.*$", "" -replace "-(600|900|1400|1600|1800)\.jpg$", "" -replace "visgraat-detail", "visgraat-keuken" -replace "tapijt-pouf-2", "tapijt-pouf-1") }
 function Paras($list) { ($list | ForEach-Object { "<p>$_</p>" }) -join "`n          " }
+
+# Afbeeldingsattributen (nov. 2026):
+# - width/height op elke foto, zodat de browser ruimte vrijhoudt en de pagina
+#   niet verspringt. Lokale foto's meten we zelf; voor Unsplash/Pexels staat
+#   de beeldverhouding in tools/image-sizes.json (nieuwe foto? voeg hem daar toe).
+# - lokale foto's die in meerdere formaten bestaan (naam-900.jpg + naam-1800.jpg)
+#   krijgen srcset + sizes, zodat telefoons de kleine versie laden.
+# - sizes per plek in het sjabloon, gemeten op 390/600/820/1100/1440 px breed.
+Add-Type -AssemblyName System.Drawing
+$REMOTE_DIMS = @{}
+(Get-Content (Join-Path $PSScriptRoot "image-sizes.json") -Raw -Encoding UTF8 | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $REMOTE_DIMS[$_.Name] = $_.Value }
+$LOCAL_DIMS = @{}
+function LocalDims([string]$url) {
+  if (-not $LOCAL_DIMS.ContainsKey($url)) {
+    $f = Join-Path $Root ($url.TrimStart("/") -replace "/", "\")
+    if (Test-Path -LiteralPath $f) { $im = [System.Drawing.Image]::FromFile($f); $LOCAL_DIMS[$url] = @($im.Width, $im.Height); $im.Dispose() }
+    else { $LOCAL_DIMS[$url] = $null }
+  }
+  return $LOCAL_DIMS[$url]
+}
+function Dims([string]$src, [string]$url, [int]$w) {
+  if ($src -match "images\.unsplash\.com/photo-([\w-]+)") { $k = "unsplash:" + $Matches[1] }
+  elseif ($src -match "pexels-photo-(\d+)") { $k = "pexels:" + $Matches[1] }
+  else { return LocalDims $url }
+  $r = $REMOTE_DIMS[$k]
+  if (-not $r) { Write-Warning "Geen maten bekend voor $k - voeg hem toe aan tools/image-sizes.json"; return $null }
+  if ($w -gt $r[0]) { $w = $r[0] }  # wordt niet groter geleverd dan het origineel
+  return @($w, [int][math]::Round($w * $r[1] / $r[0]))
+}
+function Variants([string]$url) {
+  if ($url -notmatch "^/assets/img/real/(.+)-\d+\.jpg$") { return @() }
+  $name = $Matches[1]
+  # Alleen versies met een echt andere breedte tellen mee: sommige "-1800"
+  # bestanden zijn even groot als hun "-900" broertje; dan geen srcset.
+  $widths = @{}
+  return @(Get-ChildItem -LiteralPath (Join-Path $Root "assets\img\real") -Filter "$name-*.jpg" |
+    Where-Object { $_.Name -match ("^" + [regex]::Escape($name) + "-\d+\.jpg$") } |
+    ForEach-Object { "/assets/img/real/$($_.Name)" } |
+    Sort-Object @{ Expression = { (LocalDims $_)[0] } }, @{ Expression = { $_ -ne $url } } |
+    Where-Object { $vw = (LocalDims $_)[0]; if ($widths.ContainsKey($vw)) { $false } else { $widths[$vw] = 1; $true } })
+}
+function ImgAttrs([string]$src, [int]$w, [string]$sizes) {
+  $url = Img $src $w
+  $a = "src=""$url"""
+  $vs = Variants $url
+  if ($vs.Count -gt 1 -and $sizes) {
+    $a += " srcset=""" + (($vs | ForEach-Object { "$_ $((LocalDims $_)[0])w" }) -join ", ") + """ sizes=""$sizes"""
+  }
+  $d = Dims $src $url $w
+  if ($d) { $a += " width=""$($d[0])"" height=""$($d[1])""" }
+  return $a
+}
+$SZ = @{
+  hero       = "100vw"
+  introBig   = "(max-width: 900px) 75vw, 540px"
+  introSmall = "(max-width: 900px) 40vw, 280px"
+  type       = "(max-width: 640px) 70vw, (max-width: 1100px) 50vw, 440px"
+  feature    = "(max-width: 900px) 92vw, 760px"
+  split      = "(max-width: 900px) 92vw, 600px"
+  mosaicBig  = "(max-width: 900px) 92vw, 540px"
+  mosaic     = "(max-width: 900px) 45vw, 390px"
+  mosaicWide = "(max-width: 900px) 92vw, 790px"
+  faq        = "500px"
+  cta        = "(max-width: 900px) 92vw, 740px"
+  rel        = "(max-width: 640px) 40vw, (max-width: 1100px) 45vw, 280px"
+}
 
 # Eerst alle pagina's lezen: hun hoofdfoto gebruiken we voor de "Bekijk ook"-tegels.
 $HERO = @{}
@@ -170,7 +236,7 @@ Get-ChildItem (Join-Path $PSScriptRoot "content\*.json") | ForEach-Object {
     $more = if ($_.href) { "<a class=""btn-text pr-type-more"" href=""$($_.href)"">$moreLabel <span class=""arrow"">&rarr;</span></a>" } else { "" }
     @"
         <article class="pr-type"$id>
-          <div class="pr-type-media"><img src="$(Img $src 900)" alt="$talt" loading="lazy"></div>
+          <div class="pr-type-media"><img $(ImgAttrs $src 900 $SZ.type) alt="$talt" loading="lazy"></div>
           <div class="pr-type-body">
             <h3>$($_.title)</h3>
             <p>$($_.text)</p>
@@ -210,7 +276,7 @@ $types
   <section class="pr-feature" data-review-id="uitgelicht" data-review-label="Uitgelicht">
     <div class="wrap pr-feature-grid">
       <div class="pr-feature-media">
-        <img src="$(Img $d.feature.img 1600)" alt="$($d.feature.alt)" loading="lazy">
+        <img $(ImgAttrs $d.feature.img 1600 $SZ.feature) alt="$($d.feature.alt)" loading="lazy">
       </div>
       <div class="pr-feature-copy">
         <p class="eyebrow">$($d.feature.eyebrow)</p>
@@ -236,7 +302,7 @@ $types
   <section class="pr-section pr-split-sec" data-review-id="voordelen" data-review-label="Voordelen">
     <div class="wrap pr-split">
       <div class="pr-split-media">
-        <img src="$(Img $bImg 1400)" alt="$alt" loading="lazy">
+        <img $(ImgAttrs $bImg 1400 $SZ.split) alt="$alt" loading="lazy">
         <p class="pr-split-note">Liever zelf voelen en vergelijken? <a href="/showroom.html">Kom langs in de showroom</a></p>
       </div>
       <div class="pr-split-copy">
@@ -266,10 +332,10 @@ $benefits
         <p class="pr-head-text">Een greep uit wat er mogelijk is met $($d.name.ToLower()). In onze showroom ziet u alles op ware grootte, in complete woonopstellingen. <a class="btn-text" href="/inspiratie/projecten.html">Bekijk projecten <span class="arrow">&rarr;</span></a></p>
       </div>
       <div class="pr-mosaic">
-        <figure class="is-big"><img src="$(Img $m[0] 1400)" alt="$alt" loading="lazy"></figure>
-        <figure><img src="$(Img $m[1] 900)" alt="$alt" loading="lazy"></figure>
-        <figure><img src="$(Img $m[2] 900)" alt="$alt" loading="lazy"></figure>
-        <figure class="is-wide"><img src="$(Img $m[3] 1400)" alt="$alt" loading="lazy"></figure>
+        <figure class="is-big"><img $(ImgAttrs $m[0] 1400 $SZ.mosaicBig) alt="$alt" loading="lazy"></figure>
+        <figure><img $(ImgAttrs $m[1] 900 $SZ.mosaic) alt="$alt" loading="lazy"></figure>
+        <figure><img $(ImgAttrs $m[2] 900 $SZ.mosaic) alt="$alt" loading="lazy"></figure>
+        <figure class="is-wide"><img $(ImgAttrs $m[3] 1400 $SZ.mosaicWide) alt="$alt" loading="lazy"></figure>
       </div>
     </div>
   </section>
@@ -324,7 +390,7 @@ $reviewItems
       <div class="pr-faq-aside">
         <h2>$($d.info.h2)</h2>
         <p class="eyebrow">Goed om te weten</p>
-        <div class="pr-faq-media"><img src="$(Img $fImg 900)" alt="$alt" loading="lazy"></div>
+        <div class="pr-faq-media"><img $(ImgAttrs $fImg 900 $SZ.faq) alt="$alt" loading="lazy"></div>
         <p class="pr-faq-ask">Staat uw vraag er niet bij? Bel <a href="tel:+31135368598">013 - 536 85 98</a> of <a href="/contact.html">stuur ons een bericht</a>.</p>
       </div>
       <div class="pr-faq">
@@ -363,7 +429,7 @@ $info
   $relSet = if ($d.related) { $d.related } elseif ($isFloor) { $FLOORS } elseif ($isMaatwerk) { $MAATWERK } else { $INTERIOR }
   $related = ($relSet | Where-Object { $_.href -ne "/$($d.file)" } | ForEach-Object {
     $rs = $HERO[$_.href]
-    $ri = if ($rs) { "<span class=""pr-rel-img""><img src=""$(Img $rs 600)"" alt="""" loading=""lazy""></span>" } else { "" }
+    $ri = if ($rs) { "<span class=""pr-rel-img""><img $(ImgAttrs $rs 600 $SZ.rel) alt="""" loading=""lazy""></span>" } else { "" }
     "        <a href=""$($_.href)"">$ri<span class=""pr-rel-label"">$($_.label) <span class=""arrow"" aria-hidden=""true"">&rarr;</span></span></a>"
   }) -join "`n"
   $relTitle = if ($isFloor) { "Bekijk ook de andere vloersoorten" } else { "Bekijk ook" }
@@ -421,7 +487,7 @@ $info
     <div class="pr-hero-wrap">
       <nav class="crumb" aria-label="Kruimelpad">$crumb</nav>
       <div class="pr-hero-media">
-        <img src="$(Img $d.heroImg 2200)" alt="$($d.heroAlt)" loading="eager">
+        <img $(ImgAttrs $d.heroImg 2200 $SZ.hero) alt="$($d.heroAlt)" loading="eager">
         <p class="pr-hero-vertical" aria-hidden="true">$($d.vertical) <strong>in Tilburg</strong></p>
       </div>
     </div>
@@ -449,8 +515,8 @@ $info
   <section class="pr-section pr-intro" data-review-id="over" data-review-label="Over $($d.name)">
     <div class="wrap pr-intro-grid">
       <div class="pr-intro-media">
-        <img class="pr-intro-big" src="$(Img $introBig 1400)" alt="$alt" loading="lazy">
-        <img class="pr-intro-small" src="$(Img $introSmall 900)" alt="" loading="lazy">
+        <img class="pr-intro-big" $(ImgAttrs $introBig 1400 $SZ.introBig) alt="$alt" loading="lazy">
+        <img class="pr-intro-small" $(ImgAttrs $introSmall 900 $SZ.introSmall) alt="" loading="lazy">
       </div>
       <div class="pr-intro-copy">
         <h2>$($d.about.h2)</h2>
@@ -477,7 +543,7 @@ $typesSection$featureSection$benefitsSection$mosaic$reviews$infoSection$brands
         </div>
       </div>
       <div class="pr-cta-media">
-        <img src="$(Img $d.cta.img 1400)" alt="$($d.cta.alt)" loading="lazy">
+        <img $(ImgAttrs $d.cta.img 1400 $SZ.cta) alt="$($d.cta.alt)" loading="lazy">
       </div>
     </div>
   </section>
