@@ -198,6 +198,7 @@
           '<a class="brand" href="/index.html"><img class="brand-logo" src="/assets/img/logo-dark.svg" alt="De Vloerenspecialist Tilburg" width="260" height="38"></a>' +
           '<nav class="main-nav" aria-label="Hoofdmenu"><ul>' + renderDesktopNav() + "</ul></nav>" +
           '<div class="header-actions">' +
+            '<a class="header-icon" href="mailto:info@vloerenspecialist-tilburg.nl" aria-label="Mail ons">' + ICONS.mail + '</a>' +
             '<a class="header-phone" href="tel:+31135368598" aria-label="Bel 013 - 536 85 98">' + ICONS.phone + '<span class="header-phone-nr">013 - 536 85 98</span></a>' +
             '<a class="btn btn-primary btn-sm header-cta" href="/showroom.html" id="header-cta">Plan showroombezoek</a>' +
             '<button class="menu-toggle" id="overlay-toggle" aria-expanded="false" aria-controls="overlay-nav"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-label">Menu</span></button>' +
@@ -240,6 +241,13 @@
       svg.setAttribute("role", "img");
       svg.setAttribute("aria-label", imgEl.getAttribute("alt"));
       imgEl.replaceWith(svg);
+      /* Tegeltjes huppen bij binnenkomst en daarna af en toe even op. */
+      function hop() {
+        svg.classList.remove("is-hop"); void svg.getBoundingClientRect(); svg.classList.add("is-hop");
+      }
+      window.setTimeout(hop, 900);
+      window.setInterval(function () { if (!document.hidden) hop(); }, 8000);
+      svg.addEventListener("animationend", function (e) { if (e.target.classList.contains("logo-tile") && e.target === svg.querySelector(".logo-tile:last-of-type")) svg.classList.remove("is-hop"); });
     }).catch(function () {});
   }
   inlineLogo();

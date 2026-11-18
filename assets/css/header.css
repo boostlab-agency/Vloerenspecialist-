@@ -259,3 +259,41 @@ html.menu-open .fb-header-controls { display: none; }
 /* Mobiel menu: openingstijden per dag (feedback 17 nov. 2026) */
 .m-hours { margin-top: 10px; text-align: left; }
 .m-hours .open-week-row { padding: 6px 10px; font-size: 13.5px; }
+
+/* ==========================================================================
+   Header naar knulst.nl (18 nov. 2026): helder wit, logo links, menu als
+   losse woorden in het midden (geen grijze pil), rechts kleine icoontjes
+   en één ronde donkere knop. Blijft bij scrollen altijd in beeld.
+   ========================================================================== */
+.site-header { position: sticky; top: 0; background: #fff; border-bottom: 0; }
+.site-header.is-scrolled { box-shadow: 0 8px 30px -22px rgba(29,27,25,.4); border-bottom: 1px solid var(--line); }
+.main-nav > ul { background: none; padding: 0; height: auto; align-self: stretch; gap: clamp(8px, 1.4vw, 26px); }
+.main-nav > ul .nav-dot { display: none; }
+.nav-link { font-size: clamp(14px, .86vw, 16px); font-weight: 500; letter-spacing: .01em; }
+.nav-caret { width: 9px; height: 9px; }
+.header-actions { gap: clamp(10px, 1.2vw, 22px); }
+.header-icon, .header-phone { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0 !important; border-radius: 50%; color: var(--ink); transition: color .2s, background .2s; }
+.header-icon:hover, .header-phone:hover { color: var(--brand); background: var(--surface); }
+.header-phone-nr { display: none !important; }
+.header-cta { padding: 15px 28px; font-size: 12px; letter-spacing: .08em; }
+@media (min-width: 641px) {
+  .site-header.is-scrolled .header-bar { height: 76px; }
+}
+@media (max-width: 640px) {
+  .header-icon { display: none; }
+}
+
+/* Logo: tegeltjes huppen bij binnenkomst, daarna af en toe, en bij aanwijzen */
+.logo-inline.is-hop .logo-tile { animation: tile-hop .6s calc(var(--i) * 70ms) cubic-bezier(.34,1.56,.64,1); }
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .main-nav > ul { gap: 0; }
+  .nav-link { font-size: 14px; padding-left: 9px; padding-right: 9px; }
+  .header-icon { display: none; }
+  .header-actions { gap: 8px; }
+  .header-cta { padding: 13px 18px; letter-spacing: .04em; }
+  .brand-logo { height: 36px; }
+}
+
+/* Altijd in beeld bij scrollen: de header staat in #site-header (net zo hoog
+   als de header zelf), dus die wrapper moet sticky zijn, niet alleen de header. */
+#site-header { position: sticky; top: 0; z-index: 100; }
