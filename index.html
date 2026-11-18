@@ -34,6 +34,7 @@
 <script src="/assets/js/modules/home-motion.js" defer></script>
 <script src="/assets/js/modules/depth.js" defer></script>
 <script src="/assets/js/modules/quotes.js" defer></script>
+<script src="/assets/js/modules/home-slides.js" defer></script>
 <script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="home">
@@ -242,23 +243,48 @@
       </div>
     </div>
   </section>
-  <!-- 6 · Binnenkijken: projecten (zoals de inspiratiegalerij van knulst.nl) -->
-  <section class="h-section h-inspire" id="binnenkijken" data-review-id="binnenkijken" data-review-label="Binnenkijken">
+  <!-- 6 · Binnenkijken: fotoslider (ref. knulst.nl) — beige vlak, kop met lijn,
+       knop links en pijltjes rechts, grote foto in het midden met de buren
+       half in beeld. Eigen toets: rode ruitjes bij de bijschriften, dunne
+       witte belijning in de foto's. Aansturing: assets/js/modules/home-slides.js. -->
+  <section class="h-section h-slides-sec" id="binnenkijken" data-review-id="binnenkijken" data-review-label="Binnenkijken">
     <div class="wrap">
-      <div class="h-head">
-        <div>
-          <h2>Binnenkijken bij onze klanten</h2>
-          <p class="eyebrow">Projecten</p>
+      <div class="h-slides-head">
+        <h2>Binnenkijken bij onze klanten</h2>
+        <p class="eyebrow">Projecten</p>
+      </div>
+      <div class="h-slides-bar">
+        <a class="btn btn-outline" href="/inspiratie/projecten.html">Alle projecten</a>
+        <div class="h-slides-arrows">
+          <button type="button" data-slides-prev aria-label="Vorige foto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button type="button" data-slides-next aria-label="Volgende foto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
-        <a class="btn-text" href="/inspiratie/projecten.html">Alle projecten <span class="arrow">→</span></a>
       </div>
-      <div class="h-inspire-grid">
-        <a class="h-inspire-item is-large" href="/inspiratie/projecten.html"><img src="/assets/img/real/visgraat-kastenwand-1800.jpg" srcset="/assets/img/real/visgraat-kastenwand-900.jpg 900w, /assets/img/real/visgraat-kastenwand-1800.jpg 1536w" sizes="(max-width: 640px) 82vw, (max-width: 1100px) 92vw, 46vw" width="1536" height="1152" alt="Eetkamer met visgraatvloer en kastenwand" loading="lazy"><span>Eetkamer, Tilburg</span></a>
-        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="/assets/img/real/maatwerk-meubel-1400.jpg" srcset="/assets/img/real/maatwerk-meubel-600.jpg 600w, /assets/img/real/maatwerk-meubel-1400.jpg 1400w" sizes="(max-width: 640px) 39vw, (max-width: 1100px) 45vw, 23vw" width="1400" height="1750" alt="Lichte woonkamer met warme tinten" loading="lazy"><span>Totaalinterieur, Tilburg</span></a>
-        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="https://images.unsplash.com/photo-1787145879056-d02365c5b911?q=75&amp;auto=format&amp;fit=crop&amp;w=900" width="900" height="900" alt="Terracotta Renostuc-wand" loading="lazy"><span>Slaapkamer, Goirle</span></a>
-        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="/assets/img/real/gordijn-velvet-zwart-900.jpg" srcset="/assets/img/real/gordijn-velvet-zwart-900.jpg 900w, /assets/img/real/gordijn-velvet-zwart-1800.jpg 1600w" sizes="(max-width: 640px) 39vw, (max-width: 1100px) 45vw, 23vw" width="900" height="1350" alt="Zwarte velvet gordijnstof" loading="lazy"><span>Werkkamer, Tilburg</span></a>
-        <a class="h-inspire-item" href="/inspiratie/projecten.html"><img src="/assets/img/real/tapijt-pouf-1-900.jpg" srcset="/assets/img/real/tapijt-pouf-1-900.jpg 900w, /assets/img/real/tapijt-pouf-1-1800.jpg 1800w" sizes="(max-width: 640px) 39vw, (max-width: 1100px) 45vw, 23vw" width="900" height="600" alt="Tapijt en poef" loading="lazy"><span>Studio, Tilburg</span></a>
-      </div>
+    </div>
+    <div class="h-slides" data-slides>
+      <ul class="h-slides-track" tabindex="0" aria-label="Projectfoto's, schuif of gebruik de pijltjes">
+        <li class="h-slide"><a href="/inspiratie/projecten.html">
+          <figure><img src="/assets/img/real/visgraat-kastenwand-1800.jpg" srcset="/assets/img/real/visgraat-kastenwand-900.jpg 900w, /assets/img/real/visgraat-kastenwand-1800.jpg 1536w" sizes="(max-width: 760px) 84vw, 62vw" width="1536" height="1152" alt="Eetkamer met visgraatvloer en een kastenwand op maat" loading="lazy"></figure>
+          <span class="h-slide-cap">Visgraatvloer met kastenwand op maat</span></a></li>
+        <li class="h-slide"><a href="/vloeren/pvc.html">
+          <figure><img src="https://images.unsplash.com/photo-1716315325541-776e39f9725f?q=75&amp;auto=format&amp;fit=crop&amp;w=1600" width="1600" height="1063" alt="PVC vloer in houtlook in een moderne woonkamer" loading="lazy"></figure>
+          <span class="h-slide-cap">PVC vloer in houtlook</span></a></li>
+        <li class="h-slide"><a href="/interieur/renostuc.html">
+          <figure><img src="/assets/img/real/renostuc-bedroom-sage-1600.jpg" width="1600" height="1067" alt="Slaapkamer met een strakke wand in Renostuc" loading="lazy"></figure>
+          <span class="h-slide-cap">Slaapkamerwand in Renostuc</span></a></li>
+        <li class="h-slide"><a href="/vloeren/traprenovatie.html">
+          <figure><img src="https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" width="1600" height="1068" alt="Verlichte eikenhouten trap in een moderne woning" loading="lazy"></figure>
+          <span class="h-slide-cap">Eiken traprenovatie</span></a></li>
+        <li class="h-slide"><a href="/vloeren/vloerbedekking.html">
+          <figure><img src="/assets/img/real/tapijt-pouf-1-1800.jpg" srcset="/assets/img/real/tapijt-pouf-1-900.jpg 900w, /assets/img/real/tapijt-pouf-1-1800.jpg 1800w" sizes="(max-width: 760px) 84vw, 62vw" width="1800" height="1200" alt="Karpet, poef en wandkleed in hetzelfde dessin, met gordijnstof" loading="lazy"></figure>
+          <span class="h-slide-cap">Karpet en poef in hetzelfde dessin</span></a></li>
+        <li class="h-slide"><a href="/vloeren/tegelvloer.html">
+          <figure><img src="https://images.unsplash.com/photo-1708540084677-dc5838b37627?q=75&amp;auto=format&amp;fit=crop&amp;w=1600" width="1600" height="1066" alt="Woonkamer met grote tegelvloer in marmerlook" loading="lazy"></figure>
+          <span class="h-slide-cap">Tegelvloer in marmerlook</span></a></li>
+        <li class="h-slide"><a href="/vloeren/hout.html">
+          <figure><img src="https://images.pexels.com/photos/5982764/pexels-photo-5982764.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" width="1600" height="910" alt="Warme, moderne woonkamer met houten vloer en groot raam" loading="lazy"></figure>
+          <span class="h-slide-cap">Houten vloer in een lichte woonkamer</span></a></li>
+      </ul>
     </div>
   </section>
 

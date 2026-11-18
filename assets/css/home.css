@@ -250,23 +250,52 @@ html.js-motion .m-reveal.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .h-brands-row { animation: none !important; } }
 @media (max-width: 640px) { .h-brands-inner { flex-direction: column; align-items: flex-start; gap: 14px; } .h-brands-viewport { width: 100%; } }
 
-/* ---- Binnenkijken: galerij met één groot beeld en vier kleinere ---- */
-.h-inspire-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 16px; aspect-ratio: 2.3 / 1; }
-.h-inspire-item { position: relative; display: block; overflow: hidden; background: var(--surface-2); }
-.h-inspire-item.is-large { grid-row: 1 / 3; }
-.h-inspire-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
-.h-inspire-item:hover img { transform: scale(1.05); }
-.h-inspire-item span {
-  position: absolute; left: 14px; bottom: 14px; padding: 7px 13px; background: rgba(255,255,255,.94);
-  font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
-  transform: translateY(6px); opacity: .92; transition: transform .3s var(--ease), opacity .3s;
+/* ---- Binnenkijken: fotoslider (ref. knulst.nl) ----
+   Beige vlak; kop met lijn; knop links, pijltjes rechts; grote foto in het
+   midden met de buren half in beeld; klein bijschrift eronder.
+   Eigen toets: rode ruitjes, dunne witte belijning in de foto. */
+.h-slides-sec { background: var(--surface); overflow: hidden; }
+.h-slides-head h2 { margin: 0 0 18px; max-width: 22ch; }
+.h-slides-head .eyebrow { margin: 0; max-width: none; }
+.h-slides-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: clamp(32px, 3.4vw, 48px) 0 clamp(28px, 3vw, 40px); }
+.h-slides-arrows { display: flex; gap: 8px; }
+.h-slides-arrows button {
+  width: 46px; height: 46px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  background: var(--bg); border: 1px solid var(--line); color: var(--ink);
+  transition: border-color .2s, color .2s;
 }
-.h-inspire-item span::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; background: var(--brand); transform: rotate(45deg) translateY(-1px); }
-.h-inspire-item:hover span { transform: none; opacity: 1; }
-@media (max-width: 900px) {
-  .h-inspire-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; aspect-ratio: auto; }
-  .h-inspire-item { aspect-ratio: 4 / 3; }
-  .h-inspire-item.is-large { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
+.h-slides-arrows button:hover:not(:disabled) { border-color: var(--ink); color: var(--brand); }
+.h-slides-arrows button:disabled { opacity: .4; cursor: default; }
+.h-slides-arrows button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.h-slides { --slide: min(62vw, 1080px); }
+.h-slides-track {
+  position: relative; list-style: none; margin: 0; display: flex; gap: clamp(12px, 1.4vw, 22px);
+  padding: 0 calc((100% - var(--slide)) / 2) 4px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.h-slides-track::-webkit-scrollbar { display: none; }
+.h-slides-track:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.h-slide { flex: 0 0 var(--slide); scroll-snap-align: center; }
+.h-slide a { display: block; color: var(--ink); }
+.h-slide figure { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
+.h-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.h-slide a:hover img { transform: scale(1.04); }
+.h-slide figure::after { content: ""; position: absolute; inset: 16px; border: 1px solid rgba(255,255,255,.4); pointer-events: none; }
+.h-slide-cap {
+  display: flex; align-items: center; gap: 10px; margin-top: 16px;
+  font-size: 11.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  transition: color .3s;
+}
+.h-slide-cap::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--brand); transform: rotate(45deg); opacity: .5; transition: opacity .3s; }
+.h-slide.is-on .h-slide-cap { color: var(--ink); }
+.h-slide.is-on .h-slide-cap::before { opacity: 1; }
+@media (max-width: 760px) {
+  .h-slides { --slide: 84vw; }
+  .h-slides-arrows button { width: 40px; height: 40px; }
+  .h-slide figure { aspect-ratio: 4 / 3; }
+  .h-slide figure::after { inset: 10px; }
+  .h-slide-cap { font-size: 10.5px; margin-top: 12px; }
 }
 
 /* ---- Reviews op donker vlak ---- */
