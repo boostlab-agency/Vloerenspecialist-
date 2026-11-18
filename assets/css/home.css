@@ -596,3 +596,40 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 @media (max-width: 420px) {
   .h-spread-cards .h-spread-card, .h-spread-cards .h-spread-card:last-child { flex-basis: 78%; }
 }
+
+/* ==========================================================================
+   Vergelijking met knulst.nl (18 nov. 2026)
+   ========================================================================== */
+
+/* Hero-film: lichte donkere laag over het hele beeld, zodat felle lichtvlekken
+   minder overheersen. Op mobiel (smalle uitsnede, midden van het beeld) iets sterker. */
+.h-film-shade {
+  inset: 0; height: auto;
+  background:
+    linear-gradient(to top, rgba(28, 20, 13, .5), rgba(28, 20, 13, 0) 34%),
+    rgba(28, 20, 13, .08);
+}
+@media (max-width: 900px) {
+  .h-film-clip { filter: sepia(.12) saturate(1.04) brightness(.9) contrast(.96); }
+  .h-film-shade {
+    background:
+      linear-gradient(to top, rgba(28, 20, 13, .5), rgba(28, 20, 13, 0) 34%),
+      radial-gradient(ellipse 80% 55% at 50% 62%, rgba(28, 20, 13, .26), rgba(28, 20, 13, 0) 70%),
+      rgba(28, 20, 13, .16);
+  }
+}
+
+/* Kernboodschap: één grote kop direct onder de hero, groter dan de sectiekoppen */
+.h-statement { padding: clamp(64px, 8vw, 120px) 0 0; }
+.h-statement h1 { font-size: clamp(30px, 3.6vw, 52px); line-height: 1.12; max-width: 22ch; margin-bottom: 18px; }
+.h-statement .eyebrow { margin-bottom: 0; }
+#welkom { padding-top: clamp(56px, 6vw, 96px); }
+#welkom .h-welcome-copy h2 { margin-bottom: 14px; }
+#welkom .h-welcome-copy .eyebrow { margin-bottom: 32px; }
+
+/* Meer adem tussen de secties op desktop (Knulst: 120–160px) */
+@media (min-width: 641px) {
+  .h-section { padding-top: clamp(72px, 9.5vw, 136px); padding-bottom: clamp(72px, 9.5vw, 136px); }
+  .h-spread { padding-bottom: clamp(72px, 9.5vw, 136px); }
+  .h-visit { padding-bottom: clamp(72px, 9.5vw, 136px); }
+}
