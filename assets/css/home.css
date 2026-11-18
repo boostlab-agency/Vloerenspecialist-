@@ -443,6 +443,12 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 .h-hours { margin: 4px 0 30px; padding: 22px 24px 18px; background: var(--bg); border: 1px solid var(--line); max-width: 420px; }
 .h-hours-title { margin: 0 0 10px; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 17px; color: var(--ink); }
 .h-hours .open-week-row { padding: 7px 10px; }
+/* Smalle telefoons: label "Vandaag" onder de dagnaam, zodat de tijd ernaast past. */
+@media (max-width: 420px) {
+  .h-hours { padding: 20px 14px 16px; }
+  .h-hours .open-week-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .h-hours .open-week-row.is-today .d::after { display: table; margin: 4px 0 0; }
+}
 .h-hours-note { margin: 12px 0 0 !important; font-size: 13.5px !important; line-height: 1.5 !important; color: var(--ink-soft) !important; }
 .h-hours-note a { color: var(--ink); font-weight: 600; }
 
@@ -482,6 +488,11 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 
 /* ---- Onze vloeren / Wand en raam: groter, zoals knulst.nl ---- */
 #vloeren .wrap, #interieur .wrap { max-width: 1720px; }
+/* De rasters hieronder lopen met negatieve marges uit (voor de scheidingslijnen).
+   Rond 1440px steekt die lege buitenrand voorbij het scherm en gaf dat een
+   horizontale scrollbalk. Alleen die overloop afknippen; zichtbaar verandert er
+   niets. "clip" (geen scrollvak); "hidden" als terugval voor oude browsers. */
+#vloeren, #interieur { overflow-x: hidden; overflow-x: clip; }
 #vloeren .h-grid.is-divided > *, #interieur .h-grid.is-divided > * { padding-left: clamp(28px, 3.6vw, 70px); padding-right: clamp(28px, 3.6vw, 70px); padding-bottom: 60px; }
 #vloeren .h-grid.is-divided, #interieur .h-grid.is-divided { margin-left: calc(-1 * clamp(28px, 3.6vw, 70px)); margin-right: calc(-1 * clamp(28px, 3.6vw, 70px)); }
 @media (min-width: 1101px) {
@@ -561,7 +572,7 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 }
 @media (max-width: 760px) {
   .h-visit-card { width: auto; margin: -80px 16px 0; }
-  .h-visit-info { grid-template-columns: 1fr; }
+  .h-visit-info { grid-template-columns: minmax(0, 1fr); }
   .h-visit-map { height: 220px; }
   .h-spread-cards { grid-template-columns: 1fr 1fr; }
   .h-spread-cards .h-spread-card:last-child { display: none; }
@@ -611,7 +622,7 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
   .h-visit-photo { height: 320px; }
   .h-visit-photo .h-hero-vertical { left: 18px; bottom: 22px; font-size: 10.5px; }
   .h-visit-card { width: auto; margin: -60px 12px 0; padding: 28px 22px; }
-  .h-visit-info { grid-template-columns: 1fr; }
+  .h-visit-info { grid-template-columns: minmax(0, 1fr); }  /* minmax: niet breder dan de kaart (anders horizontale scroll op smalle telefoons) */
   .h-visit-map { height: 200px; }
   .h-visit .h-actions { flex-wrap: wrap; gap: 16px; }
 
