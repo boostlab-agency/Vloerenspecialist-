@@ -241,13 +241,6 @@
       svg.setAttribute("role", "img");
       svg.setAttribute("aria-label", imgEl.getAttribute("alt"));
       imgEl.replaceWith(svg);
-      /* Tegeltjes huppen bij binnenkomst en daarna af en toe even op. */
-      function hop() {
-        svg.classList.remove("is-hop"); void svg.getBoundingClientRect(); svg.classList.add("is-hop");
-      }
-      window.setTimeout(hop, 900);
-      window.setInterval(function () { if (!document.hidden) hop(); }, 8000);
-      svg.addEventListener("animationend", function (e) { if (e.target.classList.contains("logo-tile") && e.target === svg.querySelector(".logo-tile:last-of-type")) svg.classList.remove("is-hop"); });
     }).catch(function () {});
   }
   inlineLogo();
