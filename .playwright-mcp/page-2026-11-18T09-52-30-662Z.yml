@@ -1,0 +1,574 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e2]:
+    - banner [ref=f10e3]:
+      - navigation [ref=f10e4]:
+        - generic [ref=f10e6]:
+          - text:   
+          - link "Knulst vloeren" [ref=f10e8] [cursor=pointer]:
+            - /url: /
+          - list [ref=f10e15]:
+            - listitem [ref=f10e16]:
+              - button "Vloersoorten " [ref=f10e17] [cursor=pointer]
+            - listitem [ref=f10e18]:
+              - link "Inspiratie" [ref=f10e19] [cursor=pointer]:
+                - /url: /inspiratie/
+            - listitem [ref=f10e20]:
+              - button "Showrooms " [ref=f10e21] [cursor=pointer]
+            - listitem [ref=f10e22]:
+              - link "Stories" [ref=f10e23] [cursor=pointer]:
+                - /url: /stories/
+            - listitem [ref=f10e24]:
+              - link "Ons verhaal" [ref=f10e25] [cursor=pointer]:
+                - /url: /ons-verhaal/
+            - listitem [ref=f10e26]:
+              - link "Contact" [ref=f10e27] [cursor=pointer]:
+                - /url: /contact/
+          - generic [ref=f10e29]:
+            - generic [ref=f10e31]:
+              - link "0341-252787" [ref=f10e32] [cursor=pointer]:
+                - /url: tel:0341252787
+                - generic [ref=f10e33]: 
+              - button "Zoeken" [ref=f10e34] [cursor=pointer]:
+                - generic [ref=f10e35]: 
+              - link "info@knulst.nl" [ref=f10e36] [cursor=pointer]:
+                - /url: mailto:info@knulst.nl
+                - generic [ref=f10e37]: 
+            - generic [ref=f10e38]:
+              - generic:
+                - link "change language to nl":
+                  - /url: "#"
+                  - img "knulst.nl - Afbeelding" [ref=f10e39] [cursor=pointer]
+            - link "Gratis brochure" [ref=f10e41] [cursor=pointer]:
+              - /url: /inspiratiemagazine/
+      - text: 
+    - main [ref=f10e42]:
+      - generic [ref=f10e46]:
+        - paragraph [ref=f10e51]:
+          - text: Ambachtelijke vloeren
+          - strong [ref=f10e52]: sinds 1958
+        - link "Scroll to discover " [ref=f10e53] [cursor=pointer]:
+          - /url: "#down"
+          - generic [ref=f10e54]: Scroll to discover
+          - generic [ref=f10e55]: 
+      - generic [ref=f10e60]:
+        - generic [ref=f10e61]: Ontdek het fundament onder uw woongeluk
+        - generic [ref=f10e62]:
+          - generic [ref=f10e63]: 
+          - generic [ref=f10e64]: Knulst vloeren
+      - generic [ref=f10e68]:
+        - generic [ref=f10e70]:
+          - heading "De mooiste vloeren onder één dak" [level=2] [ref=f10e71]
+          - paragraph [ref=f10e73]: Welkom in de wereld van kwaliteitsvloeren. Welkom bij Knulst. Wij zijn al vier generaties lang een ambachtelijk familiebedrijf in hoogwaardige vloeren. Wat ons uniek maakt is de grote variatie aan kwalitatieve vloersoorten, gecombineerd met een uitmuntende service. Ervaar het zelf en plan een vrijblijvend adviesgesprek in Amsterdam, Utrecht of Nunspeet. Onze adviseurs staan dagelijks voor u klaar om u te voorzien van een gedegen advies naar aanleiding van uw persoonlijke wensen en woonsituatie.
+          - link "Plan uw showroombezoek" [ref=f10e75] [cursor=pointer]:
+            - /url: /showrooms/
+        - img "Showroom Knulst Vloeren Wereldkaart - Nunspeet - Amsterdam - Utrecht - www.knulst.nl" [ref=f10e81]
+      - generic [ref=f10e84]:
+        - generic [ref=f10e86]:
+          - heading "Van huis uit de beste kwaliteit" [level=2] [ref=f10e87]
+          - generic [ref=f10e88]: Onze vloersoorten
+        - generic [ref=f10e93]:
+          - link [ref=f10e95] [cursor=pointer]:
+            - /url: /houten-vloeren/
+            - img "Houten vloeren van Knulst - Alles over houten vloeren en parketvloeren - Knulst Vloeren - Amsterdam - Utrecht - Nunspeet - www.knulst.nl" [ref=f10e97]
+            - generic [ref=f10e98]:
+              - heading "Houten vloeren" [level=3] [ref=f10e99]
+              - paragraph [ref=f10e101]: Ambachtelijk handwerk
+          - link [ref=f10e103] [cursor=pointer]:
+            - /url: /pvc-vloeren/
+            - img "PVC vloeren van Knulst - Alles over PVC en laminaat vloeren - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e105]
+            - generic [ref=f10e106]:
+              - heading "PVC vloeren" [level=3] [ref=f10e107]
+              - paragraph [ref=f10e109]: Praktisch en hoogwaardig
+          - link [ref=f10e111] [cursor=pointer]:
+            - /url: /gietvloeren/
+            - img "Gietvloeren van Knulst - Alles over gietvloeren - Cementgebonden gietvloeren - PU gietvloeren - Beton ciré gietvloeren - Knulst Vloeren" [ref=f10e113]
+            - generic [ref=f10e114]:
+              - heading "Gietvloeren" [level=3] [ref=f10e115]
+              - paragraph [ref=f10e117]: Modern en ambachtelijk
+          - link [ref=f10e119] [cursor=pointer]:
+            - /url: /tegels/
+            - img "Tegels van Knulst - Ontdek alles over keramische tegels en tegelvloeren - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e121]
+            - generic [ref=f10e122]:
+              - heading "Tegels" [level=3] [ref=f10e123]
+              - paragraph [ref=f10e125]: Duurzaam en chique
+          - link [ref=f10e127] [cursor=pointer]:
+            - /url: /tapijt/
+            - img "Tapijt van Knulst - Alles over tapijt en karpetten - Knulst Vloeren - Amsterdam - Utrecht - Nunspeet - www.knulst.nl" [ref=f10e129]
+            - generic [ref=f10e130]:
+              - heading "Tapijt" [level=3] [ref=f10e131]
+              - paragraph [ref=f10e133]: Comfortabel en warm
+          - link [ref=f10e135] [cursor=pointer]:
+            - /url: /ecologische-vloeren/
+            - img "Ecologische vloeren van Knulst - Welke vloeren zijn ecologisch verantwoord en duurzaam voor het klimaat - Knulst Vloeren" [ref=f10e137]
+            - generic [ref=f10e138]:
+              - heading "Ecologische vloeren" [level=3] [ref=f10e139]
+              - paragraph [ref=f10e141]: Duurzaam en verantwoord
+          - link [ref=f10e143] [cursor=pointer]:
+            - /url: /traprenovatie/
+            - img "Traprenovatie van Knulst - Welke soorten trapbekleding zijn er allemaal - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e145]
+            - generic [ref=f10e146]:
+              - heading "Traprenovatie" [level=3] [ref=f10e147]
+              - paragraph [ref=f10e149]: Slijtvast en stijlvol
+          - link [ref=f10e151] [cursor=pointer]:
+            - /url: /vloerverwarming/
+            - img "Vloerverwarming van Knulst - Alles over vloerverwarming inclusief vloeren - Knulst Vloeren - Amsterdam - Utrecht - Nunspeet - www.knulst.nl" [ref=f10e153]
+            - generic [ref=f10e154]:
+              - heading "Vloerverwarming" [level=3] [ref=f10e155]
+              - paragraph [ref=f10e157]: Comfortabel en rendabel
+      - img "Showroom Knulst Vloeren - Nunspeet - Amsterdam - Utrecht - www.knulst.nl" [ref=f10e163]
+      - generic [ref=f10e168]:
+        - generic [ref=f10e169]:
+          - heading "Volop inspiratie in onze showrooms" [level=2] [ref=f10e170]
+          - generic [ref=f10e171]: Showrooms
+          - paragraph [ref=f10e175]: Of u nu in het schilderachtige Nunspeet bent, het bruisende Amsterdam bezoekt, of binnenloopt in onze showroom op de Woonboulevard in Utrecht. In al onze vestigingen bent u verzekerd van een warm welkom, deskundig advies en een zorgvuldig geselecteerde collectie vloeren om naar hartelust inspiratie op te doen. Ontdek onze stijlvolle showrooms. Onze adviseurs staan dagelijks voor u klaar. Welkom in de wereld van kwaliteitsvloeren. Welkom bij Knulst!
+        - generic [ref=f10e180]:
+          - link "Showroom Nunspeet - Knulst Vloeren - Elburgerweg 37 - Veluwe - Houten Vloeren - PVC Vloeren - Gietvloeren - Tegels - Tapijt - Vloerverwarming Ontdek de mooiste vloeren op de bosrijke Veluwe Showroom Nunspeet" [ref=f10e182] [cursor=pointer]:
+            - /url: /showrooms/showroom-nunspeet/
+            - img "Showroom Nunspeet - Knulst Vloeren - Elburgerweg 37 - Veluwe - Houten Vloeren - PVC Vloeren - Gietvloeren - Tegels - Tapijt - Vloerverwarming" [ref=f10e183]
+            - generic [ref=f10e185]:
+              - heading "Ontdek de mooiste vloeren op de bosrijke Veluwe" [level=3] [ref=f10e186]
+              - generic [ref=f10e187]: Showroom Nunspeet
+          - link "Showroom Amsterdam - Knulst Vloeren - Waterlandplein 213-215 - Houten Vloeren - PVC Vloeren - Gietvloeren - Tegels - Tapijt - Vloerverwarming Ervaar de luxe van maatwerk vloeren Showroom Amsterdam" [ref=f10e189] [cursor=pointer]:
+            - /url: /showrooms/showroom-amsterdam/
+            - img "Showroom Amsterdam - Knulst Vloeren - Waterlandplein 213-215 - Houten Vloeren - PVC Vloeren - Gietvloeren - Tegels - Tapijt - Vloerverwarming" [ref=f10e190]
+            - generic [ref=f10e192]:
+              - heading "Ervaar de luxe van maatwerk vloeren" [level=3] [ref=f10e193]
+              - generic [ref=f10e194]: Showroom Amsterdam
+          - link [ref=f10e196] [cursor=pointer]:
+            - /url: /showrooms/showroom-utrecht/
+            - generic [ref=f10e199]:
+              - heading [level=3] [ref=f10e200]: Raak geïnspireerd door het grote vloerenassortiment
+              - generic [ref=f10e201]: Showroom Utrecht
+        - generic [ref=f10e203]:
+          - button "previous slide" [ref=f10e205] [cursor=pointer]:
+            - generic [ref=f10e206]: 
+          - button "next slide" [ref=f10e208] [cursor=pointer]:
+            - generic [ref=f10e209]: 
+      - generic [ref=f10e214]:
+        - generic [ref=f10e216]:
+          - generic [ref=f10e218]:
+            - generic [ref=f10e219]: Uitstekende informatie bij keuze van onze nieuwe vloer en nadat alles was gerealiseerd ook de after sales. Keuze gemaakt voor nieuwe plavuizen in vestiging Nunspeet. Daarna vlotte levering en perfecte plaatsing van deze grote plavuizen (90x90 cm) en ook het inkorten van deuren, plaatsen van plinten etc. Kortom wij waren en zijn zeer tevreden over Fa. Knulst.
+            - generic [ref=f10e220]:
+              - generic [ref=f10e221]: Dhr. B. Bos
+              - generic [ref=f10e222]: "-"
+              - generic [ref=f10e223]: Bemmel
+          - generic [ref=f10e225]:
+            - generic [ref=f10e226]: Wij hebben een gietvloer en een PVC vloer bij Knulst gekocht. Van begin tot einde (bezoek showroom tot leggen van de vloeren) werd je goed in het proces meegenomen en van informatie voorzien. De planning werd goed uitgevoerd en ook het leggen van de vloeren. Wij zijn super tevreden over het hele proces.
+            - generic [ref=f10e227]:
+              - generic [ref=f10e228]: Mevr. N. Schwebke
+              - generic [ref=f10e229]: "-"
+              - generic [ref=f10e230]: Houten
+          - generic [ref=f10e232]:
+            - generic [ref=f10e233]: Zeer goede informatie vooraf. Zeer goede en fijne verkoper, heel klantgericht. Goede begeleiding tijdens het hele proces van aankoop, tot leggen van de vloer tot nazorg als vloeronderhoud. Zeer mooie kwaliteit van de vloer. Zeer deskundig gelegd.
+            - generic [ref=f10e234]:
+              - generic [ref=f10e235]: Mevr. K, van den Berg
+              - generic [ref=f10e236]: "-"
+              - generic [ref=f10e237]: Epe
+          - generic [ref=f10e239]:
+            - generic [ref=f10e240]: Wij zijn enorm tevreden met onze nieuwe vloer! De communicatie is heel fijn en de service is uitmuntend. Bij iedereen die hier over de vloer ;-) geweest is, merk je echt de passie voor het vak. Wij zouden Knulst bij iedereen aanraden!
+            - generic [ref=f10e241]:
+              - generic [ref=f10e242]: Mevr. T. Timmerman
+              - generic [ref=f10e243]: "-"
+              - generic [ref=f10e244]: Huizen
+          - generic [ref=f10e246]:
+            - generic [ref=f10e247]: De communicatie verliep heel goed. Vooraf ruim de tijd genomen voor het nodige kijk- en denkwerk. Alle afspraken werden stipt nagekomen. Er werd goed met ons meegedacht en het leggen van de vloer werd vakkundig, snel en precies gedaan (met dank aan Ko). Het eindresultaat mag er dan ook wezen. We zijn er heel blij mee.
+            - generic [ref=f10e248]:
+              - generic [ref=f10e249]: Dhr. J. ter Welle
+              - generic [ref=f10e250]: "-"
+              - generic [ref=f10e251]: Ruurlo
+          - generic [ref=f10e253]:
+            - generic [ref=f10e254]: Eiken houten vloer. De afdeling planning heeft goed naar mij geluisterd en geprobeerd om de vloer zo snel mogelijk te leggen. De vloer is ook heel mooi gelegd en alle verschillende mensen hebben netjes en op tijd gewerkt
+            - generic [ref=f10e255]:
+              - generic [ref=f10e256]: Mevr. M. Kouwenhoven
+              - generic [ref=f10e257]: "-"
+              - generic [ref=f10e258]: Zutphen
+          - generic [ref=f10e260]:
+            - generic [ref=f10e261]: Wij zijn super tevreden over onze visgraat parketvloer! Het verkoopgesprek met Job was prima, hij heeft goed geluisterd naar onze wensen. Communicatie van Knulst naar ons was altijd tijdig en helder. De vloer is gelegd door Wally, wat een harde werker en vakman! En wij genieten dagelijks van onze prachtige nieuwe vloer.
+            - generic [ref=f10e262]:
+              - generic [ref=f10e263]: Dhr. P. de Jong
+              - generic [ref=f10e264]: "-"
+              - generic [ref=f10e265]: Amsterdam
+          - generic [ref=f10e267]:
+            - generic [ref=f10e268]: Heel goede informatie vooraf, de diverse mogelijkheden ter plekke kunnen bekijken en zo een goede keuze kunnen maken. Het resultaat is volledig zoals ik me voorgesteld had. Ook het leggen van de vloerverwarming vooraf was naar volle tevredenheid. Prettige mensen die het werk uitvoerden, zowel voor de vloerverwarming als het leggen van de houten vloer.
+            - generic [ref=f10e269]:
+              - generic [ref=f10e270]: Mevr. J. Koudijs
+              - generic [ref=f10e271]: "-"
+              - generic [ref=f10e272]: Soest
+          - generic [ref=f10e274]:
+            - generic [ref=f10e275]: Hier wordt SERVICE met hoofdletters geschreven!
+            - generic [ref=f10e276]:
+              - generic [ref=f10e277]: Dhr. T. Philipsen
+              - generic [ref=f10e278]: "-"
+              - generic [ref=f10e279]: Huissen
+          - generic [ref=f10e281]:
+            - generic [ref=f10e282]: "Vanaf het eerste contact alleen maar super! Heldere afspraken, goede communicatie, aardige professionele vrouwen en mannen. En wat rest: een hele mooie vloer"
+            - generic [ref=f10e283]:
+              - generic [ref=f10e284]: C. Waardenburg
+              - generic [ref=f10e285]: "-"
+              - generic [ref=f10e286]: Wijk bij Duurstede
+        - generic [ref=f10e287]:
+          - button "View slide 1" [ref=f10e288] [cursor=pointer]
+          - button "View slide 2" [ref=f10e289] [cursor=pointer]
+          - button "View slide 3" [ref=f10e290] [cursor=pointer]
+          - button "View slide 4" [ref=f10e291] [cursor=pointer]
+          - button "View slide 5" [ref=f10e292] [cursor=pointer]
+          - button "View slide 6" [ref=f10e293] [cursor=pointer]
+          - button "View slide 7" [ref=f10e294] [cursor=pointer]
+          - button "View slide 8" [ref=f10e295] [cursor=pointer]
+          - button "View slide 9" [ref=f10e296] [cursor=pointer]
+          - button "View slide 10" [ref=f10e297] [cursor=pointer]
+      - generic [ref=f10e301]:
+        - generic [ref=f10e302]:
+          - heading "Binnenkijken! Ervaar de luxe van maatwerk vloeren" [level=2] [ref=f10e303]
+          - generic [ref=f10e304]: Inspiratie
+          - generic [ref=f10e307]:
+            - link "Alle inspiratie" [ref=f10e310] [cursor=pointer]:
+              - /url: /inspiratie/
+            - generic [ref=f10e311]:
+              - button "previous slide" [ref=f10e313] [cursor=pointer]:
+                - generic [ref=f10e314]: 
+              - button "next slide" [ref=f10e316] [cursor=pointer]:
+                - generic [ref=f10e317]: 
+        - generic [ref=f10e321]:
+          - generic [ref=f10e322]:
+            - link [ref=f10e324] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/123_3840x2160.jpg/versailles-patroon-keramisch-parket-houtlook-tegelvloer-tegels-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+              - img "Versailles patroon Keramisch Parket - Houtlook Tegelvloer - Tegels - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e325]
+            - paragraph [ref=f10e327]: Keramisch Parket
+          - generic [aria-hidden] [ref=f10e328]:
+            - link [ref=f10e330] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/107_3840x2160.jpg/grijze-polyurethaan-gietvloer-op-vloerverwarming-detail-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e333]: Cementgebonden Gietvloer
+          - generic [aria-hidden] [ref=f10e334]:
+            - link [ref=f10e336] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/97_3840x2160.jpg/eiken-planken-parketvloer-in-landelijke-keuken-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e339]: Eiken Planken Vloer
+          - generic [aria-hidden] [ref=f10e340]:
+            - link [ref=f10e342] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/86_3840x2160.jpg/witte-terrazzolook-keramische-tegelvloer-in-slaapkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e345]: Terrazzolook Keramische Tegels
+          - generic [aria-hidden] [ref=f10e346]:
+            - link [ref=f10e348] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/128_3840x2160.png/moduleo-moods-triangle-pvc-vloer-special-in-hotelkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.png
+            - paragraph [ref=f10e351]: PVC Vloer Triangles
+          - generic [aria-hidden] [ref=f10e352]:
+            - link [ref=f10e354] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/126_3840x2160.jpg/witte-polyurethaan-gietvloer-in-scandinavisch-design-woonkamer-met-wollen-karpet-knulst-vloeren-nunspeet-utrecht-amsterdam.jpg
+            - paragraph [ref=f10e357]: PU Gietvloer
+          - generic [aria-hidden] [ref=f10e358]:
+            - link [ref=f10e360] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/98_3840x2160.jpg/eiken-prefab-walvisgraat-parketvloer-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e363]: Eiken Visgraat Parket
+          - generic [aria-hidden] [ref=f10e364]:
+            - link [ref=f10e366] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/95_3840x2160.jpg/eiken-houtlook-keramische-tegelvloer-keramisch-parket-met-zwart-marmeren-tafel-knulst-vloeren-nunspeet-utrecht-amsterdam.jpg
+            - paragraph [ref=f10e369]: Houtlook Keramische Tegels
+          - generic [aria-hidden] [ref=f10e370]:
+            - link [ref=f10e372] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/125_3840x2160.jpg/visgraat-pvc-vloer-van-therdex-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e375]: Visgraat PVC Vloer
+          - generic [aria-hidden] [ref=f10e376]:
+            - link [ref=f10e378] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/114_3840x2160.png/lichtgrijze-betonlook-keramische-tegelvloer-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.png
+            - paragraph [ref=f10e381]: Betonlook Keramische Tegels
+          - generic [aria-hidden] [ref=f10e382]:
+            - link [ref=f10e384] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/124_3840x2160.jpg/visgraat-pvc-vloer-hongaarse-punt-pvc-vloer-van-therdex-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e387]: Visgraat PVC Vloer
+          - generic [aria-hidden] [ref=f10e388]:
+            - link [ref=f10e390] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/113_3840x2160.jpg/lichte-eiken-houtlook-pvc-vloer-van-therdex-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e393]: Houtlook PVC Vloer
+          - generic [aria-hidden] [ref=f10e394]:
+            - link [ref=f10e396] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/122_3840x2160.jpg/traprenovatie-met-pvc-vloer-van-moduleo-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e399]: PVC Traprenovatie
+          - generic [aria-hidden] [ref=f10e400]:
+            - link [ref=f10e402] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/106_3840x2160.jpg/grijze-cementgebonden-gietvloer-van-stoneage-betonflow-in-entree-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e405]: Cementgebonden Gietvloer
+          - generic [aria-hidden] [ref=f10e406]:
+            - link [ref=f10e408] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/121_3840x2160.jpg/robuuste-moduleo-houtlook-pvc-vloer-in-woonkamer-op-vloerverwarming-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e411]: PVC Vloer
+          - generic [aria-hidden] [ref=f10e412]:
+            - link [ref=f10e414] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/108_3840x2160.jpg/grijze-pu-gietvloer-van-remmers-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e417]: Polyurethaan Gietvloer
+          - generic [aria-hidden] [ref=f10e418]:
+            - link [ref=f10e420] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/120_3840x2160.jpg/robuust-eiken-planken-multiplank-duoplank-raftwood-parketvloer-in-keuken-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e423]: Eiken 'Raftwood' Multiplank
+          - generic [aria-hidden] [ref=f10e424]:
+            - link [ref=f10e426] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/105_3840x2160.jpg/grijze-cementgebonden-gietvloer-van-stoneage-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e429]: Cementgebonden Gietvloer
+          - generic [aria-hidden] [ref=f10e430]:
+            - link [ref=f10e432] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/102_3840x2160.jpg/goudkleurige-marmerlook-keramische-tegelvloer-in-hotelkamer-slaapkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e435]: Marmerlook Keramische Tegels
+          - generic [aria-hidden] [ref=f10e436]:
+            - link [ref=f10e438] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/119_3840x2160.jpg/robuste-eikenhouten-plankenvloer-in-landelijke-woonboerderij-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e441]: Eikenhouten Plankenvloer
+          - generic [aria-hidden] [ref=f10e442]:
+            - link [ref=f10e444] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/118_3840x2160.jpg/realistische-grijze-pvc-tegelvloer-in-klooster-woonkeuken-van-therdex-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e447]: PVC Tegels
+          - generic [aria-hidden] [ref=f10e448]:
+            - link [ref=f10e450] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/99_3840x2160.jpg/eiken-visgraat-pvc-vloer-in-keuken-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e453]: Visgraat PVC
+          - generic [aria-hidden] [ref=f10e454]:
+            - link [ref=f10e456] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/115_3840x2160.jpg/lichtgrijze-pu-gietvloer-van-remmers-in-badkamer-en-douche-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e459]: Witte PU Gietvloer
+          - generic [aria-hidden] [ref=f10e460]:
+            - link [ref=f10e462] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/112_3840x2160.jpg/leisteenlook-keramische-tegelvloer-in-moderne-slaapkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e465]: Leisteenlook Tegelvloer
+          - generic [aria-hidden] [ref=f10e466]:
+            - link [ref=f10e468] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/111_3840x2160.jpg/klassieke-eiken-visgraat-tapis-parketvloer-met-band-en-bies-op-vloerverwarming-knulst-vloeren-nunspeet-utrecht-amsterdam.jpg
+            - paragraph [ref=f10e471]: Eiken Visgraat Tapis Parketvloer
+          - generic [aria-hidden] [ref=f10e472]:
+            - link [ref=f10e474] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/109_3840x2160.jpg/hoogpolig-tapijt-van-van-besouw-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e477]: Hoogpolig Tapijt
+          - generic [aria-hidden] [ref=f10e478]:
+            - link [ref=f10e480] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/110_3840x2160.jpg/houtlook-pvc-vloer-van-coretec-met-robuste-eikenhouten-uitstraling-in-woonkeuken-knulst-vloeren-nunspeet-utrecht-amsterdam.jpg
+            - paragraph [ref=f10e483]: Houtlook PVC Vloer
+          - generic [aria-hidden] [ref=f10e484]:
+            - link [ref=f10e486] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/104_3840x2160.png/grijze-betonlook-keramische-tegelvloer-op-terras-en-in-keuken-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.png
+            - paragraph [ref=f10e489]: Betonlook Keramische Tegels
+          - generic [aria-hidden] [ref=f10e490]:
+            - link [ref=f10e492] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/103_3840x2160.jpg/grijze-beton-cire-gietvloer-van-stoneage-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e495]: Beton Ciré Gietvloer
+          - generic [aria-hidden] [ref=f10e496]:
+            - link [ref=f10e498] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/101_3840x2160.jpg/geborstelde-eiken-plankenvloer-bruin-geolied-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e501]: Geborstelde Eiken Plankenvloer
+          - generic [aria-hidden] [ref=f10e502]:
+            - link [ref=f10e504] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/100_3840x2160.jpg/eiken-visgraat-tapis-parketvloer-op-vloerverwarming-in-herenhuis-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e507]: Eiken Visgraat Parket
+          - generic [aria-hidden] [ref=f10e508]:
+            - link [ref=f10e510] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/87_3840x2160.jpg/zandkleurige-pu-gietvloer-van-remmers-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e513]: PU (Polyurethaan) Gietvloer
+          - generic [aria-hidden] [ref=f10e514]:
+            - link [ref=f10e516] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/96_3840x2160.jpg/eiken-houtlook-pvc-stroken-vloer-in-keuken-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e519]: Eiken Houtlook PVC Vloer
+          - generic [aria-hidden] [ref=f10e520]:
+            - link [ref=f10e522] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/94_3840x2160.jpg/donkere-steenlook-keramische-tegelvloer-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e525]: Betonlook Tegelvloer
+          - generic [aria-hidden] [ref=f10e526]:
+            - link [ref=f10e528] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/93_3840x2160.jpg/brede-eikenhouten-multiplank-duoplank-parketvloer-geolied-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e531]: Eiken Multiplank Vloer
+          - generic [aria-hidden] [ref=f10e532]:
+            - link [ref=f10e534] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/92_3840x2160.jpg/belgisch-hardsteenlook-keramische-tegels-in-badkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e537]: Belgisch Hardsteenlook Tegels
+          - generic [aria-hidden] [ref=f10e538]:
+            - link [ref=f10e540] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/91_3840x2160.jpg/zwarte-marmerlook-keramische-tegels-in-badkamer-met-ligbad-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e543]: Zwarte Marmerlook Tegels
+          - generic [aria-hidden] [ref=f10e544]:
+            - link [ref=f10e546] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/90_3840x2160.jpg/zwarte-houten-visgraat-parketvloer-tapis-op-vloerverwarming-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e549]: Zwarte Houten Visgraat Parketvloer
+          - generic [aria-hidden] [ref=f10e550]:
+            - link [ref=f10e552] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/89_3840x2160.jpg/zwart-geoliede-prefab-visgraat-parketvloer-in-slaapkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e555]: Prefab Visgraat Parket
+          - generic [aria-hidden] [ref=f10e556]:
+            - link [ref=f10e558] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/88_3840x2160.jpg/zandkleurige-pu-polyurethaan-kunststof-gietvloer-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e561]: Betonlook PU Gietvloer
+          - generic [aria-hidden] [ref=f10e562]:
+            - link [ref=f10e564] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/85_3840x2160.jpg/witte-pu-gietvloer-in-kantoor-met-bureaustoel-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.jpg
+            - paragraph [ref=f10e567]: Witte PU Gietvloer
+          - generic [aria-hidden] [ref=f10e568]:
+            - link [ref=f10e570] [cursor=pointer]:
+              - /url: https://www.knulst.nl/m/Inspiratie/127_3840x2160.png/moduleo-moods-trapezium-pvc-vloer-kleur-eiken-in-woonkamer-knulst-vloeren-nunspeet-utrecht-amsterdam-wwwknulstnl.png
+            - paragraph [ref=f10e573]: Trapezium PVC Vloer
+      - generic [ref=f10e577]:
+        - generic [ref=f10e579]:
+          - heading "Het fundament Onder uw woongeluk" [level=2] [ref=f10e580]
+          - generic [ref=f10e581]: Vloeren van Knulst
+        - generic [ref=f10e586]:
+          - paragraph [ref=f10e588]: "Een vloer kiest u niet alleen vanwege esthetiek of prijs. U kiest met het geruststellende vooruitzicht op jarenlang comfortabel wonen. Op basis van vertrouwen en het gevoel dat het klopt, vandaag én in de toekomst. De vloerspecialisten van Knulst begrijpen dat als geen ander. Daarom draait alles wat zij doen om één gemeenschappelijk doel: het creëren van een stevig fundament onder uw woongeluk."
+          - paragraph [ref=f10e590]:
+            - strong [ref=f10e591]: Zorgvuldig proces
+            - text: Het fundament wordt niet alleen bepaald door de kwaliteit van de vloer, maar vooral door de wijze waarop deze tot stand komt. Vanaf het eerste moment nemen deskundige vloerenadviseurs u stap voor stap mee in een transparant proces. Ze luisteren naar uw wensen en vertalen ideeën naar een persoonlijk vloerenadvies dat esthetiek, comfort en vakmanschap samenbrengt. Dat geeft rust. Omdat u zeker weet dat er zorgvuldig is nagedacht over elk detail.
+            - strong [ref=f10e592]: Ambachtelijk vakmanschap
+            - text: De kwaliteit van een vloer komt pas echt tot uiting in de manier waarop deze wordt aangebracht en afgewerkt. De vloerspecialisten van Knulst werken dagelijks in het besef dat zij te gast zijn in uw woning. Met precisie en respect voor uw leefomgeving realiseren zij een hoogwaardige vloer die niet alleen mooi is, maar ook duurzaam. Een vloer waar u niet meer over na hoeft te denken, maar waarop u elke dag opnieuw woongeluk ervaart.
+            - strong [ref=f10e593]: Zekerheid na oplevering
+            - text: Zorgeloos wonen begint pas echt na oplevering van uw nieuwe vloer. Daarom blijft Knulst betrokken, met duidelijke afspraken, lange garanties en service die de standaard overstijgt. Mocht er ooit iets zijn, dan kunt u rekenen op dezelfde aandacht en zorg als op dag één. Omdat zekerheid bij Knulst geen belofte is, maar een vanzelfsprekendheid.
+            - strong [ref=f10e594]: Alles onder één dak
+            - text: "Of u nu kiest voor een houten vloer, een PVC vloer, een gietvloer, keramische tegels of een combinatie met vloerverwarming: bij Knulst vindt u alle expertise onder één dak. Dat betekent voor u: overzicht, samenhang en één aanspreekpunt dat het geheel bewaakt. Van oriëntatie tot realisatie en daarna. Zo ontstaat niet alleen een mooie vloer, maar een totaaloplossing die aansluit bij uw manier van wonen. Ervaar zelf wat wij bedoelen met het fundament onder uw woongeluk. Welkom in de wereld van hoogwaardige vloeren. Welkom bij Knulst."
+          - link "Plan uw adviesgesprek" [ref=f10e596] [cursor=pointer]:
+            - /url: /showrooms/
+      - generic [ref=f10e602]:
+        - link "Gratis Inspiratiemagazine Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl Vraag ons gratis magazine aan Vol inspiratie" [ref=f10e604] [cursor=pointer]:
+          - /url: /inspiratiemagazine/
+          - img "Gratis Inspiratiemagazine Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e605]
+          - generic [ref=f10e606]:
+            - heading "Vraag ons gratis magazine aan" [level=2] [ref=f10e607]
+            - generic [ref=f10e608]: Vol inspiratie
+        - link "Inspiring Stories - Lees inspirerende verhalen over vloeren en interieur - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl Inspiring stories Bekijk nu" [ref=f10e612] [cursor=pointer]:
+          - /url: /stories/
+          - img "Inspiring Stories - Lees inspirerende verhalen over vloeren en interieur - Knulst Vloeren - Nunspeet - Utrecht - Amsterdam - www.knulst.nl" [ref=f10e613]
+          - generic [ref=f10e614]:
+            - heading "Inspiring stories" [level=2] [ref=f10e615]
+            - generic [ref=f10e616]: Bekijk nu
+      - generic [ref=f10e622]:
+        - heading [level=2] [ref=f10e624]:
+          - paragraph [ref=f10e625]:
+            - text: Volg ons op
+            - link "@knulstvloeren" [ref=f10e626] [cursor=pointer]:
+              - /url: https://www.instagram.com/knulstvloeren/
+        - generic [ref=f10e629]:
+          - link [ref=f10e631] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/Dc3HzPaCvTa/
+            - img "791996882_1872616890368558_1020511258506276844_n.jpg" [ref=f10e632]
+          - link [ref=f10e634] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/DcldxCvigh2/
+            - img "788173322_1866536190976628_2649108273774163811_n.jpg" [ref=f10e635]
+          - link [ref=f10e637] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/DcQvPIbCjtA/
+            - img "778589760_1859467498350164_2369969843457332778_n.jpg" [ref=f10e638]
+          - link [ref=f10e640] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/Dbdg8gaCi41/
+            - img "759717107_1841681546795426_6889216390787902012_n.jpg" [ref=f10e641]
+          - link [ref=f10e643] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/DUI3DozirVA/
+            - img "622205906_1685449172418665_1044999484133438057_n.jpg" [ref=f10e644]
+          - link [ref=f10e646] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/DSZtF-GintL/
+            - img "598254114_1650951492535100_5635654633852823283_n.jpg" [ref=f10e647]
+    - contentinfo [ref=f10e648]:
+      - generic [ref=f10e649]:
+        - generic [ref=f10e650]:
+          - generic [ref=f10e652]:
+            - heading "BLIJF OP DE HOOGTE VAN DE MOOISTE VLOEREN VAN NEDERLAND" [level=2] [ref=f10e653]
+            - generic [ref=f10e654]:
+              - link "pinterest" [ref=f10e656] [cursor=pointer]:
+                - /url: https://nl.pinterest.com/knulstvloeren/
+                - generic [ref=f10e657]: 
+              - link "instagram" [ref=f10e659] [cursor=pointer]:
+                - /url: https://www.instagram.com/knulstvloeren/
+                - generic [ref=f10e660]: 
+              - link "facebook" [ref=f10e662] [cursor=pointer]:
+                - /url: https://www.facebook.com/knulstvloeren/
+                - generic [ref=f10e663]: 
+              - link "youtube" [ref=f10e665] [cursor=pointer]:
+                - /url: https://www.youtube.com/user/KnulstSinds1958/
+                - generic [ref=f10e666]: 
+              - link "linkedin" [ref=f10e668] [cursor=pointer]:
+                - /url: https://nl.linkedin.com/company/knulstvloeren/
+                - generic [ref=f10e669]: 
+            - generic [ref=f10e670]:
+              - generic "gorgeous":
+                - img "1"
+                - img "2"
+                - img "3"
+                - img "4"
+                - img "5"
+              - link "Klantervaringen" [ref=f10e671] [cursor=pointer]:
+                - /url: https://www.qasa.nl/ervaringen/knulst-vloeren-1792
+          - generic [ref=f10e672]:
+            - generic [ref=f10e673]: Knulst vloeren
+            - generic [ref=f10e674]:
+              - generic [ref=f10e675]:
+                - generic [ref=f10e676]: 
+                - generic [ref=f10e677]: Elburgerweg 37 8071 TA Nunspeet
+              - generic [ref=f10e678]:
+                - generic [ref=f10e679]: 
+                - link "info@knulst.nl" [ref=f10e680] [cursor=pointer]:
+                  - /url: mailto:info@knulst.nl
+              - generic [ref=f10e681]:
+                - generic [ref=f10e682]: 
+                - link "0341-252787" [ref=f10e683] [cursor=pointer]:
+                  - /url: tel:0341252787
+          - generic [ref=f10e684]:
+            - generic [ref=f10e685]: Direct naar
+            - list [ref=f10e686]:
+              - listitem [ref=f10e687]:
+                - link "Vloersoorten" [ref=f10e688] [cursor=pointer]:
+                  - /url: /#vloersoorten
+              - listitem [ref=f10e689]:
+                - link "Inspiratie" [ref=f10e690] [cursor=pointer]:
+                  - /url: /inspiratie/
+              - listitem [ref=f10e691]:
+                - link "Showrooms" [ref=f10e692] [cursor=pointer]:
+                  - /url: /showrooms/
+              - listitem [ref=f10e693]:
+                - link "Stories" [ref=f10e694] [cursor=pointer]:
+                  - /url: /stories/
+              - listitem [ref=f10e695]:
+                - link "Ons verhaal" [ref=f10e696] [cursor=pointer]:
+                  - /url: /ons-verhaal/
+              - listitem [ref=f10e697]:
+                - link "Contact" [ref=f10e698] [cursor=pointer]:
+                  - /url: /contact/
+              - listitem [ref=f10e699]:
+                - link "Werken bij" [ref=f10e700] [cursor=pointer]:
+                  - /url: /werkenbij/
+          - generic [ref=f10e701]:
+            - generic [ref=f10e702]: Showrooms
+            - paragraph [ref=f10e704]: Showroom Amsterdam Waterlandplein 213-215, 1024 LR Amsterdam Showroom Utrecht Decimalaan 16, 3526 AJ Utrecht Showroom Nunspeet Elburgerweg 37, 8071 TA Nunspeet
+        - list [ref=f10e705]:
+          - listitem [ref=f10e706]:
+            - link "Algemene Voorwaarden" [ref=f10e707] [cursor=pointer]:
+              - /url: /algemene-voorwaarden/
+          - listitem [ref=f10e708]:
+            - link "Garantie" [ref=f10e709] [cursor=pointer]:
+              - /url: /garantie/
+          - listitem [ref=f10e710]:
+            - link "Copyright" [ref=f10e711] [cursor=pointer]:
+              - /url: /copyright/
+          - listitem [ref=f10e712]:
+            - link "Disclaimer" [ref=f10e713] [cursor=pointer]:
+              - /url: /disclaimer/
+          - listitem [ref=f10e714]:
+            - link "Privacy" [ref=f10e715] [cursor=pointer]:
+              - /url: /privacy/
+          - listitem [ref=f10e716]:
+            - link "Cookies" [ref=f10e717] [cursor=pointer]:
+              - /url: /cookies/
+        - generic [ref=f10e718]: © Knulst 2026
+        - generic [ref=f10e719]:
+          - text: Deze site is beveiligd door reCAPTCHA. Het
+          - link "privacybeleid" [ref=f10e720] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy
+          - text: en de
+          - link "servicevoorwaarden" [ref=f10e721] [cursor=pointer]:
+            - /url: https://policies.google.com/terms
+          - text: van Google zijn van toepassing.
+          - paragraph
+    - link "" [ref=f10e722] [cursor=pointer]:
+      - /url: "#"
+  - text: 
+  - dialog "Cookie banner" [ref=f10e724]:
+    - generic [ref=f10e725]:
+      - heading "Knulst maakt gebruik van cookies" [level=3] [ref=f10e726]
+      - paragraph [ref=f10e727]: Om u beter en persoonlijker van dienst te kunnen zijn maken wij gebruik van cookies op onze website. We gebruiken cookies om op anonieme wijze content en advertenties te personaliseren, om functies voor social media te bieden en om ons websiteverkeer te analyseren. Ook delen we anonieme informatie over uw gebruik van onze site met onze partners voor social media, adverteren en analyse.
+      - paragraph [ref=f10e728]:
+        - text: Als u verder gaat op onze website, gaan we ervan uit dat u dat goed vindt.Meer weten? Bekijk ons
+        - link "cookiebeleid" [ref=f10e729] [cursor=pointer]:
+          - /url: /cookies/
+        - text: en het beleid van
+        - link "Google" [ref=f10e730] [cursor=pointer]:
+          - /url: https://business.safety.google/privacy/
+        - text: .
+      - generic [ref=f10e731]:
+        - button "Cookie-instellingen" [ref=f10e732] [cursor=pointer]
+        - button "Alles accepteren" [ref=f10e733] [cursor=pointer]

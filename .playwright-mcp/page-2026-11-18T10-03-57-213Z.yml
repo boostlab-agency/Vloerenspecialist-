@@ -1,0 +1,391 @@
+- generic [active] [ref=f21e1]:
+  - link "Naar de inhoud" [ref=f21e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f21e4]:
+    - generic [ref=f21e5]:
+      - link [ref=f21e6] [cursor=pointer]:
+        - /url: /index.html
+        - img "De Vloerenspecialist Tilburg" [ref=f21e7]
+      - generic [ref=f21e58]:
+        - link "Bel 013 - 536 85 98" [ref=f21e59] [cursor=pointer]:
+          - /url: tel:+31135368598
+        - button [ref=f21e62] [cursor=pointer]
+  - main [ref=f21e67]:
+    - generic [ref=f21e69]:
+      - generic [ref=f21e70]:
+        - paragraph [aria-hidden] [ref=f21e73]:
+          - text: Vloeren & interieur ·
+          - strong [ref=f21e74]: eigen vakmensen
+        - navigation "Hoofdstukken van de film" [ref=f21e75]:
+          - button [ref=f21e76] [cursor=pointer]
+          - button [ref=f21e79] [cursor=pointer]
+          - button [ref=f21e81] [cursor=pointer]
+          - button [ref=f21e83] [cursor=pointer]
+        - button "Pauzeer film" [ref=f21e85] [cursor=pointer]
+      - link "Scroll om te ontdekken" [ref=f21e89] [cursor=pointer]:
+        - /url: "#intro"
+    - generic [ref=f21e93]:
+      - heading "Vloeren en interieur op maat, onder één dak" [level=1] [ref=f21e94]
+      - paragraph [ref=f21e95]: De Vloerenspecialist Tilburg
+    - generic [ref=f21e97]:
+      - img "Warme woonkamer met houtkachel en eikenhouten vloer" [ref=f21e99]
+      - generic [ref=f21e100]:
+        - heading "Van keuze tot oplevering" [level=2] [ref=f21e101]
+        - paragraph [ref=f21e102]: Welkom bij De Vloerenspecialist
+        - paragraph [ref=f21e103]: Welkom bij De Vloerenspecialist in Tilburg. In onze showroom van 1.800 m² vindt u alle soorten vloeren — van PVC en laminaat tot hout, tegels en gietvloer — en daarnaast interieur op maat, behang en raamdecoratie. Met meer dan 62 topmerken en een eigen team dat alles plaatst, bent u van keuze tot oplevering bij ons aan het juiste adres. Onze klanten waarderen ons met een 9+.
+        - generic [ref=f21e104]:
+          - generic [ref=f21e105]:
+            - term [ref=f21e106]: 1.800 m²
+            - definition [ref=f21e107]: showroom
+          - generic [ref=f21e108]:
+            - term [ref=f21e109]: 62+
+            - definition [ref=f21e110]: topmerken
+          - generic [ref=f21e111]:
+            - term [ref=f21e112]: 9+
+            - definition [ref=f21e113]: klantwaardering
+        - link "Plan uw showroombezoek" [ref=f21e114] [cursor=pointer]:
+          - /url: /showroom.html
+    - generic [ref=f21e116]:
+      - generic [ref=f21e117]:
+        - generic [ref=f21e118]:
+          - heading "Onze vloeren" [level=2] [ref=f21e119]
+          - paragraph [ref=f21e120]: Voor elke ruimte de juiste vloer
+        - link "Alle vloeren →" [ref=f21e121] [cursor=pointer]:
+          - /url: /vloeren/index.html
+          - text: Alle vloeren
+          - generic [ref=f21e122]: →
+      - generic [ref=f21e123]:
+        - link [ref=f21e124] [cursor=pointer]:
+          - /url: /vloeren/pvc.html
+          - img "PVC vloer in een moderne woonkamer" [ref=f21e126]
+          - heading "PVC vloeren →" [level=3] [ref=f21e127]
+          - paragraph [ref=f21e128]: Waterbestendig en onderhoudsarm
+        - link [ref=f21e129] [cursor=pointer]:
+          - /url: /vloeren/hout.html
+          - img "Houten vloer met natuurlijk licht" [ref=f21e131]
+          - heading "Houten vloeren →" [level=3] [ref=f21e132]
+          - paragraph [ref=f21e133]: Tijdloos en ambachtelijk
+        - link [ref=f21e134] [cursor=pointer]:
+          - /url: /vloeren/laminaat.html
+          - img "Laminaatvloer in een woonkamer" [ref=f21e136]
+          - heading "Laminaat →" [level=3] [ref=f21e137]
+          - paragraph [ref=f21e138]: Slim geprijsd, snel gelegd
+        - link [ref=f21e139] [cursor=pointer]:
+          - /url: /vloeren/tegelvloer.html
+          - img "Woonkamer met grote tegelvloer in marmerlook" [ref=f21e141]
+          - heading "Tegelvloeren →" [level=3] [ref=f21e142]
+          - paragraph [ref=f21e143]: Duurzaam en slijtvast
+        - link [ref=f21e144] [cursor=pointer]:
+          - /url: /vloeren/vloerbedekking.html
+          - img "Slaapkamer met zachte, kamerbrede vloerbedekking" [ref=f21e146]
+          - heading "Vloerbedekking →" [level=3] [ref=f21e147]
+          - paragraph [ref=f21e148]: Warm en geluiddempend
+        - link [ref=f21e149] [cursor=pointer]:
+          - /url: /vloeren/gietvloer.html
+          - img "Lichte, naadloze gietvloer in een loft" [ref=f21e151]
+          - heading "Gietvloeren →" [level=3] [ref=f21e152]
+          - paragraph [ref=f21e153]: Naadloos en modern
+        - link [ref=f21e154] [cursor=pointer]:
+          - /url: /vloeren/hybride-houtenvloer.html
+          - img "Lichte eikenhouten vloer in een zonnige kamer" [ref=f21e156]
+          - heading "Hybride houtenvloeren →" [level=3] [ref=f21e157]
+          - paragraph [ref=f21e158]: Echt hout, waterbestendig
+        - link [ref=f21e159] [cursor=pointer]:
+          - /url: /vloeren/traprenovatie.html
+          - img "Verlichte eikenhouten trap in een moderne woning" [ref=f21e161]
+          - heading "Traprenovatie →" [level=3] [ref=f21e162]
+          - paragraph [ref=f21e163]: Uw trap passend bij de vloer
+    - generic [ref=f21e165]:
+      - img "Warme, moderne woonkamer met houten vloer en groot raam" [ref=f21e167]
+      - generic [ref=f21e168]:
+        - generic [ref=f21e169]:
+          - heading "Van ondervloer tot afwerking" [level=2] [ref=f21e170]
+          - paragraph [ref=f21e171]: Meer dan vloeren
+          - paragraph [ref=f21e172]: "Oude vloer eruit, vloerverwarming erin, beton storten of de hele verbouwing in één hand: ons eigen team regelt het van begin tot eind. Zo heeft u één aanspreekpunt en sluit alles precies op elkaar aan."
+          - paragraph [ref=f21e173]: "Ook voor: vloerverwarming leggen · vloeren verwijderen · beton storten en egaliseren"
+          - link "Vraag een offerte aan" [ref=f21e174] [cursor=pointer]:
+            - /url: /contact.html
+        - generic [ref=f21e175]:
+          - link "Slaapkamer met wand in Renostuc Renostuc Strakke wanden zonder te stucen" [ref=f21e176] [cursor=pointer]:
+            - /url: /interieur/renostuc.html
+            - img "Slaapkamer met wand in Renostuc" [ref=f21e177]
+            - generic [ref=f21e178]:
+              - generic [ref=f21e179]: Renostuc
+              - generic [ref=f21e180]: Strakke wanden zonder te stucen
+          - link "Verlichte eikenhouten trap Traprenovatie Uw trap passend bij de vloer" [ref=f21e181] [cursor=pointer]:
+            - /url: /vloeren/traprenovatie.html
+            - img "Verlichte eikenhouten trap" [ref=f21e182]
+            - generic [ref=f21e183]:
+              - generic [ref=f21e184]: Traprenovatie
+              - generic [ref=f21e185]: Uw trap passend bij de vloer
+          - link "Sfeervolle woonruimte na een totaalverbouwing Totaalverbouwing Vloer, wand, raam en maatwerk in één hand" [ref=f21e186] [cursor=pointer]:
+            - /url: /contact.html
+            - img "Sfeervolle woonruimte na een totaalverbouwing" [ref=f21e187]
+            - generic [ref=f21e188]:
+              - generic [ref=f21e189]: Totaalverbouwing
+              - generic [ref=f21e190]: Vloer, wand, raam en maatwerk in één hand
+    - generic [ref=f21e192]:
+      - generic [ref=f21e194]:
+        - heading "Ook voor wand, raam en maatwerk" [level=2] [ref=f21e195]
+        - paragraph [ref=f21e196]: Meer dan vloeren
+      - generic [ref=f21e197]:
+        - link [ref=f21e198] [cursor=pointer]:
+          - /url: /interieur/index.html
+          - img "Inloopkast op maat met eigen verlichting" [ref=f21e200]
+          - heading "Interieur op maat →" [level=3] [ref=f21e201]
+          - paragraph [ref=f21e202]: Kasten, deuren, wanden en meubels — ontworpen voor uw woning
+        - link [ref=f21e203] [cursor=pointer]:
+          - /url: /interieur/behang.html
+          - img "Woonkamer met groen behang" [ref=f21e205]
+          - heading "Behang →" [level=3] [ref=f21e206]
+          - paragraph [ref=f21e207]: Foto-, papier-, vinyl- en vliesbehang en Renostuc
+        - link [ref=f21e208] [cursor=pointer]:
+          - /url: /interieur/raamdecoratie.html
+          - img "Linnen gordijnen in een woonkamer" [ref=f21e210]
+          - heading "Raamdecoratie →" [level=3] [ref=f21e211]
+          - paragraph [ref=f21e212]: Jaloezieën, rol-, plissé- en vouwgordijnen op maat
+    - generic [ref=f21e214]:
+      - paragraph [ref=f21e215]: ★★★★★ 4,8 / 5 op Google · klanten waarderen ons met een 9+
+      - generic [ref=f21e216]:
+        - figure "Marieke Jansen – augustus 2026" [ref=f21e218]:
+          - blockquote [ref=f21e219]: Van eerste advies tot plaatsing klopte alles. De showroom gaf meteen een goed gevoel en het eindresultaat overtreft onze verwachtingen.
+        - tablist "Kies een review" [ref=f21e221]:
+          - tab "Review 1" [selected] [ref=f21e222] [cursor=pointer]
+          - tab "Review 2" [ref=f21e223] [cursor=pointer]
+          - tab "Review 3" [ref=f21e224] [cursor=pointer]
+    - generic [ref=f21e226]:
+      - generic [ref=f21e227]:
+        - generic [ref=f21e228]:
+          - heading "Binnenkijken bij onze klanten" [level=2] [ref=f21e229]
+          - paragraph [ref=f21e230]: Projecten
+        - link "Alle projecten →" [ref=f21e231] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - text: Alle projecten
+          - generic [ref=f21e232]: →
+      - generic [ref=f21e233]:
+        - link "Eetkamer met visgraatvloer en kastenwand Eetkamer, Tilburg" [ref=f21e234] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - img "Eetkamer met visgraatvloer en kastenwand" [ref=f21e235]
+          - generic [ref=f21e236]: Eetkamer, Tilburg
+        - link "Lichte woonkamer met warme tinten Totaalinterieur, Tilburg" [ref=f21e237] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - img "Lichte woonkamer met warme tinten" [ref=f21e238]
+          - generic [ref=f21e239]: Totaalinterieur, Tilburg
+        - link "Terracotta Renostuc-wand Slaapkamer, Goirle" [ref=f21e240] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - img "Terracotta Renostuc-wand" [ref=f21e241]
+          - generic [ref=f21e242]: Slaapkamer, Goirle
+        - link "Zwarte velvet gordijnstof Werkkamer, Tilburg" [ref=f21e243] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - img "Zwarte velvet gordijnstof" [ref=f21e244]
+          - generic [ref=f21e245]: Werkkamer, Tilburg
+        - link "Tapijt en poef Studio, Tilburg" [ref=f21e246] [cursor=pointer]:
+          - /url: /inspiratie/projecten.html
+          - img "Tapijt en poef" [ref=f21e247]
+          - generic [ref=f21e248]: Studio, Tilburg
+    - generic [ref=f21e250]:
+      - generic [ref=f21e251]:
+        - img "Showroom met vloeren, gordijnen en complete woonopstellingen" [ref=f21e252]
+        - paragraph [aria-hidden] [ref=f21e253]:
+          - text: Showroom
+          - strong [ref=f21e254]: Tilburg
+      - generic [ref=f21e255]:
+        - heading "Kom langs in onze showroom" [level=2] [ref=f21e256]
+        - paragraph [ref=f21e257]: Welkom in Tilburg
+        - paragraph [ref=f21e258]: Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen of plan een afspraak voor uitgebreid advies; onze adviseurs nemen graag de tijd voor u.
+        - status [ref=f21e259]:
+          - strong [ref=f21e261]: Nu geopend
+          - generic [ref=f21e262]: nog 5 u 57 min · sluit om 17:00
+        - generic [ref=f21e263]:
+          - generic [ref=f21e264]:
+            - paragraph [ref=f21e265]: Openingstijden
+            - generic [ref=f21e266]:
+              - generic [ref=f21e267]:
+                - generic [ref=f21e268]: Maandag
+                - generic [ref=f21e269]: 09:00 – 17:00
+              - generic [ref=f21e270]:
+                - generic [ref=f21e271]: Dinsdag
+                - generic [ref=f21e272]: 09:00 – 17:00
+              - generic [ref=f21e273]:
+                - generic [ref=f21e274]: WoensdagVandaag
+                - generic [ref=f21e275]: 09:00 – 17:00
+              - generic [ref=f21e278]:
+                - generic [ref=f21e279]: Donderdag
+                - generic [ref=f21e280]: 09:00 – 17:00
+              - generic [ref=f21e281]:
+                - generic [ref=f21e282]: Vrijdag
+                - generic [ref=f21e283]: 09:00 – 17:00
+              - generic [ref=f21e284]:
+                - generic [ref=f21e285]: Zaterdag
+                - generic [ref=f21e286]: 09:00 – 15:00
+              - generic [ref=f21e287]:
+                - generic [ref=f21e288]: Zondag
+                - generic [ref=f21e289]: Gesloten
+            - paragraph [ref=f21e290]:
+              - text: "Buiten openingstijden op afspraak:"
+              - link "06 - 21 59 83 93" [ref=f21e291] [cursor=pointer]:
+                - /url: tel:+31621598393
+          - link "Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)" [ref=f21e292] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/?api=1&destination=Jules+Verneweg+7a,+5015+BD+Tilburg
+            - iframe [ref=f21e293]
+            - generic [ref=f21e294]:
+              - text: Jules Verneweg 7a · Gratis parkeren
+              - generic [ref=f21e296]: →
+        - generic [ref=f21e297]:
+          - link "Plan uw showroombezoek" [ref=f21e298] [cursor=pointer]:
+            - /url: /showroom.html
+          - link "Route plannen →" [ref=f21e299] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/?api=1&destination=Jules+Verneweg+7a,+5015+BD+Tilburg
+            - text: Route plannen
+            - generic [ref=f21e300]: →
+    - region "Onze merken" [ref=f21e301]:
+      - generic [ref=f21e302]:
+        - link "Onze merken →" [ref=f21e303] [cursor=pointer]:
+          - /url: /merken/index.html
+          - text: Onze merken
+          - generic [ref=f21e304]: →
+        - generic [ref=f21e306]:
+          - generic [ref=f21e307]:
+            - generic [ref=f21e308]: Floer
+            - generic [ref=f21e309]: Moduleo
+            - generic [ref=f21e310]: COREtec
+            - generic [ref=f21e311]: Meister
+            - generic [ref=f21e312]: Mart Visser
+            - generic [ref=f21e313]: Eijffinger
+            - generic [ref=f21e314]: Cerdomus
+            - generic [ref=f21e315]: Gelasta
+            - generic [ref=f21e316]: KeJe
+            - generic [ref=f21e317]: Belakos
+            - generic [ref=f21e318]: Ambiant
+            - generic [ref=f21e319]: Floor Life
+            - generic [ref=f21e320]: Hebeta
+          - generic [aria-hidden] [ref=f21e321]:
+            - generic [ref=f21e322]: Floer
+            - generic [ref=f21e323]: Moduleo
+            - generic [ref=f21e324]: COREtec
+            - generic [ref=f21e325]: Meister
+            - generic [ref=f21e326]: Mart Visser
+            - generic [ref=f21e327]: Eijffinger
+            - generic [ref=f21e328]: Cerdomus
+            - generic [ref=f21e329]: Gelasta
+            - generic [ref=f21e330]: KeJe
+            - generic [ref=f21e331]: Belakos
+            - generic [ref=f21e332]: Ambiant
+            - generic [ref=f21e333]: Floor Life
+            - generic [ref=f21e334]: Hebeta
+  - contentinfo [ref=f21e336]:
+    - generic [ref=f21e337]:
+      - generic [ref=f21e338]:
+        - generic [ref=f21e339]:
+          - link [ref=f21e340] [cursor=pointer]:
+            - /url: /index.html
+            - img "De Vloerenspecialist Tilburg" [ref=f21e341]
+          - paragraph [ref=f21e342]: Het interieurmerk van Tilburg, met de showroom als hart. Vier disciplines, één team, één standaard.
+          - generic [ref=f21e343]:
+            - link "Instagram" [ref=f21e344] [cursor=pointer]:
+              - /url: https://www.instagram.com/vloerenspecialisttilburg/
+            - link "Facebook" [ref=f21e349] [cursor=pointer]:
+              - /url: https://www.facebook.com/p/Vloerenspecialist-Tilburg-61574414801570/
+        - generic [ref=f21e352]:
+          - heading "Vloeren" [level=4] [ref=f21e353]
+          - list [ref=f21e354]:
+            - listitem [ref=f21e355]:
+              - link "PVC vloeren" [ref=f21e356] [cursor=pointer]:
+                - /url: /vloeren/pvc.html
+            - listitem [ref=f21e357]:
+              - link "Houten vloeren" [ref=f21e358] [cursor=pointer]:
+                - /url: /vloeren/hout.html
+            - listitem [ref=f21e359]:
+              - link "Laminaat" [ref=f21e360] [cursor=pointer]:
+                - /url: /vloeren/laminaat.html
+            - listitem [ref=f21e361]:
+              - link "Tegelvloer" [ref=f21e362] [cursor=pointer]:
+                - /url: /vloeren/tegelvloer.html
+            - listitem [ref=f21e363]:
+              - link "Vloerbedekking" [ref=f21e364] [cursor=pointer]:
+                - /url: /vloeren/vloerbedekking.html
+            - listitem [ref=f21e365]:
+              - link "Gietvloer" [ref=f21e366] [cursor=pointer]:
+                - /url: /vloeren/gietvloer.html
+            - listitem [ref=f21e367]:
+              - link "Hybride houtenvloer" [ref=f21e368] [cursor=pointer]:
+                - /url: /vloeren/hybride-houtenvloer.html
+            - listitem [ref=f21e369]:
+              - link "Traprenovatie" [ref=f21e370] [cursor=pointer]:
+                - /url: /vloeren/traprenovatie.html
+            - listitem [ref=f21e371]:
+              - link "Alle merken" [ref=f21e372] [cursor=pointer]:
+                - /url: /merken/index.html
+        - generic [ref=f21e373]:
+          - heading "Assortiment" [level=4] [ref=f21e374]
+          - list [ref=f21e375]:
+            - listitem [ref=f21e376]:
+              - link "Interieur op maat" [ref=f21e377] [cursor=pointer]:
+                - /url: /interieur/index.html
+            - listitem [ref=f21e378]:
+              - link "Behang" [ref=f21e379] [cursor=pointer]:
+                - /url: /interieur/behang.html
+            - listitem [ref=f21e380]:
+              - link "Raamdecoratie" [ref=f21e381] [cursor=pointer]:
+                - /url: /interieur/raamdecoratie.html
+            - listitem [ref=f21e382]:
+              - link "Showroom" [ref=f21e383] [cursor=pointer]:
+                - /url: /showroom.html
+            - listitem [ref=f21e384]:
+              - link "Projecten" [ref=f21e385] [cursor=pointer]:
+                - /url: /inspiratie/projecten.html
+            - listitem [ref=f21e386]:
+              - link "Over ons" [ref=f21e387] [cursor=pointer]:
+                - /url: /over-ons/index.html
+        - generic [ref=f21e388]:
+          - heading "Showroom" [level=4] [ref=f21e389]
+          - generic [ref=f21e390]:
+            - generic [ref=f21e391]:
+              - strong [ref=f21e392]: Adres
+              - text: Jules Verneweg 7a, 5015 BD Tilburg
+            - generic [ref=f21e393]:
+              - strong [ref=f21e394]: Openingstijden
+              - generic [ref=f21e395]:
+                - generic [ref=f21e396]: Maandag
+                - generic [ref=f21e397]: 09:00 – 17:00
+                - generic [ref=f21e398]: Dinsdag
+                - generic [ref=f21e399]: 09:00 – 17:00
+                - generic [ref=f21e400]: Woensdag
+                - generic [ref=f21e401]: 09:00 – 17:00
+                - generic [ref=f21e402]: Donderdag
+                - generic [ref=f21e403]: 09:00 – 17:00
+                - generic [ref=f21e404]: Vrijdag
+                - generic [ref=f21e405]: 09:00 – 17:00
+                - generic [ref=f21e406]: Zaterdag
+                - generic [ref=f21e407]: 09:00 – 15:00
+                - generic [ref=f21e408]: Zondag
+                - generic [ref=f21e409]: Gesloten
+            - generic [ref=f21e410]:
+              - strong [ref=f21e411]: Telefoon
+              - link "013 - 536 85 98" [ref=f21e412] [cursor=pointer]:
+                - /url: tel:+31135368598
+          - link "Plan showroombezoek" [ref=f21e413] [cursor=pointer]:
+            - /url: /showroom.html
+      - generic [ref=f21e414]:
+        - generic [ref=f21e415]: © 2026 De Vloerenspecialist, Tilburg
+        - generic [ref=f21e416]:
+          - link "Contact" [ref=f21e417] [cursor=pointer]:
+            - /url: /contact.html
+          - link "Privacy" [ref=f21e418] [cursor=pointer]:
+            - /url: /privacy.html
+          - link "Voorwaarden" [ref=f21e419] [cursor=pointer]:
+            - /url: /voorwaarden.html
+  - button "💬 Feedback geven" [ref=f21e421] [cursor=pointer]:
+    - generic [ref=f21e422]: 💬
+    - generic [ref=f21e423]: Feedback geven
+  - toolbar "Feedbackmodus":
+    - button "❓"
+    - button "📋 0":
+      - text: 📋
+      - generic: "0"
+    - button "Versturen naar Jip"
+    - button "Feedbackmodus sluiten (je feedback blijft bewaard)": ✕
+  - generic:
+    - button "✓ Opslaan"
+    - button "Annuleren"
+    - button "💬 Opmerking"
