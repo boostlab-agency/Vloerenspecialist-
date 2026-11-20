@@ -337,5 +337,5 @@ html.is-intro .pr-hero-media > img { animation-play-state: paused; }
    lange woorden als "Plisségordijnen" of "Vloerbedekking" in één regel
    passen en niet buiten het scherm lopen. */
 @media (max-width: 420px) {
-  .pr-hero-head h1, .pr-hero-wide h1 { font-size: min(36px, 8.4vw); }
+  .pr-hero-head h1, .pr-hero-wide h1 { font-size: min(36px, 7.6vw); }
 }

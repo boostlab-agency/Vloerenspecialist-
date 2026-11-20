@@ -23,7 +23,8 @@ $FLOORS = @(
   @{ label = "Vloerbedekking"; href = "/vloeren/vloerbedekking.html" },
   @{ label = "Gietvloeren"; href = "/vloeren/gietvloer.html" },
   @{ label = "Hybride houtenvloeren"; href = "/vloeren/hybride-houtenvloer.html" },
-  @{ label = "Traprenovatie"; href = "/vloeren/traprenovatie.html" }
+  @{ label = "Traprenovatie"; href = "/vloeren/traprenovatie.html" },
+  @{ label = "Totaalverbouwing"; href = "/vloeren/totaalverbouwing.html" }
 )
 $INTERIOR = @(
   @{ label = "Interieur op maat"; href = "/interieur/index.html" },

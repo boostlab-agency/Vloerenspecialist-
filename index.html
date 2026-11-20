@@ -30,7 +30,7 @@
 <script src="/assets/js/modules/feedback-mode.js" defer></script>
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
-<script src="/assets/js/modules/hero-video.js" defer></script>
+<script src="/assets/js/modules/hero-photos.js" defer></script>
 <script src="/assets/js/modules/home-motion.js" defer></script>
 <script src="/assets/js/modules/depth.js" defer></script>
 <script src="/assets/js/modules/quotes.js" defer></script>
@@ -44,39 +44,29 @@
 
 <main id="main">
 
-  <!-- 1 · Hero: een korte "film" van sfeerclips (naar knulst.nl), beeldvullend.
-       Rustig en groot: alleen een verticale regel en rechtsonder klikbare
-       hoofdstukken met een lijntje dat meeloopt. Aansturing: assets/js/modules/hero-video.js.
-       CONCEPT: tijdelijke stockclips (Pexels). Vervangen door eigen showroombeelden:
-       pas per hoofdstuk data-hd / data-sd aan. -->
+  <!-- 1 · Hero: foto's die rustig in elkaar overvloeien (feedback 20 nov.: foto's
+       i.p.v. film). Rechtsonder klikbare hoofdstukken met een lijntje dat
+       meeloopt; pauzeknop. Aansturing: assets/js/modules/hero-photos.js.
+       CONCEPT: tijdelijke foto's. Vervangen door eigen showroom-/projectfoto's:
+       per hoofdstuk één <img class="h-film-clip"> in dezelfde volgorde. -->
   <section class="h-hero h-film" data-review-id="hero" data-review-label="Hero">
     <div class="wrap h-hero-inner">
       <div class="h-hero-media is-video" data-film>
-        <video class="h-film-clip is-on" muted loop playsinline preload="auto" aria-hidden="true"></video>
-        <video class="h-film-clip" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <img class="h-film-clip is-on" src="https://images.pexels.com/photos/5982764/pexels-photo-5982764.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=2200" width="2200" height="1251" alt="" fetchpriority="high">
+        <img class="h-film-clip" src="/assets/img/real/tapijt-pouf-1-1800.jpg" srcset="/assets/img/real/tapijt-pouf-1-900.jpg 900w, /assets/img/real/tapijt-pouf-1-1800.jpg 1800w" sizes="100vw" width="1800" height="1200" alt="" loading="lazy">
+        <img class="h-film-clip" src="/assets/img/real/visgraat-kastenwand-1800.jpg" srcset="/assets/img/real/visgraat-kastenwand-900.jpg 900w, /assets/img/real/visgraat-kastenwand-1800.jpg 1536w" sizes="100vw" width="1536" height="1152" alt="" loading="lazy">
+        <img class="h-film-clip" src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?q=78&amp;auto=format&amp;fit=crop&amp;w=2200" width="2200" height="1466" alt="" loading="lazy">
         <div class="h-film-shade" aria-hidden="true"></div>
         <p class="h-hero-vertical" aria-hidden="true">Vloeren &amp; interieur &middot; <strong>eigen vakmensen</strong></p>
-        <nav class="h-film-chapters" aria-label="Hoofdstukken van de film">
-          <button type="button" class="is-on" data-chapter
-                  data-hd="https://videos.pexels.com/video-files/7578546/7578546-hd_1920_1080_30fps.mp4"
-                  data-sd="https://videos.pexels.com/video-files/7578546/7578546-sd_960_540_30fps.mp4">
-            <span class="h-film-bar"><i></i></span><span class="h-film-label">Vloeren</span></button>
-          <button type="button" data-chapter
-                  data-hd="https://videos.pexels.com/video-files/5744424/5744424-hd_1920_1080_30fps.mp4"
-                  data-sd="https://videos.pexels.com/video-files/5744424/5744424-sd_960_540_30fps.mp4">
-            <span class="h-film-bar"><i></i></span><span class="h-film-label">Raamdecoratie</span></button>
-          <button type="button" data-chapter
-                  data-hd="https://videos.pexels.com/video-files/10135156/10135156-hd_1920_1080_30fps.mp4"
-                  data-sd="https://videos.pexels.com/video-files/10135156/10135156-sd_960_540_30fps.mp4">
-            <span class="h-film-bar"><i></i></span><span class="h-film-label">Interieur op maat</span></button>
-          <button type="button" data-chapter
-                  data-hd="https://videos.pexels.com/video-files/6583396/6583396-hd_2048_1080_25fps.mp4"
-                  data-sd="https://videos.pexels.com/video-files/6583396/6583396-sd_960_506_25fps.mp4">
-            <span class="h-film-bar"><i></i></span><span class="h-film-label">In de showroom</span></button>
+        <nav class="h-film-chapters" aria-label="Foto's in de kop">
+          <button type="button" class="is-on" data-chapter><span class="h-film-bar"><i></i></span><span class="h-film-label">Vloeren</span></button>
+          <button type="button" data-chapter><span class="h-film-bar"><i></i></span><span class="h-film-label">Raamdecoratie</span></button>
+          <button type="button" data-chapter><span class="h-film-bar"><i></i></span><span class="h-film-label">Interieur op maat</span></button>
+          <button type="button" data-chapter><span class="h-film-bar"><i></i></span><span class="h-film-label">In de showroom</span></button>
         </nav>
 
-        <p class="h-concept" role="note"><strong>Concept</strong> Hier komen beelden van jullie eigen showroom.</p>
-        <button class="h-video-toggle" type="button" aria-label="Pauzeer film" data-film-toggle>
+        <p class="h-concept" role="note"><strong>Concept</strong> Hier komen foto's van jullie eigen showroom en projecten.</p>
+        <button class="h-video-toggle" type="button" aria-label="Pauzeer de foto's" data-film-toggle>
           <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
           <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
         </button>
@@ -185,7 +175,7 @@
             <img src="https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="601" alt="Verlichte eikenhouten trap" loading="lazy">
             <span><small>Traprenovatie</small><b>Uw trap passend bij de vloer</b></span>
           </a>
-          <a class="h-spread-card" href="/contact.html">
+          <a class="h-spread-card" href="/vloeren/totaalverbouwing.html">
             <img src="https://images.pexels.com/photos/19050701/pexels-photo-19050701.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" alt="Sfeervolle woonruimte na een totaalverbouwing" loading="lazy">
             <span><small>Totaalverbouwing</small><b>Vloer, wand, raam en maatwerk in één hand</b></span>
           </a>

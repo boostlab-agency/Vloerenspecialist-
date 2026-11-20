@@ -1,0 +1,79 @@
+{
+  "file": "vloeren/totaalverbouwing.html",
+  "group": "vloeren",
+  "name": "Totaalverbouwing",
+  "title": "Totaalverbouwing",
+  "metaDesc": "Totaalverbouwing in Tilburg: oude vloer eruit, beton storten, egaliseren, vloerverwarming, nieuwe vloer en trap, en de afwerking van wand, raam en maatwerk. Eén aanspreekpunt en ons eigen team.",
+  "eyebrow": "Vloeren",
+  "h1": "Totaalverbouwing",
+  "vertical": "Totaalverbouwing",
+  "lead": "Van ondervloer tot afwerking in één hand. Wij halen uw oude vloer eruit, maken de ondergrond klaar en leggen de nieuwe vloer, en verzorgen daarna ook de trap, de wanden, de raamdecoratie en het maatwerk. Met één aanspreekpunt en ons eigen team.",
+  "heroImg": "https://images.pexels.com/photos/19050701/pexels-photo-19050701.jpeg",
+  "heroAlt": "Sfeervolle woonruimte na een totaalverbouwing",
+  "gallery": [
+    "/assets/img/real/visgraat-kastenwand-1800.jpg",
+    "/assets/img/real/meubels-op-maat-1600.jpg",
+    "/assets/img/real/gordijn-linnen-stoel-1800.jpg",
+    "/assets/img/real/visgraat-detail-1400.jpg",
+    "/assets/img/real/renostuc-bedroom-sage-1600.jpg",
+    "/assets/img/real/maatwerk-meubel-1400.jpg",
+    "/assets/img/real/tapijt-pouf-1-1800.jpg"
+  ],
+  "about": {
+    "eyebrow": "Over totaalverbouwing",
+    "h2": "Uw verbouwing in één hand",
+    "paras": [
+      "Een verbouwing bestaat uit veel stappen die precies op elkaar moeten aansluiten: de oude vloer eruit, de ondergrond recht, vloerverwarming erin, en daarna de vloer, de trap en de afwerking van wanden en ramen. Bij De Vloerenspecialist regelt ons eigen team dat van begin tot eind.",
+      "U heeft één aanspreekpunt en één planning. Zo hoeft u niet zelf verschillende vakmensen op elkaar af te stemmen, en sluit alles precies op elkaar aan.",
+      "In onze showroom van 1.800 m² kiest u vloer, trap, stoffen en behang naast elkaar, zodat u vooraf ziet hoe het geheel wordt."
+    ]
+  },
+  "types": {
+    "eyebrow": "Wat we voor u doen",
+    "h2": "Van ondervloer tot afwerking",
+    "text": "U kiest zelf welke onderdelen u bij ons onderbrengt. Wij stemmen de volgorde af, zodat niets op elkaar hoeft te wachten.",
+    "items": [
+      { "title": "Vloeren verwijderen", "text": "Wij halen uw oude vloer, tegels of vloerbedekking eruit, zodat de ondergrond klaar is voor de volgende stap.", "tags": ["Voorbereiding"] },
+      { "title": "Beton storten en egaliseren", "text": "Een vlakke, stevige ondergrond is de basis voor elke nieuwe vloer.", "tags": ["Ondergrond"] },
+      { "title": "Vloerverwarming", "text": "Vloerverwarming leggen voordat de nieuwe vloer erop komt. Wij adviseren welke vloeren daar geschikt voor zijn.", "tags": ["Comfort"] },
+      { "title": "Nieuwe vloer en trap", "text": "PVC, laminaat, visgraat, hout, tegels of gietvloer, met de trap in dezelfde uitstraling.", "tags": ["Vloeren", "Traprenovatie"], "href": "/vloeren/index.html", "more": "Bekijk alle vloeren", "img": "/assets/img/real/visgraat-detail-1400.jpg", "alt": "Lichte visgraatvloer" },
+      { "title": "Wand, raam en maatwerk", "text": "Renostuc, behang, raamdecoratie, maatwerkkasten en stalen deuren maken de ruimte af.", "tags": ["Afwerking"], "href": "/interieur/index.html", "more": "Meer over interieur op maat", "img": "/assets/img/real/visgraat-kastenwand-1800.jpg", "alt": "Eetkamer met visgraatvloer en een kastenwand op maat" }
+    ]
+  },
+  "feature": {
+    "eyebrow": "Eén aanspreekpunt",
+    "h2": "Alles in de juiste volgorde",
+    "text": "Eerst de ondergrond, dan de vloer, daarna de trap en de afwerking. Omdat alles via ons eigen team loopt, plannen wij de werkzaamheden zo dat ze naadloos op elkaar aansluiten.",
+    "img": "/assets/img/real/meubels-op-maat-1600.jpg",
+    "alt": "Woonkamer met een warme, kalkachtige wandafwerking"
+  },
+  "benefits": {
+    "h2": "Waarom uw verbouwing bij ons",
+    "items": [
+      { "title": "Eén aanspreekpunt", "text": "Van het eerste advies tot de oplevering." },
+      { "title": "Eigen vakmensen", "text": "Ons eigen team voert het werk uit." },
+      { "title": "Alles sluit aan", "text": "Ondergrond, vloer, trap en afwerking op elkaar afgestemd." },
+      { "title": "Kiezen in de showroom", "text": "1.800 m² met complete woonopstellingen." }
+    ]
+  },
+  "info": {
+    "h2": "Alles over een totaalverbouwing",
+    "rows": [
+      { "title": "Hoe verloopt een totaalverbouwing?", "paras": [
+        "U begint met een bezoek aan de showroom of een adviesgesprek. Daarna komen wij bij u thuis kijken en opmeten, en ontvangt u een offerte voor het hele traject. Na uw akkoord plannen wij de werkzaamheden in de juiste volgorde, van de ondergrond tot de afwerking."
+      ]},
+      { "title": "Kan ik ook een deel laten doen?", "paras": [
+        "Ja. Wilt u bijvoorbeeld alleen de ondergrond laten voorbereiden, of alleen een nieuwe vloer met trap, dan kan dat ook. Wij bespreken graag wat u nodig heeft."
+      ]},
+      { "title": "Wat kost een totaalverbouwing?", "paras": [
+        "De prijs hangt af van de oppervlakte, de staat van de ondergrond en uw keuzes voor vloer en afwerking. Na het opmeten ontvangt u een offerte op maat."
+      ]}
+    ]
+  },
+  "cta": {
+    "h2": "Plannen voor een verbouwing? Kom langs",
+    "text": "Bespreek uw plannen met onze adviseurs en kies vloer, trap en afwerking in de showroom. Neem gerust plattegronden of foto's van uw woning mee.",
+    "img": "https://images.unsplash.com/photo-1680503397644-bcd216845f26",
+    "alt": "Ruime showroom met vloeren en complete woonopstellingen"
+  }
+}
