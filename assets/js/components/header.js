@@ -43,7 +43,10 @@
             { label: "Vloerbedekking", desc: "Warm en geluiddempend", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1772563214602-3c6434766700", 160) },
             { label: "Gietvloer", desc: "Naadloos en modern", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1765728614529-4749706523d9", 160) },
             { label: "Hybride houtenvloer", desc: "Echt hout, waterbestendig", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef", 160) },
-            { label: "Traprenovatie", desc: "Uw trap passend bij de vloer", href: "/vloeren/traprenovatie.html", img: "https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg?auto=compress&cs=tinysrgb&w=320" }
+            { label: "Traprenovatie", desc: "Uw trap passend bij de vloer", href: "/vloeren/traprenovatie.html", img: "https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg?auto=compress&cs=tinysrgb&w=320" },
+            /* Feedback 20 nov.: totaalverbouwing in het menu. Nog geen eigen pagina,
+               daarom naar het blok "Van ondervloer tot afwerking" op de homepage. */
+            { label: "Totaalverbouwing", desc: "Van ondervloer tot afwerking in één hand", href: "/index.html#diensten" }
           ]
         }
       ]

@@ -422,7 +422,7 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 .h-services-head h2 { margin: 0; color: #fff; max-width: 18ch; }
 .h-services-head p { margin: 0 0 26px; font-size: 16px; line-height: 1.8; color: rgba(255,255,255,.8); max-width: 560px; }
 .btn-light { background: #fff; color: var(--ink); border-color: #fff; }
-.btn-light:hover { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.btn-light:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 .h-services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .h-service { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; color: #fff; background: #3a2f26; }
 .h-service-media, .h-service-media img { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -671,4 +671,95 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
   .h-section { padding-top: clamp(72px, 9.5vw, 136px); padding-bottom: clamp(72px, 9.5vw, 136px); }
   .h-spread { padding-bottom: clamp(72px, 9.5vw, 136px); }
   .h-visit { padding-bottom: clamp(72px, 9.5vw, 136px); }
+}
+
+/* ==========================================================================
+   Feedback 20 nov. 2026 (homepagina)
+   ========================================================================== */
+
+/* 1 · Hero-film: breedte blijft, hoogte ingeperkt */
+.h-film .h-hero-media { height: clamp(380px, 60vh, 600px); }
+@media (max-width: 900px) {
+  .h-film .h-hero-media { height: min(56vh, 480px); min-height: 340px; }
+}
+
+/* 2 · Welkom ("Van keuze tot oplevering"): beige vlak achter de tekst dat
+   over de foto heen loopt, voor meer dynamiek */
+#welkom .h-welcome-grid { align-items: center; }
+#welkom .h-welcome-copy {
+  position: relative; z-index: 2; max-width: 620px;
+  margin-left: calc(-1 * clamp(150px, 15vw, 260px));
+  padding: clamp(36px, 4vw, 64px);
+  background: var(--surface);
+  box-shadow: 0 40px 80px -44px rgba(39, 37, 33, .4);
+}
+#welkom .h-welcome-copy::before {
+  content: ""; position: absolute; left: 0; top: clamp(36px, 4vw, 64px); width: 3px; height: 54px; background: var(--brand);
+}
+@media (max-width: 900px) {
+  #welkom .h-welcome-grid { grid-template-columns: minmax(0, 1fr); }
+  #welkom .h-welcome-copy { margin: -70px 12px 0; max-width: none; padding: 30px 24px 32px; }
+  #welkom .h-welcome-copy::before { top: 30px; height: 44px; }
+}
+@media (max-width: 420px) {
+  #welkom .h-welcome-copy { padding: 28px 18px 30px; }
+  #welkom .h-welcome-copy .btn { padding: 14px 20px; white-space: normal; text-align: center; }
+}
+
+/* 5 · Minder witruimte na "Van ondervloer tot afwerking": het donkere vlak
+   sluit af, het volgende blok houdt zijn eigen ruimte (zoals elders) */
+#diensten.h-spread { padding-bottom: 0; }
+
+/* 8 · Showroom: zelfde donkere vlak als "Van ondervloer tot afwerking".
+   Grote foto, daaronder het vlak met tekst links en openingstijden + kaart rechts. */
+#showroom .h-visit-photo { height: clamp(320px, 42vw, 640px); }
+#showroom .h-visit-card {
+  width: auto; margin: 0; box-shadow: none;
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr);
+  grid-template-areas: "kop info" "label info" "tekst info" "status info" "knoppen info";
+  grid-template-rows: auto auto auto auto 1fr;
+  column-gap: clamp(40px, 6vw, 110px); align-items: start;
+  padding: clamp(56px, 7vw, 120px) clamp(28px, 6vw, 110px);
+  background: var(--espresso); color: #fff;
+}
+#showroom .h-visit-card > h2 { grid-area: kop; color: #fff; }
+#showroom .h-visit-card > .eyebrow { grid-area: label; color: #fff; }
+#showroom .h-visit-card > .eyebrow::after { background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.3) 26px); }
+#showroom .h-visit-card > p { grid-area: tekst; color: rgba(255,255,255,.82); max-width: 46ch; }
+#showroom .h-visit-card > .h-status { grid-area: status; justify-self: start; }
+#showroom .h-visit-card > .h-visit-info { grid-area: info; margin: 0; }
+#showroom .h-visit-card > .h-actions { grid-area: knoppen; margin-top: 30px; }
+/* Openingstijden op donker */
+#showroom .h-hours { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14); }
+#showroom .h-hours-title { color: #fff; }
+#showroom .h-hours .open-week-row { color: rgba(255,255,255,.72); }
+#showroom .h-hours .open-week-row.is-today { background: rgba(255,255,255,.1); color: #fff; }
+#showroom .h-hours .open-today-bar { background: rgba(255,255,255,.2); }
+#showroom .h-hours-note { color: rgba(255,255,255,.7) !important; }
+#showroom .h-hours-note a { color: #fff; }
+/* Kaart: dunne witte belijning eromheen, zoals op de showroompagina */
+#showroom .h-visit-map { outline: 1px solid rgba(255,255,255,.35); outline-offset: 10px; border-color: transparent; }
+/* Knoppen op donker: witte knop, tekstlink wit; hover rood */
+#showroom .h-actions .btn-primary { background: #fff; color: var(--ink); border-color: #fff; }
+#showroom .h-actions .btn-primary:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+#showroom .h-actions .btn-text { color: #fff; border-color: rgba(255,255,255,.6); }
+#showroom .h-actions .btn-text:hover { color: var(--brand); border-color: var(--brand); }
+@media (max-width: 1100px) {
+  #showroom .h-visit-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "kop" "label" "tekst" "status" "info" "knoppen";
+    grid-template-rows: none;
+  }
+  #showroom .h-visit-card > .h-visit-info { margin-top: 28px; }
+}
+@media (max-width: 760px) {
+  #showroom .h-visit-photo { height: 300px; }
+  #showroom .h-visit-card { margin: 0; padding: 44px 20px 40px; }
+}
+/* Showroom op donker: status leesbaar */
+#showroom .h-status, #showroom .h-status strong { color: #fff; }
+/* Welkom: foto hoger dan het beige vlak, zodat het vlak zichtbaar óver de foto ligt */
+@media (min-width: 901px) {
+  #welkom .h-welcome-media { aspect-ratio: 1 / 1.06; }
+  #welkom .h-welcome-copy { padding: clamp(32px, 3.4vw, 54px); }
 }

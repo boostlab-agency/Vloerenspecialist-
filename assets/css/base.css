@@ -98,13 +98,13 @@ main { display: block; }
   border: 1px solid transparent;
 }
 
-/* Hover: de knop wordt wit met een lichte zwarte rand. */
+/* Hover: alle knoppen kleuren huisstijlrood (feedback 20 nov.). */
 .btn-primary { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn-dark { background: var(--ink); color: #fff; border-color: var(--ink); }
-.btn-primary:hover, .btn-dark:hover, .btn-outline:hover { background: #fff; color: var(--ink); border-color: rgba(var(--accent-rgb), .28); }
+.btn-primary:hover, .btn-dark:hover, .btn-outline:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 
 .btn-ghost-light { border-color: rgba(255,255,255,.7); color: #fff; }
-.btn-ghost-light:hover { background: rgba(255,255,255,.14); border-color: #fff; }
+.btn-ghost-light:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
 
 .btn-outline { border-color: var(--ink); color: var(--ink); background: transparent; }
 
@@ -114,7 +114,7 @@ main { display: block; }
   font-size: 12px; font-weight: 500; letter-spacing: .6px; text-transform: uppercase;
   color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px;
 }
-.btn-text:hover { color: var(--ink-soft); border-color: var(--ink-soft); }
+.btn-text:hover { color: var(--brand); border-color: var(--brand); }
 .btn-text .arrow { transition: transform .2s var(--ease); }
 .btn-text:hover .arrow { transform: translateX(3px); color: var(--brand); }
 
@@ -124,7 +124,7 @@ main { display: block; }
 
 /* Bel-/WhatsApp-knop: duidelijk herkenbaar (icoon + tekst). */
 .btn-call { border-color: var(--line); color: var(--ink); background: var(--bg); }
-.btn-call:hover { border-color: var(--ink); }
+.btn-call:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
 .btn-call svg { flex: none; }
 .btn-whatsapp:hover { background: #25d366; border-color: #25d366; color: #0b2e1a; }
 
