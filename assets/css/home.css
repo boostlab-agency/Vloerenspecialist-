@@ -443,11 +443,10 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 .h-hours { margin: 4px 0 30px; padding: 22px 24px 18px; background: var(--bg); border: 1px solid var(--line); max-width: 420px; }
 .h-hours-title { margin: 0 0 10px; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 17px; color: var(--ink); }
 .h-hours .open-week-row { padding: 7px 10px; }
-/* Smalle telefoons: label "Vandaag" onder de dagnaam, zodat de tijd ernaast past. */
+/* Smalle telefoons: iets minder binnenmarge, zodat dag en tijd ruim naast elkaar
+   passen (het label "Vandaag" onder de dagnaam regelt base.css). */
 @media (max-width: 420px) {
   .h-hours { padding: 20px 14px 16px; }
-  .h-hours .open-week-row { grid-template-columns: minmax(0, 1fr) auto; }
-  .h-hours .open-week-row.is-today .d::after { display: table; margin: 4px 0 0; }
 }
 .h-hours-note { margin: 12px 0 0 !important; font-size: 13.5px !important; line-height: 1.5 !important; color: var(--ink-soft) !important; }
 .h-hours-note a { color: var(--ink); font-weight: 600; }

@@ -168,6 +168,11 @@ main { display: block; }
 .open-today-bar { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 4px; }
 .open-today-bar span { display: block; height: 100%; border-radius: 3px; background: #1fa855; }
 .open-week-row.is-closed-now .open-today-bar span { background: var(--ink-faint); }
+/* Smalle telefoons: label "Vandaag" onder de dagnaam, zodat de tijd ernaast past. */
+@media (max-width: 420px) {
+  .open-week-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .open-week-row.is-today .d::after { display: table; margin: 4px 0 0; }
+}
 
 /* Google Maps-kaartje: gewone, lichte kaart. De hele kaart is één link
    naar de routeplanner (de iframe zelf vangt geen klikken). */

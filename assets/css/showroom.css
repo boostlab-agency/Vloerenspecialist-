@@ -41,7 +41,7 @@
   .sr-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .sr-stat:nth-child(3) { padding-left: 0; border-left: 0; }
   .sr-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
-  .sr-visit-grid { grid-template-columns: 1fr; }
+  .sr-visit-grid { grid-template-columns: minmax(0, 1fr); }  /* minmax: kaart nooit breder dan het scherm */
   .sr-map { min-height: 300px; }
   .sr-steps-list { grid-template-columns: 1fr; }
 }

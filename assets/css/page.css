@@ -136,7 +136,7 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 
 /* ---- Contactpagina: formulier + sidebar ---- */
 .contact-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: start; }
-@media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 900px) { .contact-layout { grid-template-columns: minmax(0, 1fr); gap: 40px; } }  /* minmax: nooit breder dan het scherm */
 
 /* ---- Showroom-uren-kaart (hergebruikt op Showroom- en Contactpagina) ---- */
 .info-cards { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -152,6 +152,12 @@ html.reduced-motion .reveal { opacity: 1; transform: none; }
 .info-card .v a:hover { color: var(--accent); }
 .call-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
 .call-row .btn { white-space: normal; text-align: center; }
+/* Smalle telefoons: kaarten en knoppen iets compacter, zodat het e-mailadres
+   binnen het scherm past (anders horizontale scroll). */
+@media (max-width: 420px) {
+  .info-card { min-width: 0; padding: 22px 18px; }
+  .call-row .btn { padding: 14px 18px; overflow-wrap: anywhere; }
+}
 .contact-map { min-height: 220px; margin-bottom: 14px; }
 
 /* ---- FAQ (Contact) ---- */
