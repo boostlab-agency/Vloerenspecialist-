@@ -45,29 +45,34 @@ $MAATWERK = @(
 $U = "https://images.unsplash.com/photo-"
 $R = "/assets/img/real/"
 $POOLS = @{
+  # Beeldtaal (nov. 2026, zie moodboard "Beeldtaal Vloerenspecialist"): warm
+  # strijklicht, aardse tinten, materiaal in de hoofdrol. Geen koele,
+  # groothoekige catalogus- of vastgoedfoto's toevoegen.
   vloeren = @(
     "$($R)visgraat-detail-1400.jpg", "$($U)1724931498964-a1f392ba9ace", "$($R)visgraat-kastenwand-1800.jpg",
-    "$($U)1772797583328-f83bc3f94f80", "$($U)1787145879056-d02365c5b911", "$($U)1649083048381-520a5b3d91ff",
-    "$($U)1716315325541-776e39f9725f", "$($U)1584622781564-1d987f7333c1", "$($U)1560184897-1ee3713708ee",
-    "$($U)1708540084677-dc5838b37627", "$($U)1783125126583-9aba58ccb0ef", "$($U)1765728614529-4749706523d9",
-    "$($U)1684928364941-2158e071cdd6", "$($R)tapijt-pouf-1-1800.jpg"
+    "$($U)1785333765025-3796bb7d1ce2", "$($U)1722942117261-ec876f53cc5b", "$($U)1562582664-8a8803c031ca",
+    "$($U)1716315325541-776e39f9725f", "$($U)1560506267-6dcb84978bf6", "$($U)1586374574216-20c5d3a466ee",
+    "$($U)1722942116037-97e84b56c990", "$($U)1546940084-6333670a0666", "$($U)1767634920578-fec1a2580c00",
+    "$($U)1795239826280-855c34e787cb", "$($R)tapijt-pouf-1-1800.jpg"
   )
   behang = @(
-    "$($R)behang-woonkamer-1800.jpg", "$($R)maatwerk-meubel-1400.jpg", "$($R)renostuc-bedroom-sage-1600.jpg",
-    "$($U)1759774313806-7c564f3bd592", "$($R)renostuc-paneelwand-1800.jpg", "$($U)1783403716758-27e30a7976ca",
-    "$($R)renostuc-bedroom-brown-1600.jpg", "$($U)1695624794480-7449b7e5a0b4", "$($R)meubels-op-maat-1600.jpg"
+    "$($R)behang-woonkamer-1800.jpg", "$($U)1780672823907-07fb6661c31a", "$($R)renostuc-bedroom-sage-1600.jpg",
+    "$($U)1759774313806-7c564f3bd592", "$($R)renostuc-paneelwand-1800.jpg", "$($U)1783855844295-6a0bcd6de993",
+    "$($R)renostuc-bedroom-brown-1600.jpg", "$($U)1788927775194-70e9b280dd79", "$($U)1780672823896-fc266a8d5ecb",
+    "$($R)meubels-op-maat-1600.jpg"
   )
   raam = @(
     "$($R)gordijn-linnen-stoel-1800.jpg", "$($R)mv-dawn-1400.jpg", "$($R)gordijn-caramel-tapijt-1800.jpg",
     "$($R)gordijn-wit-sculptuur-1800.jpg", "$($R)raamdecoratie-woonkamer-1800.jpg",
     "$($R)gordijn-sheer-tapijt-blauw-1800.jpg", "$($R)mv-rose-1400.jpg", "$($R)gordijn-linnen-blauw-tapijt-1800.jpg",
-    "$($U)1609534117141-ff9f20450902", "$($U)1776261293170-66fd3b09273e", "$($U)1596275617740-a2ea3bf3aca9",
-    "$($U)1779078652928-6d941878d32e", "$($R)gordijn-velvet-zwart-1800.jpg"
+    "$($U)1682421938316-4b186e25174c", "$($U)1776972334786-ae17d81b4572", "$($U)1689155627959-03a8e553ef33",
+    "$($U)1761281946760-93237ce9e628", "$($U)1623658423238-8307df454e11", "$($R)gordijn-velvet-zwart-1800.jpg"
   )
   maatwerk = @(
     "$($R)kasten-garderobe-1800.jpg", "$($R)maatwerk-meubel-1400.jpg", "$($R)visgraat-kastenwand-1800.jpg",
-    "$($U)1717429541792-5c59021d6ceb", "$($R)meubels-op-maat-1600.jpg", "$($U)1721742151032-e0c159fe5097",
-    "$($R)renostuc-paneelwand-1800.jpg", "$($R)behang-woonkamer-1800.jpg", "$($R)visgraat-detail-1400.jpg"
+    "$($U)1779648596383-fc041f8bd4da", "$($R)meubels-op-maat-1600.jpg", "$($U)1727207334719-9b40e061e8a2",
+    "$($U)1752407828514-660d6945d392", "$($U)1721742151032-e0c159fe5097", "$($U)1737898422812-54c83e3811ff",
+    "$($R)renostuc-paneelwand-1800.jpg", "$($U)1668010794777-1f0d577a70af", "$($U)1760072513393-b9d81f65dd7e"
   )
 }
 
@@ -99,14 +104,34 @@ function Paras($list) { ($list | ForEach-Object { "<p>$_</p>" }) -join "`n      
 # - lokale foto's die in meerdere formaten bestaan (naam-900.jpg + naam-1800.jpg)
 #   krijgen srcset + sizes, zodat telefoons de kleine versie laden.
 # - sizes per plek in het sjabloon, gemeten op 390/600/820/1100/1440 px breed.
-Add-Type -AssemblyName System.Drawing
+# Breedte/hoogte uit de bestandskop lezen (JPEG/PNG), zodat het script ook
+# zonder System.Drawing draait (bijv. PowerShell op macOS/Linux).
+function ReadImageSize([string]$path) {
+  $b = [IO.File]::ReadAllBytes($path)
+  if ($b.Length -gt 24 -and $b[0] -eq 0x89 -and $b[1] -eq 0x50) {
+    return @((([int]$b[16] -shl 24) -bor ([int]$b[17] -shl 16) -bor ([int]$b[18] -shl 8) -bor $b[19]), (([int]$b[20] -shl 24) -bor ([int]$b[21] -shl 16) -bor ([int]$b[22] -shl 8) -bor $b[23]))
+  }
+  if ($b.Length -lt 4 -or $b[0] -ne 0xFF -or $b[1] -ne 0xD8) { return $null }
+  $i = 2
+  while ($i + 9 -lt $b.Length) {
+    if ([int]$b[$i] -ne 0xFF) { $i++; continue }
+    $m = $b[$i + 1]
+    if ($m -eq 0xD8 -or $m -eq 0x01 -or ($m -ge 0xD0 -and $m -le 0xD7) -or $m -eq 0xFF) { $i++; continue }
+    $len = ([int]$b[$i + 2] -shl 8) -bor $b[$i + 3]
+    if (($m -ge 0xC0 -and $m -le 0xCF) -and $m -ne 0xC4 -and $m -ne 0xC8 -and $m -ne 0xCC) {
+      return @((([int]$b[$i + 7] -shl 8) -bor $b[$i + 8]), (([int]$b[$i + 5] -shl 8) -bor $b[$i + 6]))
+    }
+    $i += 2 + $len
+  }
+  return $null
+}
 $REMOTE_DIMS = @{}
 (Get-Content (Join-Path $PSScriptRoot "image-sizes.json") -Raw -Encoding UTF8 | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $REMOTE_DIMS[$_.Name] = $_.Value }
 $LOCAL_DIMS = @{}
 function LocalDims([string]$url) {
   if (-not $LOCAL_DIMS.ContainsKey($url)) {
-    $f = Join-Path $Root ($url.TrimStart("/") -replace "/", "\")
-    if (Test-Path -LiteralPath $f) { $im = [System.Drawing.Image]::FromFile($f); $LOCAL_DIMS[$url] = @($im.Width, $im.Height); $im.Dispose() }
+    $f = Join-Path $Root $url.TrimStart("/")
+    if (Test-Path -LiteralPath $f) { $LOCAL_DIMS[$url] = ReadImageSize $f }
     else { $LOCAL_DIMS[$url] = $null }
   }
   return $LOCAL_DIMS[$url]
@@ -126,7 +151,7 @@ function Variants([string]$url) {
   # Alleen versies met een echt andere breedte tellen mee: sommige "-1800"
   # bestanden zijn even groot als hun "-900" broertje; dan geen srcset.
   $widths = @{}
-  return @(Get-ChildItem -LiteralPath (Join-Path $Root "assets\img\real") -Filter "$name-*.jpg" |
+  return @(Get-ChildItem -LiteralPath (Join-Path $Root "assets/img/real") -Filter "$name-*.jpg" |
     Where-Object { $_.Name -match ("^" + [regex]::Escape($name) + "-\d+\.jpg$") } |
     ForEach-Object { "/assets/img/real/$($_.Name)" } |
     Sort-Object @{ Expression = { (LocalDims $_)[0] } }, @{ Expression = { $_ -ne $url } } |

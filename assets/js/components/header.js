@@ -37,12 +37,12 @@
           title: "Vloertypes",
           links: [
             { label: "PVC vloeren", desc: "Waterbestendig en onderhoudsarm", href: "/vloeren/pvc.html", img: img("https://images.unsplash.com/photo-1716315325541-776e39f9725f", 160) },
-            { label: "Houten vloeren", desc: "Tijdloos en ambachtelijk", href: "/vloeren/hout.html", img: img("https://images.unsplash.com/photo-1772797583328-f83bc3f94f80", 160) },
-            { label: "Laminaat", desc: "Slim geprijsd, snel gelegd", href: "/vloeren/laminaat.html", img: img("https://images.unsplash.com/photo-1560184897-1ee3713708ee", 160) },
-            { label: "Tegelvloer", desc: "Duurzaam en slijtvast", href: "/vloeren/tegelvloer.html", img: img("https://images.unsplash.com/photo-1708540084677-dc5838b37627", 160) },
-            { label: "Vloerbedekking", desc: "Warm en geluiddempend", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1772563214602-3c6434766700", 160) },
-            { label: "Gietvloer", desc: "Naadloos en modern", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1765728614529-4749706523d9", 160) },
-            { label: "Hybride houtenvloer", desc: "Echt hout, waterbestendig", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1783125126583-9aba58ccb0ef", 160) },
+            { label: "Houten vloeren", desc: "Tijdloos en ambachtelijk", href: "/vloeren/hout.html", img: img("https://images.unsplash.com/photo-1785333765025-3796bb7d1ce2", 160) },
+            { label: "Laminaat", desc: "Slim geprijsd, snel gelegd", href: "/vloeren/laminaat.html", img: img("https://images.unsplash.com/photo-1560506267-6dcb84978bf6", 160) },
+            { label: "Tegelvloer", desc: "Duurzaam en slijtvast", href: "/vloeren/tegelvloer.html", img: img("https://images.unsplash.com/photo-1767634920578-fec1a2580c00", 160) },
+            { label: "Vloerbedekking", desc: "Warm en geluiddempend", href: "/vloeren/vloerbedekking.html", img: img("https://images.unsplash.com/photo-1636482912307-289591870bb3", 160) },
+            { label: "Gietvloer", desc: "Naadloos en modern", href: "/vloeren/gietvloer.html", img: img("https://images.unsplash.com/photo-1795239826280-855c34e787cb", 160) },
+            { label: "Hybride houtenvloer", desc: "Echt hout, waterbestendig", href: "/vloeren/hybride-houtenvloer.html", img: img("https://images.unsplash.com/photo-1586374574216-20c5d3a466ee", 160) },
             { label: "Traprenovatie", desc: "Uw trap passend bij de vloer", href: "/vloeren/traprenovatie.html", img: "https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg?auto=compress&cs=tinysrgb&w=320" },
             { label: "Totaalverbouwing", desc: "Van ondervloer tot afwerking in één hand", href: "/vloeren/totaalverbouwing.html" }
           ]
@@ -71,7 +71,7 @@
             { label: "Fotobehang", desc: "Eén wand als statement", href: "/interieur/fotobehang.html", img: img("https://images.unsplash.com/photo-1759774313806-7c564f3bd592", 160) },
             { label: "Papierbehang", desc: "Tijdloos, ademend en natuurlijk", href: "/interieur/papierbehang.html", img: img("https://images.unsplash.com/photo-1783403716758-27e30a7976ca", 160) },
             { label: "Vinylbehang", desc: "Sterk en afwasbaar", href: "/interieur/vinylbehang.html", img: "/assets/img/real/behang-woonkamer-900.jpg" },
-            { label: "Vliesbehang", desc: "Scheurvast en snel aangebracht", href: "/interieur/vliesbehang.html", img: img("https://images.unsplash.com/photo-1695624794480-7449b7e5a0b4", 160) },
+            { label: "Vliesbehang", desc: "Scheurvast en snel aangebracht", href: "/interieur/vliesbehang.html", img: img("https://images.unsplash.com/photo-1780672823907-07fb6661c31a", 160) },
             { label: "Renostuc", desc: "Strakke muren zonder stucwerk", href: "/interieur/renostuc.html", img: "/assets/img/real/renostuc-bedroom-sage-1600.jpg" }
           ]
         }
@@ -83,9 +83,9 @@
         {
           title: "Soorten raamdecoratie",
           links: [
-            { label: "Jaloezieën", desc: "Bepaal precies licht en inkijk", href: "/interieur/jaloezieen.html", img: img("https://images.unsplash.com/photo-1609534117141-ff9f20450902", 160) },
+            { label: "Jaloezieën", desc: "Bepaal precies licht en inkijk", href: "/interieur/jaloezieen.html", img: img("https://images.unsplash.com/photo-1776972334786-ae17d81b4572", 160) },
             { label: "Rolgordijnen", desc: "Lichtdoorlatend of verduisterend", href: "/interieur/rolgordijnen.html", img: img("https://images.unsplash.com/photo-1776261293170-66fd3b09273e", 160) },
-            { label: "Plisségordijnen", desc: "Past in lastige raamvormen", href: "/interieur/plissegordijnen.html", img: img("https://images.unsplash.com/photo-1596275617740-a2ea3bf3aca9", 160) },
+            { label: "Plisségordijnen", desc: "Past in lastige raamvormen", href: "/interieur/plissegordijnen.html", img: img("https://images.unsplash.com/photo-1682421938316-4b186e25174c", 160) },
             { label: "Vouwgordijnen", desc: "Zachte plooien, warm afgewerkt", href: "/interieur/vouwgordijnen.html", img: img("https://images.unsplash.com/photo-1779078652928-6d941878d32e", 160) }
           ]
         }

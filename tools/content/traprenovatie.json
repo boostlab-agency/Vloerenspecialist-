@@ -11,10 +11,10 @@
   "heroImg": "https://images.pexels.com/photos/6032422/pexels-photo-6032422.jpeg",
   "heroAlt": "Verlichte eikenhouten trap in een moderne woning",
   "gallery": [
-    "https://images.pexels.com/photos/4577688/pexels-photo-4577688.jpeg",
-    "https://images.pexels.com/photos/922793/pexels-photo-922793.jpeg",
+    "https://images.unsplash.com/photo-1653520108022-329b0f64e08f",
+    "https://images.unsplash.com/photo-1732321221818-3bb8fdd9052d",
     "https://images.pexels.com/photos/15758635/pexels-photo-15758635.jpeg",
-    "https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg",
+    "https://images.unsplash.com/photo-1607950001102-db839cced647",
     "https://images.pexels.com/photos/3805102/pexels-photo-3805102.jpeg"
   ],
   "about": {
@@ -33,7 +33,7 @@
     "items": [
       { "title": "PVC traprenovatie", "text": "Slijtvast, stil en eenvoudig schoon te houden. Mooi in combinatie met een PVC vloer in dezelfde kleur.", "tags": ["Stil", "Onderhoudsarm"], "img": "https://images.pexels.com/photos/15758635/pexels-photo-15758635.jpeg", "alt": "Trap met houtlook treden en witte spijlen" },
       { "title": "Laminaat traprenovatie", "text": "Een sterke, voordelige afwerking met een houtlook die aansluit op uw laminaatvloer.", "tags": ["Voordelig"], "img": "https://images.pexels.com/photos/3805102/pexels-photo-3805102.jpeg", "alt": "Trappenhuis met houten treden van bovenaf" },
-      { "title": "Houten traptreden", "text": "De warme uitstraling van echt hout, passend bij een houten of hybride houtenvloer.", "tags": ["Echt hout"], "img": "https://images.pexels.com/photos/922793/pexels-photo-922793.jpeg", "alt": "Rechte trap met houten treden" },
+      { "title": "Houten traptreden", "text": "De warme uitstraling van echt hout, passend bij een houten of hybride houtenvloer.", "tags": ["Echt hout"], "img": "https://images.unsplash.com/photo-1732321221818-3bb8fdd9052d", "alt": "Eikenhouten traptreden langs een witte wand" },
       { "title": "Trap met tapijt", "text": "Zacht onder de voeten en geluiddempend. Prettig in huizen met kinderen.", "tags": ["Zacht", "Geluiddempend"] }
     ]
   },
@@ -41,8 +41,8 @@
     "eyebrow": "Eén geheel",
     "h2": "Vloer en trap in dezelfde uitstraling",
     "text": "Kiest u een nieuwe vloer, dan nemen we de trap graag mee. Zo loopt de vloer van de woonkamer door tot boven aan de trap, met afwerking en neuzen die precies passen.",
-    "img": "https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg",
-    "alt": "Lichte woonruimte met houten trap en eettafel"
+    "img": "https://images.unsplash.com/photo-1607950001102-db839cced647",
+    "alt": "Gebogen houten trap met een strakke leuning"
   },
   "benefits": {
     "h2": "Waarom uw trap renoveren",
