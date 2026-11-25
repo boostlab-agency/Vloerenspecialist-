@@ -1022,3 +1022,23 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
   .h-loc-hours .open-week-row.is-today { border-left: 2px solid var(--brand); }
   .h-loc-credit { padding: 0 20px; text-align: left; }
 }
+
+/* Showroom: kaart randloos over de hele paginabreedte (feedback 25 nov., 4).
+   Tekst, velden en kaartje op dezelfde lijn als de rest van de pagina. */
+@media (min-width: 761px) {
+  .h-loc-wrap { max-width: none; padding: 0; }
+  .h-loc-stage { height: clamp(600px, 46vw, 860px); }
+  .h-loc-map { object-position: 62% 50%; }
+  .h-loc-copy {
+    max-width: none; width: calc(max(var(--gutter), (100% - var(--container)) / 2 + var(--gutter)) + 560px);
+    padding-left: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+    padding-right: 0;
+  }
+  .h-loc-fade {
+    background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.95) calc(max(var(--gutter), (100% - var(--container)) / 2) + 420px), rgba(255,255,255,.55) calc(max(var(--gutter), (100% - var(--container)) / 2) + 640px), rgba(255,255,255,0) calc(max(var(--gutter), (100% - var(--container)) / 2) + 900px));
+  }
+  .h-loc-hours, .h-loc-credit {
+    max-width: calc(var(--container) + 2 * var(--gutter)); margin-left: auto; margin-right: auto;
+    padding-left: var(--gutter); padding-right: var(--gutter);
+  }
+}
