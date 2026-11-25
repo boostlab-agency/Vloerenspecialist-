@@ -1042,3 +1042,47 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
     padding-left: var(--gutter); padding-right: var(--gutter);
   }
 }
+
+/* ==========================================================================
+   Eén paginabreedte op de homepage (feedback 25 nov., 5): alle blokken lijnen
+   uit met de hero. "Van ondervloer tot afwerking" even breed als de hero en
+   groter van opbouw. Alleen vanaf tablet; mobiel blijft zoals het was.
+   ========================================================================== */
+:root { --frame: clamp(16px, 2.4vw, 44px); }
+@media (min-width: 761px) {
+  body[data-page="home"] main .wrap,
+  body[data-page="home"] #vloeren .wrap,
+  body[data-page="home"] #interieur .wrap,
+  body[data-page="home"] .h-start-sec .wrap { max-width: none; padding-left: var(--frame); padding-right: var(--frame); }
+
+  /* Welkom: foto blijft tot de schermrand lopen */
+  #welkom .h-welcome-media { margin-left: calc(-1 * var(--frame)); }
+
+  /* Van ondervloer tot afwerking: zelfde breedte als de hero, groter */
+  .h-spread-wrap, .h-visit-wrap { max-width: none; padding-left: var(--frame); padding-right: var(--frame); }
+  #diensten .h-spread-photo { height: clamp(380px, 40vw, 780px); }
+  #diensten .h-spread-panel {
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.5fr); gap: clamp(48px, 6vw, 140px);
+    padding: clamp(64px, 7vw, 150px) clamp(32px, 6vw, 150px);
+  }
+  #diensten .h-spread-copy h2 { font-size: clamp(36px, 3.4vw, 64px); line-height: 1.05; }
+  #diensten .h-spread-copy p { font-size: 17.5px; max-width: 44ch; }
+  #diensten .h-spread-copy .h-spread-also { font-size: 15px; }
+  #diensten .h-spread-cards { gap: 16px; }
+  #diensten .h-spread-card span { left: 26px; right: 26px; bottom: 26px; gap: 6px; }
+  #diensten .h-spread-card small { font-size: 16px; }
+  #diensten .h-spread-card b { font-size: 15px; }
+
+  /* Showroom: tekst en openingstijden op dezelfde lijn */
+  .h-loc-copy { padding-left: var(--frame); width: calc(var(--frame) + 560px); }
+  .h-loc-fade {
+    background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.95) calc(var(--frame) + 440px), rgba(255,255,255,.55) calc(var(--frame) + 660px), rgba(255,255,255,0) calc(var(--frame) + 920px));
+  }
+  .h-loc-hours, .h-loc-credit { max-width: none; padding-left: var(--frame); padding-right: var(--frame); }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  #diensten .h-spread-panel { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  #welkom .h-welcome-media { margin-left: calc(-1 * var(--frame)); margin-right: calc(-1 * var(--frame)); }
+}
