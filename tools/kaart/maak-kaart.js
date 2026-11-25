@@ -3,18 +3,20 @@
 // Gegevens ophalen (in deze map, niet in git):
 //   osm.json   - straten via Overpass (OpenStreetMap), bbox 51.508,4.890,51.608,5.226:
 //                highway (motorway t/m living_street), railway=rail, waterway=canal|river; "out geom"
-//   route.json - OSRM: https://router.project-osrm.org/route/v1/driving/5.0838,51.5605;5.111179,51.5655119?overview=full&geometries=geojson
 // Daarna:  node tools/kaart/maak-kaart.js assets/img/kaart-showroom.svg
 // Kaartgegevens (c) OpenStreetMap-bijdragers (ODbL); vermelding staat onder de kaart.
 const fs = require('fs'), path = require('path');
 const dir = __dirname;
 const osm = JSON.parse(fs.readFileSync(path.join(dir, 'osm.json')));
-const route = JSON.parse(fs.readFileSync(path.join(dir, 'route.json'))).routes[0];
 const out = process.argv[2];
 
 const W = 1600, H = 720;
-// Kaartvlak (ver uitgezoomd, feedback 25 nov.): vrijwel heel Tilburg, route klein rechts.
-const lonMin = 4.898, lonMax = 5.218, latMin = 51.5132, latMax = 51.6029;
+// Kaartvlak: vrijwel heel Tilburg, de showroom op 70% van de breedte en 48% van de
+// hoogte (daar zet de pagina de stip neer; zie .h-loc-pin in home.css).
+const SHOWROOM = { lon: 5.111179, lat: 51.5655119, fx: 0.70, fy: 0.48 };
+const lonSpan = 0.32, latSpan = 0.0897;
+const lonMin = SHOWROOM.lon - SHOWROOM.fx * lonSpan, lonMax = lonMin + lonSpan;
+const latMax = SHOWROOM.lat + SHOWROOM.fy * latSpan, latMin = latMax - latSpan;
 const X = lon => (lon - lonMin) / (lonMax - lonMin) * W;
 const Y = lat => (latMax - lat) / (latMax - latMin) * H;
 const r1 = n => Math.round(n * 10) / 10;
@@ -98,16 +100,8 @@ for (const c of cands) {
   if (labels.length >= 18) break;
 }
 
-// Route en markeringen
-const rp = route.geometry.coordinates.map(([lon, lat]) => [X(lon), Y(lat)]);
-const routeD = 'M' + rp.map(([x, y]) => r1(x) + ' ' + r1(y)).join('L');
-let rlen = 0; for (let i = 1; i < rp.length; i++) rlen += Math.hypot(rp[i][0] - rp[i - 1][0], rp[i][1] - rp[i - 1][1]);
-const [sx, sy] = rp[0];
-const [ex, ey] = [X(5.111179), Y(51.5655119)];
-const tagX = ex - 150, tagY = ey - 52;
-
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaart met de route van Tilburg Centraal naar de showroom aan de Jules Verneweg 7a in Tilburg">
-<!-- Kaartgegevens © OpenStreetMap-bijdragers (ODbL); route via OSRM. Gemaakt door tools/kaart (zie commit). -->
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaart van Tilburg met de ligging van de showroom aan de Jules Verneweg 7a">
+<!-- Kaartgegevens © OpenStreetMap-bijdragers (ODbL); Gemaakt door tools/kaart (zie commit). -->
 <style>
 .bg{fill:#f3f3f1}
 .water{fill:none;stroke:#e1e6e8;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
@@ -119,22 +113,6 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" pre
 .c-maj{stroke-width:5.4}.f-maj{stroke-width:3.8}
 .c-mid{stroke-width:3.6}.f-mid{stroke-width:2.2}
 .lbl text{font:500 13px "Work Sans",Helvetica,Arial,sans-serif;fill:#a8a8a4;text-anchor:middle;letter-spacing:.02em}
-.glow{fill:none;stroke:#e20e18;stroke-opacity:.12;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
-.route{fill:none;stroke:#e20e18;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:${Math.ceil(rlen)};stroke-dashoffset:0}
-.ring{fill:#e20e18;fill-opacity:.1}
-.pulse{fill:none;stroke:#e20e18;stroke-opacity:.35;stroke-width:1.2;transform-box:fill-box;transform-origin:center}
-.dot{fill:#e20e18;stroke:#fff;stroke-width:2.4}
-.tag rect{fill:#fff;stroke:#e20e18;stroke-opacity:.45}
-.tag text{font:600 10.5px "Work Sans",Helvetica,Arial,sans-serif;letter-spacing:.18em;fill:#e20e18}
-.lead{fill:none;stroke:#e20e18;stroke-width:1.8;stroke-dasharray:1 5;stroke-linecap:round}
-.from text{font:600 10px "Work Sans",Helvetica,Arial,sans-serif;letter-spacing:.16em;fill:#8a8a86}
-@media (prefers-reduced-motion:no-preference){
-  .route{animation:draw 2.6s .4s cubic-bezier(.6,0,.2,1) both}
-  .pulse{animation:pulse 2.4s ease-out infinite}
-  .pulse.b{animation-delay:1.2s}
-}
-@keyframes draw{from{stroke-dashoffset:${Math.ceil(rlen)}}to{stroke-dashoffset:0}}
-@keyframes pulse{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
 </style>
 <rect class="bg" width="${W}" height="${H}"/>
 <path class="water" d="${paths.water.join('')}"/>
@@ -143,14 +121,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" pre
 <path class="c-mid" d="${paths.mid.join('')}"/><path class="c-maj" d="${paths.maj.join('')}"/><path class="c-mot" d="${paths.mot.join('')}"/>
 <path class="f-mid" d="${paths.mid.join('')}"/><path class="f-maj" d="${paths.maj.join('')}"/><path class="f-mot" d="${paths.mot.join('')}"/>
 <g class="lbl">${labels.join('')}</g>
-<path class="glow" d="${routeD}"/>
-<path class="route" d="${routeD}"/>
-<g transform="translate(${r1(sx)} ${r1(sy)})"><circle class="ring" r="11"/><circle class="pulse" r="11"/><circle class="dot" r="4.5"/></g>
-<g class="from" transform="translate(${r1(sx)} ${r1(sy + 26)})"><text text-anchor="middle">TILBURG CENTRAAL</text></g>
-<g transform="translate(${r1(ex)} ${r1(ey)})"><circle class="ring" r="14"/><circle class="pulse" r="14"/><circle class="pulse b" r="14"/><circle class="dot" r="5.5"/></g>
-<path class="lead" d="M${r1(tagX + 104)} ${r1(tagY + 13)}L${r1(ex - 7)} ${r1(ey - 4)}"/>
-<g class="tag" transform="translate(${r1(tagX)} ${r1(tagY)})"><rect width="104" height="26" x=".5" y=".5"/><text x="52" y="17" text-anchor="middle">SHOWROOM</text></g>
 </svg>
 `;
 fs.writeFileSync(out, svg);
-console.log('labels', labels.length, '| routelengte', Math.round(rlen), 'px | start', r1(sx), r1(sy), '| eind', r1(ex), r1(ey), '| grootte', Math.round(svg.length / 1024), 'KB');
+console.log('labels', labels.length, '| showroom op', r1(X(SHOWROOM.lon)), r1(Y(SHOWROOM.lat)), '| grootte', Math.round(svg.length / 1024), 'KB');

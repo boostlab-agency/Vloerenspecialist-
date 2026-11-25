@@ -252,16 +252,35 @@
     </div>
   </section>
 
-  <!-- 7 · Showroom (slotblok, feedback 25 nov., ref. "app-kaart"): eigen lichte
-       vectorkaart als achtergrond (assets/img/kaart-showroom.svg, OpenStreetMap +
-       echte route vanaf Tilburg Centraal), tekst links op een witte overloop,
-       routevelden die Google Maps openen, en onderaan een kaartje met afstand,
-       parkeren en knop. Openingstijden als strook eronder. -->
+  <!-- 7 · Showroom (slotblok, ref. "app-kaart"): eigen lichte vectorkaart van
+       Tilburg (assets/img/kaart-showroom.svg, OpenStreetMap) met één stip op de
+       showroom. Over de stip bewegen (of tikken) toont adres en "Bekijk de route".
+       Tekst links op een witte overloop; routeveld opent Google Maps vanaf het
+       ingevulde adres. Openingstijden als strook eronder. -->
   <section class="h-loc" id="showroom" data-review-id="showroom" data-review-label="De showroom">
     <div class="h-loc-wrap">
       <div class="h-loc-stage">
-        <img class="h-loc-map" src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="Kaart met de route van Tilburg Centraal naar de showroom aan de Jules Verneweg 7a in Tilburg" loading="lazy">
+        <div class="h-loc-mapbox">
+          <div class="h-loc-canvas">
+            <img class="h-loc-map" src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="Kaart van Tilburg met de ligging van de showroom aan de Jules Verneweg 7a" loading="lazy">
+          </div>
+        </div>
         <span class="h-loc-fade" aria-hidden="true"></span>
+        <!-- Stip in een eigen laag boven de witte overloop, zelfde maatvoering als de kaart -->
+        <div class="h-loc-mapbox is-pins">
+          <div class="h-loc-canvas">
+            <div class="h-loc-pin" tabindex="0" aria-label="Showroom De Vloerenspecialist, Jules Verneweg 7a, Tilburg. Toon details">
+              <span class="h-loc-dot" aria-hidden="true"></span>
+              <span class="h-loc-tag" aria-hidden="true">Showroom</span>
+              <div class="h-loc-pop" role="group" aria-label="Showroom De Vloerenspecialist">
+                <p class="h-loc-pop-name">De Vloerenspecialist</p>
+                <p class="h-loc-pop-addr">Jules Verneweg 7a<br>5015 BD Tilburg</p>
+                <p class="h-loc-pop-meta">Showroom van 1.800 m² &middot; gratis parkeren</p>
+                <a class="h-loc-pop-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Bekijk de route <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="h-loc-copy">
           <h2>Kom langs in onze showroom</h2>
@@ -287,7 +306,7 @@
 
           <div class="h-loc-card">
             <dl>
-              <div><dt>Vanaf station</dt><dd>2,3 km</dd></div>
+              <div><dt>Adres</dt><dd>Jules Verneweg 7a</dd></div>
               <div><dt>Parkeren</dt><dd>Gratis</dd></div>
             </dl>
             <a class="btn btn-primary btn-sm" href="/showroom.html">Plan uw bezoek</a>

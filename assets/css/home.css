@@ -1102,3 +1102,80 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
     margin-right: calc(-1 * max(clamp(28px, 4vw, 64px), (100cqw - 1520px) / 2));
   }
 }
+
+/* ==========================================================================
+   Showroomkaart: één stip met details bij hover/tik (feedback 25 nov., 7)
+   Kaart en stip in twee lagen met dezelfde maatvoering (.h-loc-canvas, zelfde
+   verhouding als de SVG en "cover" over het vlak), zodat de stip altijd exact
+   op de showroom staat (70% / 48% van de kaart, zie tools/kaart).
+   ========================================================================== */
+.h-loc-mapbox { position: absolute; inset: 0; overflow: hidden; container-type: size; --fx: 62%; }
+.h-loc-mapbox.is-pins { z-index: 3; pointer-events: none; }
+.h-loc-canvas {
+  position: absolute; left: var(--fx); top: 50%;
+  width: max(100cqw, calc(100cqh * 1600 / 720)); aspect-ratio: 1600 / 720;
+  transform: translate(calc(-1 * var(--fx)), -50%);
+}
+.h-loc-canvas .h-loc-map { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; aspect-ratio: auto; }
+.h-loc-fade { z-index: 1; }
+.h-loc-copy { z-index: 2; }
+
+.h-loc-pin { position: absolute; left: 70%; top: 48%; width: 0; height: 0; pointer-events: auto; outline: none; cursor: pointer; }
+.h-loc-pin::before { content: ""; position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 50%; }
+.h-loc-dot {
+  position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--brand); box-shadow: 0 0 0 3px #fff, 0 4px 10px rgba(0,0,0,.22);
+}
+.h-loc-dot::after { content: ""; position: absolute; inset: -15px; border-radius: 50%; background: rgba(var(--brand-rgb), .08); }
+.h-loc-dot::before { content: ""; position: absolute; inset: -15px; border-radius: 50%; border: 1px solid rgba(var(--brand-rgb), .45); }
+@media (prefers-reduced-motion: no-preference) {
+  .h-loc-dot::before { animation: h-dotpulse 2.6s ease-out infinite; }
+}
+@keyframes h-dotpulse { 0% { transform: scale(.45); opacity: 1; } 100% { transform: scale(1.55); opacity: 0; } }
+.h-loc-pin:focus-visible .h-loc-dot { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--ink); }
+
+.h-loc-tag {
+  position: absolute; right: 16px; bottom: 14px; white-space: nowrap; padding: 5px 9px;
+  background: #fff; border: 1px solid rgba(var(--brand-rgb), .4);
+  font-size: 10.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--brand);
+  transition: opacity .2s;
+}
+.h-loc-pop {
+  position: absolute; left: 12px; bottom: 12px; width: 268px; padding: 18px 20px 16px;
+  background: #fff; border-radius: 8px; box-shadow: 0 22px 44px -18px rgba(0,0,0,.35);
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: opacity .2s ease, transform .25s var(--ease), visibility 0s .25s; cursor: default;
+}
+.h-loc-pin:hover .h-loc-pop, .h-loc-pin:focus .h-loc-pop, .h-loc-pin:focus-within .h-loc-pop {
+  opacity: 1; visibility: visible; transform: none; transition: opacity .2s ease, transform .25s var(--ease);
+}
+.h-loc-pin:hover .h-loc-tag, .h-loc-pin:focus .h-loc-tag, .h-loc-pin:focus-within .h-loc-tag { opacity: 0; }
+.h-loc-pop p { margin: 0; }
+.h-loc-pop-name { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px !important; }
+.h-loc-pop-addr { font-size: 14px; line-height: 1.5; color: var(--ink); }
+.h-loc-pop-meta { margin-top: 8px !important; font-size: 12.5px; color: var(--ink-soft); }
+.h-loc-pop-link {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px;
+}
+.h-loc-pop-link:hover { color: var(--brand); border-color: var(--brand); }
+
+@media (max-width: 760px) {
+  .h-loc-mapbox { position: relative; inset: auto; aspect-ratio: 4 / 3; --fx: 76%; }
+  .h-loc-mapbox.is-pins { position: absolute; top: 0; left: 0; right: 0; }
+  .h-loc-canvas .h-loc-map { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+  .h-loc-pop { left: auto; right: 12px; width: 236px; }
+}
+/* Kaartje altijd links van de stip openen (de stip staat rechts van het midden) */
+.h-loc-pop { left: auto; right: 12px; }
+@media (max-width: 760px) { .h-loc-pop { width: 216px; padding: 14px 16px 12px; } }
+@media (max-width: 760px) {
+  .h-loc-mapbox { aspect-ratio: 1 / 1; }
+  .h-loc-pop { top: 12px; bottom: auto; }
+}
+@media (max-width: 760px) { .h-loc-pop { top: 6px; padding-bottom: 10px; } .h-loc-pop-link { margin-top: 10px; } }
+@media (max-width: 760px) { .h-loc-mapbox { aspect-ratio: 1 / 1.1; } }
+/* Mobiel: stip op ~3/4 van de breedte, zodat het kaartje links ervan past */
+@media (max-width: 760px) { .h-loc-mapbox { --fx: 66%; } }
+@media (max-width: 400px) { .h-loc-mapbox { aspect-ratio: 1 / 1.25; } }
