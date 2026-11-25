@@ -763,3 +763,79 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
   #welkom .h-welcome-media { aspect-ratio: 1 / 1.06; }
   #welkom .h-welcome-copy { padding: clamp(32px, 3.4vw, 54px); }
 }
+
+/* ==========================================================================
+   Feedback 25 nov. 2026
+   ========================================================================== */
+
+/* Hero: op elk scherm dezelfde verhouding tot de kop eronder. De hoogte is de
+   schermhoogte min een vaste ruimte voor header en kop, zodat "Vloeren en
+   interieur op maat, onder één dak" altijd in beeld valt; nooit platter dan
+   nodig en nooit hoger dan 2,4 : 1. */
+@media (min-width: 901px) {
+  .h-film .h-hero-media {
+    height: clamp(320px, calc(100vh - 400px), calc((100vw - 88px) / 2.4));
+    height: clamp(320px, calc(100svh - 400px), calc((100vw - 88px) / 2.4));
+  }
+}
+/* Minder witruimte tussen hero en kop */
+.h-film .h-scroll { margin-top: 12px; }
+.h-statement { padding-top: clamp(20px, 2vw, 32px); }
+
+/* Van ondervloer tot afwerking + showroom: minder breed dan de hero,
+   in lijn met de rest van de pagina */
+.h-spread-wrap, .h-visit-wrap {
+  max-width: calc(var(--container) + 2 * clamp(28px, 5vw, 96px));
+  margin-left: auto; margin-right: auto;
+  padding-left: clamp(28px, 5vw, 96px); padding-right: clamp(28px, 5vw, 96px);
+}
+@media (max-width: 760px) {
+  .h-spread-wrap, .h-visit-wrap { padding-left: 0; padding-right: 0; }
+}
+
+/* Showroom: kaart en openingstijden rustiger en mooier.
+   Kaart bovenaan (breed, zachte kleuren, dunne lijn), daaronder de
+   openingstijden als strakke lijst in twee kolommen; vandaag uitgelicht. */
+#showroom .h-visit-info { display: flex; flex-direction: column; gap: 30px; }
+#showroom .h-visit-map {
+  order: -1; height: auto; min-height: 0; aspect-ratio: 16 / 7.5;
+  outline: 0; border: 1px solid rgba(255,255,255,.2);
+}
+#showroom .h-visit-map iframe { filter: grayscale(.45) contrast(.92) brightness(1.02); }
+#showroom .h-hours { margin: 0; padding: 0; max-width: none; background: none; border: 0; }
+#showroom .h-hours-title {
+  display: flex; align-items: center; gap: 16px; margin: 0 0 8px;
+  font-size: 18px; color: #fff;
+}
+#showroom .h-hours-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.22) 26px); }
+#showroom .h-hours .open-week {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: clamp(28px, 3vw, 48px);
+}
+#showroom .h-hours .open-week-row,
+#showroom .h-hours .open-week-row + .open-week-row {
+  margin: 0; padding: 12px 0; border-radius: 0; background: none;
+  border-bottom: 1px solid rgba(255,255,255,.1); font-size: 15px;
+}
+#showroom .h-hours .open-week-row.is-today { background: none; color: #fff; font-weight: 600; }
+#showroom .h-hours .open-week-row.is-today .d::before {
+  content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 10px;
+  background: var(--brand); transform: rotate(45deg) translateY(-2px);
+}
+#showroom .h-hours .open-week-row.is-today .d::after { background: var(--brand); }
+#showroom .h-hours .open-today-bar { display: none; }
+#showroom .h-hours-note { margin: 16px 0 0 !important; font-size: 14px !important; }
+@media (max-width: 560px) {
+  #showroom .h-hours .open-week { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+  #showroom .h-visit-map { aspect-ratio: 4 / 3; }
+}
+/* Laptops (lagere header): iets minder ruimte reserveren, zodat de hero
+   niet onnodig plat wordt */
+@media (min-width: 901px) and (max-width: 1599px) {
+  .h-film .h-hero-media {
+    height: clamp(320px, calc(100vh - 370px), calc((100vw - 88px) / 2.4));
+    height: clamp(320px, calc(100svh - 370px), calc((100vw - 88px) / 2.4));
+  }
+}
+/* Showroom: label "Vandaag" altijd onder de dagnaam (de kolommen zijn smal) */
+#showroom .h-hours .open-week-row.is-today .d::after { display: table; margin: 5px 0 0 16px; }
