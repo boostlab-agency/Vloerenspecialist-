@@ -13,11 +13,27 @@ const route = JSON.parse(fs.readFileSync(path.join(dir, 'route.json'))).routes[0
 const out = process.argv[2];
 
 const W = 1600, H = 720;
-const lonMin = 5.0405, lonMax = 5.1205, latMin = 51.5502, latMax = 51.5726;
+// Kaartvlak (uitgezoomd, feedback 25 nov.): route rechts, veel stad eromheen.
+const lonMin = 5.0095, lonMax = 5.1375, latMin = 51.5428, latMax = 51.5786;
 const X = lon => (lon - lonMin) / (lonMax - lonMin) * W;
 const Y = lat => (latMax - lat) / (latMax - latMin) * H;
 const r1 = n => Math.round(n * 10) / 10;
+const r0 = n => Math.round(n);
 const inView = pts => pts.some(([x, y]) => x > -60 && x < W + 60 && y > -60 && y < H + 60);
+// Lijn vereenvoudigen (Douglas-Peucker), op dit zoomniveau onzichtbaar maar
+// scheelt veel bestandsgrootte.
+function simplify(pts, tol) {
+  if (pts.length < 3) return pts;
+  const keep = new Array(pts.length).fill(false); keep[0] = keep[pts.length - 1] = true;
+  const stack = [[0, pts.length - 1]];
+  while (stack.length) {
+    const [a, b] = stack.pop(); let max = 0, idx = -1;
+    const [ax, ay] = pts[a], [bx, by] = pts[b], dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy) || 1;
+    for (let i = a + 1; i < b; i++) { const d = Math.abs(dy * pts[i][0] - dx * pts[i][1] + bx * ay - by * ax) / L; if (d > max) { max = d; idx = i; } }
+    if (max > tol) { keep[idx] = true; stack.push([a, idx], [idx, b]); }
+  }
+  return pts.filter((_, i) => keep[i]);
+}
 
 const cls = {
   motorway: 'maj', trunk: 'maj', primary: 'maj', secondary: 'maj',
@@ -30,7 +46,8 @@ for (const e of osm.elements) {
   if (!e.geometry) continue;
   const pts = e.geometry.map(g => [X(g.lon), Y(g.lat)]);
   if (!inView(pts)) continue;
-  const d = 'M' + pts.map(([x, y]) => r1(x) + ' ' + r1(y)).join('L');
+  const sp = simplify(pts, 0.7);
+  const d = 'M' + sp.map(([x, y]) => r0(x) + ' ' + r0(y)).join('L');
   const t = e.tags || {};
   let c = null;
   if (t.highway) c = cls[t.highway] || null;
@@ -92,13 +109,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" pre
 <!-- Kaartgegevens © OpenStreetMap-bijdragers (ODbL); route via OSRM. Gemaakt door tools/kaart (zie commit). -->
 <style>
 .bg{fill:#f3f3f1}
-.water{fill:none;stroke:#e1e6e8;stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
+.water{fill:none;stroke:#e1e6e8;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
 .rail{fill:none;stroke:#d9d9d6;stroke-width:2;stroke-dasharray:10 7}
 .c-maj,.c-mid,.c-min{fill:none;stroke:#dcdcd8;stroke-linecap:round;stroke-linejoin:round}
 .f-maj,.f-mid,.f-min{fill:none;stroke:#fdfdfc;stroke-linecap:round;stroke-linejoin:round}
-.c-maj{stroke-width:15}.f-maj{stroke-width:12}
-.c-mid{stroke-width:11}.f-mid{stroke-width:8.4}
-.c-min{stroke-width:7.4}.f-min{stroke-width:5.2}
+.c-maj{stroke-width:11}.f-maj{stroke-width:8.6}
+.c-mid{stroke-width:7.6}.f-mid{stroke-width:5.6}
+.c-min{stroke-width:4.6}.f-min{stroke-width:3.1}
 .lbl text{font:500 14px "Work Sans",Helvetica,Arial,sans-serif;fill:#a8a8a4;text-anchor:middle;letter-spacing:.02em}
 .glow{fill:none;stroke:#e20e18;stroke-opacity:.14;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
 .route{fill:none;stroke:#e20e18;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:${Math.ceil(rlen)};stroke-dashoffset:0}
