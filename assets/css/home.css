@@ -1086,3 +1086,19 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 @media (min-width: 761px) and (max-width: 900px) {
   #welkom .h-welcome-media { margin-left: calc(-1 * var(--frame)); margin-right: calc(-1 * var(--frame)); }
 }
+
+/* Blokken onder de hero iets minder breed dan de hero (feedback 25 nov., 6):
+   maximaal 1520px, gecentreerd, met ruimere marge op laptops. De hero houdt
+   zijn eigen breedte. */
+:root { --frame: max(clamp(28px, 4vw, 64px), calc((100% - 1520px) / 2)); }
+@media (min-width: 761px) {
+  /* Welkomstfoto loopt tot de schermrand: zelfde marge, gemeten t.o.v. de sectie */
+  #welkom { container-type: inline-size; }
+  #welkom .h-welcome-media { margin-left: calc(-1 * max(clamp(28px, 4vw, 64px), (100cqw - 1520px) / 2)); }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  #welkom .h-welcome-media {
+    margin-left: calc(-1 * max(clamp(28px, 4vw, 64px), (100cqw - 1520px) / 2));
+    margin-right: calc(-1 * max(clamp(28px, 4vw, 64px), (100cqw - 1520px) / 2));
+  }
+}
