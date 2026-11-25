@@ -82,18 +82,100 @@
     });
   }
 
-  /* Contactformulier: geen backend op deze statische site — toont een
-     duidelijke bevestiging i.p.v. een dode "Verstuur"-knop die niets doet. */
+  /* Contact- en afsprakenformulier: versturen naar /api/aanvraag (Vercel +
+     Resend). Lukt dat niet, dan tonen we telefoon en mail als terugval. */
   function initContactForm() {
-    var form = document.getElementById("contact-form");
-    if (!form) return;
+    // Contact- en afsprakenformulier: versturen via /api/aanvraag (Resend).
+    var forms = [document.getElementById("contact-form"), document.getElementById("appt-form")].filter(Boolean);
+    forms.forEach(initAanvraagForm);
+  }
+
+  function initAanvraagForm(form) {
+    var soort = form.getAttribute("data-aanvraag") || "contact";
+    var note = form.querySelector(".form-note") || document.getElementById("contact-form-note");
+    var dateInput = form.querySelector('input[name="datum"]');
+    var hint = form.querySelector(".appt-hint");
+    var middag = form.querySelector("[data-middag]");
+
+    if (dateInput) {
+      // Vroegst morgen, uiterlijk drie maanden vooruit (lokale datum).
+      var iso = function (d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); };
+      var t = new Date(); t.setDate(t.getDate() + 1);
+      if (t.getDay() === 0) t.setDate(t.getDate() + 1);
+      var max = new Date(); max.setMonth(max.getMonth() + 3);
+      dateInput.min = iso(t); dateInput.max = iso(max);
+      dateInput.addEventListener("change", function () { checkDate(); });
+    }
+
+    // Onderwerp vooraf aanvinken vanuit de link (?onderwerp=Vloeren) of de vorige pagina.
+    var pre = new URLSearchParams(location.search).get("onderwerp");
+    if (!pre && document.referrer.indexOf(location.origin) === 0) {
+      var ref = document.referrer.replace(location.origin, "");
+      if (/traprenovatie/.test(ref)) pre = "Traprenovatie";
+      else if (/^\/vloeren\//.test(ref)) pre = "Vloeren";
+      else if (/behang|renostuc/.test(ref)) pre = "Behang";
+      else if (/gordijn|jaloezie|raamdecoratie/.test(ref)) pre = "Raamdecoratie";
+      else if (/^\/interieur\//.test(ref)) pre = "Interieur op maat";
+    }
+    if (pre) {
+      form.querySelectorAll('input[name="onderwerp"]').forEach(function (c) { if (c.value.toLowerCase() === pre.toLowerCase()) c.checked = true; });
+    }
+
+    function checkDate() {
+      if (!dateInput || !dateInput.value) return !dateInput;
+      var d = new Date(dateInput.value + "T12:00:00");
+      var ok = d.getDay() !== 0 && (!dateInput.min || dateInput.value >= dateInput.min) && (!dateInput.max || dateInput.value <= dateInput.max);
+      dateInput.setAttribute("aria-invalid", ok ? "false" : "true");
+      if (hint) {
+        hint.textContent = ok ? (d.getDay() === 6 ? "Zaterdag zijn we open tot 15.00 uur" : "Maandag t/m zaterdag") : "Kies een dag van maandag t/m zaterdag, vanaf morgen.";
+        hint.classList.toggle("is-error", !ok);
+      }
+      if (middag) middag.innerHTML = d.getDay() === 6 ? "12 &ndash; 15 uur" : "12 &ndash; 17 uur";
+      return ok;
+    }
+
+    function show(msg, isError) {
+      if (!note) return;
+      note.textContent = msg;
+      note.hidden = false;
+      note.classList.toggle("is-error", !!isError);
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var note = document.getElementById("contact-form-note");
-      if (note) {
-        note.textContent = "Bedankt! Bel ons voor een snel antwoord op 013 - 536 85 98, of mail naar info@vloerenspecialist-tilburg.nl — dit formulier is nog niet aangesloten op e-mail.";
-        note.hidden = false;
+      if (!form.checkValidity() || !checkDate()) {
+        form.reportValidity();
+        if (dateInput && !checkDate()) dateInput.focus();
+        return;
       }
+      var fd = new FormData(form);
+      var data = { soort: soort, onderwerp: fd.getAll("onderwerp") };
+      fd.forEach(function (v, k) { if (k !== "onderwerp") data[k] = v; });
+      if (soort === "contact") {
+        data.naam = fd.get("name"); data.telefoon = fd.get("phone"); data.bericht = fd.get("message");
+        data.onderwerp = [fd.get("type")];
+      }
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Bezig met versturen..."; }
+      fetch("/api/aanvraag", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.j.error || "fout");
+          var done = document.createElement("div");
+          done.className = "form-done";
+          done.setAttribute("role", "status");
+          done.innerHTML = soort === "afspraak"
+            ? "<h2>Bedankt, uw aanvraag is binnen</h2><p>We bellen of mailen u binnen één werkdag om de afspraak te bevestigen. Tot ziens in de showroom aan de Jules Verneweg 7a.</p>"
+            : "<h2>Bedankt voor uw bericht</h2><p>We reageren binnen één werkdag. Heeft u haast? Bel 013 - 536 85 98.</p>";
+          form.classList.add("is-sent");
+          form.parentNode.insertBefore(done, form.nextSibling);
+          done.scrollIntoView({ behavior: "smooth", block: "center" });
+        })
+        .catch(function () {
+          show("Versturen lukte helaas niet. Bel ons op 013 - 536 85 98 of mail naar info@vloerenspecialist-tilburg.nl, dan plannen we het direct in.", true);
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+        });
     });
   }
 

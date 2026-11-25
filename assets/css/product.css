@@ -339,3 +339,48 @@ html.is-intro .pr-hero-media > img { animation-play-state: paused; }
 @media (max-width: 420px) {
   .pr-hero-head h1, .pr-hero-wide h1 { font-size: min(36px, 7.6vw); }
 }
+
+/* ==========================================================================
+   Titel in de hero (25 nov. 2026): de paginatitel, het label en de
+   hoofdknop staan onderaan in de foto, op een donker verloop. Zo ziet een
+   bezoeker (ook via Google Ads) meteen waar hij is en wat hij kan doen.
+   De foto is iets lager, zodat ook de introtekst bijna in beeld komt.
+   ========================================================================== */
+.pr-hero-wide .pr-hero-media { height: clamp(420px, calc(100vh - var(--header-h) - 190px), 720px); }
+.pr-hero-wide .pr-hero-media::before {
+  height: 72%;
+  background: linear-gradient(to top, rgba(28, 20, 13, .78) 0%, rgba(28, 20, 13, .45) 45%, rgba(28, 20, 13, 0) 100%);
+}
+.pr-hero-title {
+  position: absolute; left: clamp(36px, 4.4vw, 76px); right: clamp(36px, 4.4vw, 76px); bottom: clamp(40px, 4.4vw, 68px);
+  z-index: 2; max-width: 760px; color: #fff;
+}
+.pr-hero-title .eyebrow { color: #fff; margin-bottom: 14px; }
+.pr-hero-title .eyebrow::after { background: linear-gradient(90deg, var(--brand) 0 26px, rgba(255,255,255,.4) 26px); max-width: 140px; }
+.pr-hero-wide .pr-hero-title h1 { margin: 0 0 26px; color: #fff; text-wrap: balance; }
+.pr-hero-title .pr-hero-actions { gap: 16px 28px; }
+.pr-hero-title .btn-primary { background: #fff; color: var(--ink); border-color: #fff; }
+.pr-hero-title .btn-primary:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+.pr-hero-title .btn-text { color: #fff; border-color: rgba(255,255,255,.7); }
+.pr-hero-title .btn-text:hover { color: #fff; border-color: #fff; }
+.pr-hero-title .btn-text:hover .arrow { color: #fff; }
+/* Onder de foto: introtekst links, zekerheden rechts */
+.pr-hero-wide .pr-hero-head { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; padding-top: clamp(36px, 4vw, 64px); }
+.pr-hero-wide .pr-hero-head .pr-hero-lead { margin: 0; }
+.pr-hero-wide .pr-hero-head .pr-hero-usps { margin: 0; flex-direction: column; gap: 10px; padding: 0 0 0 28px; border-top: 0; border-left: 1px solid var(--line); }
+@media (max-width: 900px) {
+  .pr-hero-wide .pr-hero-head { grid-template-columns: 1fr; gap: 24px; }
+  .pr-hero-wide .pr-hero-head .pr-hero-usps { flex-direction: row; flex-wrap: wrap; gap: 8px 22px; padding: 18px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 640px) {
+  .pr-hero-wide .pr-hero-media { height: min(64vh, 480px); }
+  .pr-hero-title { left: 22px; right: 22px; bottom: 26px; }
+  .pr-hero-title .eyebrow { font-size: 14px; margin-bottom: 10px; }
+  .pr-hero-wide .pr-hero-title h1 { margin-bottom: 18px; }
+  .pr-hero-title .btn-primary { padding: 14px 22px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pr-hero-title { animation: pr-title-in .9s .35s var(--ease) both; }
+}
+@keyframes pr-title-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+html.is-intro .pr-hero-title { animation-play-state: paused; }

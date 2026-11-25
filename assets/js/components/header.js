@@ -179,7 +179,7 @@
       '<div class="m-nav">' +
         '<div class="m-cats">' + cats + "</div>" +
         '<div class="m-actions">' +
-          '<a class="btn btn-primary m-plan" href="/showroom.html">Plan showroombezoek</a>' +
+          '<a class="btn btn-primary m-plan" href="/afspraak.html">Plan showroombezoek</a>' +
           '<div class="m-quick">' +
             '<a href="tel:+31135368598">' + ICONS.phone + "<span>Bellen</span></a>" +
             '<a href="mailto:info@vloerenspecialist-tilburg.nl">' + ICONS.mail + "<span>Mail</span></a>" +
@@ -201,7 +201,7 @@
           '<div class="header-actions">' +
             '<a class="header-icon" href="mailto:info@vloerenspecialist-tilburg.nl" aria-label="Mail ons">' + ICONS.mail + '</a>' +
             '<a class="header-phone" href="tel:+31135368598" aria-label="Bel 013 - 536 85 98">' + ICONS.phone + '<span class="header-phone-nr">013 - 536 85 98</span></a>' +
-            '<a class="btn btn-primary btn-sm header-cta" href="/showroom.html" id="header-cta">Plan showroombezoek</a>' +
+            '<a class="btn btn-primary btn-sm header-cta" href="/afspraak.html" id="header-cta">Plan showroombezoek</a>' +
             '<button class="menu-toggle" id="overlay-toggle" aria-expanded="false" aria-controls="overlay-nav"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-label">Menu</span></button>' +
           "</div>" +
         "</div>" +
@@ -224,6 +224,23 @@
     var target = document.getElementById("site-header");
     if (!target) return;
     target.innerHTML = headerTemplate();
+    mountMobileBar();
+  }
+
+  /* Mobiel (tot 640px): vaste actiebalk onderin met de twee belangrijkste
+     acties, omdat de knop "Plan showroombezoek" in de header daar niet past.
+     Niet op de afsprakenpagina zelf (body[data-no-mobile-cta]). */
+  function mountMobileBar() {
+    if (document.body.hasAttribute("data-no-mobile-cta") || document.querySelector(".m-cta-bar")) return;
+    var bar = document.createElement("div");
+    bar.className = "m-cta-bar";
+    bar.setAttribute("role", "region");
+    bar.setAttribute("aria-label", "Snel contact");
+    bar.innerHTML =
+      '<a class="m-cta-call" href="tel:+31135368598" aria-label="Bel 013 - 536 85 98">' + ICONS.phone + "<span>Bellen</span></a>" +
+      '<a class="btn btn-primary m-cta-plan" href="/afspraak.html">Plan showroombezoek</a>';
+    document.body.appendChild(bar);
+    document.documentElement.classList.add("has-m-cta");
   }
 
   mount();

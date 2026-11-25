@@ -1182,3 +1182,12 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 
 /* Kaart sluit direct aan op het beige blok erboven (geen witte strook) */
 .h-loc { padding-top: 0; }
+
+/* Mobiel (25 nov. 2026): lagere hero, zodat de kop "Vloeren en interieur op
+   maat, onder één dak" direct in beeld is; de hoofdknop staat in de vaste
+   actiebalk onderin (header.css, .m-cta-bar). */
+@media (max-width: 640px) {
+  .h-film .h-hero-media { height: min(46vh, 380px); min-height: 280px; }
+  .h-film .h-scroll { display: none; }
+  .h-statement { padding-top: 20px; }
+}

@@ -76,11 +76,15 @@ $POOLS = @{
   )
 }
 
-# Reacties van klanten (dezelfde als op de homepage).
+# Echte Google-reviews (bedrijfsprofiel, nov. 2026); zelfde selectie als de
+# homepage. Alleen voornaam + initiaal. Cijfer bijwerken als het verandert.
+$GOOGLE_REVIEWS = "https://share.google/7Lkc1Gba8safAnbRU"
 $QUOTES = @(
-  @{ q = "Van eerste advies tot plaatsing &mdash; alles klopte. De showroom gaf meteen een goed gevoel en het eindresultaat overtreft onze verwachtingen."; who = "Marieke Jansen" },
-  @{ q = "Professioneel, deskundig en ontzettend netjes opgeleverd. Onze eiken visgraatvloer is precies zoals we 'm in de showroom hadden uitgezocht."; who = "Robin de Groot" },
-  @{ q = "Eindelijk een zaak die vloer, raamdecoratie &eacute;n interieur in &eacute;&eacute;n keer goed regelt. Persoonlijk advies zonder verkooppraatjes."; who = "Sanne Bakker" }
+  @{ q = "Echt een mooi bedrijf. Duidelijke offerte, snelle levering, goede communicatie en een mooie pvc-vloer met vloerverwarming. Alles was goed op elkaar afgestemd en het had echt niet beter of sneller gekund. Helemaal top!"; who = "Sergio M." },
+  @{ q = "Ik ben zeer tevreden over de service en de visgraat vloer die bij mij gelegd is. Echt vakwerk."; who = "Thijs v.d. B." },
+  @{ q = "Fijn geholpen, goede uitleg gehad over verschillende opties. Denken met je mee."; who = "Yvonne B." },
+  @{ q = "Hier kun je gerust langsgaan! Had redelijke spoed maar was geen probleem en uiteindelijk vakwerk dus een echte aanrader!"; who = "Tim K." },
+  @{ q = "De vloer ligt er perfect in en de werknemers hadden ook nog nuttige tips. Dus al bij al een aanrader."; who = "Jo P." }
 )
 
 $CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -308,7 +312,7 @@ $types
         <p class="eyebrow">$($d.feature.eyebrow)</p>
         <h2>$($d.feature.h2)</h2>
         <p>$($d.feature.text)</p>
-        <a class="btn btn-outline" href="/showroom.html">Plan uw showroombezoek</a>
+        <a class="btn btn-outline" href="/afspraak.html">Plan uw showroombezoek</a>
       </div>
     </div>
   </section>
@@ -372,14 +376,14 @@ $benefits
   $reviewItems = ($QUOTES | ForEach-Object {
     $on = if ($first) { " is-on" } else { "" }
     $first = $false
-    "          <figure class=""q-slide$on""><blockquote>$($_.q)</blockquote><figcaption><b>$($_.who)</b></figcaption></figure>"
+    "          <figure class=""q-slide$on""><blockquote>$($_.q)</blockquote><figcaption><b>$($_.who)</b> <span>&ndash; Google-review</span></figcaption></figure>"
   }) -join "`n"
   $reviews = @"
 
   <!-- 7 - Wat klanten zeggen (ref. knulst.nl) -->
   <section class="pr-section pr-quotes" data-review-id="reviews" data-review-label="Reviews">
     <div class="wrap">
-      <p class="pr-quotes-score"><span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Klanten waarderen ons met een 9+</p>
+      <p class="pr-quotes-score"><span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4,6 uit 5 op Google &middot; <a href="$GOOGLE_REVIEWS" target="_blank" rel="noopener">28 reviews</a></p>
       <div class="q-slider" data-quotes>
         <div class="q-track">
 $reviewItems
@@ -507,33 +511,32 @@ $info
 
 <main id="main">
 
-  <!-- 1 - Hero (ref. knulst.nl): bijna schermvullende foto met lijnkader en
-       verticale regel; daaronder de titel en een korte intro -->
+  <!-- 1 - Hero (ref. knulst.nl): bijna schermvullende foto met lijnkader.
+       Titel, eyebrow en de hoofdknop staan ín de foto (onderaan, op een
+       donkere verloop), zodat bezoekers direct zien waar ze zijn; de
+       introtekst en zekerheden volgen eronder. -->
   <section class="pr-hero pr-hero-wide" data-review-id="hero" data-review-label="Hero">
     <div class="pr-hero-wrap">
       <nav class="crumb" aria-label="Kruimelpad">$crumb</nav>
       <div class="pr-hero-media">
         <img $(ImgAttrs $d.heroImg 2200 $SZ.hero) alt="$($d.heroAlt)" loading="eager">
-        <p class="pr-hero-vertical" aria-hidden="true">$($d.vertical) <strong>in Tilburg</strong></p>
+        <div class="pr-hero-title">
+          <p class="eyebrow">$($d.eyebrow) in Tilburg</p>
+          <h1>$($d.h1)</h1>
+          <div class="pr-hero-actions">
+            <a class="btn btn-primary" href="/afspraak.html">Plan uw showroombezoek</a>
+            <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="wrap pr-hero-head">
-      <div>
-        <h1>$($d.h1)</h1>
-        <p class="eyebrow">$($d.eyebrow)</p>
-      </div>
-      <div>
-        <p class="pr-hero-lead">$($d.lead)</p>
-        <div class="pr-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
-          <a class="btn-text" href="/contact.html">Vraag advies aan <span class="arrow">&rarr;</span></a>
-        </div>
-        <ul class="pr-hero-usps" aria-label="Waarom De Vloerenspecialist">
-          <li>$CHECK Showroom van 1.800 m&sup2;</li>
-          <li>$CHECK Eigen team plaatst alles</li>
-          <li>$CHECK Klanten geven ons een 9+</li>
-        </ul>
-      </div>
+      <p class="pr-hero-lead">$($d.lead)</p>
+      <ul class="pr-hero-usps" aria-label="Waarom De Vloerenspecialist">
+        <li>$CHECK Showroom van 1.800 m&sup2;</li>
+        <li>$CHECK Eigen team plaatst alles</li>
+        <li>$CHECK 4,6 uit 5 op Google</li>
+      </ul>
     </div>
   </section>
 
@@ -564,7 +567,7 @@ $typesSection$featureSection$benefitsSection$mosaic$reviews$infoSection$brands
         <p>$($d.cta.text)</p>
         <p class="pr-cta-address">Jules Verneweg 7a, 5015 BD Tilburg &middot; Gratis parkeren</p>
         <div class="pr-hero-actions">
-          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
+          <a class="btn btn-primary" href="/afspraak.html">Plan uw showroombezoek</a>
           <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">&rarr;</span></a>
         </div>
       </div>

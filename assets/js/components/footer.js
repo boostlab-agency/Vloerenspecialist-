@@ -15,7 +15,7 @@
             "<h3>Twijfelt u nog? Kom het voelen.</h3>" +
             "<p>1.800 m² complete woonopstellingen, vrijblijvend en persoonlijk advies.</p>" +
           "</div>" +
-          '<a class="btn btn-primary" href="/showroom.html">Plan showroombezoek</a>' +
+          '<a class="btn btn-primary" href="/afspraak.html">Plan showroombezoek</a>' +
         "</div>" +
       "</div>"
     );
@@ -74,7 +74,7 @@
                   "<span>Zondag</span><span>Gesloten</span></span></span>" +
                 '<span><strong>Telefoon</strong><a href="tel:+31135368598">013 - 536 85 98</a></span>' +
               "</div>" +
-              '<a class="btn btn-outline btn-sm" href="/showroom.html">Plan showroombezoek</a>' +
+              '<a class="btn btn-outline btn-sm" href="/afspraak.html">Plan showroombezoek</a>' +
             "</div>" +
           "</div>" +
           '<div class="footer-bottom">' +

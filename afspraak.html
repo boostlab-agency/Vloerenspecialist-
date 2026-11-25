@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan uw showroombezoek — De Vloerenspecialist Tilburg</title>
+<meta name="description" content="Plan een afspraak in de showroom van De Vloerenspecialist in Tilburg: kies een dag en dagdeel, dan staat een adviseur voor u klaar. Ook zonder afspraak welkom.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e20e18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fffdf9' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/review-mode.css">
+<link rel="stylesheet" href="/assets/css/feedback-mode.css">
+<link rel="stylesheet" href="/assets/css/page.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+
+<script src="/assets/js/components/mega-icons.js" defer></script>
+<script src="/assets/js/components/header.js" defer></script>
+<script src="/assets/js/components/footer.js" defer></script>
+<script src="/assets/js/modules/wishlist.js" defer></script>
+<script src="/assets/js/modules/review-mode.js" defer></script>
+<script src="/assets/js/modules/feedback-mode.js" defer></script>
+<script src="/assets/js/modules/nav.js" defer></script>
+<script src="/assets/js/modules/open-status.js" defer></script>
+<script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/intro-loader.js"></script>
+</head>
+<body data-page="sub" data-no-mobile-cta>
+
+<a class="skip-link" href="#main">Naar de inhoud</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Kruimelpad">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <a href="/showroom.html">Showroom</a><span class="sep">/</span>
+      <span aria-current="page">Afspraak</span>
+    </nav>
+
+    <div class="page-hero-copy reveal" style="max-width:62ch;margin:20px 0 48px">
+      <p class="eyebrow">Showroombezoek</p>
+      <h1>Plan uw bezoek aan de showroom</h1>
+      <p class="lead">Kies een dag en dagdeel, dan staat er een adviseur voor u klaar met de stalen die bij uw wensen passen. U krijgt binnen één werkdag een bevestiging. Zonder afspraak bent u tijdens openingstijden ook welkom.</p>
+    </div>
+  </div>
+
+  <section class="page-section is-tight" style="padding-top:0">
+    <div class="wrap contact-layout">
+      <div class="reveal">
+        <form class="contact-form appt-form" id="appt-form" data-aanvraag="afspraak" novalidate>
+          <fieldset class="appt-group">
+            <legend>Waar wilt u naar kijken? <span class="opt">(meerdere mogelijk)</span></legend>
+            <div class="appt-chips">
+              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Vloeren"><span>Vloeren</span></label>
+              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Traprenovatie"><span>Traprenovatie</span></label>
+              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Interieur op maat"><span>Interieur op maat</span></label>
+              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Behang"><span>Behang</span></label>
+              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Raamdecoratie"><span>Raamdecoratie</span></label>
+            </div>
+          </fieldset>
+
+          <div class="form-two">
+            <div class="form-row">
+              <label for="ap-datum">Voorkeursdag</label>
+              <input type="date" id="ap-datum" name="datum" required aria-describedby="ap-datum-hint">
+              <span class="appt-hint" id="ap-datum-hint">Maandag t/m zaterdag</span>
+            </div>
+            <fieldset class="appt-group form-row">
+              <legend>Dagdeel</legend>
+              <div class="appt-chips">
+                <label class="appt-chip"><input type="radio" name="dagdeel" value="ochtend" required><span>Ochtend <small>9 &ndash; 12 uur</small></span></label>
+                <label class="appt-chip"><input type="radio" name="dagdeel" value="middag"><span>Middag <small data-middag>12 &ndash; 17 uur</small></span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-two">
+            <div class="form-row">
+              <label for="ap-naam">Naam</label>
+              <input type="text" id="ap-naam" name="naam" autocomplete="name" required>
+            </div>
+            <div class="form-row">
+              <label for="ap-tel">Telefoonnummer</label>
+              <input type="tel" id="ap-tel" name="telefoon" autocomplete="tel" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="ap-email">E-mailadres</label>
+            <input type="email" id="ap-email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="ap-bericht">Opmerking <span class="opt">(optioneel)</span></label>
+            <textarea id="ap-bericht" name="bericht" placeholder="Bijvoorbeeld om welke ruimtes het gaat, de afmetingen of de stijl die u zoekt."></textarea>
+          </div>
+          <div class="appt-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="appt-submit">
+            <button type="submit" class="btn btn-primary">Vraag afspraak aan</button>
+            <p class="appt-small">Liever direct iets plannen? Bel <a href="tel:+31135368598">013 - 536 85 98</a>.</p>
+          </div>
+          <p class="form-note" role="status" hidden></p>
+        </form>
+      </div>
+
+      <div class="reveal">
+        <div class="info-cards" style="flex-direction:column; flex-wrap:nowrap">
+          <div class="info-card">
+            <h3>Wat u kunt verwachten</h3>
+            <ol class="appt-steps">
+              <li><b>Persoonlijk advies</b><span>Een adviseur neemt de tijd en zet vooraf stalen klaar die bij uw vraag passen.</span></li>
+              <li><b>Alles op ware grootte</b><span>Vloeren, stoffen en behang in complete woonopstellingen, in 1.800 m&sup2; showroom.</span></li>
+              <li><b>Vrijblijvende offerte</b><span>Desgewenst komen we daarna bij u thuis inmeten.</span></li>
+            </ol>
+          </div>
+          <div class="info-card">
+            <h3>Showroom</h3>
+            <a class="map-embed vs-map contact-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
+              <span class="vs-map-box" aria-hidden="true"><span class="vs-map-canvas"><img src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="" loading="lazy"><span class="vs-map-pin"><span class="vs-map-dot"></span><span class="vs-map-tag">Showroom</span></span></span></span>
+              <span class="map-cap">Jules Verneweg 7a, 5015 BD Tilburg · Plan route <span class="arrow">→</span></span>
+              <span class="vs-map-credit">&copy; OpenStreetMap</span>
+            </a>
+            <div class="contact-hours" data-open-week></div>
+            <p class="appt-small" style="margin-top:12px">Gratis parkeren voor de deur. Buiten openingstijden op afspraak.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+</body>
+</html>

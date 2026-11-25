@@ -296,3 +296,26 @@ html.menu-open .fb-header-controls { display: none; }
 /* Altijd in beeld bij scrollen: de header staat in #site-header (net zo hoog
    als de header zelf), dus die wrapper moet sticky zijn, niet alleen de header. */
 #site-header { position: sticky; top: 0; z-index: 100; }
+
+/* ---- Mobiele actiebalk (25 nov. 2026): "Bellen" + "Plan showroombezoek"
+   altijd binnen bereik op telefoons; de headerknop past daar niet. ---- */
+.m-cta-bar { display: none; }
+@media (max-width: 640px) {
+  .m-cta-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: flex; gap: 10px; align-items: center;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.96); border-top: 1px solid var(--line);
+    box-shadow: 0 -8px 24px rgba(39,37,33,.08);
+    -webkit-backdrop-filter: saturate(1.4) blur(8px); backdrop-filter: saturate(1.4) blur(8px);
+    transition: transform .3s var(--ease);
+  }
+  .m-cta-call {
+    flex: none; display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px;
+    border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 13px; font-weight: 600;
+  }
+  .m-cta-call svg { width: 18px; height: 18px; }
+  .m-cta-plan { flex: 1; height: 46px; padding: 0 16px; font-size: 12px; }
+  html.has-m-cta body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  html.menu-open .m-cta-bar { transform: translateY(110%); }
+}
