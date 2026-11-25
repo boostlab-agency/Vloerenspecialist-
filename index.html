@@ -252,42 +252,55 @@
     </div>
   </section>
 
-  <!-- 7 · Showroom (slotblok): grote sfeerfoto met daaronder een donker vlak zoals "Van ondervloer tot afwerking" (feedback 20 nov.); tekst links, openingstijden en kaart rechts -->
-  <section class="h-visit" id="showroom" data-review-id="showroom" data-review-label="De showroom">
-    <div class="h-visit-wrap">
-      <div class="h-visit-photo">
-        <img src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?q=78&amp;auto=format&amp;fit=crop&amp;w=2000" width="2000" height="1333" alt="Showroom met vloeren, gordijnen en complete woonopstellingen" loading="lazy">
-        <p class="h-hero-vertical" aria-hidden="true">Showroom <strong>Tilburg</strong></p>
-      </div>
-      <div class="h-visit-card">
-        <h2>Kom langs in onze showroom</h2>
-        <p class="eyebrow">Welkom in Tilburg</p>
-        <p>Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen of plan een afspraak voor uitgebreid advies; onze adviseurs nemen graag de tijd voor u.</p>
-        <span class="h-status is-on-dark" data-open-status></span>
-        <div class="h-visit-info">
-          <div class="h-hours"><p class="h-hours-title">Openingstijden</p><div data-open-week></div><p class="h-hours-note">Buiten openingstijden op afspraak: <a href="tel:+31621598393">06&nbsp;&#8209;&nbsp;21&nbsp;59&nbsp;83&nbsp;93</a></p></div>
-          <!-- Kaart (feedback 25 nov., ref. strakke "app-kaart"): lichte, grijze
-               kaart zonder Google-markering, met een eigen rode locatiestip op
-               de exacte coördinaten (51.5655, 5.1112), een label en een
-               zwevende kaart met adres, parkeren en de routeknop. -->
-          <div class="h-locmap">
-            <iframe src="https://maps.google.com/maps?ll=51.5655119,5.111179&amp;z=15&amp;t=m&amp;output=embed" title="Kaart van de omgeving van de showroom aan de Jules Verneweg 7a in Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1" aria-hidden="true"></iframe>
-            <span class="h-locmap-fade" aria-hidden="true"></span>
-            <span class="h-locmap-pin" aria-hidden="true"></span>
-            <span class="h-locmap-tag" aria-hidden="true">Showroom</span>
-            <div class="h-locmap-card">
-              <dl>
-                <div><dt>Adres</dt><dd>Jules Verneweg 7a, Tilburg</dd></div>
-                <div><dt>Parkeren</dt><dd>Gratis</dd></div>
-              </dl>
-              <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen</a>
-            </div>
+  <!-- 7 · Showroom (slotblok, feedback 25 nov., ref. "app-kaart"): eigen lichte
+       vectorkaart als achtergrond (assets/img/kaart-showroom.svg, OpenStreetMap +
+       echte route vanaf Tilburg Centraal), tekst links op een witte overloop,
+       routevelden die Google Maps openen, en onderaan een kaartje met afstand,
+       parkeren en knop. Openingstijden als strook eronder. -->
+  <section class="h-loc" id="showroom" data-review-id="showroom" data-review-label="De showroom">
+    <div class="h-loc-wrap">
+      <div class="h-loc-stage">
+        <img class="h-loc-map" src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="Kaart met de route van Tilburg Centraal naar de showroom aan de Jules Verneweg 7a in Tilburg" loading="lazy">
+        <span class="h-loc-fade" aria-hidden="true"></span>
+
+        <div class="h-loc-copy">
+          <h2>Kom langs in onze showroom</h2>
+          <p>Alle vloeren, stoffen en behang in complete woonopstellingen. Loop gewoon binnen of plan een afspraak; onze adviseurs nemen graag de tijd voor u.</p>
+          <span class="h-status" data-open-status></span>
+
+          <form class="h-loc-route" action="https://www.google.com/maps/dir/" method="get" target="_blank" rel="noopener">
+            <input type="hidden" name="api" value="1">
+            <input type="hidden" name="destination" value="Jules Verneweg 7a, 5015 BD Tilburg">
+            <label class="h-loc-field">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              <span class="sr-only">Uw vertrekpunt</span>
+              <input type="text" name="origin" placeholder="Uw adres of postcode" autocomplete="street-address">
+            </label>
+            <span class="h-loc-field is-fixed">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4"/></svg>
+              Jules Verneweg 7a
+            </span>
+            <button class="h-loc-go" type="submit" aria-label="Toon de route in Google Maps (opent in een nieuw venster)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+
+          <div class="h-loc-card">
+            <dl>
+              <div><dt>Vanaf station</dt><dd>2,3 km</dd></div>
+              <div><dt>Parkeren</dt><dd>Gratis</dd></div>
+            </dl>
+            <a class="btn btn-primary btn-sm" href="/showroom.html">Plan uw bezoek</a>
           </div>
         </div>
-        <div class="h-actions">
-          <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
-        </div>
       </div>
+
+      <div class="h-loc-hours">
+        <p class="h-loc-hours-title">Openingstijden</p>
+        <div data-open-week></div>
+        <p class="h-loc-hours-note">Buiten openingstijden op afspraak: <a href="tel:+31621598393">06&nbsp;&#8209;&nbsp;21&nbsp;59&nbsp;83&nbsp;93</a></p>
+      </div>
+      <p class="h-loc-credit">Kaartgegevens &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bijdragers</p>
     </div>
   </section>
 

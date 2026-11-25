@@ -915,3 +915,110 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 @media (max-width: 760px) {
   #showroom .h-locmap { aspect-ratio: 1 / 1.12; }
 }
+
+/* ==========================================================================
+   Showroom als "app-kaart" (feedback 25 nov. 2026, 3)
+   Eigen vectorkaart als achtergrond, tekst links op witte overloop,
+   routevelden, kaartje onderaan, openingstijden als strook eronder.
+   ========================================================================== */
+.h-loc { padding: clamp(48px, 5.5vw, 96px) 0 clamp(72px, 9.5vw, 136px); }
+.h-loc-wrap {
+  max-width: calc(1600px + 2 * clamp(20px, 3.4vw, 64px)); margin: 0 auto;
+  padding: 0 clamp(20px, 3.4vw, 64px);
+}
+.h-loc-stage { position: relative; height: clamp(560px, 44vw, 720px); overflow: hidden; background: #f3f3f1; }
+.h-loc-map { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.h-loc-fade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.94) 26%, rgba(255,255,255,.6) 40%, rgba(255,255,255,0) 58%);
+}
+.h-loc-copy {
+  position: relative; z-index: 2; height: 100%; max-width: 600px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: clamp(36px, 4vw, 64px);
+}
+.h-loc-copy h2 { margin: 0 0 18px; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.04; max-width: 13ch; }
+.h-loc-copy > p { margin: 0 0 18px; font-size: 16px; line-height: 1.7; color: var(--ink-soft); max-width: 42ch; }
+#showroom.h-loc .h-status, #showroom.h-loc .h-status strong { color: var(--ink); }
+#showroom.h-loc .h-status { margin-bottom: 0; }
+
+/* Routevelden: vertrekpunt, bestemming, pijl */
+.h-loc-route { display: flex; gap: 8px; width: 100%; max-width: 520px; margin-top: 24px; }
+.h-loc-field {
+  flex: 1 1 0; min-width: 0; height: 48px; display: flex; align-items: center; gap: 9px;
+  padding: 0 14px; border-radius: 8px; background: #efefec; color: var(--ink); font-size: 14px;
+}
+.h-loc-field svg { flex: none; color: var(--ink); }
+.h-loc-field input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: var(--ink); outline: 0; padding: 0; }
+.h-loc-field input::placeholder { color: var(--ink-soft); }
+.h-loc-field:focus-within { box-shadow: 0 0 0 2px var(--ink); }
+.h-loc-field.is-fixed { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h-loc-go {
+  flex: none; width: 48px; height: 48px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border: 0; border-radius: 8px; background: #efefec; color: var(--ink); transition: background .2s, color .2s;
+}
+.h-loc-go:hover, .h-loc-go:focus-visible { background: var(--brand); color: #fff; }
+
+/* Kaartje onderaan: afstand, parkeren, knop */
+.h-loc-card {
+  margin-top: auto; display: flex; align-items: center; gap: 28px;
+  padding: 14px 14px 14px 22px; border-radius: 8px; background: #efefec;
+}
+.h-loc-card dl { display: flex; gap: 28px; margin: 0; }
+.h-loc-card dt { margin: 0 0 4px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.h-loc-card dd { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+.h-loc-card .btn { flex: none; border-radius: 6px; }
+
+/* Openingstijden als strook onder de kaart */
+.h-loc-hours {
+  display: grid; grid-template-columns: 190px minmax(0, 1fr); align-items: stretch; column-gap: 24px;
+  padding-top: 26px;
+}
+.h-loc-hours-title { margin: 14px 0 0; font-family: var(--script); font-style: italic; font-weight: 600; font-size: 19px; color: var(--ink); }
+.h-loc-hours .open-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.h-loc-hours .open-week-row,
+.h-loc-hours .open-week-row + .open-week-row {
+  display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; margin: 0;
+  padding: 14px 14px 16px; border-radius: 0; background: none; border-left: 1px solid var(--line);
+  border-top: 2px solid transparent;
+}
+.h-loc-hours .open-week-row .d { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.h-loc-hours .open-week-row .t { font-size: 15px; color: var(--ink); }
+.h-loc-hours .open-week-row.is-today { border-top-color: var(--brand); background: #f7f6f3; }
+.h-loc-hours .open-week-row.is-today .d { color: var(--brand); }
+.h-loc-hours .open-week-row.is-today .d::after { display: none; }
+.h-loc-hours .open-today-bar { display: none; }
+.h-loc-hours-note { grid-column: 2; margin: 12px 0 0; font-size: 13.5px; color: var(--ink-soft); }
+.h-loc-hours-note a { color: var(--ink); font-weight: 600; }
+.h-loc-credit { margin: 14px 0 0; font-size: 11px; color: var(--ink-faint); text-align: right; }
+.h-loc-credit a { color: inherit; text-decoration: underline; }
+
+@media (max-width: 1100px) {
+  .h-loc-stage { height: 600px; }
+  .h-loc-fade { background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.95) 40%, rgba(255,255,255,.6) 58%, rgba(255,255,255,0) 78%); }
+  .h-loc-hours { grid-template-columns: minmax(0, 1fr); }
+  .h-loc-hours-title { margin: 0 0 10px; }
+  .h-loc-hours-note { grid-column: 1; }
+  .h-loc-hours .open-week { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 0; }
+  .h-loc-hours .open-week-row { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 760px) {
+  .h-loc-wrap { padding: 0; }
+  .h-loc-stage { height: auto; display: flex; flex-direction: column; background: #fff; }
+  .h-loc-map { position: relative; height: auto; aspect-ratio: 4 / 3; object-position: 74% 42%; }
+  .h-loc-fade { display: none; }
+  .h-loc-copy { height: auto; max-width: none; padding: 28px 20px 0; }
+  .h-loc-route { flex-wrap: wrap; max-width: none; }
+  .h-loc-route .h-loc-field:first-of-type { flex-basis: 100%; }
+  .h-loc-card { margin-top: 22px; width: 100%; flex-wrap: wrap; gap: 14px 22px; }
+  .h-loc-card dl { flex-wrap: wrap; gap: 14px 22px; }
+  .h-loc-hours { padding: 28px 20px 0; }
+  .h-loc-hours .open-week { grid-template-columns: minmax(0, 1fr); }
+  .h-loc-hours .open-week-row,
+  .h-loc-hours .open-week-row + .open-week-row {
+    flex-direction: row; justify-content: space-between; align-items: center;
+    padding: 12px 10px; border-left: 0; border-top: 0; border-bottom: 1px solid var(--line);
+  }
+  .h-loc-hours .open-week-row.is-today { border-left: 2px solid var(--brand); }
+  .h-loc-credit { padding: 0 20px; text-align: left; }
+}
