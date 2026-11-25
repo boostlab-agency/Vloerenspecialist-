@@ -266,14 +266,26 @@
         <span class="h-status is-on-dark" data-open-status></span>
         <div class="h-visit-info">
           <div class="h-hours"><p class="h-hours-title">Openingstijden</p><div data-open-week></div><p class="h-hours-note">Buiten openingstijden op afspraak: <a href="tel:+31621598393">06&nbsp;&#8209;&nbsp;21&nbsp;59&nbsp;83&nbsp;93</a></p></div>
-          <a class="map-embed h-visit-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
-            <iframe src="https://maps.google.com/maps?q=Jules%20Verneweg%207a%2C%205015%20BD%20Tilburg&amp;z=14&amp;output=embed" title="Kaart: showroom Jules Verneweg 7a, Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
-            <span class="map-cap"><span class="map-pin" aria-hidden="true"></span>Jules Verneweg 7a &middot; Gratis parkeren <span class="arrow">→</span></span>
-          </a>
+          <!-- Kaart (feedback 25 nov., ref. strakke "app-kaart"): lichte, grijze
+               kaart zonder Google-markering, met een eigen rode locatiestip op
+               de exacte coördinaten (51.5655, 5.1112), een label en een
+               zwevende kaart met adres, parkeren en de routeknop. -->
+          <div class="h-locmap">
+            <iframe src="https://maps.google.com/maps?ll=51.5655119,5.111179&amp;z=15&amp;t=m&amp;output=embed" title="Kaart van de omgeving van de showroom aan de Jules Verneweg 7a in Tilburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1" aria-hidden="true"></iframe>
+            <span class="h-locmap-fade" aria-hidden="true"></span>
+            <span class="h-locmap-pin" aria-hidden="true"></span>
+            <span class="h-locmap-tag" aria-hidden="true">Showroom</span>
+            <div class="h-locmap-card">
+              <dl>
+                <div><dt>Adres</dt><dd>Jules Verneweg 7a, Tilburg</dd></div>
+                <div><dt>Parkeren</dt><dd>Gratis</dd></div>
+              </dl>
+              <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen</a>
+            </div>
+          </div>
         </div>
         <div class="h-actions">
           <a class="btn btn-primary" href="/showroom.html">Plan uw showroombezoek</a>
-          <a class="btn-text" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Route plannen <span class="arrow">→</span></a>
         </div>
       </div>
     </div>

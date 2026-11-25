@@ -4,8 +4,7 @@
    dat meeloopt.
    - Pauzeknop (bewegend beeld moet te stoppen zijn); pauzeert ook als het
      tabblad niet zichtbaar is.
-   - Met "minder beweging" staat de eerste foto stil; de hoofdstukken blijven
-     klikbaar.
+   - Speelt altijd vanzelf af; met "minder beweging" zonder inzoom.
    ========================================================================== */
 (function () {
   "use strict";
@@ -18,9 +17,10 @@
   var toggle = film.querySelector("[data-film-toggle]");
   if (!slides.length || slides.length !== chapters.length) return;
 
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Speelt altijd vanzelf af (feedback 25 nov.); bij "minder beweging" zonder
+     inzoom (CSS), alleen rustig overvloeien. Pauzeren kan altijd. */
   var cur = 0, elapsed = 0, last = 0;
-  var paused = reduce, hidden = false;
+  var paused = false, hidden = false;
 
   function show(i) {
     slides.forEach(function (s, k) { s.classList.toggle("is-on", k === i); });
@@ -56,11 +56,10 @@
 
   if (toggle) toggle.addEventListener("click", function () { setPaused(!paused); });
   chapters.forEach(function (b, i) {
-    b.addEventListener("click", function () { show(i); if (paused && !reduce) setPaused(false); });
+    b.addEventListener("click", function () { show(i); if (paused) setPaused(false); });
   });
   document.addEventListener("visibilitychange", function () { hidden = document.hidden; });
 
   show(0);
-  if (reduce && toggle) setPaused(true);
   window.requestAnimationFrame(tick);
 })();

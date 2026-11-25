@@ -839,3 +839,79 @@ html.is-intro .h-film-chapters { animation-play-state: paused; }
 }
 /* Showroom: label "Vandaag" altijd onder de dagnaam (de kolommen zijn smal) */
 #showroom .h-hours .open-week-row.is-today .d::after { display: table; margin: 5px 0 0 16px; }
+
+/* ==========================================================================
+   Feedback 25 nov. 2026 (2)
+   ========================================================================== */
+
+/* Witruimte tussen "Onze vloeren" en "Van ondervloer tot afwerking" */
+#diensten.h-spread { padding-top: clamp(48px, 5.5vw, 96px); }
+
+/* Van ondervloer tot afwerking + showroom: iets breder (max 1600px) */
+.h-spread-wrap, .h-visit-wrap {
+  max-width: calc(1600px + 2 * clamp(20px, 3.4vw, 64px));
+  padding-left: clamp(20px, 3.4vw, 64px); padding-right: clamp(20px, 3.4vw, 64px);
+}
+@media (max-width: 760px) {
+  .h-spread-wrap, .h-visit-wrap { padding-left: 0; padding-right: 0; }
+}
+
+/* Showroomkaart in "app-stijl": lichte grijze kaart, eigen rode locatiestip
+   met pulserende ringen, label, zachte witte overloop links en een zwevende
+   kaart met adres, parkeren en routeknop */
+#showroom .h-locmap { position: relative; order: -1; aspect-ratio: 16 / 8.5; overflow: hidden; background: #ecebe8; isolation: isolate; }
+#showroom .h-locmap iframe {
+  position: absolute; left: -60px; top: -90px; width: calc(100% + 120px); height: calc(100% + 180px);
+  border: 0; pointer-events: none;
+  filter: grayscale(1) brightness(1.08) contrast(.86);
+}
+#showroom .h-locmap-fade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.35) 38%, rgba(255,255,255,0) 62%);
+}
+#showroom .h-locmap-pin {
+  position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  background: var(--brand); box-shadow: 0 0 0 4px #fff, 0 6px 14px rgba(0,0,0,.25); z-index: 2;
+}
+#showroom .h-locmap-pin::before, #showroom .h-locmap-pin::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 90px; height: 90px; margin: -45px 0 0 -45px;
+  border-radius: 50%; background: rgba(var(--brand-rgb), .16); z-index: -1;
+}
+#showroom .h-locmap-pin::after { width: 46px; height: 46px; margin: -23px 0 0 -23px; background: rgba(var(--brand-rgb), .22); }
+@media (prefers-reduced-motion: no-preference) {
+  #showroom .h-locmap-pin::before { animation: h-locpulse 2.6s ease-out infinite; }
+}
+@keyframes h-locpulse { 0% { transform: scale(.4); opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+#showroom .h-locmap-tag {
+  position: absolute; left: calc(50% - 128px); top: calc(50% - 58px); z-index: 2;
+  padding: 7px 12px; background: #fff; border: 1px solid rgba(var(--brand-rgb), .35);
+  font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--brand);
+}
+#showroom .h-locmap-tag::after {
+  content: ""; position: absolute; left: 100%; top: 50%; width: 92px; border-top: 2px dotted var(--brand);
+  transform-origin: left center; transform: rotate(33deg);
+}
+#showroom .h-locmap-card {
+  position: absolute; left: 18px; bottom: 18px; z-index: 3;
+  display: flex; align-items: center; gap: 22px; padding: 14px 14px 14px 20px;
+  background: rgba(255,255,255,.94); color: var(--ink);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.35);
+}
+#showroom .h-locmap-card dl { display: flex; gap: 28px; margin: 0; }
+#showroom .h-locmap-card dt { margin: 0 0 4px; font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+#showroom .h-locmap-card dd { margin: 0; font-size: 14px; font-weight: 500; white-space: nowrap; }
+#showroom .h-locmap-card .btn { flex: none; }
+@media (max-width: 760px) {
+  #showroom .h-locmap { aspect-ratio: 4 / 3.4; }
+  #showroom .h-locmap-tag { left: calc(50% - 112px); }
+  #showroom .h-locmap-card { left: 10px; right: 10px; bottom: 10px; flex-wrap: wrap; gap: 12px 18px; padding: 12px 14px; }
+  #showroom .h-locmap-card dl { gap: 18px; flex-wrap: wrap; }
+  #showroom .h-locmap-card dd { white-space: normal; }
+}
+/* Kaart: lijntje van label naar de stip, rustiger kaartbeeld, mobiel hoger */
+#showroom .h-locmap-tag::after { width: 54px; transform: rotate(57deg); }
+#showroom .h-locmap iframe { filter: grayscale(1) brightness(1.14) contrast(.74); }
+@media (max-width: 760px) {
+  #showroom .h-locmap { aspect-ratio: 1 / 1.12; }
+}
