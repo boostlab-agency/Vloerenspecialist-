@@ -9,7 +9,7 @@
 /* ---- 1 · Hero: lager dan op de homepage, zodat het formulier dichtbij is ---- */
 .h-film.ap-hero .h-hero-media { height: clamp(300px, 44vh, 500px); }
 .ap-hero-status {
-  position: absolute; top: 22px; right: 22px; z-index: 3;
+  position: absolute; top: 22px; left: 22px; z-index: 3;
   background: rgba(255,255,255,.94); box-shadow: 0 6px 18px rgba(0,0,0,.12);
 }
 
@@ -130,7 +130,7 @@
 }
 @media (max-width: 640px) {
   .h-film.ap-hero .h-hero-media { height: min(34vh, 260px); min-height: 220px; }
-  .ap-hero-status { top: 14px; right: 14px; }
+  .ap-hero-status { top: 14px; left: 14px; }
   .ap-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .ap-tiles .ap-tile:last-child { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
   .ap-days { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 8px; margin: 0 calc(-1 * var(--gutter)); padding: 2px var(--gutter) 6px; scrollbar-width: none; }
@@ -148,3 +148,10 @@
 .ap-step .form-two, .ap-step .form-row { margin-bottom: 18px; }
 .ap-step .form-two .form-row { margin-bottom: 0; }
 .ap-step:last-of-type { margin-bottom: 20px; }
+
+/* Grid-kinderen mogen smaller worden dan hun inhoud (dagknoppenrij) */
+.ap-grid > *, .ap-form, .ap-step { min-width: 0; }
+@media (max-width: 640px) {
+  .ap-hero-status { flex-wrap: nowrap; white-space: nowrap; font-size: 12.5px; padding: 7px 12px; }
+  .ap-hero-status .open-sub { display: none; }
+}
