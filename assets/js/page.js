@@ -93,7 +93,7 @@
   function initAanvraagForm(form) {
     var soort = form.getAttribute("data-aanvraag") || "contact";
     var note = form.querySelector(".form-note") || document.getElementById("contact-form-note");
-    var dateInput = form.querySelector('input[name="datum"]');
+    var dateInput = form.querySelector('input[type="date"][name="datum"]');
     var hint = form.querySelector(".appt-hint");
     var middag = form.querySelector("[data-middag]");
 

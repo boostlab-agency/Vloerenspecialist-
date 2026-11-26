@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="/assets/css/review-mode.css">
 <link rel="stylesheet" href="/assets/css/feedback-mode.css">
 <link rel="stylesheet" href="/assets/css/page.css">
+<link rel="stylesheet" href="/assets/css/home.css">
+<link rel="stylesheet" href="/assets/css/afspraak.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
 
@@ -31,6 +33,9 @@
 <script src="/assets/js/modules/nav.js" defer></script>
 <script src="/assets/js/modules/open-status.js" defer></script>
 <script src="/assets/js/page.js" defer></script>
+<script src="/assets/js/modules/afspraak.js" defer></script>
+<script src="/assets/js/modules/home-motion.js" defer></script>
+<script src="/assets/js/modules/quotes.js" defer></script>
 <script src="/assets/js/modules/intro-loader.js"></script>
 </head>
 <body data-page="sub" data-no-mobile-cta>
@@ -39,50 +44,87 @@
 <div id="site-header"></div>
 
 <main id="main">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Kruimelpad">
-      <a href="/index.html">Home</a><span class="sep">/</span>
-      <a href="/showroom.html">Showroom</a><span class="sep">/</span>
-      <span aria-current="page">Afspraak</span>
-    </nav>
 
-    <div class="page-hero-copy reveal" style="max-width:62ch;margin:20px 0 48px">
-      <p class="eyebrow">Showroombezoek</p>
-      <h1>Plan uw bezoek aan de showroom</h1>
-      <p class="lead">Kies een dag en dagdeel, dan staat er een adviseur voor u klaar met de stalen die bij uw wensen passen. U krijgt binnen één werkdag een bevestiging. Zonder afspraak bent u tijdens openingstijden ook welkom.</p>
+  <!-- 1 · Hero in de stijl van de homepage: één grote foto met lijnkader,
+       verticale regel en de open/dicht-status als label. -->
+  <section class="h-hero h-film ap-hero" data-review-id="hero" data-review-label="Hero">
+    <div class="wrap h-hero-inner">
+      <div class="h-hero-media">
+        <img class="h-film-clip is-on" src="https://images.unsplash.com/photo-1680503397644-bcd216845f26?q=78&amp;auto=format&amp;fit=crop&amp;w=2200" width="2200" height="1466" alt="Woonopstelling met bank en vloer in de showroom" fetchpriority="high">
+        <div class="h-film-shade" aria-hidden="true"></div>
+        <p class="h-hero-vertical" aria-hidden="true">Showroom &middot; <strong>Jules Verneweg 7a</strong></p>
+        <span class="ap-hero-status h-status" data-open-status></span>
+      </div>
+      <a class="h-scroll" href="#plan">Kies uw moment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
-  </div>
+  </section>
 
-  <section class="page-section is-tight" style="padding-top:0">
-    <div class="wrap contact-layout">
-      <div class="reveal">
-        <form class="contact-form appt-form" id="appt-form" data-aanvraag="afspraak" novalidate>
-          <fieldset class="appt-group">
-            <legend>Waar wilt u naar kijken? <span class="opt">(meerdere mogelijk)</span></legend>
-            <div class="appt-chips">
-              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Vloeren"><span>Vloeren</span></label>
-              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Traprenovatie"><span>Traprenovatie</span></label>
-              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Interieur op maat"><span>Interieur op maat</span></label>
-              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Behang"><span>Behang</span></label>
-              <label class="appt-chip"><input type="checkbox" name="onderwerp" value="Raamdecoratie"><span>Raamdecoratie</span></label>
-            </div>
-          </fieldset>
+  <section class="h-statement" data-review-id="intro" data-review-label="Kop">
+    <div class="wrap ap-statement">
+      <div>
+        <h1>Plan uw bezoek aan onze showroom</h1>
+        <p class="eyebrow">1.800 m&sup2; vloeren en interieur</p>
+      </div>
+      <p class="ap-statement-lead">Kies wat u wilt zien en wanneer het u uitkomt. Dan zetten we de stalen voor u klaar en neemt een adviseur rustig de tijd. U krijgt binnen één werkdag een bevestiging.</p>
+    </div>
+  </section>
 
-          <div class="form-two">
-            <div class="form-row">
-              <label for="ap-datum">Voorkeursdag</label>
-              <input type="date" id="ap-datum" name="datum" required aria-describedby="ap-datum-hint">
-              <span class="appt-hint" id="ap-datum-hint">Maandag t/m zaterdag</span>
-            </div>
-            <fieldset class="appt-group form-row">
-              <legend>Dagdeel</legend>
-              <div class="appt-chips">
-                <label class="appt-chip"><input type="radio" name="dagdeel" value="ochtend" required><span>Ochtend <small>9 &ndash; 12 uur</small></span></label>
-                <label class="appt-chip"><input type="radio" name="dagdeel" value="middag"><span>Middag <small data-middag>12 &ndash; 17 uur</small></span></label>
-              </div>
-            </fieldset>
+  <!-- 2 · Het formulier in drie stappen, met rechts een "bezoekkaart" die
+       meeschrijft (stijl van het welkomblok: foto met beige vlak). -->
+  <section class="h-section ap-plan" id="plan" data-review-id="formulier" data-review-label="Afspraak plannen">
+    <div class="wrap ap-grid">
+      <form class="contact-form ap-form" id="appt-form" data-aanvraag="afspraak" novalidate>
+
+        <fieldset class="ap-step">
+          <legend class="ap-step-head"><span class="ap-step-nr">1</span><span>Waar wilt u naar kijken? <em>Meerdere mogelijk</em></span></legend>
+          <div class="ap-tiles">
+              <label class="ap-tile">
+                <input type="checkbox" name="onderwerp" value="Vloeren">
+                <span class="ap-tile-media"><img src="https://images.unsplash.com/photo-1562582664-8a8803c031ca?q=75&amp;auto=format&amp;fit=crop&amp;w=500" width="500" height="750" alt="" loading="lazy"></span>
+                <span class="ap-tile-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ap-tile-copy"><b>Vloeren</b><small>PVC, hout, tegels, giet</small></span>
+              </label>
+              <label class="ap-tile">
+                <input type="checkbox" name="onderwerp" value="Traprenovatie">
+                <span class="ap-tile-media"><img src="https://images.unsplash.com/photo-1653520108022-329b0f64e08f?q=75&amp;auto=format&amp;fit=crop&amp;w=500" width="500" height="750" alt="" loading="lazy"></span>
+                <span class="ap-tile-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ap-tile-copy"><b>Traprenovatie</b><small>Treden, stootborden, leuning</small></span>
+              </label>
+              <label class="ap-tile">
+                <input type="checkbox" name="onderwerp" value="Interieur op maat">
+                <span class="ap-tile-media"><img src="https://images.unsplash.com/photo-1752407828514-660d6945d392?q=75&amp;auto=format&amp;fit=crop&amp;w=500" width="500" height="698" alt="" loading="lazy"></span>
+                <span class="ap-tile-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ap-tile-copy"><b>Interieur op maat</b><small>Kasten, deuren en wanden</small></span>
+              </label>
+              <label class="ap-tile">
+                <input type="checkbox" name="onderwerp" value="Behang">
+                <span class="ap-tile-media"><img src="https://images.unsplash.com/photo-1780672823907-07fb6661c31a?q=75&amp;auto=format&amp;fit=crop&amp;w=500" width="500" height="750" alt="" loading="lazy"></span>
+                <span class="ap-tile-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ap-tile-copy"><b>Behang</b><small>Papier, vlies, vinyl, Renostuc</small></span>
+              </label>
+              <label class="ap-tile">
+                <input type="checkbox" name="onderwerp" value="Raamdecoratie">
+                <span class="ap-tile-media"><img src="/assets/img/real/gordijn-linnen-stoel-900.jpg" width="900" height="1350" alt="" loading="lazy"></span>
+                <span class="ap-tile-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ap-tile-copy"><b>Raamdecoratie</b><small>Gordijnen, jaloezieën, plissé</small></span>
+              </label>
           </div>
+        </fieldset>
 
+        <fieldset class="ap-step">
+          <legend class="ap-step-head"><span class="ap-step-nr">2</span><span>Wanneer komt het u uit?</span></legend>
+          <div class="ap-days" data-days role="radiogroup" aria-label="Kies een dag">
+            <noscript><input type="date" name="datum" required></noscript>
+          </div>
+          <p class="ap-days-note">Maandag t/m vrijdag 9.00 &ndash; 17.00 uur, zaterdag tot 15.00 uur. Andere dag of avond? Zet het bij de opmerking.</p>
+          <div class="ap-parts" role="radiogroup" aria-label="Kies een dagdeel">
+            <label class="ap-part"><input type="radio" name="dagdeel" value="ochtend" required><span><b>Ochtend</b><small>9 &ndash; 12 uur</small></span></label>
+            <label class="ap-part"><input type="radio" name="dagdeel" value="middag"><span><b>Middag</b><small data-middag>12 &ndash; 17 uur</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="ap-step">
+          <legend class="ap-step-head"><span class="ap-step-nr">3</span><span>Hoe bereiken we u?</span></legend>
           <div class="form-two">
             <div class="form-row">
               <label for="ap-naam">Naam</label>
@@ -99,41 +141,167 @@
           </div>
           <div class="form-row">
             <label for="ap-bericht">Opmerking <span class="opt">(optioneel)</span></label>
-            <textarea id="ap-bericht" name="bericht" placeholder="Bijvoorbeeld om welke ruimtes het gaat, de afmetingen of de stijl die u zoekt."></textarea>
+            <textarea id="ap-bericht" name="bericht" placeholder="Bijvoorbeeld om welke ruimtes het gaat, de afmetingen of de stijl die u zoekt. Neem gerust foto's mee naar de showroom."></textarea>
           </div>
           <div class="appt-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-          <div class="appt-submit">
-            <button type="submit" class="btn btn-primary">Vraag afspraak aan</button>
-            <p class="appt-small">Liever direct iets plannen? Bel <a href="tel:+31135368598">013 - 536 85 98</a>.</p>
-          </div>
-          <p class="form-note" role="status" hidden></p>
-        </form>
-      </div>
+        </fieldset>
 
-      <div class="reveal">
-        <div class="info-cards" style="flex-direction:column; flex-wrap:nowrap">
-          <div class="info-card">
-            <h3>Wat u kunt verwachten</h3>
-            <ol class="appt-steps">
-              <li><b>Persoonlijk advies</b><span>Een adviseur neemt de tijd en zet vooraf stalen klaar die bij uw vraag passen.</span></li>
-              <li><b>Alles op ware grootte</b><span>Vloeren, stoffen en behang in complete woonopstellingen, in 1.800 m&sup2; showroom.</span></li>
-              <li><b>Vrijblijvende offerte</b><span>Desgewenst komen we daarna bij u thuis inmeten.</span></li>
-            </ol>
+        <div class="appt-submit">
+          <button type="submit" class="btn btn-primary">Vraag afspraak aan</button>
+          <p class="appt-small">Liever bellen? <a href="tel:+31135368598">013 - 536 85 98</a></p>
+        </div>
+        <p class="form-note" role="status" hidden></p>
+      </form>
+
+      <aside class="ap-side" aria-label="Uw bezoek">
+        <div class="ap-ticket">
+          <div class="ap-ticket-media">
+            <img src="https://images.unsplash.com/photo-1546940084-6333670a0666?q=75&amp;auto=format&amp;fit=crop&amp;w=900" width="900" height="1200" alt="Leeslamp naast een bed op een visgraatvloer" loading="lazy">
           </div>
-          <div class="info-card">
-            <h3>Showroom</h3>
-            <a class="map-embed vs-map contact-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener" aria-label="Plan uw route naar Jules Verneweg 7a, Tilburg (opent Google Maps)">
-              <span class="vs-map-box" aria-hidden="true"><span class="vs-map-canvas"><img src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="" loading="lazy"><span class="vs-map-pin"><span class="vs-map-dot"></span><span class="vs-map-tag">Showroom</span></span></span></span>
-              <span class="map-cap">Jules Verneweg 7a, 5015 BD Tilburg · Plan route <span class="arrow">→</span></span>
-              <span class="vs-map-credit">&copy; OpenStreetMap</span>
-            </a>
-            <div class="contact-hours" data-open-week></div>
-            <p class="appt-small" style="margin-top:12px">Gratis parkeren voor de deur. Buiten openingstijden op afspraak.</p>
+          <div class="ap-ticket-body">
+            <p class="ap-ticket-title">Uw bezoek</p>
+            <dl class="ap-summary" aria-live="polite">
+              <div><dt>Onderwerp</dt><dd data-sum="onderwerp">Nog niets gekozen</dd></div>
+              <div><dt>Wanneer</dt><dd data-sum="wanneer">Kies een dag</dd></div>
+              <div><dt>Waar</dt><dd>Jules Verneweg 7a, Tilburg &middot; gratis parkeren</dd></div>
+            </dl>
+            <dl class="h-stats ap-stats">
+              <div><dt>1.800 m&sup2;</dt><dd>showroom</dd></div>
+              <div><dt>62+</dt><dd>topmerken</dd></div>
+              <div><dt>4,6</dt><dd>op Google</dd></div>
+            </dl>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 3 · Wat u kunt verwachten: grote foto + donker vlak met drie fotokaarten
+       (zelfde blok als "Van ondervloer tot afwerking" op de homepage). -->
+  <section class="h-spread ap-spread" data-review-id="verwachten" data-review-label="Wat u kunt verwachten">
+    <div class="h-spread-wrap">
+      <div class="h-spread-panel">
+        <div class="h-spread-copy">
+          <h2>Wat u kunt verwachten</h2>
+          <p class="eyebrow">Zo verloopt uw bezoek</p>
+          <p>Een showroombezoek duurt meestal drie kwartier tot een uur. U bent welkom met of zonder plannen; samen maken we het concreet.</p>
+          <p class="h-spread-also">Neem gerust foto's, afmetingen of een plattegrond mee.</p>
+        </div>
+        <div class="h-spread-cards">
+          <div class="h-spread-card">
+            <img src="https://images.unsplash.com/photo-1615225502559-842cbc296205?q=75&amp;auto=format&amp;fit=crop&amp;w=900" width="900" height="675" alt="Gestreepte gordijnstof van dichtbij" loading="lazy">
+            <span><small>Stap 1</small><b>Stalen liggen voor u klaar</b></span>
+          </div>
+          <div class="h-spread-card">
+            <img src="/assets/img/real/visgraat-kastenwand-900.jpg" width="900" height="675" alt="Visgraatvloer met een kastenwand op maat" loading="lazy">
+            <span><small>Stap 2</small><b>Alles zien op ware grootte</b></span>
+          </div>
+          <div class="h-spread-card">
+            <img src="https://images.unsplash.com/photo-1722942116037-97e84b56c990?q=75&amp;auto=format&amp;fit=crop&amp;w=900" width="900" height="1350" alt="Visgraatvloer bij een open deur" loading="lazy">
+            <span><small>Stap 3</small><b>Vrijblijvend thuis inmeten</b></span>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- 4 · Reviews (zelfde als homepage) -->
+  <section class="h-section h-quotes" id="reviews" data-review-id="reviews" data-review-label="Reviews">
+    <div class="wrap">
+      <p class="h-quotes-score"><span class="h-stars" aria-hidden="true">★★★★★</span> 4,6 uit 5 op Google &middot; <a href="https://share.google/7Lkc1Gba8safAnbRU" target="_blank" rel="noopener">28 reviews</a></p>
+      <div class="q-slider" data-quotes>
+        <div class="q-track">
+          <figure class="q-slide is-on">
+            <blockquote>Echt een mooi bedrijf. Duidelijke offerte, snelle levering, goede communicatie en een mooie pvc-vloer met vloerverwarming. Alles was goed op elkaar afgestemd en het had echt niet beter of sneller gekund. Helemaal top!</blockquote>
+            <figcaption><b>Sergio M.</b> <span>&ndash; Google-review</span></figcaption>
+          </figure>
+          <figure class="q-slide">
+            <blockquote>Ik ben zeer tevreden over de service en de visgraat vloer die bij mij gelegd is. Echt vakwerk.</blockquote>
+            <figcaption><b>Thijs v.d. B.</b> <span>&ndash; Google-review</span></figcaption>
+          </figure>
+          <figure class="q-slide">
+            <blockquote>Fijn geholpen, goede uitleg gehad over verschillende opties. Denken met je mee.</blockquote>
+            <figcaption><b>Yvonne B.</b> <span>&ndash; Google-review</span></figcaption>
+          </figure>
+          <figure class="q-slide">
+            <blockquote>Hier kun je gerust langsgaan! Had redelijke spoed maar was geen probleem en uiteindelijk vakwerk dus een echte aanrader!</blockquote>
+            <figcaption><b>Tim K.</b> <span>&ndash; Google-review</span></figcaption>
+          </figure>
+          <figure class="q-slide">
+            <blockquote>De vloer ligt er perfect in en de werknemers hadden ook nog nuttige tips. Dus al bij al een aanrader.</blockquote>
+            <figcaption><b>Jo P.</b> <span>&ndash; Google-review</span></figcaption>
+          </figure>
+        </div>
+        <div class="q-dots" role="tablist" aria-label="Kies een review"></div>
+      </div>
+    </div>
+  </section>
+  <!-- 5 · Route en openingstijden (zelfde blok als op de homepage) -->
+  <section class="h-loc" id="showroom" data-review-id="showroom" data-review-label="De showroom">
+    <div class="h-loc-wrap">
+      <div class="h-loc-stage">
+        <div class="h-loc-mapbox">
+          <div class="h-loc-canvas">
+            <img class="h-loc-map" src="/assets/img/kaart-showroom.svg" width="1600" height="720" alt="Kaart van Tilburg met de ligging van de showroom aan de Jules Verneweg 7a" loading="lazy">
+          </div>
+        </div>
+        <span class="h-loc-fade" aria-hidden="true"></span>
+        <!-- Stip in een eigen laag boven de witte overloop, zelfde maatvoering als de kaart -->
+        <div class="h-loc-mapbox is-pins">
+          <div class="h-loc-canvas">
+            <div class="h-loc-pin" tabindex="0" aria-label="Showroom De Vloerenspecialist, Jules Verneweg 7a, Tilburg. Toon details">
+              <span class="h-loc-dot" aria-hidden="true"></span>
+              <span class="h-loc-tag" aria-hidden="true">Showroom</span>
+              <div class="h-loc-pop" role="group" aria-label="Showroom De Vloerenspecialist">
+                <p class="h-loc-pop-name">De Vloerenspecialist</p>
+                <p class="h-loc-pop-addr">Jules Verneweg 7a<br>5015 BD Tilburg</p>
+                <p class="h-loc-pop-meta">Showroom van 1.800 m² &middot; gratis parkeren</p>
+                <a class="h-loc-pop-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Jules+Verneweg+7a,+5015+BD+Tilburg" target="_blank" rel="noopener">Bekijk de route <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-loc-copy">
+          <h2>Zo vindt u ons</h2>
+          <p>Aan de rand van Tilburg, met gratis parkeren voor de deur. Vul uw adres in voor de route.</p>
+          <span class="h-status" data-open-status></span>
+
+          <form class="h-loc-route" action="https://www.google.com/maps/dir/" method="get" target="_blank" rel="noopener">
+            <input type="hidden" name="api" value="1">
+            <input type="hidden" name="destination" value="Jules Verneweg 7a, 5015 BD Tilburg">
+            <label class="h-loc-field">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              <span class="sr-only">Uw vertrekpunt</span>
+              <input type="text" name="origin" placeholder="Uw adres of postcode" autocomplete="street-address">
+            </label>
+            <span class="h-loc-field is-fixed">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4"/></svg>
+              Jules Verneweg 7a
+            </span>
+            <button class="h-loc-go" type="submit" aria-label="Toon de route in Google Maps (opent in een nieuw venster)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+
+          <div class="h-loc-card">
+            <dl>
+              <div><dt>Adres</dt><dd>Jules Verneweg 7a</dd></div>
+              <div><dt>Parkeren</dt><dd>Gratis</dd></div>
+            </dl>
+            <a class="btn btn-primary btn-sm" href="#plan">Kies uw moment</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-loc-hours">
+        <p class="h-loc-hours-title">Openingstijden</p>
+        <div data-open-week></div>
+      </div>
+      <p class="h-loc-credit">Kaartgegevens &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bijdragers</p>
+    </div>
+  </section>
+
 </main>
 
 <div id="site-footer"></div>
